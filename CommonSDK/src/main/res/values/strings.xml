@@ -1,0 +1,8 @@
+<resources>
+    <!--时间线-->
+    <string name="time_just_now">Just now</string>
+    <string name="time_min_ago">min ago</string>
+    <string name="time_an_hour">An hour ago</string>
+    <string name="time_hours_ago">hours ago</string>
+    <string name="time_yesterday">Yesterday</string>
+</resources>

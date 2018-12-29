@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/public_padding_10dp"
+        android:paddingRight="@dimen/public_padding_10dp">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/public_height_40dp"
+            android:layout_weight="1">
+
+            <me.jessyan.armscomponent.commonres.view.EasyTabBarTxtScroll
+                android:id="@+id/easyTabBar_fragment_news_tab"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/public_height_40dp"
+                app:indicatorColor="@color/public_tab_text_color_selected"
+                app:indicatorFit="tabText"
+                app:indicatorHeight="@dimen/public_height_2dp"
+                app:indicatorPaddingLeft="@dimen/public_padding_15dp"
+                app:indicatorPaddingRight="@dimen/public_padding_15dp"
+                app:indicatorType="line"
+                app:tabPaddingBottom="@dimen/public_pad_bottom_6dp"
+                app:tabPaddingTop="@dimen/public_pad_top_6dp"
+                app:tabPaddingLeft="@dimen/public_padding_15dp"
+                app:tabPaddingRight="@dimen/public_padding_15dp"
+                app:tabSelectTextColor="@color/public_tab_text_color_selected"
+                app:tabUnSelectTextColor="@color/public_tab_text_color_normal"
+                app:tabTextSize="@dimen/public_font_14sp"
+                app:tabWeight="true"/>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_fragment_news_expend_list"
+            android:layout_width="@dimen/public_width_30dp"
+            android:layout_height="@dimen/public_height_30dp"
+            android:layout_marginLeft="@dimen/public_mar_left_10dp"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/news_ic_list_white_24dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_10dp"
+        android:background="@color/public_custom_color_app_bg"/>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_fragment_news_display"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

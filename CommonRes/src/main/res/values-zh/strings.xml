@@ -1,0 +1,31 @@
+<resources>
+    <string name="public_app_name">纯享</string>
+    <string name="public_module_name">app</string>
+    <string name="public_loading">加载中</string>
+    <string name="public_news">新闻</string>
+    <string name="public_video">视频</string>
+    <string name="public_music">音乐</string>
+
+
+    <string name="public_name_zhihu">知乎日报</string>
+    <string name="public_name_gank">干货集中营</string>
+    <string name="public_name_gold">稀土掘金</string>
+
+
+    <!--下拉刷新头部-->
+    <string name="pull_refresh">下拉刷新数据</string>
+    <string name="load_data">正在加载数据</string>
+    <string name="release_update">松开立即刷新</string>
+    <string name="data_load_done">数据加载完成</string>
+    <string name="data_load_failure">数据加载失败</string>
+    <!--上拉加载更多-->
+    <string name="str_refresh_pullmore">上拉加载更多</string>
+    <string name="str_refresh_loadnow">释放立即加载</string>
+    <string name="str_refresh_loading">正在加载...</string>
+    <string name="str_refresh_refreshing">正在刷新...</string>
+    <string name="str_refresh_refreshed">加载完成</string>
+    <string name="str_refresh_failure">加载失败</string>
+    <string name="str_refresh_finish">全部加载完成</string>
+    <string name="str_internet_unavailable">网络连接失败</string>
+
+</resources>

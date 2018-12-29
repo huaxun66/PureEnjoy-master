@@ -1,0 +1,9 @@
+<resources>
+    <!--时间线-->
+    <string name="time_just_now">刚刚</string>
+    <string name="time_min_ago">分钟前</string>
+    <string name="time_an_hour">1 小时前</string>
+    <string name="time_hours_ago">小时前</string>
+    <string name="time_yesterday">昨天</string>
+
+</resources>

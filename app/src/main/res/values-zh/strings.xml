@@ -1,0 +1,5 @@
+<resources>
+    <string name="module_name">app</string>
+    <string name="splash_title">欢迎来到纯享</string>
+    <string name="press_again_exit">再按一次退出</string>
+</resources>

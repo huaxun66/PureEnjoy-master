@@ -1,0 +1,29 @@
+<resources>
+    <string name="public_app_name">PureEnjoy</string>
+    <string name="public_module_name">app</string>
+    <string name="public_loading">loading</string>
+    <string name="public_news">News</string>
+    <string name="public_video">Video</string>
+    <string name="public_music">Music</string>
+
+
+    <string name="public_name_zhihu">知乎日报</string>
+    <string name="public_name_gank">干货集中营</string>
+    <string name="public_name_gold">稀土掘金</string>
+
+    <!--下拉刷新头部-->
+    <string name="pull_refresh">Pull down</string>
+    <string name="load_data">Loading</string>
+    <string name="release_update">Release</string>
+    <string name="data_load_done">Succeed</string>
+    <string name="data_load_failure">Fail</string>
+    <!--上拉加载更多-->
+    <string name="str_refresh_pullmore">Loading...</string>
+    <string name="str_refresh_loadnow">Loading after release</string>
+    <string name="str_refresh_loading">Loading...</string>
+    <string name="str_refresh_refreshing">Refreshing...</string>
+    <string name="str_refresh_refreshed">Done</string>
+    <string name="str_refresh_failure">Loading failed</string>
+    <string name="str_refresh_finish">All Done</string>
+    <string name="str_internet_unavailable">Network Anomaly</string>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="public_colorPrimary">#37889F</color>
+    <color name="public_colorPrimaryDark">#37889F</color>
+    <color name="public_colorAccent">#FF4081</color>
+
+    <!-- app -->
+    <color name="public_custom_color_app_bg">#F8F8F8</color>
+    <color name="public_custom_color_image_bg">@color/public_grey_300</color>
+    <color name="public_custom_color_app_title_bg">#FFFFFF</color>
+    <color name="public_custom_color_app_content_bg">#FFFFFF</color>
+    <color name="public_custom_color_text_main">@color/public_black</color>
+    <color name="public_custom_color_text_sub">@color/public_grey_500</color>
+    <color name="public_custom_color_app_content_div">@color/public_grey_500</color>
+
+    <color name="public_tab_background_color">#90FFFFFF</color>
+    <color name="public_tab_text_color_normal">#A7A7A7</color>
+    <color name="public_tab_text_color_selected">#FB5553</color>
+
+    <color name="public_bottom_navigation_unselected">#515151</color>
+    <color name="public_bottom_navigation_selected">@color/public_orange_red_500</color>
+
+    <color name="public_refresh_tip">#7C868D</color>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="news_tab_text_color_normal">#A7A7A7</color>
+    <color name="news_tab_text_color_selected">#FB5553</color>
+    <color name="news_photo_set_bottom_bg">#44000000</color>
+
+    <color name="news_custom_color_app_bg">#FF171717</color>
+    <color name="news_custom_color_app_title_bg">#FF191919</color>
+    <color name="news_custom_color_app_content_bg">#ff343a49</color>
+    <color name="news_custom_color_text_main">#FF999999</color>
+    <color name="news_custom_color_text_sub">#FF666666</color>
+    <color name="news_custom_color_app_content_div">#FF191919</color>
+
+</resources>
