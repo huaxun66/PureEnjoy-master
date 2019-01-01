@@ -16,6 +16,7 @@
 package me.jessyan.armscomponent.commonsdk.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -73,6 +74,19 @@ public class StringUtil {
             exception.printStackTrace();
         }
         return inputTime;
+    }
+
+    /**
+     * 判断字符串是否是空字符串
+     *
+     * @param msg
+     * @return
+     */
+    public static boolean isEmpty(String msg) {
+        if (TextUtils.isEmpty(msg) || "null".equals(msg.toLowerCase().trim())) {
+            return true;
+        }
+        return false;
     }
 
 

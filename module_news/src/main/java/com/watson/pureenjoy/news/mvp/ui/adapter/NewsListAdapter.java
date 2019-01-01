@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.watson.pureenjoy.news.R;
@@ -49,8 +50,10 @@ public class NewsListAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseVie
         helper.setText(R.id.tv_item_news_list_title, item.getTitle())
                 .setText(R.id.tv_item_news_list_time, StringUtil.getFormatDateString(context, item.getMtime()))
                 .setText(R.id.tv_item_news_list_from, item.getSource());
+        RequestOptions options = new RequestOptions().fallback(R.drawable.news_image_bg).error(R.drawable.news_image_bg);
         Glide.with(context)
                 .load(item.getImgsrc())
+                .apply(options)
                 .into((ImageView) helper.getView(R.id.iv_item_news_list_display));
         helper.setVisible(R.id.lv_item_news_list_label,false);
         if (NewsConstants.SPECIAL_TITLE.equals(item.getSkipType())) {
@@ -64,16 +67,16 @@ public class NewsListAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseVie
         if (item.getImgextra() != null) {
             if (item.getImgextra().size() == 1) {
                 Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_one));
-                Glide.with(context).load(item.getImgextra().get(0)).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_two));
+                Glide.with(context).load(item.getImgextra().get(0).getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_two));
                 Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_three));
             } else if (item.getImgextra().size() == 2) {
-                Glide.with(context).load(item.getImgextra().get(0)).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_one));
-                Glide.with(context).load(item.getImgextra().get(1)).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_two));
+                Glide.with(context).load(item.getImgextra().get(0).getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_one));
+                Glide.with(context).load(item.getImgextra().get(1).getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_two));
                 Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_three));
             } else if (item.getImgextra().size() >= 3) {
-                Glide.with(context).load(item.getImgextra().get(0)).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_one));
-                Glide.with(context).load(item.getImgextra().get(1)).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_two));
-                Glide.with(context).load(item.getImgextra().get(2)).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_three));
+                Glide.with(context).load(item.getImgextra().get(0).getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_one));
+                Glide.with(context).load(item.getImgextra().get(1).getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_two));
+                Glide.with(context).load(item.getImgextra().get(2).getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_three));
             }
         } else {
             Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_one));

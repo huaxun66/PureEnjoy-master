@@ -26,4 +26,7 @@
     <string name="str_refresh_failure">Loading failed</string>
     <string name="str_refresh_finish">All Done</string>
     <string name="str_internet_unavailable">Network Anomaly</string>
+
+    <string name="str_sure">Sure</string>
+    <string name="str_cancel">Cancel</string>
 </resources>

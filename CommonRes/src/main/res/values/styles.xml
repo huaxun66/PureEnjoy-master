@@ -3,6 +3,7 @@
     <!-- Base application theme. -->
     <style name="public_AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:listDivider">@drawable/public_divider_bg</item>
         <item name="colorPrimary">@color/public_colorPrimary</item>
         <item name="colorPrimaryDark">@color/public_colorPrimaryDark</item>
         <item name="colorAccent">@color/public_colorAccent</item>
@@ -34,5 +35,11 @@
         <item name="android:windowContentOverlay">@null</item>
         <!--是否模糊-->
         <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="public_style_cutline">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/public_height_0_5dp</item>
+        <item name="android:background">@color/public_custom_color_app_content_div</item>
     </style>
 </resources>

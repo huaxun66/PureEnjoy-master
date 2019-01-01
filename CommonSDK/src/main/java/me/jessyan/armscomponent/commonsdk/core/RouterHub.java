@@ -90,6 +90,7 @@ public interface RouterHub {
      * 新闻分组
      */
     String NEWS_HOMEFRAGMENT = NEWS + "/NewsFragment";
+    String NEWS_DETAILACTIVITY = NEWS + "/NewsDetailActivity";
 
     /**
      * 视频分组

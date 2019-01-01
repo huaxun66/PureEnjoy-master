@@ -3,19 +3,22 @@ package com.watson.pureenjoy.news.mvp.ui.fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.utils.ArmsUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.watson.pureenjoy.news.R;
 import com.watson.pureenjoy.news.R2;
+import com.watson.pureenjoy.news.app.NewsConstants;
 import com.watson.pureenjoy.news.di.component.DaggerNewsListComponent;
 import com.watson.pureenjoy.news.http.entity.NewsItem;
 import com.watson.pureenjoy.news.mvp.contract.NewsListContract;
@@ -30,12 +33,16 @@ import butterknife.BindView;
 import me.jessyan.armscomponent.commonres.base.BaseSupportFragment;
 import me.jessyan.armscomponent.commonres.dialog.ProgressDialog;
 import me.jessyan.armscomponent.commonres.view.CustomLoadingMoreView;
+import me.jessyan.armscomponent.commonres.view.DividerItemDecoration;
+import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
+import static com.watson.pureenjoy.news.app.NewsConstants.POST_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.TYPE_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.TYPE_NAME;
+import static com.watson.pureenjoy.news.app.NewsConstants.URL;
 
 public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> implements NewsListContract.View,
-        SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
+        OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R2.id.refresh_layout)
     SmartRefreshLayout mSmartRefreshLayout;
     @BindView(R2.id.recycler_view)
@@ -91,10 +98,25 @@ public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> imp
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addOnScrollListener(onScrollListener);
         adapter.setOnLoadMoreListener(this, mRecyclerView);
         adapter.setLoadMoreView(new CustomLoadingMoreView());
+        mSmartRefreshLayout.setOnRefreshListener(this);
+        adapter.setOnItemClickListener((adapter, view, position) -> {
+            NewsItem item = (NewsItem)adapter.getItem(position);
+            if (NewsConstants.SPECIAL_TITLE.equals(item.getSkipType())) {
+
+            } else if (NewsConstants.PHOTO_SET.equals(item.getSkipType())){
+
+            } else {
+                ARouter.getInstance().build(RouterHub.NEWS_DETAILACTIVITY)
+                        .withString(POST_ID, item.getPostid())
+                        .withString(URL, item.getUrl())
+                        .navigation();
+            }
+        });
         getData(0);
     }
 
@@ -127,11 +149,10 @@ public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> imp
         allData.addAll(list);
         adapter.setNewData(allData);
         adapter.disableLoadMoreIfNotFullPage();
-        ArmsUtils.makeText(getContext(), "name:" + name+ " nums:" + list.size());
     }
 
     @Override
-    public void onRefresh() {
+    public void onRefresh(RefreshLayout refreshlayout) {
         getData(0);
     }
 

@@ -31,5 +31,7 @@ public class NewsConstants {
     public static final String HEADLINE_TYPE_ID = "T1348647909107";
     public static final String PHOTO_SET = "photoset";
     public static final String SPECIAL_TITLE = "special";
+    public static final String POST_ID = "postid";
+    public static final String URL = "url";
 
 }

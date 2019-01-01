@@ -28,4 +28,8 @@
     <string name="str_refresh_finish">全部加载完成</string>
     <string name="str_internet_unavailable">网络连接失败</string>
 
+
+    <string name="str_sure">确认</string>
+    <string name="str_cancel">取消</string>
+
 </resources>
