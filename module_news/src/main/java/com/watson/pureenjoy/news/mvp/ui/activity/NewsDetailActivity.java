@@ -37,7 +37,6 @@ public class NewsDetailActivity extends BaseSupportActivity {
     @Autowired
     private String url;
 
-
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
     }
