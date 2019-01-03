@@ -31,8 +31,8 @@ public class TopBar extends RelativeLayout {
     private RelativeLayout menu;
     //左侧图片布局
     private ImageView ivLeft;
-    //左侧头像布局
-    private ImageView iv_face;
+    //左侧第二图片布局
+    private ImageView ivLeftSecond;
     //右侧图片布局
     private ImageView ivRight;
     //右侧第二图片布局
@@ -50,37 +50,35 @@ public class TopBar extends RelativeLayout {
     private String mTitle;
     //左侧文字
     private String mLeftText;
+    //右侧文字
+    private String mRightText;
     //左侧文字颜色
     private int mLeftTextColor = -1; //颜色没有负值，初始化设置为-1，使用默认颜色
     //右侧文字颜色
     private int mRightTextColor = -1; //颜色没有负值，初始化设置为-1，使用默认颜色
-    //左侧文字附带图片
-    private Drawable mLeftTextWithLeftImg;
     //左侧图标资源
     private Drawable mLeftImage;
-    //左侧图片背景
-    private Drawable mLeftImageBackground;
+    //左侧第二图标资源
+    private Drawable mLeftSecondImage;
     //右侧图标资源
     private Drawable mRightImage;
     //右侧第二图标资源
     private Drawable mRightSecondImage;
     //右侧第三图标资源
     private Drawable mRightThirdImage;
-    //右侧文字
-    private String mRightText;
 
     //是否显示左侧图片
     private boolean isShowLeftImage;
-    //是否显示左侧头像图片
-    private boolean isShowFaceLeftImage;
-    //显示显示底部的分割线。默认为显示
-    private boolean isShowBottomLine = true;
-    //标题是否加粗
-    private boolean isTitleBold;
+    //是否左侧第二图片
+    private boolean isShowLeftSecondImage;
     //是否显示右侧第二图片
     private boolean isShowRightSecondImage;
     //是否显示右侧第三图片
     private boolean isShowRightThirdImage;
+    //显示显示底部的分割线,默认为显示
+    private boolean isShowBottomLine = true;
+    //标题是否加粗
+    private boolean isTitleBold;
 
     private View viewLine;
 
@@ -113,22 +111,20 @@ public class TopBar extends RelativeLayout {
                 mTitle = a.getString(attr);
             } else if (attr == R.styleable.TopBar_leftText) {
                 mLeftText = a.getString(attr);
-            } else if (attr == R.styleable.TopBar_leftTextWithLeftImg) {
-                mLeftTextWithLeftImg = a.getDrawable(attr);
-            } else if (attr == R.styleable.TopBar_rightText) {
+            }else if (attr == R.styleable.TopBar_rightText) {
                 mRightText = a.getString(attr);
-            } else if (attr == R.styleable.TopBar_showLeftImage) {
+            } else if (attr == R.styleable.TopBar_isShowLeftImage) {
                 isShowLeftImage = a.getBoolean(attr, false);
-            } else if (attr == R.styleable.TopBar_showLeftFaceImage) {
-                isShowFaceLeftImage = a.getBoolean(attr, false);
-            } else if (attr == R.styleable.TopBar_leftImageBackground) {
-                mLeftImageBackground = a.getDrawable(attr);
+            } else if (attr == R.styleable.TopBar_isShowLeftSecondImage) {
+                isShowLeftSecondImage = a.getBoolean(attr, false);
             } else if (attr == R.styleable.TopBar_isShowRightSecondImage) {
                 isShowRightSecondImage = a.getBoolean(attr, false);
             } else if (attr == R.styleable.TopBar_isShowRightThirdImage) {
                 isShowRightThirdImage = a.getBoolean(attr, false);
             } else if (attr == R.styleable.TopBar_leftImage) {
                 mLeftImage = a.getDrawable(attr);
+            } else if (attr == R.styleable.TopBar_leftSecondImage) {
+                mLeftSecondImage = a.getDrawable(attr);
             } else if (attr == R.styleable.TopBar_rightImage) {
                 mRightImage = a.getDrawable(attr);
             } else if (attr == R.styleable.TopBar_rightSecondImage) {
@@ -152,15 +148,15 @@ public class TopBar extends RelativeLayout {
         LayoutInflater mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         RelativeLayout mMainContainer = (RelativeLayout) mInflater.inflate(R.layout.public_topbar, null);
 
-        menu = (RelativeLayout) mMainContainer.findViewById(R.id.menu);
-        ivLeft = (ImageView) mMainContainer.findViewById(R.id.iv_left);
-        iv_face = (ImageView) mMainContainer.findViewById(R.id.iv_face);
-        ivRight = (ImageView) mMainContainer.findViewById(R.id.iv_right);
-        tvTitle = (TextView) mMainContainer.findViewById(R.id.tv_title);
-        tvLeft = (TextView) mMainContainer.findViewById(R.id.tv_left);
-        tvRight = (TextView) mMainContainer.findViewById(R.id.tv_right);
-        ivRightSecond = (ImageView) mMainContainer.findViewById(R.id.iv_right_second);
-        ivRightThird = (ImageView) mMainContainer.findViewById(R.id.iv_right_third);
+        menu = mMainContainer.findViewById(R.id.menu);
+        ivLeft = mMainContainer.findViewById(R.id.iv_left);
+        ivLeftSecond = mMainContainer.findViewById(R.id.iv_left_second);
+        tvLeft = mMainContainer.findViewById(R.id.tv_left);
+        tvTitle = mMainContainer.findViewById(R.id.tv_title);
+        tvRight = mMainContainer.findViewById(R.id.tv_right);
+        ivRight = mMainContainer.findViewById(R.id.iv_right);
+        ivRightSecond = mMainContainer.findViewById(R.id.iv_right_second);
+        ivRightThird = mMainContainer.findViewById(R.id.iv_right_third);
         viewLine = mMainContainer.findViewById(R.id.line_view_topbar);
 
         this.addView(mMainContainer);
@@ -187,18 +183,17 @@ public class TopBar extends RelativeLayout {
         }
 
         setLeftImage(mLeftImage);
-//        暂时屏蔽
-//        setLeftImageBackground(mLeftImageBackground);
+
+        setLeftSecondImage(mLeftSecondImage);
+
         setRightImage(mRightImage);
 
         setRightSecondImage(mRightSecondImage);
 
         setRightThirdImage(mRightThirdImage);
 
-        setLeftTextWithLeftImage(mLeftTextWithLeftImg);
-
         ivLeft.setVisibility((isShowLeftImage || mLeftImage != null) ? VISIBLE : GONE);
-        iv_face.setVisibility((isShowFaceLeftImage) ? VISIBLE : GONE);
+        ivLeftSecond.setVisibility((isShowLeftSecondImage) ? VISIBLE : GONE);
         ivRightSecond.setVisibility((isShowRightSecondImage) ? VISIBLE : GONE);
         ivRightThird.setVisibility((isShowRightThirdImage) ? VISIBLE : GONE);
         viewLine.setVisibility(isShowBottomLine ? VISIBLE : GONE);
@@ -240,26 +235,12 @@ public class TopBar extends RelativeLayout {
         return tvLeft;
     }
 
-    public void setLeftTextVisiable(boolean isVisiable) {
-        tvLeft.setVisibility(isVisiable ? VISIBLE : GONE);
+    public void setLeftTextVisible(boolean isVisible) {
+        tvLeft.setVisibility(isVisible ? VISIBLE : GONE);
     }
 
     public void setLeftTextColor(int color) {
         tvLeft.setTextColor(color);
-    }
-
-    /**
-     * -----------------------设置左边文字附带左边图片---------------------------
-     */
-    public void setLeftTextWithLeftImage(Drawable drawable) {
-        if (drawable != null) {
-            int marginPx = DisplayUtil.dip2px(mContext, 6f); //图片距离文字的边距。6dp暂时写死
-            drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-            tvLeft.setCompoundDrawables(drawable, null, null, null);
-            tvLeft.setCompoundDrawablePadding(marginPx);
-            tvLeft.setVisibility(View.VISIBLE);
-            tvLeft.setClickable(true);
-        }
     }
 
     /**
@@ -290,8 +271,8 @@ public class TopBar extends RelativeLayout {
         tvRight.setCompoundDrawablePadding(DisplayUtil.dip2px(mContext, 3));
     }
 
-    public void setRightTextVisiable(boolean isVisiable) {
-        tvRight.setVisibility(isVisiable ? VISIBLE : GONE);
+    public void setRightTextVisiable(boolean isVisible) {
+        tvRight.setVisibility(isVisible ? VISIBLE : GONE);
     }
 
     /**
@@ -314,8 +295,8 @@ public class TopBar extends RelativeLayout {
         ivLeft.setVisibility(View.VISIBLE);
     }
 
-    public void setLeftImageVisiable(boolean isVisiable) {
-        ivLeft.setVisibility(isVisiable ? VISIBLE : GONE);
+    public void setLeftImageVisiable(boolean isVisible) {
+        ivLeft.setVisibility(isVisible ? VISIBLE : GONE);
     }
 
     public void setLeftImageSize(int widthPx, int heightPx) {
@@ -339,8 +320,23 @@ public class TopBar extends RelativeLayout {
         return ivLeft;
     }
 
-    public void setLeftImageBackground(Drawable drawable) {
-        ivLeft.setBackground(drawable);
+    /**
+     * ---------------------设置左边第二图片----------------------
+     */
+    public void setLeftSecondImage(Drawable drawable) {
+        if (drawable != null) {
+            ivLeftSecond.setImageDrawable(drawable);
+            ivLeftSecond.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void setLeftSecondImage(int resId) {
+        ivLeftSecond.setImageResource(resId);
+        ivLeftSecond.setVisibility(View.VISIBLE);
+    }
+
+    public void setLeftSecondImageVisible(boolean isShow) {
+        ivLeftSecond.setVisibility(isShow ? VISIBLE : GONE);
     }
 
     /**
@@ -363,7 +359,7 @@ public class TopBar extends RelativeLayout {
         ivRight.setVisibility(View.VISIBLE);
     }
 
-    public void setRightImageVisiable(boolean isShow) {
+    public void setRightImageVisible(boolean isShow) {
         ivRight.setVisibility(isShow ? VISIBLE : GONE);
     }
 
@@ -387,7 +383,7 @@ public class TopBar extends RelativeLayout {
         ivRightSecond.setVisibility(View.VISIBLE);
     }
 
-    public void setRightSecondImageVisiable(boolean isShow) {
+    public void setRightSecondImageVisible(boolean isShow) {
         ivRightSecond.setVisibility(isShow ? VISIBLE : GONE);
     }
 
@@ -406,11 +402,11 @@ public class TopBar extends RelativeLayout {
         ivRightThird.setVisibility(View.VISIBLE);
     }
 
-    public void setRightThirdImageVisiable(boolean isShow) {
+    public void setRightThirdImageVisible(boolean isShow) {
         ivRightThird.setVisibility(isShow ? VISIBLE : GONE);
     }
 
-    public boolean isRightThirdImageVisiable() {
+    public boolean isRightThirdImageVisible() {
         return ivRightThird.getVisibility() == VISIBLE;
     }
 
@@ -422,8 +418,8 @@ public class TopBar extends RelativeLayout {
         ivLeft.setOnClickListener(listener);
     }
 
-    public void setLeftFaceImageClickListener(OnClickListener listener) {
-        iv_face.setOnClickListener(listener);
+    public void setLeftSecondImageClickListener(OnClickListener listener) {
+        ivLeftSecond.setOnClickListener(listener);
     }
 
     public void setLeftTextClickListener(OnClickListener listener) {

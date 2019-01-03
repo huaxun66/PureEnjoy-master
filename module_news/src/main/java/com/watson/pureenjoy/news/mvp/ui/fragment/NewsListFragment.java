@@ -36,7 +36,9 @@ import me.jessyan.armscomponent.commonres.view.CustomLoadingMoreView;
 import me.jessyan.armscomponent.commonres.view.DividerItemDecoration;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
+import static com.watson.pureenjoy.news.app.NewsConstants.PHOTO_SET_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.POST_ID;
+import static com.watson.pureenjoy.news.app.NewsConstants.SPECIAL_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.TYPE_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.TYPE_NAME;
 import static com.watson.pureenjoy.news.app.NewsConstants.URL;
@@ -97,19 +99,28 @@ public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> imp
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        adapter.setLoadMoreView(new CustomLoadingMoreView());
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.setAdapter(adapter);
+        initListener();
+        getData(0);
+    }
+
+    private void initListener() {
         mRecyclerView.addOnScrollListener(onScrollListener);
-        adapter.setOnLoadMoreListener(this, mRecyclerView);
-        adapter.setLoadMoreView(new CustomLoadingMoreView());
         mSmartRefreshLayout.setOnRefreshListener(this);
+        adapter.setOnLoadMoreListener(this, mRecyclerView);
         adapter.setOnItemClickListener((adapter, view, position) -> {
             NewsItem item = (NewsItem)adapter.getItem(position);
-            if (NewsConstants.SPECIAL_TITLE.equals(item.getSkipType())) {
-
+            if (NewsConstants.SPECIAL.equals(item.getSkipType())) {
+                ARouter.getInstance().build(RouterHub.NEWS_SPECIALACTIVITY)
+                        .withString(SPECIAL_ID, item.getSpecialID())
+                        .navigation();
             } else if (NewsConstants.PHOTO_SET.equals(item.getSkipType())){
-
+                ARouter.getInstance().build(RouterHub.NEWS_PHOTOSETCTIVITY)
+                        .withString(PHOTO_SET_ID, item.getPhotosetID())
+                        .navigation();
             } else {
                 ARouter.getInstance().build(RouterHub.NEWS_DETAILACTIVITY)
                         .withString(POST_ID, item.getPostid())
@@ -117,7 +128,6 @@ public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> imp
                         .navigation();
             }
         });
-        getData(0);
     }
 
     private void getData(int offset) {

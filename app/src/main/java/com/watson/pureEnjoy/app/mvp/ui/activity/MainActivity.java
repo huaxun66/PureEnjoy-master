@@ -68,7 +68,6 @@ public class MainActivity extends BaseSupportActivity {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        ARouter.getInstance().inject(this);
         //添加tab文字
         tabText[0] = getString(R.string.public_news);
         tabText[1] = getString(R.string.public_video);

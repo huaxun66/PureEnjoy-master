@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.utils.ArmsUtils;
 
 import timber.log.Timber;
@@ -37,6 +38,8 @@ public class ActivityLifecycleCallbacksImpl implements Application.ActivityLifec
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
         Timber.i(activity + " - onActivityCreated");
+        //ARouter传参，@Autowired接收
+        ARouter.getInstance().inject(activity);
     }
 
     @Override

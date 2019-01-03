@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/public_grey_100"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_item_news_special_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:paddingBottom="@dimen/public_pad_bottom_10dp"
+        android:paddingTop="@dimen/public_pad_top_10dp"
+        android:layout_marginLeft="@dimen/public_mar_left_10dp"
+        android:textColor="@color/public_black"
+        android:textSize="@dimen/public_font_16sp"
+        tools:text="标题"/>
+
+
+</LinearLayout>

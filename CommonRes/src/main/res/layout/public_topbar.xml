@@ -11,45 +11,45 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/public_height_50dp">
 
-        <ImageView
-            android:id="@+id/iv_face"
-            android:layout_width="@dimen/public_width_32dp"
-            android:layout_height="@dimen/public_height_32dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/public_nav_manage"
-            android:paddingStart="@dimen/public_pad_left_10dp"
-            android:paddingEnd="@dimen/public_pad_right_10dp"
-            android:visibility="gone" />
-
-        <ImageView
-            android:id="@+id/iv_left"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/public_topbar_click_selector"
-            android:paddingStart="@dimen/public_pad_left_16dp"
-            android:paddingEnd="@dimen/public_pad_right_16dp"
-            android:src="@drawable/public_ic_back"
-            android:visibility="gone" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/tv_left"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignBaseline="@+id/iv_left"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/tv_title"
-            android:layout_toEndOf="@+id/iv_left"
-            android:background="@drawable/public_topbar_click_selector"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/public_pad_left_14dp"
-            android:paddingEnd="@dimen/public_pad_right_14dp"
-            android:textColor="@color/public_tab_text_color_selected"
-            android:textSize="@dimen/public_font_14sp"
-            android:visibility="gone" />
+            <ImageView
+                android:id="@+id/iv_left"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/public_topbar_click_selector"
+                android:paddingEnd="@dimen/public_pad_right_14dp"
+                android:paddingStart="@dimen/public_pad_left_14dp"
+                android:src="@drawable/public_nav_back"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/iv_left_second"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/public_topbar_click_selector"
+                android:paddingEnd="@dimen/public_pad_right_14dp"
+                android:paddingStart="@dimen/public_pad_left_14dp"
+                android:src="@drawable/public_nav_close"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_left"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/public_topbar_click_selector"
+                android:gravity="center"
+                android:paddingEnd="@dimen/public_pad_right_14dp"
+                android:paddingStart="@dimen/public_pad_left_14dp"
+                android:textColor="@color/public_tab_text_color_selected"
+                android:textSize="@dimen/public_font_14sp"
+                tools:text="@string/str_sure"
+                android:visibility="gone"/>
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_title"
@@ -73,8 +73,8 @@
                 android:id="@+id/iv_right_third"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingLeft="14dp"
-                android:paddingRight="14dp"
+                android:paddingEnd="@dimen/public_pad_right_14dp"
+                android:paddingStart="@dimen/public_pad_left_14dp"
                 android:src="@drawable/public_nav_search"
                 android:visibility="gone" />
 
@@ -82,8 +82,8 @@
                 android:id="@+id/iv_right_second"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:paddingStart="@dimen/public_pad_left_14dp"
                 android:paddingEnd="@dimen/public_pad_right_14dp"
+                android:paddingStart="@dimen/public_pad_left_14dp"
                 android:src="@drawable/public_nav_add"
                 android:visibility="gone" />
 
@@ -93,10 +93,10 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/public_topbar_click_selector"
                 android:gravity="center"
-                android:paddingStart="@dimen/public_pad_left_16dp"
-                android:paddingEnd="@dimen/public_pad_right_16dp"
+                android:paddingEnd="@dimen/public_pad_right_14dp"
+                android:paddingStart="@dimen/public_pad_left_14dp"
                 android:textColor="@color/public_tab_text_color_selected"
-                android:textSize="14sp"
+                android:textSize="@dimen/public_font_14sp"
                 android:visibility="gone"
                 tools:text="@string/str_cancel" />
 
@@ -105,8 +105,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@drawable/public_topbar_click_selector"
-                android:paddingStart="@dimen/public_pad_left_16dp"
-                android:paddingEnd="@dimen/public_pad_right_16dp"
+                android:paddingEnd="@dimen/public_pad_right_14dp"
+                android:paddingStart="@dimen/public_pad_left_14dp"
                 android:src="@drawable/public_nav_more"
                 android:visibility="gone" />
         </LinearLayout>

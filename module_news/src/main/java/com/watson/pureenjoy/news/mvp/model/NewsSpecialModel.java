@@ -15,34 +15,31 @@
  */
 package com.watson.pureenjoy.news.mvp.model;
 
-import com.jess.arms.di.scope.FragmentScope;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-import com.watson.pureenjoy.news.app.NewsConstants;
 import com.watson.pureenjoy.news.http.api.service.NewsService;
-import com.watson.pureenjoy.news.http.entity.NewsItem;
-import com.watson.pureenjoy.news.mvp.contract.NewsListContract;
+import com.watson.pureenjoy.news.http.entity.NewsSpecial;
+import com.watson.pureenjoy.news.mvp.contract.NewsSpecialContract;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
-@FragmentScope
-public class NewsListModel extends BaseModel implements NewsListContract.Model {
+@ActivityScope
+public class NewsSpecialModel extends BaseModel implements NewsSpecialContract.Model {
 
     @Inject
-    public NewsListModel(IRepositoryManager repositoryManager) {
+    public NewsSpecialModel(IRepositoryManager repositoryManager) {
         super(repositoryManager);
     }
 
     @Override
-    public Observable<Map<String, List<NewsItem>>> getNewsList(String typeId, int offset, int limit) {
-        String type = typeId.equals(NewsConstants.HEADLINE_TYPE_ID) ? "headline" : "list";
+    public Observable<Map<String, NewsSpecial>> getNewsSpecial(String specialId) {
         return mRepositoryManager
                 .obtainRetrofitService(NewsService.class)
-                .getNewsList(type, typeId, offset, limit);
+                .getNewsSpecial(specialId);
     }
 }

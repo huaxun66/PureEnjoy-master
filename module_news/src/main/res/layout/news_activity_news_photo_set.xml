@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <me.jessyan.armscomponent.commonres.view.TopBar
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:isShowBottomLine="false"
+        app:leftImage="@drawable/public_nav_back"
+        app:title="" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/topBar" />
+
+    <LinearLayout
+        android:id="@+id/ll_photo_set_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/news_photo_set_bottom_bg"
+        android:orientation="vertical"
+        android:padding="@dimen/public_padding_10dp">
+
+        <TextView
+            android:id="@+id/tv_photo_set_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/public_white"
+            android:textSize="@dimen/public_font_16sp" />
+
+        <TextView
+            android:id="@+id/tv_photo_set_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/public_white"
+            android:textSize="@dimen/public_font_14sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

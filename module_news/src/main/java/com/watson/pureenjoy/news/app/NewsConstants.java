@@ -26,11 +26,17 @@ public class NewsConstants {
     public static final String CHANNEL_FILE = "NewsChannel";
     public static final String HEADER_AGENT = "User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11";
     public static final String CACHE_CONTROL = "Cache-Control: public, max-age=3600";
+    public static final String HEADLINE_TYPE_ID = "T1348647909107";
+    //新闻栏目
     public static final String TYPE_ID = "typeId";
     public static final String TYPE_NAME = "name";
-    public static final String HEADLINE_TYPE_ID = "T1348647909107";
+    //新闻类型
     public static final String PHOTO_SET = "photoset";
-    public static final String SPECIAL_TITLE = "special";
+    public static final String SPECIAL = "special";
+    public static final String VIDEO = "video";
+    //新闻字段
+    public static final String SPECIAL_ID = "specialID";
+    public static final String PHOTO_SET_ID = "photosetID";
     public static final String POST_ID = "postid";
     public static final String URL = "url";
 

@@ -69,6 +69,7 @@
     //paddingTop
     <dimen name="public_pad_top_4dp">4dp</dimen>
     <dimen name="public_pad_top_6dp">6dp</dimen>
+    <dimen name="public_pad_top_10dp">10dp</dimen>
 
     //paddingBottom
     <dimen name="public_pad_bottom_6dp">6dp</dimen>

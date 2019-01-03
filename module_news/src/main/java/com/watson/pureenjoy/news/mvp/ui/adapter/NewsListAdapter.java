@@ -56,7 +56,7 @@ public class NewsListAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseVie
                 .apply(options)
                 .into((ImageView) helper.getView(R.id.iv_item_news_list_display));
         helper.setVisible(R.id.lv_item_news_list_label,false);
-        if (NewsConstants.SPECIAL_TITLE.equals(item.getSkipType())) {
+        if (NewsConstants.SPECIAL.equals(item.getSkipType())) {
             helper.setVisible(R.id.lv_item_news_list_label,true);
         }
     }

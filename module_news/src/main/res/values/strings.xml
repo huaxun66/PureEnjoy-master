@@ -1,5 +1,6 @@
 <resources>
     <string name="news_special">Special</string>
     <string name="news_picture_set">Picture</string>
+    <string name="news_video">Video</string>
 
 </resources>
