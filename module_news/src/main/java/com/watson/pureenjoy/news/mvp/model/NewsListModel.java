@@ -21,6 +21,7 @@ import com.jess.arms.mvp.BaseModel;
 import com.watson.pureenjoy.news.app.NewsConstants;
 import com.watson.pureenjoy.news.http.api.service.NewsService;
 import com.watson.pureenjoy.news.http.entity.NewsItem;
+import com.watson.pureenjoy.news.http.entity.NewsPhotoSet;
 import com.watson.pureenjoy.news.mvp.contract.NewsListContract;
 
 import java.util.List;
@@ -44,5 +45,12 @@ public class NewsListModel extends BaseModel implements NewsListContract.Model {
         return mRepositoryManager
                 .obtainRetrofitService(NewsService.class)
                 .getNewsList(type, typeId, offset, limit);
+    }
+
+    @Override
+    public Observable<NewsPhotoSet> getNewsPhotoSet(String photoId) {
+        return mRepositoryManager
+                .obtainRetrofitService(NewsService.class)
+                .getNewsPhotoSet(photoId);
     }
 }

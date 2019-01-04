@@ -29,6 +29,6 @@ public interface NewsPhotoSetContract {
     }
 
     interface Model extends IModel{
-        Observable<Map<String, NewsPhotoSet>> getNewsPhotoSet(String photoId);
+        Observable<NewsPhotoSet> getNewsPhotoSet(String photoId);
     }
 }

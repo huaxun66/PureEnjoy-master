@@ -80,6 +80,7 @@
     <dimen name="public_mar_top_3dp">3dp</dimen>
     <dimen name="public_mar_top_8dp">8dp</dimen>
     <dimen name="public_mar_top_10dp">10dp</dimen>
+    <dimen name="public_mar_top_15dp">15dp</dimen>
     <dimen name="public_mar_top_16dp">16dp</dimen>
 
     //marginLeft
@@ -87,6 +88,7 @@
     <dimen name="public_mar_left_5dp">5dp</dimen>
     <dimen name="public_mar_left_6dp">6dp</dimen>
     <dimen name="public_mar_left_10dp">10dp</dimen>
+    <dimen name="public_mar_left_15dp">15dp</dimen>
     <dimen name="public_mar_left_50dp">50dp</dimen>
 
     //marginRight

@@ -20,11 +20,7 @@ import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.watson.pureenjoy.news.http.api.service.NewsService;
 import com.watson.pureenjoy.news.http.entity.NewsPhotoSet;
-import com.watson.pureenjoy.news.http.entity.NewsSpecial;
 import com.watson.pureenjoy.news.mvp.contract.NewsPhotoSetContract;
-import com.watson.pureenjoy.news.mvp.contract.NewsSpecialContract;
-
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -39,7 +35,7 @@ public class NewsPhotoSetModel extends BaseModel implements NewsPhotoSetContract
     }
 
     @Override
-    public Observable<Map<String, NewsPhotoSet>> getNewsPhotoSet(String photoId) {
+    public Observable<NewsPhotoSet> getNewsPhotoSet(String photoId) {
         return mRepositoryManager
                 .obtainRetrofitService(NewsService.class)
                 .getNewsPhotoSet(photoId);

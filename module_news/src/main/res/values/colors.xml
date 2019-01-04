@@ -7,8 +7,8 @@
     <color name="news_custom_color_app_bg">#FF171717</color>
     <color name="news_custom_color_app_title_bg">#FF191919</color>
     <color name="news_custom_color_app_content_bg">#ff343a49</color>
-    <color name="news_custom_color_text_main">#FF999999</color>
-    <color name="news_custom_color_text_sub">#FF666666</color>
-    <color name="news_custom_color_app_content_div">#FF191919</color>
+    <color name="news_custom_color_text_main">#FF666666</color>
+    <color name="news_custom_color_text_sub">#FF999999</color>
+    <color name="news_custom_color_app_content_div">#FF999999</color>
 
 </resources>

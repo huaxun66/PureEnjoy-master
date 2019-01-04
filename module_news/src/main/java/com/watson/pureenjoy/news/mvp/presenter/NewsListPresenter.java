@@ -18,18 +18,22 @@ package com.watson.pureenjoy.news.mvp.presenter;
 import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
-import com.watson.pureenjoy.news.http.entity.ChannelItem;
+import com.watson.pureenjoy.news.app.NewsConstants;
 import com.watson.pureenjoy.news.http.entity.NewsItem;
-import com.watson.pureenjoy.news.mvp.contract.NewsContract;
+import com.watson.pureenjoy.news.http.entity.NewsPhotoSet;
 import com.watson.pureenjoy.news.mvp.contract.NewsListContract;
+import com.watson.pureenjoy.news.utils.StringUtil;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.schedulers.Schedulers;
+import me.jessyan.armscomponent.commonsdk.core.ErrorHandleSingleObserver;
 import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
@@ -52,15 +56,52 @@ public class NewsListPresenter extends BasePresenter<NewsListContract.Model, New
                 .doOnSubscribe(disposable -> mRootView.showLoading())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(stringListMap -> Observable.fromIterable(stringListMap.get(typeId)))
+                .doAfterNext(newsItem -> {
+                    if (NewsConstants.PHOTO_SET.equals(newsItem.getSkipType())) {
+                        if (newsItem.getImgextra() == null || newsItem.getImgextra().size() < 3) {
+                            getExtraPhotoSet(newsItem);
+                        }
+                    }
+                })
+                .toList()
                 .doFinally(() -> mRootView.hideLoading())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView)) //使用 Rxlifecycle,使 Disposable 和 Activity 一起销毁
-                .subscribe(new ErrorHandleSubscriber<Map<String, List<NewsItem>>>(mErrorHandler) {
+                .subscribe(new ErrorHandleSingleObserver<List<NewsItem>>(mErrorHandler) {
                     @Override
-                    public void onNext(Map<String, List<NewsItem>> datas) {
-                        mRootView.setNewsList(datas.get(typeId));
+                    public void onSuccess(@NonNull List<NewsItem> newsList) {
+                        mRootView.setNewsList(newsList);
+                    }
+                });
+
+    }
+
+
+    private void getExtraPhotoSet(final NewsItem newsItem) {
+        mModel.getNewsPhotoSet(StringUtil.clipPhotoSetId(newsItem.getPhotosetID()))
+                .subscribeOn(Schedulers.io())
+                .retryWhen(new RetryWithDelay(3, 2))//遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔
+                .doOnSubscribe(disposable -> mRootView.showLoading())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally(() -> mRootView.hideLoading())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView)) //使用 Rxlifecycle,使 Disposable 和 Activity 一起销毁
+                .subscribe(new ErrorHandleSubscriber<NewsPhotoSet>(mErrorHandler) {
+                    @Override
+                    public void onNext(NewsPhotoSet newsPhotoSet) {
+                        if (newsPhotoSet.getPhotos() != null && newsPhotoSet.getPhotos().size() > 0) {
+                            List<NewsItem.ImgextraEntity> list = new ArrayList<>();
+                            for (NewsPhotoSet.PhotosEntity entity : newsPhotoSet.getPhotos()) {
+                                NewsItem.ImgextraEntity item = new NewsItem.ImgextraEntity();
+                                item.setImgsrc(entity.getImgurl());
+                                list.add(item);
+                            }
+                            newsItem.setImgextra(list);
+                        }
                     }
                 });
     }
+
 
     @Override
     public void onDestroy() {

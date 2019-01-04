@@ -37,5 +37,5 @@ public interface NewsService {
 
     @Headers({DOMAIN_NAME_HEADER + Api.NEWS_LIST_DOMAIN_NAME, NewsConstants.HEADER_AGENT, NewsConstants.CACHE_CONTROL})
     @GET("photo/api/set/{photoId}.json")
-    Observable<Map<String, NewsPhotoSet>> getNewsPhotoSet(@Path("photoId") String photoId);
+    Observable<NewsPhotoSet> getNewsPhotoSet(@Path("photoId") String photoId);
 }

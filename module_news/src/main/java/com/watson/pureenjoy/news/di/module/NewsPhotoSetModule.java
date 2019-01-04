@@ -19,6 +19,7 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.watson.pureenjoy.news.mvp.contract.NewsPhotoSetContract;
 import com.watson.pureenjoy.news.mvp.model.NewsPhotoSetModel;
+import com.watson.pureenjoy.news.mvp.ui.adapter.NewsPhotoSetAdapter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -26,6 +27,11 @@ import dagger.Provides;
 @Module
 public class NewsPhotoSetModule {
 
+    @ActivityScope
+    @Provides
+    public NewsPhotoSetAdapter provideNewsPhotoSetAdapter(IRepositoryManager iRepositoryManager) {
+        return new NewsPhotoSetAdapter(iRepositoryManager.getContext());
+    }
 
     @ActivityScope
     @Provides

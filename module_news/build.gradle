@@ -15,4 +15,6 @@ dependencies {
     api project(':CommonService')
     //view
     api rootProject.ext.dependencies["labelview"]
+    api rootProject.ext.dependencies["slider"]
+    api rootProject.ext.dependencies["photoview"]
 }

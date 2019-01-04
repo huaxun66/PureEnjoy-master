@@ -1,23 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <me.jessyan.armscomponent.commonres.view.TopBar
-        android:id="@+id/topBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:isShowBottomLine="false"
-        app:leftImage="@drawable/public_nav_back"
-        app:title="" />
-
     <android.support.v4.view.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/topBar" />
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/public_mar_left_15dp"
+        android:layout_marginTop="@dimen/public_mar_top_15dp"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:src="@drawable/public_ic_arrow_back_white_24dp" />
+
+    <TextView
+        android:id="@+id/tv_index"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/public_mar_top_15dp"
+        android:textColor="@color/public_white"
+        android:textSize="@dimen/public_font_14sp"
+        tools:text="1/5" />
 
     <LinearLayout
         android:id="@+id/ll_photo_set_bottom"
