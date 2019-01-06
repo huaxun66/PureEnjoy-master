@@ -31,7 +31,7 @@ import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.PHOTO_SET_ID;
 
-@Route(path = RouterHub.NEWS_PHOTOSETCTIVITY)
+@Route(path = RouterHub.NEWS_PHOTO_SET_ACTIVITY)
 public class NewsPhotoSetActivity extends BaseSupportActivity<NewsPhotoSetPresenter> implements NewsPhotoSetContract.View {
     @BindView(R2.id.iv_back)
     ImageView mBack;
@@ -87,6 +87,7 @@ public class NewsPhotoSetActivity extends BaseSupportActivity<NewsPhotoSetPresen
             @Override
             public void onPageSelected(int position) {
                 mIndex.setText((position + 1) + "/" + photos.size());
+                mContent.setText(photos.get(position).getNote());
             }
             @Override
             public void onPageScrollStateChanged(int state) {

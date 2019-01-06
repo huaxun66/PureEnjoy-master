@@ -45,7 +45,7 @@ import static com.watson.pureenjoy.news.app.NewsConstants.POST_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.SPECIAL_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.URL;
 
-@Route(path = RouterHub.NEWS_SPECIALACTIVITY)
+@Route(path = RouterHub.NEWS_SPECIAL_ACTIVITY)
 public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresenter> implements NewsSpecialContract.View {
     @BindView(R2.id.topBar)
     TopBar mTopBar;
@@ -95,7 +95,7 @@ public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresente
         adapter.setOnItemClickListener((adapter, view, position) -> {
             NewsSpecialItem item = (NewsSpecialItem)adapter.getItem(position);
             if (item.getItemType() == NewsSpecialItem.TYPE_PHOTO_SET) {
-                ARouter.getInstance().build(RouterHub.NEWS_PHOTOSETCTIVITY)
+                ARouter.getInstance().build(RouterHub.NEWS_PHOTO_SET_ACTIVITY)
                         .withString(PHOTO_SET_ID, item.getEntity().getSkipID())
                         .navigation();
             } else if (item.getItemType() == NewsSpecialItem.TYPE_NORMAL){
@@ -108,7 +108,7 @@ public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresente
                     mediaIntent.setDataAndType(Uri.parse(url), mimeType);
                     startActivity(mediaIntent);
                 } else {
-                    ARouter.getInstance().build(RouterHub.NEWS_DETAILACTIVITY)
+                    ARouter.getInstance().build(RouterHub.NEWS_DETAIL_ACTIVITY)
                             .withString(POST_ID, item.getEntity().getPostid())
                             .withString(URL, item.getEntity().getUrl())
                             .navigation();

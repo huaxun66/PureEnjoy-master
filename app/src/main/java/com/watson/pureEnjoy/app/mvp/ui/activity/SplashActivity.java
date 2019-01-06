@@ -43,7 +43,7 @@ import me.jessyan.armscomponent.commonsdk.utils.Utils;
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
-@Route(path = RouterHub.APP_SPLASHACTIVITY)
+@Route(path = RouterHub.APP_SPLASH_ACTIVITY)
 public class SplashActivity extends BaseSupportActivity {
     @BindView(R.id.tv_activity_splash_main_title)
     TextView title;
@@ -71,7 +71,7 @@ public class SplashActivity extends BaseSupportActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext(aLong -> time.setText((3 - aLong)+""))
                 .doOnComplete(() -> {
-                    Utils.navigation(SplashActivity.this, RouterHub.APP_MAINACTIVITY);
+                    Utils.navigation(SplashActivity.this, RouterHub.APP_MAIN_ACTIVITY);
                     finish();
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 })

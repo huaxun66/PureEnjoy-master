@@ -1,0 +1,116 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/public_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/close_rl"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/public_mar_top_16dp"
+        android:layout_marginEnd="@dimen/public_mar_right_11dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/news_channel_manager"
+            android:textColor="@color/news_channel_color_text_title"
+            android:textSize="@dimen/public_font_18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/close_iv"
+            android:layout_width="@dimen/public_width_12dp"
+            android:layout_height="@dimen/public_height_12dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/public_nav_close" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/close_rl"
+        android:layout_marginStart="@dimen/public_mar_left_20dp"
+        android:layout_marginTop="@dimen/public_mar_top_32dp"
+        android:layout_marginEnd="@dimen/public_mar_right_20dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/my_node"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/news_my_channel"
+                    android:textColor="@color/news_channel_color_text_main"
+                    android:textSize="@dimen/public_font_16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="@dimen/public_mar_left_14dp"
+                    android:layout_toEndOf="@+id/my_node"
+                    android:text="@string/news_channel_order"
+                    android:textColor="@color/news_channel_color_text_sub"
+                    android:textSize="@dimen/public_font_12sp" />
+
+                <TextView
+                    android:id="@+id/edit_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/public_height_21dp"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/news_shape_round_red_bg"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingTop="2dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="3dp"
+                    android:text="@string/news_channel_edit"
+                    android:textColor="@color/news_tab_text_color_selected"
+                    android:textSize="@dimen/public_font_12sp" />
+
+                <TextView
+                    android:id="@+id/finish_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/news_shape_round_red_bg"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/public_pad_left_8dp"
+                    android:paddingTop="@dimen/public_pad_top_2dp"
+                    android:paddingRight="@dimen/public_pad_right_8dp"
+                    android:paddingBottom="@dimen/public_pad_bottom_3dp"
+                    android:text="@string/news_channel_complete"
+                    android:textColor="@color/news_tab_text_color_selected"
+                    android:textSize="@dimen/public_font_12sp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/public_mar_top_15dp"
+                android:layout_marginBottom="@dimen/public_mar_bottom_10dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

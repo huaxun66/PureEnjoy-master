@@ -15,12 +15,9 @@
  */
 package com.watson.pureenjoy.news.mvp.model;
 
-import com.alibaba.fastjson.JSON;
 import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
-import me.jessyan.armscomponent.commonsdk.utils.FileUtil;
-import com.watson.pureenjoy.news.app.NewsConstants;
 import com.watson.pureenjoy.news.http.entity.ChannelItem;
 import com.watson.pureenjoy.news.mvp.contract.NewsContract;
 
@@ -29,6 +26,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import me.jessyan.armscomponent.commonsdk.utils.SharedPreferenceUtil;
+
+import static com.watson.pureenjoy.news.app.NewsConstants.CHANNEL_SELECTED;
+import static com.watson.pureenjoy.news.app.NewsConstants.HEADLINE_NAME;
+import static com.watson.pureenjoy.news.app.NewsConstants.HEADLINE_TYPE_ID;
 
 
 @FragmentScope
@@ -40,20 +42,18 @@ public class NewsModel extends BaseModel implements NewsContract.Model {
     }
 
     @Override
-    public Observable<List<ChannelItem>> getChannels() {
+    public Observable<List<ChannelItem>> getSelectedChannels() {
         return Observable.create(emitter -> {
-            try {
-                if (!FileUtil.isAssetsFileExist(mRepositoryManager.getContext(), NewsConstants.CHANNEL_FILE)) {
-                    emitter.onError(new IllegalStateException("channel file is null"));
-                    return;
-                }
-                String json = FileUtil.getStringFromAssetFile(mRepositoryManager.getContext(), NewsConstants.CHANNEL_FILE);
-                List<ChannelItem> channels = JSON.parseArray(json, ChannelItem.class);
-                emitter.onNext(channels);
-                emitter.onComplete();
-            } catch (Exception e) {
-                emitter.onError(e);
+            List<ChannelItem> channels = SharedPreferenceUtil.getListData(CHANNEL_SELECTED, ChannelItem.class);
+            if (channels == null || channels.size() == 0) {
+                ChannelItem item = new ChannelItem();
+                item.setName(HEADLINE_NAME);
+                item.setTypeId(HEADLINE_TYPE_ID);
+                item.setType(2);
+                channels.add(item);
             }
+            emitter.onNext(channels);
+            emitter.onComplete();
         });
     }
 }

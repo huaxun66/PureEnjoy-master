@@ -24,6 +24,14 @@ import com.watson.pureenjoy.news.mvp.ui.activity.NewsSpecialActivity;
 import dagger.BindsInstance;
 import dagger.Component;
 
+/**
+ * ================================================
+ * 展示 Component 的用法
+ *
+ * Created by Watson on 01/05/2019
+ * ================================================
+ */
+
 @ActivityScope
 @Component(modules = NewsSpecialModule.class, dependencies = AppComponent.class)
 public interface NewsSpecialComponent {

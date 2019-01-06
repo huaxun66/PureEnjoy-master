@@ -15,9 +15,6 @@
  */
 package com.watson.pureenjoy.news.mvp.presenter;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.OnLifecycleEvent;
-
 import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
@@ -50,22 +47,22 @@ public class NewsPresenter extends BasePresenter<NewsContract.Model, NewsContrac
 //     */
 //    @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
 //    void onCreate() {
-//        requestChannels();
+//        requestSelectedChannels();
 //    }
 
-    public void requestChannels() {
-        mModel.getChannels()
+    public void requestSelectedChannels() {
+        mModel.getSelectedChannels()
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))//遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔
                 .doOnSubscribe(disposable -> mRootView.showLoading())
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(() -> mRootView.hideLoading())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView)) //使用 Rxlifecycle,使 Disposable 和 Activity 一起销毁
                 .subscribe(new ErrorHandleSubscriber<List<ChannelItem>>(mErrorHandler) {
                     @Override
-                    public void onNext(List<ChannelItem> datas) {
-                        mRootView.setChannels(datas);
+                    public void onNext(List<ChannelItem> channels) {
+                        mRootView.setSelectedChannels(channels);
                     }
                 });
     }

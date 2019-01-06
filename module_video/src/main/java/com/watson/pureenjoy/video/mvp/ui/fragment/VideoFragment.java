@@ -13,7 +13,7 @@ import me.jessyan.armscomponent.commonres.base.BaseSupportFragment;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 import com.watson.pureenjoy.video.R;
 
-@Route(path = RouterHub.VIDEO_HOMEFRAGMENT)
+@Route(path = RouterHub.VIDEO_FRAGMENT)
 public class VideoFragment extends BaseSupportFragment {
 
     public VideoFragment() {

@@ -11,4 +11,9 @@
     <color name="news_custom_color_text_sub">#FF999999</color>
     <color name="news_custom_color_app_content_div">#FF999999</color>
 
+    <color name="news_channel_color_text_title">#13161A</color>
+    <color name="news_channel_color_text_main">#313B40</color>
+    <color name="news_channel_color_text_sub">#B4BBBF</color>
+    <color name="news_channel_color_item">#4D5761</color>
+
 </resources>

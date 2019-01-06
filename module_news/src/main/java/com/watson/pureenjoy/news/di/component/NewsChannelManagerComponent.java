@@ -17,10 +17,9 @@ package com.watson.pureenjoy.news.di.component;
 
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.di.scope.ActivityScope;
-import com.jess.arms.di.scope.FragmentScope;
-import com.watson.pureenjoy.news.di.module.NewsModule;
-import com.watson.pureenjoy.news.mvp.contract.NewsContract;
-import com.watson.pureenjoy.news.mvp.ui.fragment.NewsFragment;
+import com.watson.pureenjoy.news.di.module.NewsChannelManagerModule;
+import com.watson.pureenjoy.news.mvp.contract.NewsChannelManagerContract;
+import com.watson.pureenjoy.news.mvp.ui.activity.NewsChannelManagerActivity;
 
 import dagger.BindsInstance;
 import dagger.Component;
@@ -33,15 +32,15 @@ import dagger.Component;
  * ================================================
  */
 
-@FragmentScope
-@Component(modules = NewsModule.class, dependencies = AppComponent.class)
-public interface NewsComponent {
-    void inject(NewsFragment fragment);
+@ActivityScope
+@Component(modules = NewsChannelManagerModule.class, dependencies = AppComponent.class)
+public interface NewsChannelManagerComponent {
+    void inject(NewsChannelManagerActivity activity);
     @Component.Builder
     interface Builder{
         @BindsInstance
-        NewsComponent.Builder view(NewsContract.View view);
-        NewsComponent.Builder appComponent(AppComponent appComponent);
-        NewsComponent build();
+        NewsChannelManagerComponent.Builder view(NewsChannelManagerContract.View view);
+        NewsChannelManagerComponent.Builder appComponent(AppComponent appComponent);
+        NewsChannelManagerComponent build();
     }
 }

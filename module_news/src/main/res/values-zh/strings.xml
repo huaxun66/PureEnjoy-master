@@ -3,4 +3,13 @@
     <string name="news_picture_set">图集</string>
     <string name="news_video">视频</string>
 
+    <string name="news_channel_manager">栏目管理</string>
+    <string name="news_my_channel">我的栏目</string>
+    <string name="news_channel_order">按住并拖拽进行排序</string>
+    <string name="news_channel_complete">完成</string>
+    <string name="news_channel_edit">编辑</string>
+    <string name="news_channel_recommend">栏目推荐</string>
+    <string name="news_channel_add">点击添加栏目</string>
+
+
 </resources>

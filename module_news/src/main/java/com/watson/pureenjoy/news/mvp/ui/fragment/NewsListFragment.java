@@ -114,15 +114,15 @@ public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> imp
         adapter.setOnItemClickListener((adapter, view, position) -> {
             NewsItem item = (NewsItem)adapter.getItem(position);
             if (NewsConstants.SPECIAL.equals(item.getSkipType())) {
-                ARouter.getInstance().build(RouterHub.NEWS_SPECIALACTIVITY)
+                ARouter.getInstance().build(RouterHub.NEWS_SPECIAL_ACTIVITY)
                         .withString(SPECIAL_ID, item.getSpecialID())
                         .navigation();
             } else if (NewsConstants.PHOTO_SET.equals(item.getSkipType())){
-                ARouter.getInstance().build(RouterHub.NEWS_PHOTOSETCTIVITY)
+                ARouter.getInstance().build(RouterHub.NEWS_PHOTO_SET_ACTIVITY)
                         .withString(PHOTO_SET_ID, item.getPhotosetID())
                         .navigation();
             } else {
-                ARouter.getInstance().build(RouterHub.NEWS_DETAILACTIVITY)
+                ARouter.getInstance().build(RouterHub.NEWS_DETAIL_ACTIVITY)
                         .withString(POST_ID, item.getPostid())
                         .withString(URL, item.getUrl())
                         .navigation();

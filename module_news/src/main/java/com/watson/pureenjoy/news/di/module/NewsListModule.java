@@ -32,6 +32,13 @@ import dagger.Module;
 import dagger.Provides;
 import me.jessyan.armscomponent.commonres.dialog.ProgressDialog;
 
+/**
+ * ================================================
+ * 展示 Module 的用法
+ * Created by Watson on 01/05/2019
+ * ================================================
+ */
+
 @Module
 public class NewsListModule {
 

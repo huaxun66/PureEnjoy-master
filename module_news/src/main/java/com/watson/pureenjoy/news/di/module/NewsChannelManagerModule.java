@@ -15,13 +15,15 @@
  */
 package com.watson.pureenjoy.news.di.module;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
-import com.watson.pureenjoy.news.mvp.contract.NewsSpecialContract;
-import com.watson.pureenjoy.news.mvp.model.NewsSpecialModel;
+import com.watson.pureenjoy.news.mvp.contract.NewsChannelManagerContract;
+import com.watson.pureenjoy.news.mvp.model.NewsChannelManagerModel;
+import com.watson.pureenjoy.news.mvp.ui.adapter.NewsChannelManagerAdapter;
 import com.watson.pureenjoy.news.mvp.ui.adapter.NewsSpecialAdapter;
 
 import java.util.ArrayList;
@@ -36,25 +38,24 @@ import dagger.Provides;
  * ================================================
  */
 @Module
-public class NewsSpecialModule {
+public class NewsChannelManagerModule {
 
     @ActivityScope
     @Provides
-    public RecyclerView.LayoutManager provideLayoutManager(IRepositoryManager iRepositoryManager) {
-        return new LinearLayoutManager(iRepositoryManager.getContext());
+    public GridLayoutManager provideLayoutManager(IRepositoryManager iRepositoryManager) {
+        return new GridLayoutManager(iRepositoryManager.getContext(), 4);
     }
 
     @ActivityScope
     @Provides
-    public NewsSpecialAdapter provideNewsSpecialAdapter(IRepositoryManager iRepositoryManager) {
-        return new NewsSpecialAdapter(iRepositoryManager.getContext(), new ArrayList<>());
+    public NewsChannelManagerAdapter provideNewsChannelManagerAdapter(IRepositoryManager iRepositoryManager) {
+        return new NewsChannelManagerAdapter(iRepositoryManager.getContext(), new ArrayList<>(),false);
     }
 
     @ActivityScope
     @Provides
-    public NewsSpecialContract.Model provideNewsSpecialModel(IRepositoryManager iRepositoryManager) {
-        return new NewsSpecialModel(iRepositoryManager);
+    public NewsChannelManagerContract.Model provideNewsChannelManagerModel(IRepositoryManager iRepositoryManager) {
+        return new NewsChannelManagerModel(iRepositoryManager);
     }
-
 
 }

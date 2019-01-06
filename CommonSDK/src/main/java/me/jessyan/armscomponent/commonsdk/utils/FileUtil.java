@@ -64,7 +64,7 @@ public class FileUtil {
             while ((length = is.read(buffer)) != -1) {
                 result.write(buffer, 0, length);
             }
-            String str = result.toString(StandardCharsets.UTF_8.name());
+            String str = result.toString("UTF-8");
             return str;
         } catch (Exception e) {
             e.printStackTrace();

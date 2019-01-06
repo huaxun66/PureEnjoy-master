@@ -59,8 +59,8 @@ public interface RouterHub {
     /**
      * 宿主 App 分组
      */
-    String APP_SPLASHACTIVITY = APP + "/SplashActivity";
-    String APP_MAINACTIVITY = APP + "/MainActivity";
+    String APP_SPLASH_ACTIVITY = APP + "/SplashActivity";
+    String APP_MAIN_ACTIVITY = APP + "/MainActivity";
 
 
     /**
@@ -89,18 +89,19 @@ public interface RouterHub {
     /**
      * 新闻分组
      */
-    String NEWS_HOMEFRAGMENT = NEWS + "/NewsFragment";
-    String NEWS_SPECIALACTIVITY = NEWS + "/NewsSpecialActivity";
-    String NEWS_DETAILACTIVITY = NEWS + "/NewsDetailActivity";
-    String NEWS_PHOTOSETCTIVITY = NEWS + "/NewsPhotoSetActivity";
+    String NEWS_FRAGMENT = NEWS + "/NewsFragment";
+    String NEWS_SPECIAL_ACTIVITY = NEWS + "/NewsSpecialActivity";
+    String NEWS_DETAIL_ACTIVITY = NEWS + "/NewsDetailActivity";
+    String NEWS_PHOTO_SET_ACTIVITY = NEWS + "/NewsPhotoSetActivity";
+    String NEWS_CHANNEL_MANAGER_ACTIVITY = NEWS + "/NewsChannelManagerActivity";
 
     /**
      * 视频分组
      */
-    String VIDEO_HOMEFRAGMENT = VIDEO + "/VideoFragment";
+    String VIDEO_FRAGMENT = VIDEO + "/VideoFragment";
 
     /**
      * 音乐分组
      */
-    String MUSIC_HOMEFRAGMENT = MUSIC + "/MusicFragment";
+    String MUSIC_FRAGMENT = MUSIC + "/MusicFragment";
 }

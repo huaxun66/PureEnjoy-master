@@ -34,9 +34,12 @@ import me.jessyan.armscomponent.commonsdk.BuildConfig;
 import me.jessyan.armscomponent.commonsdk.http.Api;
 import me.jessyan.armscomponent.commonsdk.http.SSLSocketClient;
 import me.jessyan.armscomponent.commonsdk.imgaEngine.Strategy.CommonGlideImageLoaderStrategy;
+import me.jessyan.armscomponent.commonsdk.utils.SharedPreferenceUtil;
 import me.jessyan.retrofiturlmanager.RetrofitUrlManager;
 import okhttp3.OkHttpClient;
 import timber.log.Timber;
+
+import static me.jessyan.armscomponent.commonsdk.core.Constants.SP_FILE_NAME;
 
 
 /**
@@ -98,6 +101,7 @@ public class GlobalConfiguration implements ConfigModule {
                     RetrofitUrlManager.getInstance().setDebug(true);
                 }
                 ARouter.init(application); // 尽可能早,推荐在Application中初始化
+                SharedPreferenceUtil.getInstance(application, SP_FILE_NAME);
             }
 
             @Override

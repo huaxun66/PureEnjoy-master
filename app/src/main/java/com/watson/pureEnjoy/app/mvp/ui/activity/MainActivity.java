@@ -45,7 +45,7 @@ import me.jessyan.armscomponent.commonsdk.core.RouterHub;
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * ================================================
  */
-@Route(path = RouterHub.APP_MAINACTIVITY)
+@Route(path = RouterHub.APP_MAIN_ACTIVITY)
 public class MainActivity extends BaseSupportActivity {
     @BindView(R.id.navigationBar)
     EasyNavigationBar navigationBar;
@@ -73,9 +73,9 @@ public class MainActivity extends BaseSupportActivity {
         tabText[1] = getString(R.string.public_video);
         tabText[2] = getString(R.string.public_music);
         //添加fragment
-        fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.NEWS_HOMEFRAGMENT).navigation());
-        fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.VIDEO_HOMEFRAGMENT).navigation());
-        fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.NEWS_HOMEFRAGMENT).navigation());
+        fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.NEWS_FRAGMENT).navigation());
+        fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.VIDEO_FRAGMENT).navigation());
+        fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.NEWS_FRAGMENT).navigation());
         navigationBar.titleItems(tabText)
                 .normalIconItems(normalIcon)
                 .selectIconItems(selectIcon)

@@ -18,13 +18,10 @@ package com.watson.pureenjoy.news.mvp.presenter;
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
-import com.watson.pureenjoy.news.http.entity.NewsSpecial;
-import com.watson.pureenjoy.news.http.entity.NewsSpecialItem;
-import com.watson.pureenjoy.news.mvp.contract.NewsSpecialContract;
+import com.watson.pureenjoy.news.http.entity.ChannelItem;
+import com.watson.pureenjoy.news.mvp.contract.NewsChannelManagerContract;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -34,19 +31,18 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
-
 @ActivityScope
-public class NewsSpecialPresenter extends BasePresenter<NewsSpecialContract.Model, NewsSpecialContract.View> {
+public class NewsChannelManagerPresenter extends BasePresenter<NewsChannelManagerContract.Model, NewsChannelManagerContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
 
     @Inject
-    public NewsSpecialPresenter(NewsSpecialContract.Model model, NewsSpecialContract.View rootView) {
+    public NewsChannelManagerPresenter(NewsChannelManagerContract.Model model, NewsChannelManagerContract.View rootView) {
         super(model, rootView);
     }
 
-    public void requestNewsSpecial(String specialId) {
-        mModel.getNewsSpecial(specialId)
+    public void getRecommendChannels(List<ChannelItem> selectedChannels) {
+        mModel.getAllChannels()
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))//遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔
                 .doOnSubscribe(disposable -> mRootView.showLoading())
@@ -54,21 +50,17 @@ public class NewsSpecialPresenter extends BasePresenter<NewsSpecialContract.Mode
                 .observeOn(AndroidSchedulers.mainThread())
                 .doFinally(() -> mRootView.hideLoading())
                 .compose(RxLifecycleUtils.bindToLifecycle(mRootView)) //使用 Rxlifecycle,使 Disposable 和 Activity 一起销毁
-                .subscribe(new ErrorHandleSubscriber<Map<String, NewsSpecial>>(mErrorHandler) {
+                .subscribe(new ErrorHandleSubscriber<List<ChannelItem>>(mErrorHandler) {
                     @Override
-                    public void onNext(Map<String, NewsSpecial> data) {
-                        NewsSpecial newsSpecial = data.get(specialId);
-                        mRootView.setBanner(newsSpecial.getBanner());
-                        List<NewsSpecialItem> specialItemList = new ArrayList<>();
-                        for(NewsSpecial.TopicsEntity topic : newsSpecial.getTopics()) {
-                            specialItemList.add(new NewsSpecialItem(topic.getShortname()));
-                            for(NewsSpecial.TopicsEntity.DocsEntity doc : topic.getDocs()) {
-                                specialItemList.add(new NewsSpecialItem(doc));
-                            }
-                        }
-                        mRootView.setNewsSpecialList(specialItemList);
+                    public void onNext(List<ChannelItem> allChannels) {
+                        allChannels.removeAll(selectedChannels);
+                        mRootView.setRecommendChannels(allChannels);
                     }
                 });
+    }
+
+    public void updateSelectedChannels(List<ChannelItem> selectedChannels) {
+         mModel.updateSelectedChannels(selectedChannels);
     }
 
     @Override

@@ -22,7 +22,7 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
-//        multiDexEnabled true
+        multiDexEnabled true
     }
     buildTypes {
         debug {
@@ -69,7 +69,7 @@ dependencies {
     //tools
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger2-compiler"]
-//    api rootProject.ext.dependencies["multidex"]
+    api rootProject.ext.dependencies["multidex"]
     //view
     api rootProject.ext.dependencies["easyNavigationBar"]
     annotationProcessor(rootProject.ext.dependencies["butterknife-compiler"]) {

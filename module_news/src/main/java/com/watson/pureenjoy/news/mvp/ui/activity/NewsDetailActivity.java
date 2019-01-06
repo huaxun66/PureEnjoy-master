@@ -35,7 +35,7 @@ import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.POST_ID;
 
-@Route(path = RouterHub.NEWS_DETAILACTIVITY)
+@Route(path = RouterHub.NEWS_DETAIL_ACTIVITY)
 public class NewsDetailActivity extends BaseSupportActivity<NewsDetailPresenter> implements NewsDetailContract.View {
     @BindView(R2.id.webView)
     ObservableWebView mWebView;

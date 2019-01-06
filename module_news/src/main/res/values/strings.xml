@@ -3,4 +3,12 @@
     <string name="news_picture_set">Picture</string>
     <string name="news_video">Video</string>
 
+    <string name="news_channel_manager">Channel Manager</string>
+    <string name="news_my_channel">My Channel</string>
+    <string name="news_channel_order">Hold and drag to sort</string>
+    <string name="news_channel_complete">Done</string>
+    <string name="news_channel_edit">Edit</string>
+    <string name="news_channel_recommend">Recommend</string>
+    <string name="news_channel_add">Click to Add Channels</string>
+
 </resources>
