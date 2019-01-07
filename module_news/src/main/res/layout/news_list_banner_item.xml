@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/public_height_30dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/public_black_transparency_250">
+            android:background="@color/public_black_transparency_450">
 
             <TextView
                 android:id="@+id/title"
