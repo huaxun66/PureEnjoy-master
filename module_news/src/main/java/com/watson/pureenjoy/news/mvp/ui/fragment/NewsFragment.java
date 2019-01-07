@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
-import com.jess.arms.utils.ArmsUtils;
 import com.watson.pureenjoy.news.R;
 import com.watson.pureenjoy.news.R2;
 import com.watson.pureenjoy.news.di.component.DaggerNewsComponent;
@@ -84,7 +83,7 @@ public class NewsFragment extends BaseSupportFragment<NewsPresenter> implements 
     private void initListener() {
         mExpandImage.setOnClickListener(view -> {
             selectId = channels.get(mViewPager.getCurrentItem()).getTypeId();
-            ObjectAnimator anim = ObjectAnimator.ofFloat(mExpandImage, "rotation", 0.0F, 180.0F).setDuration(300);
+            ObjectAnimator anim = ObjectAnimator.ofFloat(mExpandImage, "rotation", 0.0F, 360.0F).setDuration(300);
             anim.addListener(new Animator.AnimatorListener(){
                 @Override
                 public void onAnimationStart(Animator animator) {}
@@ -94,10 +93,10 @@ public class NewsFragment extends BaseSupportFragment<NewsPresenter> implements 
                 public void onAnimationRepeat(Animator animator) {}
                 @Override
                 public void onAnimationEnd(Animator animator) {
-//            ARouter.getInstance().build(RouterHub.NEWS_CHANNEL_MANAGER_ACTIVITY)
-//                    .withParcelableArrayList(CHANNEL_SELECTED, (ArrayList<ChannelItem>) channels)
-//                    .withTransition(R.anim.public_translate_bottom_to_center, R.anim.public_translate_center_to_top)
-//                    .navigation(getActivity(), REQUEST_CODE);
+//                    ARouter.getInstance().build(RouterHub.NEWS_CHANNEL_MANAGER_ACTIVITY)
+//                            .withParcelableArrayList(CHANNEL_SELECTED, (ArrayList<ChannelItem>) channels)
+//                            .withTransition(R.anim.public_translate_bottom_to_center, R.anim.public_translate_center_to_top)
+//                            .navigation(getActivity(), REQUEST_CODE);
                     Intent intent = new Intent(getContext(), NewsChannelManagerActivity.class);
                     intent.putParcelableArrayListExtra(CHANNEL_SELECTED, (ArrayList<ChannelItem>) channels);
                     startActivityForResult(intent, REQUEST_CODE);
@@ -145,29 +144,12 @@ public class NewsFragment extends BaseSupportFragment<NewsPresenter> implements 
         List<BaseFragment> fragmentList = new ArrayList<>();
         for (ChannelItem item : channels) {
             titleList.add(item.getName());
-            fragmentList.add(NewsListFragment.getIns(item.getTypeId(), item.getName()));
+            fragmentList.add(NewsListFragment.getIns(item.getTypeId()));
         }
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager(), titleList, fragmentList);
         mViewPager.setAdapter(adapter);
 //        mViewPager.setOffscreenPageLimit(titleList.size());
         mTabBar.setViewPager(mViewPager);
-    }
-
-
-    @Override
-    public void showMessage(@NonNull String message) {
-        ArmsUtils.snackbarText(message);
-    }
-
-
-    @Override
-    public void showLoading() {
-//        loadingDialog.show();
-    }
-
-    @Override
-    public void hideLoading() {
-//        loadingDialog.hide();
     }
 
 }

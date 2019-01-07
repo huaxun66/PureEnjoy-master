@@ -21,6 +21,7 @@
     <dimen name="public_height_0_5dp">0.5dp</dimen>
     <dimen name="public_height_1dp">1dp</dimen>
     <dimen name="public_height_2dp">2dp</dimen>
+    <dimen name="public_height_3dp">3dp</dimen>
     <dimen name="public_height_10dp">10dp</dimen>
     <dimen name="public_height_12dp">12dp</dimen>
     <dimen name="public_height_15dp">15dp</dimen>
@@ -37,6 +38,7 @@
     <dimen name="public_height_80dp">80dp</dimen>
     <dimen name="public_height_101_5dp">101.5dp</dimen>
     <dimen name="public_height_174dp">174dp</dimen>
+    <dimen name="public_height_200dp">200dp</dimen>
     <dimen name="public_height_280dp">280dp</dimen>
 
 
@@ -44,6 +46,7 @@
     <dimen name="public_width_0dp">0dp</dimen>
     <dimen name="public_width_12dp">12dp</dimen>
     <dimen name="public_width_15dp">15dp</dimen>
+    <dimen name="public_width_16dp">16dp</dimen>
     <dimen name="public_width_24dp">24dp</dimen>
     <dimen name="public_width_30dp">30dp</dimen>
     <dimen name="public_width_32dp">32dp</dimen>
@@ -59,6 +62,7 @@
     <dimen name="public_padding_20dp">20dp</dimen>
 
     //paddingLeft
+    <dimen name="public_pad_left_2dp">2dp</dimen>
     <dimen name="public_pad_left_4dp">4dp</dimen>
     <dimen name="public_pad_left_5dp">5dp</dimen>
     <dimen name="public_pad_left_8dp">8dp</dimen>
@@ -68,6 +72,7 @@
     <dimen name="public_pad_left_16dp">16dp</dimen>
 
     //paddingRight
+    <dimen name="public_pad_right_2dp">2dp</dimen>
     <dimen name="public_pad_right_8dp">8dp</dimen>
     <dimen name="public_pad_right_10dp">10dp</dimen>
     <dimen name="public_pad_right_12dp">12dp</dimen>

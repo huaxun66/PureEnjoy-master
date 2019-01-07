@@ -20,6 +20,7 @@ import android.widget.ProgressBar;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.di.component.AppComponent;
+import com.kaopiz.kprogresshud.KProgressHUD;
 import com.watson.pureenjoy.news.R;
 import com.watson.pureenjoy.news.R2;
 import com.watson.pureenjoy.news.di.component.DaggerNewsDetailComponent;
@@ -74,6 +75,12 @@ public class NewsDetailActivity extends BaseSupportActivity<NewsDetailPresenter>
     public void initData(@Nullable Bundle savedInstanceState) {
         initListener();
         initWebView();
+        progressHUD = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.ANNULAR_DETERMINATE)
+                .setLabel(getString(R.string.str_wait))
+                .setCancellable(true)
+                .setMaxProgress(100);
+        progressHUD.show();
         mPresenter.requestNewsDetail(postId);
     }
 
@@ -103,8 +110,10 @@ public class NewsDetailActivity extends BaseSupportActivity<NewsDetailPresenter>
         });
         mWebView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int newProgress) {
+                progressHUD.setProgress(newProgress);
                 if (null == mLoadingProgressBar) return;
                 if (newProgress >= 100) {
+                    progressHUD.dismiss();
                     if (!isAnimStart) {
                         // 防止调用多次动画
                         isAnimStart = true;

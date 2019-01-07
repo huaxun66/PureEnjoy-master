@@ -1,4 +1,4 @@
-package com.watson.pureenjoy.music;
+package com.watson.module_music;
 
 import org.junit.Test;
 

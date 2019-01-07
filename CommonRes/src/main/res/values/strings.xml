@@ -29,4 +29,5 @@
 
     <string name="str_sure">Sure</string>
     <string name="str_cancel">Cancel</string>
+    <string name="str_wait">Please Wait</string>
 </resources>

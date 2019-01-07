@@ -26,6 +26,7 @@ import com.watson.pureenjoy.news.utils.StringUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -49,18 +50,30 @@ public class NewsListPresenter extends BasePresenter<NewsListContract.Model, New
         super(model, rootView);
     }
 
-    public void requestNewsList(String typeId, int offset, int limit) {
+    public void requestNewsList(String typeId, int offset, int limit, boolean showLoading) {
         mModel.getNewsList(typeId, offset, limit)
                 .subscribeOn(Schedulers.io())
                 .retryWhen(new RetryWithDelay(3, 2))//遇到错误时重试,第一个参数为重试几次,第二个参数为重试的间隔
-                .doOnSubscribe(disposable -> mRootView.showLoading())
+                .doOnSubscribe(disposable -> {
+                    if (showLoading) mRootView.showLoading();
+                })
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .flatMap(stringListMap -> Observable.fromIterable(stringListMap.get(typeId)))
                 .doOnNext(newsItem -> {
-                    if (NewsConstants.PHOTO_SET.equals(newsItem.getSkipType())) {
+                    //多图,非Banner
+                    if (NewsConstants.PHOTO_SET.equals(newsItem.getSkipType()) && newsItem.getHasAD() != 1) {
                         if (newsItem.getImgextra() == null || newsItem.getImgextra().size() < 3) {
                             getExtraPhotoSet(newsItem);
+                        }
+                    }
+                    //generate Banner
+                    if (newsItem.getHasAD() == 1 && newsItem.getAds() != null && newsItem.getAds().size() > 0) {
+                        //Banner只加载首页
+                        if (offset == 0) {
+                            getBanner(newsItem.getAds());
+                        } else {
+                            newsItem.setHasAD(0);
                         }
                     }
                 })
@@ -94,6 +107,21 @@ public class NewsListPresenter extends BasePresenter<NewsListContract.Model, New
                         }
                     }
                 });
+    }
+
+    private void getBanner(List<NewsItem.AdsEntity> ads) {
+        for(NewsItem.AdsEntity entity : ads) {
+            mModel.getNewsPhotoSet(StringUtil.clipPhotoSetId(entity.getSkipID()))
+                    .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                    .subscribe(new ErrorHandleSubscriber<NewsPhotoSet>(mErrorHandler) {
+                        @Override
+                        public void onNext(NewsPhotoSet newsPhotoSet) {
+                            if (newsPhotoSet.getPhotos() != null && newsPhotoSet.getPhotos().size() > 0) {
+                                entity.setImgsrc(newsPhotoSet.getPhotos().get(new Random().nextInt(newsPhotoSet.getPhotos().size())).getImgurl());
+                            }
+                        }
+                    });
+        }
     }
 
 

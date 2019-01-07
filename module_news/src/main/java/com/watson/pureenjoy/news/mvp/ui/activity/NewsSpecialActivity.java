@@ -34,6 +34,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import me.jessyan.armscomponent.commonres.base.BaseSupportActivity;
+import me.jessyan.armscomponent.commonres.view.DividerItemDecoration;
 import me.jessyan.armscomponent.commonres.view.TopBar;
 import me.jessyan.armscomponent.commonres.view.flowlayout.FlowLayout;
 import me.jessyan.armscomponent.commonres.view.flowlayout.TagAdapter;
@@ -86,6 +87,7 @@ public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresente
     public void initData(@Nullable Bundle savedInstanceState) {
         initListener();
         mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.setAdapter(adapter);
         mPresenter.requestNewsSpecial(specialId);
     }
@@ -115,18 +117,6 @@ public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresente
                 }
             }
         });
-    }
-
-    @Override
-    public void showMessage(@NonNull String message) {
-    }
-
-    @Override
-    public void showLoading() {
-    }
-
-    @Override
-    public void hideLoading() {
     }
 
     @Override

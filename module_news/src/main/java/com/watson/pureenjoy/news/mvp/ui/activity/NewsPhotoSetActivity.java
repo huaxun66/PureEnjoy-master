@@ -25,7 +25,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import me.jessyan.armscomponent.commonres.PageTransformer.Transformers.AccordionTransformer;
+import me.jessyan.armscomponent.commonres.PageTransformer.Transformers.TabletTransformer;
 import me.jessyan.armscomponent.commonres.base.BaseSupportActivity;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
@@ -108,18 +108,6 @@ public class NewsPhotoSetActivity extends BaseSupportActivity<NewsPhotoSetPresen
 
     }
 
-    @Override
-    public void showMessage(@NonNull String message) {
-    }
-
-    @Override
-    public void showLoading() {
-    }
-
-    @Override
-    public void hideLoading() {
-    }
-
 
     @Override
     public void setNewsPhotoSet(NewsPhotoSet newsPhotoSet) {
@@ -131,7 +119,7 @@ public class NewsPhotoSetActivity extends BaseSupportActivity<NewsPhotoSetPresen
             }
             adapter.setImageList(imageList);
             mViewPager.setAdapter(adapter);
-            mViewPager.setPageTransformer(true, new AccordionTransformer()); //动画
+            mViewPager.setPageTransformer(true, new TabletTransformer()); //动画
             mViewPager.setCurrentItem(0);
             mContent.setText(photos.get(0).getNote());
             mTitle.setText(newsPhotoSet.getSetname());

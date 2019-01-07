@@ -9,11 +9,12 @@ import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.di.component.AppComponent;
-import me.jessyan.armscomponent.commonres.base.BaseSupportFragment;
-import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 import com.watson.pureenjoy.music.R;
 
-@Route(path = RouterHub.MUSIC_HOMEFRAGMENT)
+import me.jessyan.armscomponent.commonres.base.BaseSupportFragment;
+import me.jessyan.armscomponent.commonsdk.core.RouterHub;
+
+@Route(path = RouterHub.MUSIC_FRAGMENT)
 public class MusicFragment extends BaseSupportFragment {
 
     public MusicFragment() {

@@ -52,6 +52,7 @@ ext {
             "slider"                   : 'com.daimajia.slider:library:1.1.5@aar',
             "nineoldandroids"          : "com.nineoldandroids:library:2.4.0",
             "photoview"                : 'com.github.chrisbanes.photoview:library:1.2.4',
+            "kprogresshud"            : 'com.kaopiz:kprogresshud:1.0.2',
             "autolayout"               : "com.zhy:autolayout:1.4.5",
             "butterknife"              : "com.jakewharton:butterknife:${version["butterknifeSdkVersion"]}",
             "butterknife-compiler"     : "com.jakewharton:butterknife-compiler:${version["butterknifeSdkVersion"]}",

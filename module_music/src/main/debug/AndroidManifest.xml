@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.watson.pureenjoy.music">
+    package="com.watson.module_music">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -37,7 +37,7 @@
             android:name="me.jessyan.armscomponent.commonsdk.core.GlobalConfiguration"
             android:value="ConfigModule" />
         <meta-data
-            android:name="com.watson.pureenjoy.music.app.GlobalConfiguration"
+            android:name="com.watson.module_music.app.GlobalConfiguration"
             android:value="ConfigModule" />
     </application>
 </manifest>

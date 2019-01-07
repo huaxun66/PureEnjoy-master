@@ -75,7 +75,7 @@ public class MainActivity extends BaseSupportActivity {
         //添加fragment
         fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.NEWS_FRAGMENT).navigation());
         fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.VIDEO_FRAGMENT).navigation());
-        fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.NEWS_FRAGMENT).navigation());
+        fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.MUSIC_FRAGMENT).navigation());
         navigationBar.titleItems(tabText)
                 .normalIconItems(normalIcon)
                 .selectIconItems(selectIcon)

@@ -1,6 +1,8 @@
 package com.watson.pureenjoy.news.mvp.ui.adapter;
 
+import android.app.Service;
 import android.content.Context;
+import android.os.Vibrator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;

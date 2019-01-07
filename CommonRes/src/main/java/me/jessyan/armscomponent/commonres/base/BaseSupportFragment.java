@@ -2,6 +2,7 @@ package me.jessyan.armscomponent.commonres.base;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
@@ -9,7 +10,11 @@ import android.view.animation.Animation;
 
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.mvp.IPresenter;
+import com.jess.arms.mvp.IView;
+import com.jess.arms.utils.ArmsUtils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
+import me.jessyan.armscomponent.commonres.R;
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragmentDelegate;
@@ -20,10 +25,11 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * Created by Administrator on 2018/2/1.
  */
 
-public abstract class BaseSupportFragment<P extends IPresenter> extends BaseFragment<P> implements ISupportFragment {
+public abstract class BaseSupportFragment<P extends IPresenter> extends BaseFragment<P> implements ISupportFragment, IView {
 
     final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     protected FragmentActivity _mActivity;
+    protected KProgressHUD progressHUD;
 
     @Override
     public SupportFragmentDelegate getSupportDelegate() {
@@ -50,6 +56,10 @@ public abstract class BaseSupportFragment<P extends IPresenter> extends BaseFrag
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDelegate.onCreate(savedInstanceState);
+        progressHUD = KProgressHUD.create(getActivity())
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel(getString(R.string.str_wait))
+                .setCancellable(true);
     }
 
     @Override
@@ -239,6 +249,22 @@ public abstract class BaseSupportFragment<P extends IPresenter> extends BaseFrag
     @Override
     public void putNewBundle(Bundle newBundle) {
         mDelegate.putNewBundle(newBundle);
+    }
+
+
+    @Override
+    public void showMessage(@NonNull String message) {
+        ArmsUtils.snackbarText(message);
+    }
+
+    @Override
+    public void showLoading() {
+        progressHUD.show();
+    }
+
+    @Override
+    public void hideLoading() {
+        progressHUD.dismiss();
     }
 
 

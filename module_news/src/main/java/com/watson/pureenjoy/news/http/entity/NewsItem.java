@@ -4,6 +4,7 @@ import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.watson.pureenjoy.news.app.NewsConstants;
 
 import java.util.List;
+import java.util.Objects;
 
 public class NewsItem implements MultiItemEntity {
 
@@ -371,12 +372,15 @@ public class NewsItem implements MultiItemEntity {
     }
 
 
-    public static final int TYPE_PHOTO = 1;
     public static final int TYPE_NORMAL = 0;
-
+    public static final int TYPE_PHOTO = 1;
+    public static final int TYPE_BANNER = 2;
 
     @Override
     public int getItemType() {
+        if (getHasAD() == 1 && getAds() != null && getAds().size() > 0) {
+            return TYPE_BANNER;
+        }
         return NewsConstants.PHOTO_SET.equals(getSkipType()) ? TYPE_PHOTO : TYPE_NORMAL;
     }
 
@@ -397,16 +401,6 @@ public class NewsItem implements MultiItemEntity {
     }
 
     public static class AdsEntity {
-        /**
-         * subtitle :
-         * skipType : photoset
-         * skipID : 00AP0001|2276259
-         * tag : photoset
-         * title : 湄洲妈祖金身抵达台湾 接驾信众超千人
-         * imgsrc : http://cms-bucket.nosdn.127.net/de2e5dbef1e944b8b48f7aef3fd2dc7b20170924110002.jpeg
-         * url : 00AP0001|2276259
-         */
-
         private String subtitle;
         private String skipType;
         private String skipID;
@@ -470,5 +464,20 @@ public class NewsItem implements MultiItemEntity {
         public void setUrl(String url) {
             this.url = url;
         }
+
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NewsItem)) return false;
+        NewsItem newsItem = (NewsItem) o;
+        return Objects.equals(getPostid(), newsItem.getPostid()) &&
+                Objects.equals(getPhotosetID(), newsItem.getPhotosetID());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPostid(), getPhotosetID());
     }
 }

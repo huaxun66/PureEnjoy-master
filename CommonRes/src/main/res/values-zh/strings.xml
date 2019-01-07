@@ -31,5 +31,6 @@
 
     <string name="str_sure">确认</string>
     <string name="str_cancel">取消</string>
+    <string name="str_wait">请稍等</string>
 
 </resources>

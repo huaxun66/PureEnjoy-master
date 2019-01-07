@@ -3,7 +3,6 @@ package com.watson.pureenjoy.news.http.entity;
 import java.util.List;
 
 public class NewsSpecial {
-
     private String skipcontent;
     private String banner;
     private int del;
@@ -204,7 +203,6 @@ public class NewsSpecial {
     }
 
     public static class TopicsEntity {
-
         private int index;
         private String tname;
         private String type;
@@ -272,7 +270,6 @@ public class NewsSpecial {
             private List<ImgextraEntity> imgextra;
             private VideoInfo videoinfo;
 
-
             public String getSkipType() {
                 return skipType;
             }
@@ -315,7 +312,6 @@ public class NewsSpecial {
             }
 
             public static class VideoInfo {
-
                 private String title;
                 private String description;
                 private String ptime;

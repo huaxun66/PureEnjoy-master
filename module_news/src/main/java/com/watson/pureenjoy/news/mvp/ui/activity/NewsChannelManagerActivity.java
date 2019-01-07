@@ -209,10 +209,6 @@ public class NewsChannelManagerActivity extends BaseSupportActivity<NewsChannelM
     }
 
     @Override
-    public void showMessage(@NonNull String message) {
-    }
-
-    @Override
     public void setRecommendChannels(List<ChannelItem> recommendChannels) {
         ArrayList<ChannelItem> allChannels = new ArrayList<>();
         allChannels.addAll(selectedChannels);
@@ -223,7 +219,7 @@ public class NewsChannelManagerActivity extends BaseSupportActivity<NewsChannelM
 
     private ChannelItem generateRecommendTitleItem() {
         ChannelItem titleItem = new ChannelItem();
-        titleItem.setType(1);
+        titleItem.setType(mAdapter.TYPE_TITLE);
         titleItem.setTypeId(RECOMMEND_TYPE_ID);
         return titleItem;
     }

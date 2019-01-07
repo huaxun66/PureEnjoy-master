@@ -30,7 +30,6 @@ import java.util.List;
 
 import dagger.Module;
 import dagger.Provides;
-import me.jessyan.armscomponent.commonres.dialog.ProgressDialog;
 
 /**
  * ================================================
@@ -64,12 +63,6 @@ public class NewsListModule {
     @FragmentScope
     public NewsListContract.Model provideNewsListModel(IRepositoryManager iRepositoryManager) {
         return new NewsListModel(iRepositoryManager);
-    }
-
-    @FragmentScope
-    @Provides
-    public ProgressDialog provideLoadingDialog(IRepositoryManager iRepositoryManager) {
-        return new ProgressDialog(iRepositoryManager.getContext());
     }
 
 }

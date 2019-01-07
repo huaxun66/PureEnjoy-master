@@ -7,7 +7,11 @@ import android.view.MotionEvent;
 
 import com.jess.arms.base.BaseActivity;
 import com.jess.arms.mvp.IPresenter;
+import com.jess.arms.mvp.IView;
+import com.jess.arms.utils.ArmsUtils;
+import com.kaopiz.kprogresshud.KProgressHUD;
 
+import me.jessyan.armscomponent.commonres.R;
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportActivity;
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -19,10 +23,11 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * Created by Administrator on 2018/2/1.
  */
 
-public abstract class BaseSupportActivity<P extends IPresenter> extends BaseActivity<P> implements ISupportActivity {
+public abstract class BaseSupportActivity<P extends IPresenter> extends BaseActivity<P> implements ISupportActivity, IView {
 
     final SupportActivityDelegate mDelegate = new SupportActivityDelegate(this);
     public BaseSupportActivity mContext;
+    protected KProgressHUD progressHUD;
 
     @Override
     public SupportActivityDelegate getSupportDelegate() {
@@ -42,6 +47,10 @@ public abstract class BaseSupportActivity<P extends IPresenter> extends BaseActi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         mContext = this;
         mDelegate.onCreate(savedInstanceState);
+        progressHUD = KProgressHUD.create(this)
+                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                .setLabel(getString(R.string.str_wait))
+                .setCancellable(true);
         super.onCreate(savedInstanceState);
     }
 
@@ -113,6 +122,21 @@ public abstract class BaseSupportActivity<P extends IPresenter> extends BaseActi
     @Override
     public FragmentAnimator onCreateFragmentAnimator() {
         return mDelegate.onCreateFragmentAnimator();
+    }
+
+    @Override
+    public void showMessage(@NonNull String message) {
+        ArmsUtils.snackbarText(message);
+    }
+
+    @Override
+    public void showLoading() {
+        progressHUD.show();
+    }
+
+    @Override
+    public void hideLoading() {
+        progressHUD.dismiss();
     }
 
     /****************************************以下为可选方法(Optional methods)******************************************************/

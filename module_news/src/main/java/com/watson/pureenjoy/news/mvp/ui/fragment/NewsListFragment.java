@@ -12,7 +12,6 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.di.component.AppComponent;
-import com.jess.arms.utils.ArmsUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -31,7 +30,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import me.jessyan.armscomponent.commonres.base.BaseSupportFragment;
-import me.jessyan.armscomponent.commonres.dialog.ProgressDialog;
 import me.jessyan.armscomponent.commonres.view.CustomLoadingMoreView;
 import me.jessyan.armscomponent.commonres.view.DividerItemDecoration;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
@@ -40,7 +38,6 @@ import static com.watson.pureenjoy.news.app.NewsConstants.PHOTO_SET_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.POST_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.SPECIAL_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.TYPE_ID;
-import static com.watson.pureenjoy.news.app.NewsConstants.TYPE_NAME;
 import static com.watson.pureenjoy.news.app.NewsConstants.URL;
 
 public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> implements NewsListContract.View,
@@ -56,18 +53,14 @@ public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> imp
     NewsListAdapter adapter;
     @Inject
     List<NewsItem> allData;
-    @Inject
-    ProgressDialog loadingDialog;
 
     private boolean isRefresh;
     private String typeId;
-    private String name;
 
-    public static NewsListFragment getIns(String typeId, String name) {
+    public static NewsListFragment getIns(String typeId) {
         NewsListFragment newsListFragment = new NewsListFragment();
         Bundle bundle = new Bundle();
         bundle.putString(TYPE_ID, typeId);
-        bundle.putString(TYPE_NAME, name);
         newsListFragment.setArguments(bundle);
         return newsListFragment;
     }
@@ -78,7 +71,6 @@ public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> imp
         Bundle bundle = getArguments();
         if (bundle != null) {
             typeId = bundle.getString(TYPE_ID);
-            name = bundle.getString(TYPE_NAME);
         }
     }
 
@@ -104,7 +96,7 @@ public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> imp
         mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
         mRecyclerView.setAdapter(adapter);
         initListener();
-        getData(0);
+        getData(0, true);
     }
 
     private void initListener() {
@@ -130,11 +122,11 @@ public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> imp
         });
     }
 
-    private void getData(int offset) {
+    private void getData(int offset, boolean showLoading) {
         if (offset == 0) {
             isRefresh = true;
         }
-        mPresenter.requestNewsList(typeId, offset, 10);
+        mPresenter.requestNewsList(typeId, offset, 10, showLoading);
     }
 
     @Override
@@ -163,12 +155,12 @@ public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> imp
 
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
-        getData(0);
+        getData(0, false);
     }
 
     @Override
     public void onLoadMoreRequested() {
-        getData(adapter.getData().size());
+        getData(adapter.getData().size(), false);
     }
 
     private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener(){
@@ -194,20 +186,13 @@ public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> imp
         }
     };
 
-    @Override
-    public void showMessage(@NonNull String message) {
-        ArmsUtils.snackbarText(message);
-    }
 
     @Override
-    public void showLoading() {
-//        loadingDialog.show();
+    public void onDetach() {
+        super.onDetach();
+        adapter.onDetach();
     }
 
-    @Override
-    public void hideLoading() {
-//        loadingDialog.hide();
-    }
 
 
 }

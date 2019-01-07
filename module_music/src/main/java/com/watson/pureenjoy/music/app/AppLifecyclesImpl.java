@@ -9,14 +9,13 @@ import com.jess.arms.integration.cache.IntelligentCache;
 import com.jess.arms.utils.ArmsUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
-
 import com.watson.pureenjoy.music.BuildConfig;
 
 /**
  * ================================================
  * 展示 {@link AppLifecycles} 的用法
  * <p>
- * Created by ArmsComponentTemplate on 12/11/2018 10:33
+ * Created by ArmsComponentTemplate on 01/07/2019 19:48
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/ArmsComponent">Star me</a>

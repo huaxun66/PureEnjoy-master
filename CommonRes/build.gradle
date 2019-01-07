@@ -39,6 +39,8 @@ dependencies {
     //view
     api rootProject.ext.dependencies["smartRefreshLayout"]
     api rootProject.ext.dependencies["brvah"]
+    api rootProject.ext.dependencies["kprogresshud"]
+    api rootProject.ext.dependencies["slider"]
 
     //tools
     api rootProject.ext.dependencies["paginate"]
@@ -46,5 +48,6 @@ dependencies {
     api rootProject.ext.dependencies["fragmentation"]
     api rootProject.ext.dependencies["fragmentation-core"]
     api rootProject.ext.dependencies["nineoldandroids"]
-    api rootProject.ext.dependencies["slider"]
+    api rootProject.ext.dependencies["picasso"]
+
 }

@@ -45,7 +45,6 @@ public interface RouterHub {
     String APP = "/app";//宿主 App 组件
     String ZHIHU = "/zhihu";//知乎组件
     String GANK = "/gank";//干货集中营组件
-    String GOLD = "/gold";//稀土掘金组件
     String NEWS = "/news";//新闻组件
     String VIDEO = "/video";//视频组件
     String MUSIC = "/music";//音乐组件
@@ -75,16 +74,7 @@ public interface RouterHub {
      * 干货集中营分组
      */
     String GANK_SERVICE_GANKINFOSERVICE = GANK + SERVICE + "/GankInfoService";
-
     String GANK_HOMEACTIVITY = GANK + "/HomeActivity";
-
-    /**
-     * 稀土掘金分组
-     */
-    String GOLD_SERVICE_GOLDINFOSERVICE = GOLD + SERVICE + "/GoldInfoService";
-
-    String GOLD_HOMEACTIVITY = GOLD + "/HomeActivity";
-    String GOLD_DETAILACTIVITY = GOLD + "/DetailActivity";
 
     /**
      * 新闻分组

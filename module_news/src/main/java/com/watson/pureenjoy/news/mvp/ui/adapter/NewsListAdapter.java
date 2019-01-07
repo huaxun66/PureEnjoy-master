@@ -1,19 +1,29 @@
 package com.watson.pureenjoy.news.mvp.ui.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.watson.pureenjoy.news.R;
 import com.watson.pureenjoy.news.app.NewsConstants;
 import com.watson.pureenjoy.news.http.entity.NewsItem;
 
 import java.util.List;
 
+import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 import me.jessyan.armscomponent.commonsdk.utils.StringUtil;
+
+import static com.watson.pureenjoy.news.app.NewsConstants.PHOTO_SET_ID;
 
 public class NewsListAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseViewHolder> {
 
@@ -28,8 +38,9 @@ public class NewsListAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseVie
     }
 
     private void addMultiItemType() {
-        addItemType(NewsItem.TYPE_NORMAL,R.layout.news_list_normal_item);
         addItemType(NewsItem.TYPE_PHOTO, R.layout.news_list_photo_item);
+        addItemType(NewsItem.TYPE_NORMAL,R.layout.news_list_normal_item);
+        addItemType(NewsItem.TYPE_BANNER, R.layout.news_list_banner_item);
     }
 
     @Override
@@ -40,6 +51,9 @@ public class NewsListAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseVie
                 break;
             case NewsItem.TYPE_PHOTO:
                 convertPhotoContent(helper, item);
+                break;
+            case NewsItem.TYPE_BANNER:
+                convertBannerContent(helper, item);
                 break;
             default:
                 break;
@@ -82,6 +96,50 @@ public class NewsListAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseVie
             Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_one));
             Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_two));
             Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_three));
+        }
+    }
+
+    private SliderLayout mSlider;
+    private void convertBannerContent(BaseViewHolder helper, NewsItem item) {
+        SliderLayout mSlider = helper.getView(R.id.slider);
+        this.mSlider = mSlider;
+        mSlider.removeAllSliders(); //remove
+        for(NewsItem.AdsEntity entity : item.getAds()) {
+            TextSliderView textSliderView = new TextSliderView(context);
+            // initialize a SliderLayout
+            textSliderView
+                    .description(entity.getTitle())
+                    .image(entity.getImgsrc())
+                    .setScaleType(BaseSliderView.ScaleType.Fit)
+                    .setOnSliderClickListener(slider -> ARouter.getInstance().build(RouterHub.NEWS_PHOTO_SET_ACTIVITY)
+                            .withString(PHOTO_SET_ID, (String)slider.getBundle().get(PHOTO_SET_ID))
+                            .navigation());
+            //add your extra information
+            textSliderView.bundle(new Bundle());
+            textSliderView.getBundle().putString(PHOTO_SET_ID,entity.getSkipID());
+            mSlider.addSlider(textSliderView);
+        }
+        mSlider.setPresetTransformer(SliderLayout.Transformer.Accordion); //设置过渡动画
+        mSlider.setPresetIndicator(SliderLayout.PresetIndicators.Right_Bottom); //Indicator位置
+        mSlider.setCustomAnimation(new DescriptionAnimation()); //底部文字展现的动画
+        mSlider.setDuration(item.getAds().size()>1 ? 5000 : 99999);
+        mSlider.addOnPageChangeListener(new ViewPagerEx.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
+
+            @Override
+            public void onPageSelected(int position) {}
+
+            @Override
+            public void onPageScrollStateChanged(int state) {}
+        });
+    }
+
+
+    public void onDetach() {
+        // To prevent a memory leak on rotation, make sure to call stopAutoCycle() on the slider before activity or fragment is destroyed
+        if (mSlider != null) {
+            mSlider.stopAutoCycle();
         }
     }
 

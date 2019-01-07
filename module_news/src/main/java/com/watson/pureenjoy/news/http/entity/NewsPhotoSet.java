@@ -3,7 +3,6 @@ package com.watson.pureenjoy.news.http.entity;
 import java.util.List;
 
 public class NewsPhotoSet {
-
     private String postid;
     private String series;
     private String clientadurl;
