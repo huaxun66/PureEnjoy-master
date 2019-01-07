@@ -17,13 +17,14 @@
         <ImageView
             android:id="@+id/img"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/public_height_200dp" />
+            android:layout_height="@dimen/public_height_200dp"
+            android:scaleType="fitXY"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/public_height_30dp"
             android:layout_alignParentBottom="true"
-            android:background="@color/public_black_transparency_150">
+            android:background="@color/public_black_transparency_250">
 
             <TextView
                 android:id="@+id/title"
@@ -32,7 +33,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/public_mar_left_10dp"
                 android:textColor="@color/public_white"
-                android:textSize="@dimen/public_font_16sp"
+                android:textSize="@dimen/public_font_14sp"
                 tools:text="王凯的微笑太迷人" />
         </RelativeLayout>
     </RelativeLayout>
