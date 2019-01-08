@@ -1,24 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fitsSystemWindows="true">
 
-    <me.jessyan.armscomponent.commonres.view.TopBar
-        android:id="@+id/topBar"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/abl_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:isShowBottomLine="false"
-        app:leftImage="@drawable/public_nav_back"
-        app:title="" />
+        android:layout_height="wrap_content">
 
-    <include layout="@layout/news_special_news_header" />
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/public_white"
+            app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+            app:titleEnabled="false">
 
+            <ImageView
+                android:id="@+id/iv_bg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/public_height_90dp"
+                android:layout_alignParentTop="true"
+                android:scaleType="centerCrop" />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/public_height_50dp"
+                android:minHeight="?attr/actionBarSize"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin"
+                app:title="">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:id="@+id/iv_back"
+                        android:layout_width="@dimen/public_width_15dp"
+                        android:layout_height="@dimen/public_height_15dp"
+                        android:layout_marginStart="@dimen/public_mar_left_15dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/public_nav_back_white" />
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:text="@string/news_special"
+                        android:textColor="@color/news_channel_color_text_main"
+                        android:textSize="@dimen/public_font_16sp" />
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <me.jessyan.armscomponent.commonres.view.flowlayout.TagFlowLayout
+            android:id="@+id/tfl_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/public_black_transparency_300"
+            android:padding="@dimen/public_padding_10dp"
+            app:max_select="1" />
+
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

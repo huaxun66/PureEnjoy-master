@@ -1,10 +1,12 @@
 package com.watson.pureenjoy.news.mvp.ui.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.jess.arms.di.component.AppComponent;
 import com.watson.pureenjoy.news.R;
 import com.watson.pureenjoy.news.R2;
+import com.watson.pureenjoy.news.app.listener.AppBarStateChangeListener;
 import com.watson.pureenjoy.news.di.component.DaggerNewsSpecialComponent;
 import com.watson.pureenjoy.news.http.entity.NewsSpecialItem;
 import com.watson.pureenjoy.news.mvp.contract.NewsSpecialContract;
@@ -35,11 +38,11 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import me.jessyan.armscomponent.commonres.base.BaseSupportActivity;
 import me.jessyan.armscomponent.commonres.view.DividerItemDecoration;
-import me.jessyan.armscomponent.commonres.view.TopBar;
 import me.jessyan.armscomponent.commonres.view.flowlayout.FlowLayout;
 import me.jessyan.armscomponent.commonres.view.flowlayout.TagAdapter;
 import me.jessyan.armscomponent.commonres.view.flowlayout.TagFlowLayout;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
+import me.jessyan.armscomponent.commonsdk.utils.StatusBarUtil;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.PHOTO_SET_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.POST_ID;
@@ -48,14 +51,18 @@ import static com.watson.pureenjoy.news.app.NewsConstants.URL;
 
 @Route(path = RouterHub.NEWS_SPECIAL_ACTIVITY)
 public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresenter> implements NewsSpecialContract.View {
-    @BindView(R2.id.topBar)
-    TopBar mTopBar;
-    @BindView(R2.id.recycler_view)
-    RecyclerView mRecyclerView;
-    @BindView(R2.id.iv_banner)
-    ImageView mBanner;
+    @BindView(R2.id.abl_layout)
+    AppBarLayout mAppBarLayout;
+    @BindView(R2.id.iv_bg)
+    ImageView mTopBg;
+    @BindView(R2.id.iv_back)
+    ImageView mBack;
+    @BindView(R2.id.tv_name)
+    TextView toolBarTitle;
     @BindView(R2.id.tfl_tag)
     TagFlowLayout mTagFlowLayout;
+    @BindView(R2.id.recycler_view)
+    RecyclerView mRecyclerView;
 
     @Autowired(name = SPECIAL_ID)
     public String specialId;
@@ -64,8 +71,6 @@ public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresente
     RecyclerView.LayoutManager layoutManager;
     @Inject
     NewsSpecialAdapter adapter;
-
-
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
@@ -80,6 +85,7 @@ public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresente
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {
+        StatusBarUtil.setTranslucentForCoordinatorLayout(NewsSpecialActivity.this, 0);
         return R.layout.news_activity_news_special;
     }
 
@@ -93,16 +99,16 @@ public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresente
     }
 
     private void initListener() {
-        mTopBar.setLeftImageClickListener(v -> finish());
+        mBack.setOnClickListener(v -> finish());
         adapter.setOnItemClickListener((adapter, view, position) -> {
-            NewsSpecialItem item = (NewsSpecialItem)adapter.getItem(position);
+            NewsSpecialItem item = (NewsSpecialItem) adapter.getItem(position);
             if (item.getItemType() == NewsSpecialItem.TYPE_PHOTO_SET) {
                 ARouter.getInstance().build(RouterHub.NEWS_PHOTO_SET_ACTIVITY)
                         .withString(PHOTO_SET_ID, item.getEntity().getSkipID())
                         .navigation();
-            } else if (item.getItemType() == NewsSpecialItem.TYPE_NORMAL){
+            } else if (item.getItemType() == NewsSpecialItem.TYPE_NORMAL) {
                 //调用系统播放器
-                if (item.getEntity().getVideoinfo()!=null) {
+                if (item.getEntity().getVideoinfo() != null) {
                     String url = item.getEntity().getVideoinfo().getMp4_url();
                     String extension = MimeTypeMap.getFileExtensionFromUrl(url);
                     String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
@@ -117,11 +123,27 @@ public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresente
                 }
             }
         });
+        Drawable expandBack = getResources().getDrawable(R.drawable.public_nav_back_white);
+        Drawable collBack = getResources().getDrawable(R.drawable.public_nav_back);
+        mAppBarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                if (state == State.EXPAND) {//展开状态
+                    toolBarTitle.setText("");
+                    mBack.setImageDrawable(expandBack);
+                } else if (state == State.COLLAPSED) {//折叠状态
+                    toolBarTitle.setText(getString(R.string.news_special));
+                } else {//中间状态
+                    toolBarTitle.setText(getString(R.string.news_special));
+                    mBack.setImageDrawable(collBack);
+                }
+            }
+        });
     }
 
     @Override
     public void setBanner(String imgUrl) {
-        Glide.with(this).load(imgUrl).into(mBanner);
+        Glide.with(this).load(imgUrl).into(mTopBg);
     }
 
     @Override
@@ -149,9 +171,9 @@ public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresente
                 }
             });
             mTagFlowLayout.setOnTagClickListener((view, position, parent) -> {
-                String title = ((TextView) ((ViewGroup)view).getChildAt(0)).getText().toString().trim();
+                String title = ((TextView) ((ViewGroup) view).getChildAt(0)).getText().toString().trim();
                 int adapterPosition = adapter.getPositionFromTitle(title);
-                ((LinearLayoutManager)layoutManager).scrollToPositionWithOffset(adapterPosition,0);
+                ((LinearLayoutManager) layoutManager).scrollToPositionWithOffset(adapterPosition, 0);
                 return false;
             });
         }
