@@ -48,6 +48,7 @@ import static com.watson.pureenjoy.news.app.NewsConstants.PHOTO_SET_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.POST_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.SPECIAL_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.URL;
+import static me.jessyan.armscomponent.commonsdk.utils.StatusBarUtil.DEFAULT_STATUS_BAR_ALPHA;
 
 @Route(path = RouterHub.NEWS_SPECIAL_ACTIVITY)
 public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresenter> implements NewsSpecialContract.View {
@@ -85,7 +86,7 @@ public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresente
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {
-        StatusBarUtil.setTranslucentForCoordinatorLayout(NewsSpecialActivity.this, 0);
+        StatusBarUtil.setTranslucentForImageViewInFragment(NewsSpecialActivity.this,0,null);
         return R.layout.news_activity_news_special;
     }
 
@@ -131,8 +132,10 @@ public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresente
                 if (state == State.EXPAND) {//展开状态
                     toolBarTitle.setText("");
                     mBack.setImageDrawable(expandBack);
+                    StatusBarUtil.setTranslucentForCoordinatorLayout(NewsSpecialActivity.this, DEFAULT_STATUS_BAR_ALPHA);
                 } else if (state == State.COLLAPSED) {//折叠状态
                     toolBarTitle.setText(getString(R.string.news_special));
+                    StatusBarUtil.setTransparent(NewsSpecialActivity.this);
                 } else {//中间状态
                     toolBarTitle.setText(getString(R.string.news_special));
                     mBack.setImageDrawable(collBack);

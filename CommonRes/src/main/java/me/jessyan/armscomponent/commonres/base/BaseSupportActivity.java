@@ -9,9 +9,8 @@ import com.jess.arms.base.BaseActivity;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.utils.ArmsUtils;
-import com.kaopiz.kprogresshud.KProgressHUD;
 
-import me.jessyan.armscomponent.commonres.R;
+import me.jessyan.armscomponent.commonres.dialog.ProgressDialog;
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportActivity;
 import me.yokeyword.fragmentation.ISupportFragment;
@@ -27,7 +26,7 @@ public abstract class BaseSupportActivity<P extends IPresenter> extends BaseActi
 
     final SupportActivityDelegate mDelegate = new SupportActivityDelegate(this);
     public BaseSupportActivity mContext;
-    protected KProgressHUD progressHUD;
+    protected ProgressDialog mProgressDialog;
 
     @Override
     public SupportActivityDelegate getSupportDelegate() {
@@ -47,10 +46,7 @@ public abstract class BaseSupportActivity<P extends IPresenter> extends BaseActi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         mContext = this;
         mDelegate.onCreate(savedInstanceState);
-        progressHUD = KProgressHUD.create(this)
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel(getString(R.string.str_wait))
-                .setCancellable(true);
+        mProgressDialog = new ProgressDialog(this);
         super.onCreate(savedInstanceState);
     }
 
@@ -131,12 +127,12 @@ public abstract class BaseSupportActivity<P extends IPresenter> extends BaseActi
 
     @Override
     public void showLoading() {
-        progressHUD.show();
+        mProgressDialog.show();
     }
 
     @Override
     public void hideLoading() {
-        progressHUD.dismiss();
+        mProgressDialog.dismiss();
     }
 
     /****************************************以下为可选方法(Optional methods)******************************************************/

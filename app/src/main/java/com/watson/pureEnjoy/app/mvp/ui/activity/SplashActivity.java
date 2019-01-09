@@ -57,12 +57,12 @@ public class SplashActivity extends BaseSupportActivity {
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {
-        StatusBarUtil.setTranslucentForImageViewInFragment(this,0,null);
         return R.layout.activity_splash;
     }
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        StatusBarUtil.setTranslucentForImageView(this, 0, null);
         Animation animation = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.splash_top_in);
 //        animation.setAnimationListener(this);
         title.startAnimation(animation);

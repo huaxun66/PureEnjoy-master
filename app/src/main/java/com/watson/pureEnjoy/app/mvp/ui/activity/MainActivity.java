@@ -19,11 +19,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.di.component.AppComponent;
-import com.jess.arms.utils.ArmsUtils;
 import com.next.easynavigation.constant.Anim;
 import com.next.easynavigation.view.EasyNavigationBar;
 import com.watson.pureenjoy.app.R;
@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
 import me.jessyan.armscomponent.commonres.base.BaseSupportActivity;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
@@ -86,7 +87,7 @@ public class MainActivity extends BaseSupportActivity {
                 .hasPadding(true)     //viewpager在导航栏之上，防止重叠
                 .onTabClickListener((view, position) -> {
                     if (position == 1 || position == 2) {
-                        ArmsUtils.snackbarText("developing...");
+                        Toasty.warning(this, "Developing...", Toast.LENGTH_SHORT, true).show();
                     }
                     return false;
                 })
@@ -100,7 +101,7 @@ public class MainActivity extends BaseSupportActivity {
         long mNowTime = System.currentTimeMillis();
         //比较两次按键时间差
         if ((mNowTime - mPressedTime) > 2000) {
-            ArmsUtils.makeText(getApplicationContext(), ArmsUtils.getString(getApplicationContext(), R.string.press_again_exit));
+            Toasty.info(this, getString(R.string.press_again_exit), Toast.LENGTH_SHORT, true).show();
             mPressedTime = mNowTime;
         } else {
             super.onBackPressedSupport();

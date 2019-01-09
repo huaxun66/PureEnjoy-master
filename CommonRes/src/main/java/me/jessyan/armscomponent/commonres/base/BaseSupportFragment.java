@@ -12,9 +12,8 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
 import com.jess.arms.utils.ArmsUtils;
-import com.kaopiz.kprogresshud.KProgressHUD;
 
-import me.jessyan.armscomponent.commonres.R;
+import me.jessyan.armscomponent.commonres.dialog.ProgressDialog;
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragmentDelegate;
@@ -29,7 +28,7 @@ public abstract class BaseSupportFragment<P extends IPresenter> extends BaseFrag
 
     final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     protected FragmentActivity _mActivity;
-    protected KProgressHUD progressHUD;
+    protected ProgressDialog mProgressDialog;
 
     @Override
     public SupportFragmentDelegate getSupportDelegate() {
@@ -56,10 +55,7 @@ public abstract class BaseSupportFragment<P extends IPresenter> extends BaseFrag
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mDelegate.onCreate(savedInstanceState);
-        progressHUD = KProgressHUD.create(getActivity())
-                .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
-                .setLabel(getString(R.string.str_wait))
-                .setCancellable(true);
+        mProgressDialog = new ProgressDialog(getContext());
     }
 
     @Override
@@ -259,12 +255,12 @@ public abstract class BaseSupportFragment<P extends IPresenter> extends BaseFrag
 
     @Override
     public void showLoading() {
-        progressHUD.show();
+        mProgressDialog.show();
     }
 
     @Override
     public void hideLoading() {
-        progressHUD.dismiss();
+        mProgressDialog.dismiss();
     }
 
 

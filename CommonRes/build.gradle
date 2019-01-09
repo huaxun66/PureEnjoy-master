@@ -37,9 +37,9 @@ dependencies {
     }
 
     //view
+    api rootProject.ext.dependencies["loadingIndicator"]
     api rootProject.ext.dependencies["smartRefreshLayout"]
     api rootProject.ext.dependencies["brvah"]
-    api rootProject.ext.dependencies["kprogresshud"]
     api rootProject.ext.dependencies["slider"]
 
     //tools

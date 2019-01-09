@@ -17,16 +17,17 @@ package me.jessyan.armscomponent.commonsdk.core;
 
 import android.content.Context;
 import android.net.ParseException;
+import android.widget.Toast;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonParseException;
-import com.jess.arms.utils.ArmsUtils;
 
 import org.json.JSONException;
 
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 
+import es.dmoral.toasty.Toasty;
 import me.jessyan.rxerrorhandler.handler.listener.ResponseErrorListener;
 import retrofit2.HttpException;
 import timber.log.Timber;
@@ -57,8 +58,10 @@ public class ResponseErrorListenerImpl implements ResponseErrorListener {
             msg = convertStatusCode(httpException);
         } else if (t instanceof JsonParseException || t instanceof ParseException || t instanceof JSONException || t instanceof JsonIOException) {
             msg = "数据解析错误";
+        } else {
+            msg = t.getCause().toString();
         }
-        ArmsUtils.snackbarText(msg);
+        Toasty.error(context, msg, Toast.LENGTH_SHORT, true).show();
     }
 
     private String convertStatusCode(HttpException httpException) {

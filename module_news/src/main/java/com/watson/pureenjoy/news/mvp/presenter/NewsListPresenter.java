@@ -86,7 +86,6 @@ public class NewsListPresenter extends BasePresenter<NewsListContract.Model, New
                         mRootView.setNewsList(newsList);
                     }
                 });
-
     }
 
 
@@ -110,17 +109,20 @@ public class NewsListPresenter extends BasePresenter<NewsListContract.Model, New
     }
 
     private void getBanner(List<NewsItem.AdsEntity> ads) {
-        for(NewsItem.AdsEntity entity : ads) {
-            mModel.getNewsPhotoSet(StringUtil.clipPhotoSetId(entity.getSkipID()))
-                    .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
-                    .subscribe(new ErrorHandleSubscriber<NewsPhotoSet>(mErrorHandler) {
-                        @Override
-                        public void onNext(NewsPhotoSet newsPhotoSet) {
-                            if (newsPhotoSet.getPhotos() != null && newsPhotoSet.getPhotos().size() > 0) {
-                                entity.setImgsrc(newsPhotoSet.getPhotos().get(new Random().nextInt(newsPhotoSet.getPhotos().size())).getImgurl());
+        for (NewsItem.AdsEntity entity : ads) {
+            if (me.jessyan.armscomponent.commonsdk.utils.StringUtil.isEmpty(entity.getImgsrc())) {
+                mModel.getNewsPhotoSet(StringUtil.clipPhotoSetId(entity.getSkipID()))
+                        .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                        .subscribe(new ErrorHandleSubscriber<NewsPhotoSet>(mErrorHandler) {
+                            @Override
+                            public void onNext(NewsPhotoSet newsPhotoSet) {
+                                if (newsPhotoSet.getPhotos() != null && newsPhotoSet.getPhotos().size() > 0) {
+                                    entity.setImgsrc(newsPhotoSet.getPhotos().get(new Random().nextInt(newsPhotoSet.getPhotos().size())).getImgurl());
+                                }
                             }
-                        }
-                    });
+                        });
+            }
+
         }
     }
 

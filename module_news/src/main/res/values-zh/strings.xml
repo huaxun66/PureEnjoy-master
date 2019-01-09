@@ -11,5 +11,7 @@
     <string name="news_channel_recommend">栏目推荐</string>
     <string name="news_channel_add">点击添加栏目</string>
 
+    <string name="news_not_available">新闻不可达，请看看其他新闻吧</string>
+
 
 </resources>

@@ -104,6 +104,7 @@
     <dimen name="public_mar_top_10dp">10dp</dimen>
     <dimen name="public_mar_top_15dp">15dp</dimen>
     <dimen name="public_mar_top_16dp">16dp</dimen>
+    <dimen name="public_mar_top_17_5dp">17.5dp</dimen>
     <dimen name="public_mar_top_20dp">20dp</dimen>
     <dimen name="public_mar_top_26dp">26dp</dimen>
     <dimen name="public_mar_top_32dp">32dp</dimen>

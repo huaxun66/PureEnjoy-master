@@ -30,6 +30,7 @@ import com.jess.arms.integration.ConfigModule;
 import java.util.List;
 
 import butterknife.ButterKnife;
+import es.dmoral.toasty.Toasty;
 import me.jessyan.armscomponent.commonsdk.BuildConfig;
 import me.jessyan.armscomponent.commonsdk.http.Api;
 import me.jessyan.armscomponent.commonsdk.http.SSLSocketClient;
@@ -102,6 +103,10 @@ public class GlobalConfiguration implements ConfigModule {
                 }
                 ARouter.init(application); // 尽可能早,推荐在Application中初始化
                 SharedPreferenceUtil.getInstance(application, SP_FILE_NAME);
+                //Toasty配置
+                Toasty.Config.getInstance()
+                        .setTextSize(14) // optional
+                        .apply(); // required
             }
 
             @Override

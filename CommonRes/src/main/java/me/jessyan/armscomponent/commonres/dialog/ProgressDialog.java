@@ -19,6 +19,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.wang.avi.AVLoadingIndicatorView;
+
 import me.jessyan.armscomponent.commonres.R;
 
 /**
@@ -29,9 +31,22 @@ import me.jessyan.armscomponent.commonres.R;
  * ================================================
  */
 public class ProgressDialog extends Dialog {
+    private AVLoadingIndicatorView avi;
     public ProgressDialog(@NonNull Context context) {
         super(context, R.style.public_dialog_progress);
         setContentView(R.layout.public_dialog_porgress);
+        avi = findViewById(R.id.avi);
         setCanceledOnTouchOutside(false);
     }
+
+    public void show(){
+        avi.smoothToShow();
+        super.show();
+    }
+
+    public void dismiss(){
+        avi.smoothToHide();
+        super.dismiss();
+    }
+
 }

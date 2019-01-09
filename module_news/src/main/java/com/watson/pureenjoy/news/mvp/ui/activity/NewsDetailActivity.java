@@ -16,11 +16,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.jess.arms.di.component.AppComponent;
-import com.kaopiz.kprogresshud.KProgressHUD;
 import com.watson.pureenjoy.news.R;
 import com.watson.pureenjoy.news.R2;
 import com.watson.pureenjoy.news.di.component.DaggerNewsDetailComponent;
@@ -29,10 +29,12 @@ import com.watson.pureenjoy.news.mvp.contract.NewsDetailContract;
 import com.watson.pureenjoy.news.mvp.presenter.NewsDetailPresenter;
 
 import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
 import me.jessyan.armscomponent.commonres.base.BaseSupportActivity;
 import me.jessyan.armscomponent.commonres.view.ObservableWebView;
 import me.jessyan.armscomponent.commonres.view.TopBar;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
+import me.jessyan.armscomponent.commonsdk.utils.StringUtil;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.POST_ID;
 
@@ -74,13 +76,10 @@ public class NewsDetailActivity extends BaseSupportActivity<NewsDetailPresenter>
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         initListener();
+        if (StringUtil.isEmpty(url)) {
+            Toasty.error(this, getString(R.string.news_not_available), Toast.LENGTH_SHORT, true).show();
+        }
         initWebView();
-        progressHUD = KProgressHUD.create(this)
-                .setStyle(KProgressHUD.Style.ANNULAR_DETERMINATE)
-                .setLabel(getString(R.string.str_wait))
-                .setCancellable(true)
-                .setMaxProgress(100);
-        progressHUD.show();
         mPresenter.requestNewsDetail(postId);
     }
 
@@ -110,10 +109,8 @@ public class NewsDetailActivity extends BaseSupportActivity<NewsDetailPresenter>
         });
         mWebView.setWebChromeClient(new WebChromeClient() {
             public void onProgressChanged(WebView view, int newProgress) {
-                progressHUD.setProgress(newProgress);
                 if (null == mLoadingProgressBar) return;
                 if (newProgress >= 100) {
-                    progressHUD.dismiss();
                     if (!isAnimStart) {
                         // 防止调用多次动画
                         isAnimStart = true;

@@ -11,4 +11,6 @@
     <string name="news_channel_recommend">Recommend</string>
     <string name="news_channel_add">Click to Add Channels</string>
 
+    <string name="news_not_available">News is not available, Please read others.</string>
+
 </resources>
