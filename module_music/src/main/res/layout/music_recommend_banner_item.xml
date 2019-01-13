@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_150dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/public_height_120dp"
+            android:background="@color/music_theme"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/view_pager"
+            android:layout_marginBottom="@dimen/public_mar_bottom_18dp"
+            app:fillColor="@color/music_theme"
+            app:pageColor="@color/public_white_transparency_500"
+            app:radius="3dp" />
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/music_recommend_button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/public_mar_top_5dp"
+        android:layout_marginBottom="@dimen/public_mar_bottom_5dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_0_5dp"
+        android:layout_marginBottom="@dimen/public_mar_bottom_5dp"
+        android:background="@color/public_white_transparency_550" />
+
+</LinearLayout>

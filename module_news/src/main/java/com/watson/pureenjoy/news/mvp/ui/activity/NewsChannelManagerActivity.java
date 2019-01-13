@@ -31,12 +31,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import me.jessyan.armscomponent.commonres.base.BaseSupportActivity;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.CHANNEL_SELECTED;
 import static com.watson.pureenjoy.news.app.NewsConstants.CLICK_TYPE_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.RECOMMEND_TYPE_ID;
+import static com.watson.pureenjoy.news.http.entity.ChannelItem.TYPE_TITLE;
 
 /**
  * ================================================
@@ -45,7 +45,7 @@ import static com.watson.pureenjoy.news.app.NewsConstants.RECOMMEND_TYPE_ID;
  */
 
 @Route(path = RouterHub.NEWS_CHANNEL_MANAGER_ACTIVITY)
-public class NewsChannelManagerActivity extends BaseSupportActivity<NewsChannelManagerPresenter> implements NewsChannelManagerContract.View {
+public class NewsChannelManagerActivity extends NewsBaseActivity<NewsChannelManagerPresenter> implements NewsChannelManagerContract.View {
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
     @BindView(R2.id.finish_tv)
@@ -136,16 +136,16 @@ public class NewsChannelManagerActivity extends BaseSupportActivity<NewsChannelM
                     View item = mRecyclerView.getChildAt(i);
                     icon = item.findViewById(R.id.img_icon);
                     name = item.findViewById(R.id.tv_name);
-                    if (mAdapter.getData(i).getType() != mAdapter.TYPE_TITLE) {
+                    if (mAdapter.getData(i).getType() != TYPE_TITLE) {
                         if (i > mAdapter.getRecommendTitlePosition()) {
                             icon.setVisibility(View.GONE);
                         } else {
                             if (isAllowDragOrDelete(i)) {
                                 icon.setVisibility(View.VISIBLE);
-                                name.setBackground(mContext.getResources().getDrawable(R.drawable.news_shape_round_grey_bg));
+                                name.setBackground(getResources().getDrawable(R.drawable.news_shape_round_grey_bg));
                             } else {
                                 icon.setVisibility(View.GONE);
-                                name.setBackground(mContext.getResources().getDrawable(R.drawable.news_shape_round_white_bg));
+                                name.setBackground(getResources().getDrawable(R.drawable.news_shape_round_white_bg));
                             }
                         }
                     }
@@ -219,7 +219,7 @@ public class NewsChannelManagerActivity extends BaseSupportActivity<NewsChannelM
 
     private ChannelItem generateRecommendTitleItem() {
         ChannelItem titleItem = new ChannelItem();
-        titleItem.setType(mAdapter.TYPE_TITLE);
+        titleItem.setType(TYPE_TITLE);
         titleItem.setTypeId(RECOMMEND_TYPE_ID);
         return titleItem;
     }
@@ -265,7 +265,7 @@ public class NewsChannelManagerActivity extends BaseSupportActivity<NewsChannelM
     }
 
     @Override
-    public void onBackPressedSupport() {
+    public void onBackPressed() {
         closePage();
     }
 

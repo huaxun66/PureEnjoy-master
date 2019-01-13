@@ -39,6 +39,8 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
+import static com.watson.pureenjoy.news.app.NewsConstants.BIG_IMG;
+
 
 @FragmentScope
 public class NewsListPresenter extends BasePresenter<NewsListContract.Model, NewsListContract.View> {
@@ -110,7 +112,7 @@ public class NewsListPresenter extends BasePresenter<NewsListContract.Model, New
 
     private void getBanner(List<NewsItem.AdsEntity> ads) {
         for (NewsItem.AdsEntity entity : ads) {
-            if (me.jessyan.armscomponent.commonsdk.utils.StringUtil.isEmpty(entity.getImgsrc())) {
+            if (entity.getImgsrc().equals(BIG_IMG)) {
                 mModel.getNewsPhotoSet(StringUtil.clipPhotoSetId(entity.getSkipID()))
                         .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
                         .subscribe(new ErrorHandleSubscriber<NewsPhotoSet>(mErrorHandler) {

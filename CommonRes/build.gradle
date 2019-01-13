@@ -41,6 +41,7 @@ dependencies {
     api rootProject.ext.dependencies["smartRefreshLayout"]
     api rootProject.ext.dependencies["brvah"]
     api rootProject.ext.dependencies["slider"]
+    api rootProject.ext.dependencies["viewPagerIndicator"]
 
     //tools
     api rootProject.ext.dependencies["paginate"]

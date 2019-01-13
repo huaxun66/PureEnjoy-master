@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="music_personality_recommend">Personality Recommend</string>
+    <string name="music_anchor_radio">Anchor Radio</string>
+
+    <string name="music_personal_fm">Personal FM</string>
+    <string name="music_daily_recommend">Recommend</string>
+    <string name="music_song_list">Song List</string>
+    <string name="music_rank">Rank</string>
+
+    <string name="music_recommend_list">Recommend Song</string>
+    <string name="music_recommend_album">New Album</string>
+    <string name="music_recommend_radio">Anchor Radio</string>
+
 </resources>

@@ -29,7 +29,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import me.jessyan.armscomponent.commonres.base.BaseSupportFragment;
 import me.jessyan.armscomponent.commonres.view.CustomLoadingMoreView;
 import me.jessyan.armscomponent.commonres.view.DividerItemDecoration;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
@@ -40,7 +39,7 @@ import static com.watson.pureenjoy.news.app.NewsConstants.SPECIAL_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.TYPE_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.URL;
 
-public class NewsListFragment extends BaseSupportFragment<NewsListPresenter> implements NewsListContract.View,
+public class NewsListFragment extends NewsBaseFragment<NewsListPresenter> implements NewsListContract.View,
         OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R2.id.refresh_layout)
     SmartRefreshLayout mSmartRefreshLayout;

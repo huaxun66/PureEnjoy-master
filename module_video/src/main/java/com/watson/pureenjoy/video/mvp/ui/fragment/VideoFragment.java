@@ -8,17 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
-import me.jessyan.armscomponent.commonres.base.BaseSupportFragment;
-import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 import com.watson.pureenjoy.video.R;
 
-@Route(path = RouterHub.VIDEO_FRAGMENT)
-public class VideoFragment extends BaseSupportFragment {
+import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
-    public VideoFragment() {
-        // Required empty public constructor
-    }
+@Route(path = RouterHub.VIDEO_FRAGMENT)
+public class VideoFragment extends BaseFragment {
 
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {

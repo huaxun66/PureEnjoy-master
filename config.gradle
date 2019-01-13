@@ -6,7 +6,7 @@ ext {
             minSdkVersion    : 19,
             targetSdkVersion : 28,
             versionCode      : 19,
-            versionName      : "1.0.0"
+            versionName      : "1.0.1"
     ]
 
     version = [
@@ -50,6 +50,8 @@ ext {
             "brvah"                    : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.32",
             "labelview"                : "com.flyco.labelview:FlycoLabelView_Lib:1.0.2@aar",
             "slider"                   : 'com.daimajia.slider:library:1.1.5@aar',
+            "viewPagerIndicator"       : 'com.github.JakeWharton:ViewPagerIndicator:2.4.1',
+            "infinitecycleviewpager"   : 'com.github.devlight:infinitecycleviewpager:1.0.2',
             "nineoldandroids"          : "com.nineoldandroids:library:2.4.0",
             "photoview"                : 'com.github.chrisbanes.photoview:library:1.2.4',
             "loadingIndicator"         : 'com.wang.avi:library:2.1.3',

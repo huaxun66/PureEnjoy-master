@@ -36,7 +36,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import me.jessyan.armscomponent.commonres.base.BaseSupportActivity;
 import me.jessyan.armscomponent.commonres.view.DividerItemDecoration;
 import me.jessyan.armscomponent.commonres.view.flowlayout.FlowLayout;
 import me.jessyan.armscomponent.commonres.view.flowlayout.TagAdapter;
@@ -51,7 +50,7 @@ import static com.watson.pureenjoy.news.app.NewsConstants.URL;
 import static me.jessyan.armscomponent.commonsdk.utils.StatusBarUtil.DEFAULT_STATUS_BAR_ALPHA;
 
 @Route(path = RouterHub.NEWS_SPECIAL_ACTIVITY)
-public class NewsSpecialActivity extends BaseSupportActivity<NewsSpecialPresenter> implements NewsSpecialContract.View {
+public class NewsSpecialActivity extends NewsBaseActivity<NewsSpecialPresenter> implements NewsSpecialContract.View {
     @BindView(R2.id.abl_layout)
     AppBarLayout mAppBarLayout;
     @BindView(R2.id.iv_bg)

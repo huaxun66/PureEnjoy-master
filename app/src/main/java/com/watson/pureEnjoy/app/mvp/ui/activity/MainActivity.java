@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.next.easynavigation.constant.Anim;
 import com.next.easynavigation.view.EasyNavigationBar;
@@ -33,8 +34,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import es.dmoral.toasty.Toasty;
-import me.jessyan.armscomponent.commonres.base.BaseSupportActivity;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
+import me.jessyan.armscomponent.commonsdk.utils.StatusBarUtil;
 
 /**
  * ================================================
@@ -47,12 +48,12 @@ import me.jessyan.armscomponent.commonsdk.core.RouterHub;
  * ================================================
  */
 @Route(path = RouterHub.APP_MAIN_ACTIVITY)
-public class MainActivity extends BaseSupportActivity {
+public class MainActivity extends BaseActivity {
     @BindView(R.id.navigationBar)
     EasyNavigationBar navigationBar;
 
-    private int[] normalIcon = {R.drawable.ic_navi_news, R.drawable.ic_navi_video, R.drawable.ic_navi_music};
-    private int[] selectIcon = {R.drawable.ic_navi_news, R.drawable.ic_navi_video, R.drawable.ic_navi_music};
+    private int[] normalIcon = {R.drawable.ic_navi_news, R.drawable.ic_navi_music, R.drawable.ic_navi_video};
+    private int[] selectIcon = {R.drawable.ic_navi_news, R.drawable.ic_navi_music, R.drawable.ic_navi_video};
     private String[] tabText = new String[3];
     private List<Fragment> fragmentList = new ArrayList<>();
     private long mPressedTime;
@@ -64,6 +65,7 @@ public class MainActivity extends BaseSupportActivity {
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {
+        StatusBarUtil.setColor(this, getResources().getColor(com.watson.pureenjoy.music.R.color.public_colorAccent), 0);
         return R.layout.activity_main;
     }
 
@@ -71,12 +73,12 @@ public class MainActivity extends BaseSupportActivity {
     public void initData(@Nullable Bundle savedInstanceState) {
         //添加tab文字
         tabText[0] = getString(R.string.public_news);
-        tabText[1] = getString(R.string.public_video);
-        tabText[2] = getString(R.string.public_music);
+        tabText[1] = getString(R.string.public_music);
+        tabText[2] = getString(R.string.public_video);
         //添加fragment
         fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.NEWS_FRAGMENT).navigation());
-        fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.VIDEO_FRAGMENT).navigation());
         fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.MUSIC_FRAGMENT).navigation());
+        fragmentList.add((Fragment) ARouter.getInstance().build(RouterHub.VIDEO_FRAGMENT).navigation());
         navigationBar.titleItems(tabText)
                 .normalIconItems(normalIcon)
                 .selectIconItems(selectIcon)
@@ -86,7 +88,7 @@ public class MainActivity extends BaseSupportActivity {
                 .anim(Anim.ZoomIn)    //点击Tab时的动画
                 .hasPadding(true)     //viewpager在导航栏之上，防止重叠
                 .onTabClickListener((view, position) -> {
-                    if (position == 1 || position == 2) {
+                    if (position == 2) {
                         Toasty.warning(this, "Developing...", Toast.LENGTH_SHORT, true).show();
                     }
                     return false;
@@ -96,7 +98,7 @@ public class MainActivity extends BaseSupportActivity {
     }
 
     @Override
-    public void onBackPressedSupport() {
+    public void onBackPressed() {
         //获取第一次按键时间
         long mNowTime = System.currentTimeMillis();
         //比较两次按键时间差
@@ -104,7 +106,7 @@ public class MainActivity extends BaseSupportActivity {
             Toasty.info(this, getString(R.string.press_again_exit), Toast.LENGTH_SHORT, true).show();
             mPressedTime = mNowTime;
         } else {
-            super.onBackPressedSupport();
+            super.onBackPressed();
         }
     }
 

@@ -1,4 +1,4 @@
-package com.watson.pureenjoy.news.mvp.ui.adapter;
+package me.jessyan.armscomponent.commonres.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,16 +9,15 @@ import android.view.ViewGroup;
 
 import com.jess.arms.base.BaseFragment;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-    final String TAG = ViewPagerAdapter.class.getSimpleName();
+public class FragmentViewPagerAdapter extends FragmentStatePagerAdapter {
+    final String TAG = FragmentViewPagerAdapter.class.getSimpleName();
     private FragmentManager fm;
     private List<String> titleList;
     private List<BaseFragment> fragments;
 
-    public ViewPagerAdapter(FragmentManager fm, List<String> titleList, List<BaseFragment> fragments) {
+    public FragmentViewPagerAdapter(FragmentManager fm, List<String> titleList, List<BaseFragment> fragments) {
         super(fm);
         this.fm = fm;
         this.titleList = titleList;

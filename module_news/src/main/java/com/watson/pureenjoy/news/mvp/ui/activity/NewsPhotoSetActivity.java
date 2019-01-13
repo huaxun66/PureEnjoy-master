@@ -26,13 +26,12 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import me.jessyan.armscomponent.commonres.PageTransformer.Transformers.TabletTransformer;
-import me.jessyan.armscomponent.commonres.base.BaseSupportActivity;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.PHOTO_SET_ID;
 
 @Route(path = RouterHub.NEWS_PHOTO_SET_ACTIVITY)
-public class NewsPhotoSetActivity extends BaseSupportActivity<NewsPhotoSetPresenter> implements NewsPhotoSetContract.View {
+public class NewsPhotoSetActivity extends NewsBaseActivity<NewsPhotoSetPresenter> implements NewsPhotoSetContract.View {
     @BindView(R2.id.iv_back)
     ImageView mBack;
     @BindView(R2.id.tv_index)

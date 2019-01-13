@@ -22,7 +22,6 @@ import com.watson.pureenjoy.news.mvp.model.NewsModel;
 
 import dagger.Module;
 import dagger.Provides;
-import me.jessyan.armscomponent.commonres.dialog.ProgressDialog;
 
 /**
  * ================================================
@@ -37,12 +36,6 @@ public class NewsModule {
     @Provides
     public NewsContract.Model provideNewsModel(IRepositoryManager iRepositoryManager) {
         return new NewsModel(iRepositoryManager);
-    }
-
-    @FragmentScope
-    @Provides
-    public ProgressDialog provideLoadingDialog(IRepositoryManager iRepositoryManager) {
-         return new ProgressDialog(iRepositoryManager.getContext());
     }
 
 }

@@ -30,7 +30,6 @@ import com.watson.pureenjoy.news.mvp.presenter.NewsDetailPresenter;
 
 import butterknife.BindView;
 import es.dmoral.toasty.Toasty;
-import me.jessyan.armscomponent.commonres.base.BaseSupportActivity;
 import me.jessyan.armscomponent.commonres.view.ObservableWebView;
 import me.jessyan.armscomponent.commonres.view.TopBar;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
@@ -39,7 +38,7 @@ import me.jessyan.armscomponent.commonsdk.utils.StringUtil;
 import static com.watson.pureenjoy.news.app.NewsConstants.POST_ID;
 
 @Route(path = RouterHub.NEWS_DETAIL_ACTIVITY)
-public class NewsDetailActivity extends BaseSupportActivity<NewsDetailPresenter> implements NewsDetailContract.View {
+public class NewsDetailActivity extends NewsBaseActivity<NewsDetailPresenter> implements NewsDetailContract.View {
     @BindView(R2.id.webView)
     ObservableWebView mWebView;
     @BindView(R2.id.topBar)
@@ -213,7 +212,7 @@ public class NewsDetailActivity extends BaseSupportActivity<NewsDetailPresenter>
 
 
     @Override
-    public void onBackPressedSupport() {
+    public void onBackPressed() {
         if (mWebView.canGoBack()) {
             index--;
             if (index == 1) {
@@ -221,7 +220,7 @@ public class NewsDetailActivity extends BaseSupportActivity<NewsDetailPresenter>
             }
             mWebView.goBack();
         } else {
-            super.onBackPressedSupport();
+            super.onBackPressed();
         }
     }
 

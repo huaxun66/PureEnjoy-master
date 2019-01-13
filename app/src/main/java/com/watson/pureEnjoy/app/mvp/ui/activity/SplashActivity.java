@@ -23,6 +23,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.jess.arms.base.BaseActivity;
 import com.jess.arms.di.component.AppComponent;
 import com.watson.pureenjoy.app.R;
 
@@ -31,7 +32,6 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import me.jessyan.armscomponent.commonres.base.BaseSupportActivity;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 import me.jessyan.armscomponent.commonsdk.utils.StatusBarUtil;
 import me.jessyan.armscomponent.commonsdk.utils.Utils;
@@ -44,7 +44,7 @@ import me.jessyan.armscomponent.commonsdk.utils.Utils;
  * ================================================
  */
 @Route(path = RouterHub.APP_SPLASH_ACTIVITY)
-public class SplashActivity extends BaseSupportActivity {
+public class SplashActivity extends BaseActivity {
     @BindView(R.id.tv_activity_splash_main_title)
     TextView title;
     @BindView(R.id.tv_activity_splash_main_time)

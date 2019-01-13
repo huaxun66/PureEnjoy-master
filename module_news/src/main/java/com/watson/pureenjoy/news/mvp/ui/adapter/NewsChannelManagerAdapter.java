@@ -1,8 +1,6 @@
 package com.watson.pureenjoy.news.mvp.ui.adapter;
 
-import android.app.Service;
 import android.content.Context;
-import android.os.Vibrator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -19,13 +17,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.RECOMMEND_TYPE_ID;
+import static com.watson.pureenjoy.news.http.entity.ChannelItem.TYPE_CONTENT;
+import static com.watson.pureenjoy.news.http.entity.ChannelItem.TYPE_TITLE;
 
 public class NewsChannelManagerAdapter extends RecyclerView.Adapter<NewsChannelManagerAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<ChannelItem> mData;
     private boolean isEdit;
-    public final int TYPE_TITLE = 1;
-    public final int TYPE_CONTENT = 2;
 
     public NewsChannelManagerAdapter(Context mContext, ArrayList<ChannelItem> mData, boolean isEdit) {
         this.mContext = mContext;
@@ -59,6 +57,7 @@ public class NewsChannelManagerAdapter extends RecyclerView.Adapter<NewsChannelM
         this.mData = mData;
         notifyDataSetChanged();
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {

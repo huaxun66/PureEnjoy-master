@@ -22,25 +22,22 @@ import com.watson.pureenjoy.news.http.entity.ChannelItem;
 import com.watson.pureenjoy.news.mvp.contract.NewsContract;
 import com.watson.pureenjoy.news.mvp.presenter.NewsPresenter;
 import com.watson.pureenjoy.news.mvp.ui.activity.NewsChannelManagerActivity;
-import com.watson.pureenjoy.news.mvp.ui.adapter.ViewPagerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
-import me.jessyan.armscomponent.commonres.base.BaseSupportFragment;
-import me.jessyan.armscomponent.commonres.dialog.ProgressDialog;
+import me.jessyan.armscomponent.commonres.adapter.FragmentViewPagerAdapter;
 import me.jessyan.armscomponent.commonres.view.EasyTabBarTxtScroll;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 import me.jessyan.armscomponent.commonsdk.utils.StringUtil;
 
+import static android.app.Activity.RESULT_OK;
 import static com.watson.pureenjoy.news.app.NewsConstants.CHANNEL_SELECTED;
 import static com.watson.pureenjoy.news.app.NewsConstants.CLICK_TYPE_ID;
 
 @Route(path = RouterHub.NEWS_FRAGMENT)
-public class NewsFragment extends BaseSupportFragment<NewsPresenter> implements NewsContract.View {
+public class NewsFragment extends NewsBaseFragment<NewsPresenter> implements NewsContract.View {
     @BindView(R2.id.easyTabBar_fragment_news_tab)
     EasyTabBarTxtScroll mTabBar;
     @BindView(R2.id.iv_fragment_news_expend_list)
@@ -48,16 +45,9 @@ public class NewsFragment extends BaseSupportFragment<NewsPresenter> implements 
     @BindView(R2.id.vp_fragment_news_display)
     ViewPager mViewPager;
 
-    @Inject
-    ProgressDialog loadingDialog;
-
     private List<ChannelItem> channels;
     private String selectId;
     private final int REQUEST_CODE = 100;
-
-    public NewsFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {
@@ -146,10 +136,14 @@ public class NewsFragment extends BaseSupportFragment<NewsPresenter> implements 
             titleList.add(item.getName());
             fragmentList.add(NewsListFragment.getIns(item.getTypeId()));
         }
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager(), titleList, fragmentList);
+        FragmentViewPagerAdapter adapter = new FragmentViewPagerAdapter(getChildFragmentManager(), titleList, fragmentList);
         mViewPager.setAdapter(adapter);
 //        mViewPager.setOffscreenPageLimit(titleList.size());
         mTabBar.setViewPager(mViewPager);
     }
 
+    @Override
+    public void showMessage(@NonNull String message) {
+
+    }
 }

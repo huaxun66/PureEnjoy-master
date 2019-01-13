@@ -43,5 +43,6 @@ public class NewsConstants {
     public static final String PHOTO_SET_ID = "photosetID";
     public static final String POST_ID = "postid";
     public static final String URL = "url";
+    public static final String BIG_IMG = "bigimg";
 
 }

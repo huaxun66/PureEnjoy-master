@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recommend_title"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/public_height_40dp"
+    android:paddingTop="@dimen/public_pad_top_10dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/public_mar_left_4dp"
+        android:textSize="@dimen/public_font_14sp"
+        android:textColor="@color/public_black"
+        android:textStyle="bold"
+        tools:text="@string/music_recommend_list" />
+
+    <ImageView
+        android:layout_width="@dimen/public_width_12dp"
+        android:layout_height="@dimen/public_height_12dp"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/tv_title"
+        android:src="@drawable/public_nav_back_right" />
+
+</RelativeLayout>

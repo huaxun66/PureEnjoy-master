@@ -5,6 +5,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class ChannelItem implements Parcelable {
+    public static final int TYPE_TITLE = 1;
+    public static final int TYPE_CONTENT = 2;
+
     private String name;
     private String typeId;
     //类型:1-标题 2-普通栏目(默认)

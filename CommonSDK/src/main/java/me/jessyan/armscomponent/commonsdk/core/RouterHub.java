@@ -86,12 +86,16 @@ public interface RouterHub {
     String NEWS_CHANNEL_MANAGER_ACTIVITY = NEWS + "/NewsChannelManagerActivity";
 
     /**
+     * 音乐分组
+     */
+    String MUSIC_FRAGMENT = MUSIC + "/MusicFragment";
+    String MUSIC_PERSONALITY_RECOMMEND_FRAGMENT = MUSIC + "/MusicPersonalityRecommendFragment";
+    String MUSIC_ANCHOR_RADIO_FRAGMENT = MUSIC + "/MusicAnchorRadioFragment";
+
+    /**
      * 视频分组
      */
     String VIDEO_FRAGMENT = VIDEO + "/VideoFragment";
 
-    /**
-     * 音乐分组
-     */
-    String MUSIC_FRAGMENT = MUSIC + "/MusicFragment";
+
 }
