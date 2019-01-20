@@ -1,15 +1,13 @@
 package com.watson.pureenjoy.news.mvp.ui.adapter;
 
-import android.content.Context;
+import android.app.Service;
+import android.os.Vibrator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.watson.pureenjoy.news.R;
 import com.watson.pureenjoy.news.http.entity.ChannelItem;
 
@@ -17,102 +15,70 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.RECOMMEND_TYPE_ID;
-import static com.watson.pureenjoy.news.http.entity.ChannelItem.TYPE_CONTENT;
-import static com.watson.pureenjoy.news.http.entity.ChannelItem.TYPE_TITLE;
 
-public class NewsChannelManagerAdapter extends RecyclerView.Adapter<NewsChannelManagerAdapter.ViewHolder> {
-    private Context mContext;
-    private ArrayList<ChannelItem> mData;
+public class NewsChannelManagerAdapter extends BaseMultiItemQuickAdapter<ChannelItem, BaseViewHolder> {
+    private ArrayList<ChannelItem> datas;
     private boolean isEdit;
 
-    public NewsChannelManagerAdapter(Context mContext, ArrayList<ChannelItem> mData, boolean isEdit) {
-        this.mContext = mContext;
-        this.mData = mData;
+    public NewsChannelManagerAdapter(ArrayList<ChannelItem> datas, boolean isEdit) {
+        super(datas);
+        this.datas = datas;
         this.isEdit = isEdit;
+        addMultiItemType();
     }
 
-    @Override
-    public int getItemCount() {
-        return mData != null ? mData.size() : 0;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return mData.get(position).getType();
-    }
-
-    public ChannelItem getData(int position){
-        return mData.get(position);
-    }
-
-    public ArrayList<ChannelItem> getData(){
-        return mData;
-    }
-
-    public void setEdit(Boolean flag){
+    public void setEdit(Boolean flag) {
         isEdit = flag;
     }
 
-    public void setData(ArrayList<ChannelItem> mData) {
-        this.mData = mData;
-        notifyDataSetChanged();
+    private void addMultiItemType() {
+        addItemType(ChannelItem.TYPE_TITLE, R.layout.news_recommend_title);
+        addItemType(ChannelItem.TYPE_CONTENT, R.layout.news_channel_item);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        switch (viewType) {
-            case TYPE_TITLE: {
-                return new ViewHolder(TYPE_TITLE, LayoutInflater.from(mContext).inflate(R.layout.news_recommend_title, null));
-            }
-            default: {
-                return new ViewHolder(TYPE_CONTENT, LayoutInflater.from(mContext).inflate(R.layout.news_channel_item, null));
+    protected void convert(BaseViewHolder helper, ChannelItem item) {
+        switch (helper.getItemViewType()) {
+            case ChannelItem.TYPE_TITLE:
+                //Do Nothing
+                break;
+            case ChannelItem.TYPE_CONTENT:
+                convertContent(helper, item);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void convertContent(BaseViewHolder helper, ChannelItem item) {
+        helper.setText(R.id.tv_name, item.getName());
+        if (helper.getAdapterPosition() > getRecommendTitlePosition()) {
+            helper.setGone(R.id.img_icon, false);
+            helper.setBackgroundRes(R.id.tv_name, R.drawable.news_shape_round_white_bg);
+        } else {
+            if (isEdit && helper.getAdapterPosition() != 0) {
+                helper.setGone(R.id.img_icon, true);
+                helper.setBackgroundRes(R.id.tv_name, R.drawable.news_shape_round_grey_bg);
+            } else {
+                helper.setGone(R.id.img_icon, false);
+                helper.setBackgroundRes(R.id.tv_name, R.drawable.news_shape_round_white_bg);
             }
         }
     }
 
-    @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        final ChannelItem item = mData.get(position);
-        if (item != null) {
-            holder.initDate(item, position);
-        }
+    public int getRecommendTitlePosition() {
+        ChannelItem item = new ChannelItem();
+        item.setType(1);
+        item.setTypeId(RECOMMEND_TYPE_ID);
+        return getData().indexOf(item);
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_name;
-        ImageView img_icon;
-
-        public ViewHolder(int viewType, final View itemView) {
-            super(itemView);
-            switch (viewType) {
-                case TYPE_TITLE: {
-                    break;
-                }
-                default: {
-                    tv_name = itemView.findViewById(R.id.tv_name);
-                    img_icon = itemView.findViewById(R.id.img_icon);
-                    break;
-                }
-            }
+    public ArrayList<ChannelItem> getSelectedChannels() {
+        ArrayList<ChannelItem> list = new ArrayList<>();
+        for (int i = 0; i < getRecommendTitlePosition(); i++) {
+            list.add(getData().get(i));
         }
-
-        void initDate(ChannelItem info, int position) {
-            if (info.getType() != TYPE_TITLE) {
-                tv_name.setText(info.getName());
-                if(position > getRecommendTitlePosition()){
-                    img_icon.setVisibility(View.GONE);
-                    tv_name.setBackground(mContext.getResources().getDrawable(R.drawable.news_shape_round_white_bg));
-                } else {
-                    if(isEdit && position!=0){
-                        img_icon.setVisibility(View.VISIBLE);
-                        tv_name.setBackground(mContext.getResources().getDrawable(R.drawable.news_shape_round_grey_bg));
-                    }else{
-                        img_icon.setVisibility(View.GONE);
-                        tv_name.setBackground(mContext.getResources().getDrawable(R.drawable.news_shape_round_white_bg));
-                    }
-                }
-            }
-        }
+        return list;
     }
 
 
@@ -139,7 +105,7 @@ public class NewsChannelManagerAdapter extends RecyclerView.Adapter<NewsChannelM
                 return false;
             }
             if (fromPosition < toPosition) {
-                if(toPosition > getRecommendTitlePosition()){
+                if (toPosition > getRecommendTitlePosition()) {
                     toPosition = getRecommendTitlePosition() + 1;
                 }
                 for (int i = fromPosition; i < toPosition; i++) {
@@ -163,8 +129,8 @@ public class NewsChannelManagerAdapter extends RecyclerView.Adapter<NewsChannelM
         public void onSelectedChanged(RecyclerView.ViewHolder viewHolder, int actionState) {
             super.onSelectedChanged(viewHolder, actionState);
             //震动70毫秒
-//            Vibrator vib = (Vibrator) mContext.getSystemService(Service.VIBRATOR_SERVICE);
-//            vib.vibrate(70);
+            Vibrator vib = (Vibrator) mContext.getSystemService(Service.VIBRATOR_SERVICE);
+            vib.vibrate(70);
             if (listener != null) {
                 listener.onSelectedChanged();
             }
@@ -186,27 +152,14 @@ public class NewsChannelManagerAdapter extends RecyclerView.Adapter<NewsChannelM
         }
     });
 
-    public int getRecommendTitlePosition() {
-        ChannelItem item = new ChannelItem();
-        item.setType(1);
-        item.setTypeId(RECOMMEND_TYPE_ID);
-        return mData.indexOf(item);
-    }
-
-    public ArrayList<ChannelItem> getSelectedChannels() {
-        ArrayList<ChannelItem> list = new ArrayList<>();
-        for (int i = 0; i < getRecommendTitlePosition(); i++) {
-            list.add(mData.get(i));
-        }
-        return list;
-    }
-
     public interface ItemOnSelectListener {
         void onSelectedChanged();
+
         void clearView();
     }
 
     private ItemOnSelectListener listener;
+
     public void setItemOnSelectListener(ItemOnSelectListener listener) {
         this.listener = listener;
     }

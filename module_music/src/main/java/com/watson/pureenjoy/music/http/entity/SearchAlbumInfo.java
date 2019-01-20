@@ -147,7 +147,7 @@ public class SearchAlbumInfo implements Parcelable {
         this.pic_small = in.readString();
     }
 
-    public static final Parcelable.Creator<SearchAlbumInfo> CREATOR = new Parcelable.Creator<SearchAlbumInfo>() {
+    public static final Creator<SearchAlbumInfo> CREATOR = new Creator<SearchAlbumInfo>() {
         @Override
         public SearchAlbumInfo createFromParcel(Parcel source) {
             return new SearchAlbumInfo(source);

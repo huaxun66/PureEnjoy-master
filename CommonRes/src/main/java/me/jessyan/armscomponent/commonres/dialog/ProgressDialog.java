@@ -49,4 +49,8 @@ public class ProgressDialog extends Dialog {
         super.dismiss();
     }
 
+    public void setIndicatorName(String indicatorName) {
+        avi.setIndicator(indicatorName);
+    }
+
 }

@@ -5,23 +5,26 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.utils.ArmsUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.jessyan.armscomponent.commonres.R;
+import me.jessyan.armscomponent.commonsdk.imgaEngine.config.CommonImageConfigImpl;
 
 public class ImageViewPagerAdapter extends PagerAdapter {
     private Context mContext;
     private LayoutInflater mLayoutInflater;
     private List<String> urls = new ArrayList<>();
+    private ImageLoader mImageLoader;
 
     public ImageViewPagerAdapter(Context context) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
+        mImageLoader = ArmsUtils.obtainAppComponentFromContext(context).imageLoader();
     }
 
     public void setData(ArrayList<String> urls) {
@@ -42,9 +45,12 @@ public class ImageViewPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {  //做了两件事，第一：将当前视图添加到container中，第二：返回当前View
         View view = mLayoutInflater.inflate(R.layout.public_page_item, container, false);
-        Glide.with(mContext)
-                .load(urls.get(position))
-                .into((ImageView) view.findViewById(R.id.img_item));
+        mImageLoader.loadImage(mContext,
+                CommonImageConfigImpl
+                        .builder()
+                        .url(urls.get(position))
+                        .imageView(view.findViewById(R.id.img_item))
+                        .build());
         container.addView(view);
         return view;
     }

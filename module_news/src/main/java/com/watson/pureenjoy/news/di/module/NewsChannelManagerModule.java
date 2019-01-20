@@ -16,15 +16,12 @@
 package com.watson.pureenjoy.news.di.module;
 
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.watson.pureenjoy.news.mvp.contract.NewsChannelManagerContract;
 import com.watson.pureenjoy.news.mvp.model.NewsChannelManagerModel;
 import com.watson.pureenjoy.news.mvp.ui.adapter.NewsChannelManagerAdapter;
-import com.watson.pureenjoy.news.mvp.ui.adapter.NewsSpecialAdapter;
 
 import java.util.ArrayList;
 
@@ -48,8 +45,8 @@ public class NewsChannelManagerModule {
 
     @ActivityScope
     @Provides
-    public NewsChannelManagerAdapter provideNewsChannelManagerAdapter(IRepositoryManager iRepositoryManager) {
-        return new NewsChannelManagerAdapter(iRepositoryManager.getContext(), new ArrayList<>(),false);
+    public NewsChannelManagerAdapter provideNewsChannelManagerAdapter() {
+        return new NewsChannelManagerAdapter(new ArrayList<>(),false);
     }
 
     @ActivityScope

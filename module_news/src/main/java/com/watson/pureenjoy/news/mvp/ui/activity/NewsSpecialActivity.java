@@ -19,8 +19,9 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bumptech.glide.Glide;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.utils.ArmsUtils;
 import com.watson.pureenjoy.news.R;
 import com.watson.pureenjoy.news.R2;
 import com.watson.pureenjoy.news.app.listener.AppBarStateChangeListener;
@@ -41,6 +42,7 @@ import me.jessyan.armscomponent.commonres.view.flowlayout.FlowLayout;
 import me.jessyan.armscomponent.commonres.view.flowlayout.TagAdapter;
 import me.jessyan.armscomponent.commonres.view.flowlayout.TagFlowLayout;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
+import me.jessyan.armscomponent.commonsdk.imgaEngine.config.CommonImageConfigImpl;
 import me.jessyan.armscomponent.commonsdk.utils.StatusBarUtil;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.PHOTO_SET_ID;
@@ -145,7 +147,15 @@ public class NewsSpecialActivity extends NewsBaseActivity<NewsSpecialPresenter> 
 
     @Override
     public void setBanner(String imgUrl) {
-        Glide.with(this).load(imgUrl).into(mTopBg);
+        ImageLoader mImageLoader = ArmsUtils.obtainAppComponentFromContext(this).imageLoader();
+        mImageLoader.loadImage(this,
+                CommonImageConfigImpl
+                        .builder()
+                        .errorPic(R.drawable.news_image_bg)
+                        .fallback(R.drawable.news_image_bg)
+                        .url(imgUrl)
+                        .imageView(mTopBg)
+                        .build());
     }
 
     @Override

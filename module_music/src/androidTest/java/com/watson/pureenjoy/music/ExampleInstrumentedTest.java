@@ -1,4 +1,4 @@
-package com.watson.module_music;
+package com.watson.pureenjoy.music;
 
 /**
  * Instrumented test, which will execute on an Android device.

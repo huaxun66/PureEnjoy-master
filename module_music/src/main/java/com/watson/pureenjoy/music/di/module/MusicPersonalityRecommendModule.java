@@ -16,10 +16,7 @@
 package com.watson.pureenjoy.music.di.module;
 
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
-import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.watson.pureenjoy.music.mvp.contract.MusicPersonalityRecommendContract;
@@ -27,11 +24,9 @@ import com.watson.pureenjoy.music.mvp.model.MusicPersonalityRecommendModel;
 import com.watson.pureenjoy.music.mvp.ui.adapter.MusicRecommendAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import dagger.Module;
 import dagger.Provides;
-import me.jessyan.armscomponent.commonres.adapter.ImageViewPagerAdapter;
 
 /**
  * ================================================

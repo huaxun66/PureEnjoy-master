@@ -32,6 +32,7 @@ import butterknife.BindView;
 import me.jessyan.armscomponent.commonres.view.CustomLoadingMoreView;
 import me.jessyan.armscomponent.commonres.view.DividerItemDecoration;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
+import me.jessyan.armscomponent.commonsdk.utils.ClickUtils;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.PHOTO_SET_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.POST_ID;
@@ -103,6 +104,9 @@ public class NewsListFragment extends NewsBaseFragment<NewsListPresenter> implem
         mSmartRefreshLayout.setOnRefreshListener(this);
         adapter.setOnLoadMoreListener(this, mRecyclerView);
         adapter.setOnItemClickListener((adapter, view, position) -> {
+            if (ClickUtils.isFastClick()) {
+                return;
+            }
             NewsItem item = (NewsItem)adapter.getItem(position);
             if (NewsConstants.SPECIAL.equals(item.getSkipType())) {
                 ARouter.getInstance().build(RouterHub.NEWS_SPECIAL_ACTIVITY)

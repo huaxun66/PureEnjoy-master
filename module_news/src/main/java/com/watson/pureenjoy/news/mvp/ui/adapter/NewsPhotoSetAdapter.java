@@ -6,22 +6,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.utils.ArmsUtils;
 import com.watson.pureenjoy.news.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import me.jessyan.armscomponent.commonsdk.imgaEngine.config.CommonImageConfigImpl;
 import uk.co.senab.photoview.PhotoView;
 
 public class NewsPhotoSetAdapter extends PagerAdapter {
     private Context context;
     private List<String> imageList = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
+    private ImageLoader mImageLoader;
 
     public NewsPhotoSetAdapter(Context context) {
         this.context = context;
+        mImageLoader = ArmsUtils.obtainAppComponentFromContext(context).imageLoader();
     }
 
     public void setImageList(List<String> imageList) {
@@ -39,11 +42,14 @@ public class NewsPhotoSetAdapter extends PagerAdapter {
                 onItemClickListener.onItemClick(view1, position);
             }
         });
-        RequestOptions options = new RequestOptions().fallback(R.drawable.news_image_bg).error(R.drawable.news_image_bg);
-        Glide.with(context)
-                .load(imageList.get(position))
-                .apply(options)
-                .into(photoView);
+        mImageLoader.loadImage(context,
+                CommonImageConfigImpl
+                        .builder()
+                        .errorPic(R.drawable.news_image_bg)
+                        .fallback(R.drawable.news_image_bg)
+                        .url(imageList.get(position))
+                        .imageView(photoView)
+                        .build());
         container.addView(view);
         return view;
     }

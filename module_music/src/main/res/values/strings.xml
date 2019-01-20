@@ -1,10 +1,12 @@
 <resources>
+    <string name="music_module_name">ModuleMusic</string>
+
     <string name="music_personality_recommend">Personality Recommend</string>
     <string name="music_anchor_radio">Anchor Radio</string>
 
     <string name="music_personal_fm">Personal FM</string>
     <string name="music_daily_recommend">Recommend</string>
-    <string name="music_song_list">Song List</string>
+    <string name="music_song_sheet">Song Sheet</string>
     <string name="music_rank">Rank</string>
 
     <string name="music_recommend_list">Recommend Song</string>

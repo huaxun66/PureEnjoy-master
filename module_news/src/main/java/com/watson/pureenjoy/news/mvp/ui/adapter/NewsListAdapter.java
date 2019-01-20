@@ -2,19 +2,17 @@ package com.watson.pureenjoy.news.mvp.ui.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.utils.ArmsUtils;
 import com.watson.pureenjoy.news.R;
 import com.watson.pureenjoy.news.app.NewsConstants;
 import com.watson.pureenjoy.news.http.entity.NewsItem;
@@ -22,6 +20,7 @@ import com.watson.pureenjoy.news.http.entity.NewsItem;
 import java.util.List;
 
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
+import me.jessyan.armscomponent.commonsdk.imgaEngine.config.CommonImageConfigImpl;
 import me.jessyan.armscomponent.commonsdk.utils.StringUtil;
 
 import static android.view.View.GONE;
@@ -29,14 +28,16 @@ import static android.view.View.VISIBLE;
 import static com.watson.pureenjoy.news.app.NewsConstants.PHOTO_SET_ID;
 
 public class NewsListAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseViewHolder> {
-
     private Context context;
     private List<NewsItem> datas;
+    private ImageLoader mImageLoader;//用于加载图片的管理类,默认使用 Glide,使用策略模式,可替换框架
 
     public NewsListAdapter(Context context, List<NewsItem> datas) {
         super(datas);
         this.context = context;
         this.datas = datas;
+        //可以在任何可以拿到 Context 的地方,拿到 AppComponent,从而得到用 Dagger 管理的单例对象
+        mImageLoader = ArmsUtils.obtainAppComponentFromContext(context).imageLoader();
         addMultiItemType();
     }
 
@@ -67,11 +68,14 @@ public class NewsListAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseVie
         helper.setText(R.id.tv_item_news_list_title, item.getTitle())
                 .setText(R.id.tv_item_news_list_time, StringUtil.getFormatDateString(context, item.getMtime()))
                 .setText(R.id.tv_item_news_list_from, item.getSource());
-        RequestOptions options = new RequestOptions().fallback(R.drawable.news_image_bg).error(R.drawable.news_image_bg);
-        Glide.with(context)
-                .load(item.getImgsrc())
-                .apply(options)
-                .into((ImageView) helper.getView(R.id.iv_item_news_list_display));
+        mImageLoader.loadImage(context,
+                CommonImageConfigImpl
+                        .builder()
+                        .errorPic(R.drawable.news_image_bg)
+                        .fallback(R.drawable.news_image_bg)
+                        .url(item.getImgsrc())
+                        .imageView(helper.getView(R.id.iv_item_news_list_display))
+                        .build());
         helper.setVisible(R.id.lv_item_news_list_label,false);
         if (NewsConstants.SPECIAL.equals(item.getSkipType())) {
             helper.setVisible(R.id.lv_item_news_list_label,true);
@@ -83,22 +87,82 @@ public class NewsListAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseVie
                 .setText(R.id.tv_item_news_list_time, StringUtil.getFormatDateString(context, item.getMtime()));
         if (item.getImgextra() != null) {
             if (item.getImgextra().size() == 1) {
-                Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_one));
-                Glide.with(context).load(item.getImgextra().get(0).getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_two));
-                Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_three));
+                mImageLoader.loadImage(context,
+                        CommonImageConfigImpl
+                                .builder()
+                                .url(item.getImgsrc())
+                                .imageView(helper.getView(R.id.iv_item_news_list_photo_one))
+                                .build());
+                mImageLoader.loadImage(context,
+                        CommonImageConfigImpl
+                                .builder()
+                                .url(item.getImgextra().get(0).getImgsrc())
+                                .imageView(helper.getView(R.id.iv_item_news_list_photo_two))
+                                .build());
+                mImageLoader.loadImage(context,
+                        CommonImageConfigImpl
+                                .builder()
+                                .url(item.getImgsrc())
+                                .imageView(helper.getView(R.id.iv_item_news_list_photo_three))
+                                .build());
             } else if (item.getImgextra().size() == 2) {
-                Glide.with(context).load(item.getImgextra().get(0).getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_one));
-                Glide.with(context).load(item.getImgextra().get(1).getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_two));
-                Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_three));
+                mImageLoader.loadImage(context,
+                        CommonImageConfigImpl
+                                .builder()
+                                .url(item.getImgextra().get(0).getImgsrc())
+                                .imageView(helper.getView(R.id.iv_item_news_list_photo_one))
+                                .build());
+                mImageLoader.loadImage(context,
+                        CommonImageConfigImpl
+                                .builder()
+                                .url(item.getImgextra().get(1).getImgsrc())
+                                .imageView(helper.getView(R.id.iv_item_news_list_photo_two))
+                                .build());
+                mImageLoader.loadImage(context,
+                        CommonImageConfigImpl
+                                .builder()
+                                .url(item.getImgsrc())
+                                .imageView(helper.getView(R.id.iv_item_news_list_photo_three))
+                                .build());
             } else if (item.getImgextra().size() >= 3) {
-                Glide.with(context).load(item.getImgextra().get(0).getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_one));
-                Glide.with(context).load(item.getImgextra().get(1).getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_two));
-                Glide.with(context).load(item.getImgextra().get(2).getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_three));
+                mImageLoader.loadImage(context,
+                        CommonImageConfigImpl
+                                .builder()
+                                .url(item.getImgextra().get(0).getImgsrc())
+                                .imageView(helper.getView(R.id.iv_item_news_list_photo_one))
+                                .build());
+                mImageLoader.loadImage(context,
+                        CommonImageConfigImpl
+                                .builder()
+                                .url(item.getImgextra().get(1).getImgsrc())
+                                .imageView(helper.getView(R.id.iv_item_news_list_photo_two))
+                                .build());
+                mImageLoader.loadImage(context,
+                        CommonImageConfigImpl
+                                .builder()
+                                .url(item.getImgextra().get(2).getImgsrc())
+                                .imageView(helper.getView(R.id.iv_item_news_list_photo_three))
+                                .build());
             }
         } else {
-            Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_one));
-            Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_two));
-            Glide.with(context).load(item.getImgsrc()).into((ImageView) helper.getView(R.id.iv_item_news_list_photo_three));
+            mImageLoader.loadImage(context,
+                    CommonImageConfigImpl
+                            .builder()
+                            .url(item.getImgsrc())
+                            .imageView(helper.getView(R.id.iv_item_news_list_photo_one))
+                            .build());
+            mImageLoader.loadImage(context,
+                    CommonImageConfigImpl
+                            .builder()
+                            .url(item.getImgsrc())
+                            .imageView(helper.getView(R.id.iv_item_news_list_photo_two))
+                            .build());
+            mImageLoader.loadImage(context,
+                    CommonImageConfigImpl
+                            .builder()
+                            .url(item.getImgsrc())
+                            .imageView(helper.getView(R.id.iv_item_news_list_photo_three))
+                            .build());
         }
     }
 
@@ -134,8 +198,13 @@ public class NewsListAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseVie
             mSlider.setVisibility(GONE);
             singleLayout.setVisibility(VISIBLE);
             NewsItem.AdsEntity entity = item.getAds().get(0);
-            ((TextView)helper.getView(R.id.title)).setText(entity.getTitle());
-            Glide.with(context).load(entity.getImgsrc()).into((ImageView) helper.getView(R.id.img));
+            helper.setText(R.id.title, entity.getTitle());
+            mImageLoader.loadImage(context,
+                    CommonImageConfigImpl
+                            .builder()
+                            .url(entity.getImgsrc())
+                            .imageView(helper.getView(R.id.img))
+                            .build());
             singleLayout.setOnClickListener(v -> ARouter.getInstance().build(RouterHub.NEWS_PHOTO_SET_ACTIVITY)
                     .withString(PHOTO_SET_ID, entity.getSkipID())
                     .navigation());

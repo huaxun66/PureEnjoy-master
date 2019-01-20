@@ -2,11 +2,11 @@ package com.watson.pureenjoy.music.mvp.ui.adapter;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.utils.ArmsUtils;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.http.entity.RecommendItem;
@@ -20,13 +20,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import me.jessyan.armscomponent.commonres.adapter.ImageViewPagerAdapter;
+import me.jessyan.armscomponent.commonsdk.imgaEngine.config.CommonImageConfigImpl;
 
 public class MusicRecommendAdapter extends BaseMultiItemQuickAdapter<RecommendItem, BaseViewHolder> {
     private Context mContext;
+    private ImageLoader mImageLoader;
 
-    public MusicRecommendAdapter(Context context, ArrayList<RecommendItem> mData) {
-        super(mData);
+    public MusicRecommendAdapter(Context context, ArrayList<RecommendItem> datas) {
+        super(datas);
         this.mContext = context;
+        mImageLoader = ArmsUtils.obtainAppComponentFromContext(context).imageLoader();
         addMultiItemType();
     }
 
@@ -77,6 +80,10 @@ public class MusicRecommendAdapter extends BaseMultiItemQuickAdapter<RecommendIt
         //日期
         int date = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
         helper.setText(R.id.tv_recommend, String.valueOf(date));
+        helper.addOnClickListener(R.id.iv_fm);
+        helper.addOnClickListener(R.id.tv_recommend);
+        helper.addOnClickListener(R.id.iv_songSheet);
+        helper.addOnClickListener(R.id.iv_rank);
     }
 
     private void convertHeaderContent(BaseViewHolder helper, RecommendItem item) {
@@ -85,7 +92,12 @@ public class MusicRecommendAdapter extends BaseMultiItemQuickAdapter<RecommendIt
 
     private void convertRecommendListContent(BaseViewHolder helper, RecommendItem item) {
         RecommendListInfo mRecommendListInfo = item.getRecommendListInfo();
-        Glide.with(mContext).load(mRecommendListInfo.getPic()).into((ImageView) helper.getView(R.id.img));
+        mImageLoader.loadImage(mContext,
+                CommonImageConfigImpl
+                        .builder()
+                        .url(mRecommendListInfo.getPic())
+                        .imageView(helper.getView(R.id.img))
+                        .build());
         int count = Integer.parseInt(mRecommendListInfo.getListenum());
         String countText = count > 10000 ? count / 10000 + "万" : count + "";
         helper.setText(R.id.tv_title, mRecommendListInfo.getTitle())
@@ -94,14 +106,24 @@ public class MusicRecommendAdapter extends BaseMultiItemQuickAdapter<RecommendIt
 
     private void convertRecommendAlbumContent(BaseViewHolder helper, RecommendItem item) {
         RecommendAlbumInfo mRecommendAlbumInfo = item.getRecommendAlbumInfo();
-        Glide.with(mContext).load(mRecommendAlbumInfo.getPic()).into((ImageView) helper.getView(R.id.img));
+        mImageLoader.loadImage(mContext,
+                CommonImageConfigImpl
+                        .builder()
+                        .url(mRecommendAlbumInfo.getPic())
+                        .imageView(helper.getView(R.id.img))
+                        .build());
         helper.setText(R.id.album_name, mRecommendAlbumInfo.getTitle())
               .setText(R.id.artist_name, mRecommendAlbumInfo.getAuthor());
     }
 
     private void convertRecommendRadioContent(BaseViewHolder helper, RecommendItem item) {
         RecommendRadioInfo mRecommendRadioInfo = item.getRecommendRadioInfo();
-        Glide.with(mContext).load(mRecommendRadioInfo.getPic()).into((ImageView) helper.getView(R.id.img));
+        mImageLoader.loadImage(mContext,
+                CommonImageConfigImpl
+                        .builder()
+                        .url(mRecommendRadioInfo.getPic())
+                        .imageView(helper.getView(R.id.img))
+                        .build());
         helper.setText(R.id.tv_des, mRecommendRadioInfo.getDesc())
               .setText(R.id.tv_title, mRecommendRadioInfo.getTitle());
     }

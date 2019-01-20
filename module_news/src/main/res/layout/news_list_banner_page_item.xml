@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_200dp"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_30dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/public_black_transparency_450">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/public_mar_left_10dp"
+            android:textColor="@color/public_white"
+            android:textSize="@dimen/public_font_14sp"
+            tools:text="王凯的微笑太迷人" />
+    </RelativeLayout>
+</RelativeLayout>

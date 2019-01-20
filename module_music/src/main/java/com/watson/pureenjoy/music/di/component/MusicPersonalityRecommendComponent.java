@@ -39,8 +39,8 @@ public interface MusicPersonalityRecommendComponent {
     @Component.Builder
     interface Builder{
         @BindsInstance
-        MusicPersonalityRecommendComponent.Builder view(MusicPersonalityRecommendContract.View view);
-        MusicPersonalityRecommendComponent.Builder appComponent(AppComponent appComponent);
+        Builder view(MusicPersonalityRecommendContract.View view);
+        Builder appComponent(AppComponent appComponent);
         MusicPersonalityRecommendComponent build();
     }
 }

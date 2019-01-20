@@ -1,4 +1,4 @@
-package com.watson.pureenjoy.music.http.entity;
+package com.watson.pureenjoy.music.http.entity.sheet;
 
 /**
  * Created by wm on 2016/4/15.

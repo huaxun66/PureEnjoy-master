@@ -15,7 +15,7 @@ import com.watson.pureenjoy.video.R;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
 @Route(path = RouterHub.VIDEO_FRAGMENT)
-public class VideoFragment extends BaseFragment {
+public class VideoFragment extends VideoBaseFragment {
 
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {

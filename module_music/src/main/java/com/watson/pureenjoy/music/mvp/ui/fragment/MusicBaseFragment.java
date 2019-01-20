@@ -16,13 +16,14 @@ import me.jessyan.armscomponent.commonres.dialog.ProgressDialog;
  * Created by jess on 8/5/16 14:11
  * contact with jess.yan.effort@gmail.com
  */
-public abstract class MusicBaseFragment<P extends IPresenter> extends com.jess.arms.base.BaseFragment<P> implements IView {
+public abstract class MusicBaseFragment<P extends IPresenter> extends BaseFragment<P> implements IView {
     protected ProgressDialog mProgressDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mProgressDialog = new ProgressDialog(getContext());
+        mProgressDialog.setIndicatorName("LineScalePulseOutRapidIndicator");
     }
 
     @Override

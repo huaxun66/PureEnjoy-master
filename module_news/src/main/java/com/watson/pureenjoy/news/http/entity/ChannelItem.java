@@ -4,7 +4,9 @@ package com.watson.pureenjoy.news.http.entity;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ChannelItem implements Parcelable {
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
+public class ChannelItem implements Parcelable, MultiItemEntity {
     public static final int TYPE_TITLE = 1;
     public static final int TYPE_CONTENT = 2;
 
@@ -35,6 +37,11 @@ public class ChannelItem implements Parcelable {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    @Override
+    public int getItemType() {
+        return type;
     }
 
     @Override
@@ -91,4 +98,5 @@ public class ChannelItem implements Parcelable {
             return new ChannelItem[size];
         }
     };
+
 }

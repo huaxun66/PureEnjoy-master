@@ -1,22 +1,7 @@
-package com.watson.pureenjoy.music.http.entity;
+package com.watson.pureenjoy.music.http.entity.sheet;
 
-/**
- * Created by wm on 2016/5/15.
- */
-public class GedanInfo {
 
-    /**
-     * listid : 6574
-     * listenum : 58807
-     * collectnum : 552
-     * title : King榜4月歌曲精选-最厉害的霸榜王
-     * pic_300 : http://d.hiphotos.baidu.com/ting/pic/item/c2fdfc039245d6885468c059a3c27d1ed31b24e0.jpg
-     * tag : king榜,新歌,偶像,王源
-     * desc : 四月King榜歌曲精选，王源《因为遇见你》打榜以来，一直蝉联第一名，可谓是最厉害的霸榜王。
-     * pic_w300 : http://d.hiphotos.baidu.com/ting/pic/item/c75c10385343fbf2a624dbdeb77eca8064388fc6.jpg
-     * width : 500
-     * height : 500
-     */
+public class SheetInfo {
 
     private String listid;
     private String listenum;
@@ -28,6 +13,7 @@ public class GedanInfo {
     private String pic_w300;
     private String width;
     private String height;
+    private String[] songIds;
 
     public String getListid() {
         return listid;
@@ -107,5 +93,9 @@ public class GedanInfo {
 
     public void setHeight(String height) {
         this.height = height;
+    }
+
+    public String[] getSongIds() {
+        return songIds;
     }
 }

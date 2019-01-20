@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.di.component.AppComponent;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.watson.pureenjoy.music.R;
@@ -85,6 +86,19 @@ public class MusicPersonalityRecommendFragment extends MusicBaseFragment<MusicPe
         mSmartRefreshLayout.setOnRefreshListener(refreshLayout -> {
             isRefresh = true;
             mPresenter.requestRecommendResponse(getContext());
+        });
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            switch (view.getId()) {
+                case R.id.iv_fm:
+                    break;
+                case R.id.tv_recommend:
+                    break;
+                case R.id.iv_songSheet:
+                    ARouter.getInstance().build(RouterHub.MUSIC_SONG_SHEET_ACTIVITY).navigation(getContext());
+                    break;
+                case R.id.iv_rank:
+                    break;
+            }
         });
     }
 

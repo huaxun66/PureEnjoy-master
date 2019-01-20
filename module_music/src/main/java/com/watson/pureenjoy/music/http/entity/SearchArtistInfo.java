@@ -136,7 +136,7 @@ public class SearchArtistInfo implements Parcelable {
         this.artist_source = in.readString();
     }
 
-    public static final Parcelable.Creator<SearchArtistInfo> CREATOR = new Parcelable.Creator<SearchArtistInfo>() {
+    public static final Creator<SearchArtistInfo> CREATOR = new Creator<SearchArtistInfo>() {
         @Override
         public SearchArtistInfo createFromParcel(Parcel source) {
             return new SearchArtistInfo(source);

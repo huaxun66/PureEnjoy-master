@@ -399,7 +399,7 @@ public class SearchSongInfo implements Parcelable {
         this.bitrate_fee = in.readString();
     }
 
-    public static final Parcelable.Creator<SearchSongInfo> CREATOR = new Parcelable.Creator<SearchSongInfo>() {
+    public static final Creator<SearchSongInfo> CREATOR = new Creator<SearchSongInfo>() {
         @Override
         public SearchSongInfo createFromParcel(Parcel source) {
             return new SearchSongInfo(source);

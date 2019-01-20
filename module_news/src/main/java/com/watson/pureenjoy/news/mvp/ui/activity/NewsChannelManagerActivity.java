@@ -32,6 +32,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
+import me.jessyan.armscomponent.commonsdk.utils.ClickUtils;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.CHANNEL_SELECTED;
 import static com.watson.pureenjoy.news.app.NewsConstants.CLICK_TYPE_ID;
@@ -136,7 +137,7 @@ public class NewsChannelManagerActivity extends NewsBaseActivity<NewsChannelMana
                     View item = mRecyclerView.getChildAt(i);
                     icon = item.findViewById(R.id.img_icon);
                     name = item.findViewById(R.id.tv_name);
-                    if (mAdapter.getData(i).getType() != TYPE_TITLE) {
+                    if (mAdapter.getItemViewType(i) != TYPE_TITLE) {
                         if (i > mAdapter.getRecommendTitlePosition()) {
                             icon.setVisibility(View.GONE);
                         } else {
@@ -167,29 +168,28 @@ public class NewsChannelManagerActivity extends NewsBaseActivity<NewsChannelMana
                 }
             }
 
-            long lastClickTime = 0;
             @Override
             public void onItemClick(RecyclerView.ViewHolder vh) {
-                if (System.currentTimeMillis() - lastClickTime > 300) {
-                    lastClickTime = System.currentTimeMillis();
-                    int position = vh.getLayoutPosition();
-                    if (isSelectedChannel(position)) {
-                        if (!isEditState || (isEditState && !isAllowDragOrDelete(position))) {
-                            clickToChannel(mAdapter.getData(position).getTypeId());
-                        } else {
-                            for (int i = position; i < mAdapter.getRecommendTitlePosition(); i++) {
-                                Collections.swap(mAdapter.getData(), i, i + 1);
-                            }
-                            mAdapter.notifyDataSetChanged();
-                            hasChanged = true;
-                        }
+                if (ClickUtils.isFastClick()) {
+                    return;
+                }
+                int position = vh.getLayoutPosition();
+                if (isSelectedChannel(position)) {
+                    if (!isEditState || (isEditState && !isAllowDragOrDelete(position))) {
+                        clickToChannel(mAdapter.getItem(position).getTypeId());
                     } else {
-                        for (int i = position; i > mAdapter.getRecommendTitlePosition(); i--) {
-                            Collections.swap(mAdapter.getData(), i, i - 1);
+                        for (int i = position; i < mAdapter.getRecommendTitlePosition(); i++) {
+                            Collections.swap(mAdapter.getData(), i, i + 1);
                         }
                         mAdapter.notifyDataSetChanged();
                         hasChanged = true;
                     }
+                } else {
+                    for (int i = position; i > mAdapter.getRecommendTitlePosition(); i--) {
+                        Collections.swap(mAdapter.getData(), i, i - 1);
+                    }
+                    mAdapter.notifyDataSetChanged();
+                    hasChanged = true;
                 }
             }
         });
@@ -214,7 +214,7 @@ public class NewsChannelManagerActivity extends NewsBaseActivity<NewsChannelMana
         allChannels.addAll(selectedChannels);
         allChannels.add(generateRecommendTitleItem());
         allChannels.addAll(recommendChannels);
-        mAdapter.setData(allChannels);
+        mAdapter.setNewData(allChannels);
     }
 
     private ChannelItem generateRecommendTitleItem() {

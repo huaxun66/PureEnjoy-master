@@ -1,13 +1,15 @@
 <resources>
+    <string name="music_module_name">音乐模块</string>
+
     <string name="music_personality_recommend">个性推荐</string>
     <string name="music_anchor_radio">主播电台</string>
 
     <string name="music_personal_fm">私人FM</string>
     <string name="music_daily_recommend">每日推荐</string>
-    <string name="music_song_list">歌单</string>
+    <string name="music_song_sheet">歌单</string>
     <string name="music_rank">排行榜</string>
 
-    <string name="music_recommend_list">推荐歌曲</string>
+    <string name="music_recommend_list">推荐歌单</string>
     <string name="music_recommend_album">最新专辑</string>
     <string name="music_recommend_radio">主播电台</string>
 

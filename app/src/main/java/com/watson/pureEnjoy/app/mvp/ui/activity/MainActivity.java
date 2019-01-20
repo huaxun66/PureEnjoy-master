@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {
-        StatusBarUtil.setColor(this, getResources().getColor(com.watson.pureenjoy.music.R.color.public_colorAccent), 0);
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.public_colorAccent), 0);
         return R.layout.activity_main;
     }
 
