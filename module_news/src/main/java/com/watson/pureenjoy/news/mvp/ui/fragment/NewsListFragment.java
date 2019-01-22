@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -52,6 +51,10 @@ public class NewsListFragment extends NewsBaseFragment<NewsListPresenter> implem
     @Inject
     NewsListAdapter adapter;
     @Inject
+    DividerItemDecoration itemDecoration;
+    @Inject
+    CustomLoadingMoreView customLoadingMoreView;
+    @Inject
     List<NewsItem> allData;
 
     private boolean isRefresh;
@@ -91,16 +94,15 @@ public class NewsListFragment extends NewsBaseFragment<NewsListPresenter> implem
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        adapter.setLoadMoreView(new CustomLoadingMoreView());
+        adapter.setLoadMoreView(customLoadingMoreView);
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL_LIST));
+        mRecyclerView.addItemDecoration(itemDecoration);
         mRecyclerView.setAdapter(adapter);
         initListener();
         getData(0, true);
     }
 
     private void initListener() {
-        mRecyclerView.addOnScrollListener(onScrollListener);
         mSmartRefreshLayout.setOnRefreshListener(this);
         adapter.setOnLoadMoreListener(this, mRecyclerView);
         adapter.setOnItemClickListener((adapter, view, position) -> {
@@ -165,29 +167,6 @@ public class NewsListFragment extends NewsBaseFragment<NewsListPresenter> implem
     public void onLoadMoreRequested() {
         getData(adapter.getData().size(), false);
     }
-
-    private RecyclerView.OnScrollListener onScrollListener = new RecyclerView.OnScrollListener(){
-        @Override
-        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-//            super.onScrollStateChanged(recyclerView, newState);
-            switch (newState) {
-                case RecyclerView.SCROLL_STATE_IDLE://停止滚动
-                    try {
-                        if (mContext != null) Glide.with(mContext).resumeRequests();
-                    } catch (Exception error) {
-                        error.printStackTrace();
-                    }
-                    break;
-                default:
-                    try {
-                        if (mContext != null) Glide.with(mContext).pauseRequests();
-                    } catch (Exception error) {
-                        error.printStackTrace();
-                    }
-                    break;
-            }
-        }
-    };
 
 
     @Override

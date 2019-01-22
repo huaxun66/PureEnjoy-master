@@ -15,6 +15,8 @@
  */
 package com.watson.pureenjoy.news.mvp.contract;
 
+import android.content.Context;
+
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
 import com.watson.pureenjoy.news.http.entity.NewsSpecial;
@@ -29,6 +31,7 @@ public interface NewsSpecialContract {
     interface View extends IView {
         void setBanner(String imgUrl);
         void setNewsSpecialList(List<NewsSpecialItem> specialList);
+        Context getContext();
     }
 
     interface Model extends IModel{

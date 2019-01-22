@@ -44,7 +44,8 @@ ext {
             "picasso"                  : "com.squareup.picasso:picasso:2.5.2",
 
             //view
-            "easyNavigationBar"        : "com.github.forvv231:EasyNavigation:1.0.2",
+            "constraintLayout"         : 'com.android.support.constraint:constraint-layout:1.0.2',
+            "easyNavigationBar"        : 'com.github.forvv231:EasyNavigation:1.0.2',
             "smartRefreshLayout"       : 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.4',
             "smartRefreshHeader"       : 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.4',
             "brvah"                    : "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.32",

@@ -53,7 +53,7 @@ public class CommonGlideImageLoaderStrategy implements BaseImageLoaderStrategy<C
     public void loadImage(Context ctx, CommonImageConfigImpl config) {
         Preconditions.checkNotNull(ctx, "Context is required");
         Preconditions.checkNotNull(config, "ImageConfigImpl is required");
-        if (TextUtils.isEmpty(config.getUrl())) throw new NullPointerException("Url is required");
+//        if (TextUtils.isEmpty(config.getUrl())) throw new NullPointerException("Url is required");
         Preconditions.checkNotNull(config.getImageView(), "ImageView is required");
 
 

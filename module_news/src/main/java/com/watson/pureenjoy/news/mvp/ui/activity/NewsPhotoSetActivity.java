@@ -1,5 +1,6 @@
 package com.watson.pureenjoy.news.mvp.ui.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -124,5 +125,10 @@ public class NewsPhotoSetActivity extends NewsBaseActivity<NewsPhotoSetPresenter
             mTitle.setText(newsPhotoSet.getSetname());
             mIndex.setText("1/" + photos.size());
         }
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
     }
 }

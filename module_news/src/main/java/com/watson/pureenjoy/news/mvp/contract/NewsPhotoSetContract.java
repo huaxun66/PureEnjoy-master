@@ -15,17 +15,18 @@
  */
 package com.watson.pureenjoy.news.mvp.contract;
 
+import android.content.Context;
+
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
 import com.watson.pureenjoy.news.http.entity.NewsPhotoSet;
-
-import java.util.Map;
 
 import io.reactivex.Observable;
 
 public interface NewsPhotoSetContract {
     interface View extends IView {
         void setNewsPhotoSet(NewsPhotoSet newsPhotoSet);
+        Context getContext();
     }
 
     interface Model extends IModel{

@@ -15,6 +15,8 @@
  */
 package com.watson.pureenjoy.news.mvp.contract;
 
+import android.content.Context;
+
 import com.jess.arms.mvp.IModel;
 import com.jess.arms.mvp.IView;
 import com.watson.pureenjoy.news.http.entity.ChannelItem;
@@ -25,7 +27,7 @@ import io.reactivex.Observable;
 
 public interface NewsChannelManagerContract {
     interface View extends IView {
-        void setRecommendChannels(List<ChannelItem> channels);
+        Context getContext();
     }
 
     interface Model extends IModel{

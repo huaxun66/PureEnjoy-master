@@ -1,17 +1,13 @@
-package com.watson.pureenjoy.music.http.entity;
+package com.watson.pureenjoy.music.http.entity.recommend;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendAlbumInfo;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendFocus;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendListInfo;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendRadioInfo;
 
 public class RecommendItem  implements MultiItemEntity {
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_RECOMMEND_SONG = 1; //推荐歌单
     public static final int TYPE_NEW_ALBUM = 2;  //最新专辑
     public static final int TYPE_ANCHOR_RADIO = 3; //主播电台
-    public static final int TYPE_BANNER = 4; //banner
+    public static final int TYPE_BANNER = 4; //banner+四个按钮
     private int type;
 
     private String title;

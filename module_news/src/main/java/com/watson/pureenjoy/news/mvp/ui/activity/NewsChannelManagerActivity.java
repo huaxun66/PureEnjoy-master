@@ -1,5 +1,6 @@
 package com.watson.pureenjoy.news.mvp.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,7 +27,6 @@ import com.watson.pureenjoy.news.mvp.ui.adapter.NewsChannelManagerAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -36,7 +36,6 @@ import me.jessyan.armscomponent.commonsdk.utils.ClickUtils;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.CHANNEL_SELECTED;
 import static com.watson.pureenjoy.news.app.NewsConstants.CLICK_TYPE_ID;
-import static com.watson.pureenjoy.news.app.NewsConstants.RECOMMEND_TYPE_ID;
 import static com.watson.pureenjoy.news.http.entity.ChannelItem.TYPE_TITLE;
 
 /**
@@ -86,18 +85,6 @@ public class NewsChannelManagerActivity extends NewsBaseActivity<NewsChannelMana
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        mGridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                int type = mAdapter.getItemViewType(position);
-                switch (type) {
-                    case 1: //标题
-                        return 4;
-                    default:
-                        return 1;
-                }
-            }
-        });
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         mAdapter.itemTouchHelper.attachToRecyclerView(mRecyclerView);
@@ -209,19 +196,8 @@ public class NewsChannelManagerActivity extends NewsBaseActivity<NewsChannelMana
     }
 
     @Override
-    public void setRecommendChannels(List<ChannelItem> recommendChannels) {
-        ArrayList<ChannelItem> allChannels = new ArrayList<>();
-        allChannels.addAll(selectedChannels);
-        allChannels.add(generateRecommendTitleItem());
-        allChannels.addAll(recommendChannels);
-        mAdapter.setNewData(allChannels);
-    }
-
-    private ChannelItem generateRecommendTitleItem() {
-        ChannelItem titleItem = new ChannelItem();
-        titleItem.setType(TYPE_TITLE);
-        titleItem.setTypeId(RECOMMEND_TYPE_ID);
-        return titleItem;
+    public Context getContext() {
+        return this;
     }
 
     private boolean isAllowDragOrDelete(int position) {

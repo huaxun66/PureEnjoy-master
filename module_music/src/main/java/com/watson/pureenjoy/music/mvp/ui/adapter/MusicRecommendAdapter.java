@@ -9,15 +9,16 @@ import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.utils.ArmsUtils;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.watson.pureenjoy.music.R;
-import com.watson.pureenjoy.music.http.entity.RecommendItem;
 import com.watson.pureenjoy.music.http.entity.recommend.RecommendAlbumInfo;
 import com.watson.pureenjoy.music.http.entity.recommend.RecommendFocus;
 import com.watson.pureenjoy.music.http.entity.recommend.RecommendFocusInfo;
+import com.watson.pureenjoy.music.http.entity.recommend.RecommendItem;
 import com.watson.pureenjoy.music.http.entity.recommend.RecommendListInfo;
 import com.watson.pureenjoy.music.http.entity.recommend.RecommendRadioInfo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import me.jessyan.armscomponent.commonres.adapter.ImageViewPagerAdapter;
 import me.jessyan.armscomponent.commonsdk.imgaEngine.config.CommonImageConfigImpl;
@@ -26,7 +27,7 @@ public class MusicRecommendAdapter extends BaseMultiItemQuickAdapter<RecommendIt
     private Context mContext;
     private ImageLoader mImageLoader;
 
-    public MusicRecommendAdapter(Context context, ArrayList<RecommendItem> datas) {
+    public MusicRecommendAdapter(Context context, List<RecommendItem> datas) {
         super(datas);
         this.mContext = context;
         mImageLoader = ArmsUtils.obtainAppComponentFromContext(context).imageLoader();
@@ -37,7 +38,7 @@ public class MusicRecommendAdapter extends BaseMultiItemQuickAdapter<RecommendIt
         addItemType(RecommendItem.TYPE_BANNER, R.layout.music_recommend_banner_item);
         addItemType(RecommendItem.TYPE_HEADER, R.layout.music_recommend_header_item);
         addItemType(RecommendItem.TYPE_RECOMMEND_SONG, R.layout.music_recommend_song_item);
-        addItemType(RecommendItem.TYPE_NEW_ALBUM, R.layout.music_new_album_item);
+        addItemType(RecommendItem.TYPE_NEW_ALBUM, R.layout.music_recommend_album_item);
         addItemType(RecommendItem.TYPE_ANCHOR_RADIO, R.layout.music_recommend_radio_item);
     }
 
@@ -88,6 +89,7 @@ public class MusicRecommendAdapter extends BaseMultiItemQuickAdapter<RecommendIt
 
     private void convertHeaderContent(BaseViewHolder helper, RecommendItem item) {
         helper.setText(R.id.tv_title, item.getTitle());
+        helper.addOnClickListener(R.id.tv_title);
     }
 
     private void convertRecommendListContent(BaseViewHolder helper, RecommendItem item) {

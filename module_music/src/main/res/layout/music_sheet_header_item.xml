@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/public_height_60dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/public_mar_left_15dp"
+        android:background="@drawable/music_select_tag_bg"
+        android:paddingLeft="@dimen/public_pad_left_10dp"
+        android:paddingRight="@dimen/public_pad_right_10dp"
+        android:paddingTop="@dimen/public_pad_top_5dp"
+        android:paddingBottom="@dimen/public_pad_bottom_5dp">
+
+        <TextView
+            android:id="@+id/select_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/public_font_13sp"
+            android:textColor="@color/public_custom_color_text_main"
+            android:text="@string/music_all_sheet" />
+
+        <ImageView
+            android:layout_width="@dimen/public_width_12dp"
+            android:layout_height="@dimen/public_height_12dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/select_tag"
+            android:src="@drawable/public_nav_back_right" />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/type_ballad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="@dimen/public_mar_right_10dp"
+        android:textColor="@color/public_custom_color_text_sub"
+        android:textSize="@dimen/public_font_12sp"
+        android:text="@string/music_sheet_type_ballad"/>
+
+    <View
+        android:id="@+id/line1"
+        android:layout_width="@dimen/public_width_0_5dp"
+        android:layout_height="@dimen/public_height_15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/type_ballad"
+        android:layout_marginEnd="@dimen/public_mar_right_10dp"
+        android:background="@color/public_grey_200" />
+
+    <TextView
+        android:id="@+id/type_rock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/line1"
+        android:layout_marginEnd="@dimen/public_mar_right_10dp"
+        android:textColor="@color/public_custom_color_text_sub"
+        android:textSize="@dimen/public_font_12sp"
+        android:text="@string/music_sheet_type_rock"/>
+
+    <View
+        android:id="@+id/line2"
+        android:layout_width="@dimen/public_width_0_5dp"
+        android:layout_height="@dimen/public_height_15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/type_rock"
+        android:layout_marginEnd="@dimen/public_mar_right_10dp"
+        android:background="@color/public_grey_200" />
+
+    <TextView
+        android:id="@+id/type_chinese"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/line2"
+        android:layout_marginEnd="@dimen/public_mar_right_10dp"
+        android:textColor="@color/public_custom_color_text_sub"
+        android:textSize="@dimen/public_font_12sp"
+        android:text="@string/music_sheet_type_chinese"/>
+
+</android.support.constraint.ConstraintLayout>

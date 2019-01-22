@@ -25,7 +25,7 @@ import com.watson.pureenjoy.music.BuildConfig;
  * @see com.jess.arms.base.delegate.AppDelegate
  * @see com.jess.arms.integration.ManifestParser
  * @see <a href="https://github.com/JessYanCoding/ArmsComponent/wiki#3.3">ConfigModule wiki 官方文档</a>
- * Created by ArmsComponentTemplate on 01/19/2019 18:25
+ * Created by ArmsComponentTemplate on 01/21/2019 11:13
  * <a href="mailto:jess.yan.effort@gmail.com">Contact me</a>
  * <a href="https://github.com/JessYanCoding">Follow me</a>
  * <a href="https://github.com/JessYanCoding/ArmsComponent">Star me</a>

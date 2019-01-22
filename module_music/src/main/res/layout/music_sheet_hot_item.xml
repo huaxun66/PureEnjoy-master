@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/public_height_150dp"
+    android:background="@drawable/music_hot_sheet_bg">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/public_width_100dp"
+        android:layout_height="@dimen/public_height_100dp"
+        android:layout_marginLeft="@dimen/public_mar_left_15dp"
+        android:layout_marginTop="@dimen/public_mar_top_32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:id="@+id/classic_header"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/public_height_20dp"
+        app:layout_constraintLeft_toRightOf="@id/img"
+        app:layout_constraintTop_toTopOf="@id/img"
+        android:layout_marginLeft="@dimen/public_mar_left_10dp">
+
+        <ImageView
+            android:id="@+id/classic_icon"
+            android:layout_width="@dimen/public_width_20dp"
+            android:layout_height="@dimen/public_height_20dp"
+            android:src="@drawable/music_classic_sheet"/>
+
+        <TextView
+            android:id="@+id/classic_sheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:layout_marginLeft="@dimen/public_mar_left_5dp"
+            android:layout_toRightOf="@+id/classic_icon"
+            android:layout_centerVertical="true"
+            android:textColor="@color/public_white"
+            android:textSize="@dimen/public_font_17sp"
+            android:text="@string/music_classic_sheet"/>
+
+        <ImageView
+            android:layout_width="@dimen/public_width_15dp"
+            android:layout_height="@dimen/public_height_15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/public_mar_left_2dp"
+            android:layout_toRightOf="@+id/classic_sheet"
+            android:src="@drawable/public_nav_back_right_white"/>
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/classic_sheet_title"
+        android:layout_width="@dimen/public_width_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/public_mar_left_10dp"
+        android:layout_marginRight="@dimen/public_mar_right_10dp"
+        android:layout_marginTop="@dimen/public_mar_top_15dp"
+        app:layout_constraintLeft_toRightOf="@id/img"
+        app:layout_constraintTop_toBottomOf="@id/classic_header"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/public_white"
+        android:textSize="@dimen/public_font_14sp"
+        android:text="@string/music_classic_sheet_title"/>
+
+
+    <TextView
+        android:id="@+id/classic_sheet_des"
+        android:layout_width="@dimen/public_width_0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/public_mar_left_10dp"
+        android:layout_marginRight="@dimen/public_mar_right_10dp"
+        android:layout_marginTop="@dimen/public_mar_top_10dp"
+        app:layout_constraintLeft_toRightOf="@id/img"
+        app:layout_constraintTop_toBottomOf="@id/classic_sheet_title"
+        app:layout_constraintRight_toRightOf="parent"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@color/public_white_transparency_500"
+        android:textSize="@dimen/public_font_11sp"
+        android:text="@string/music_classic_sheet_des"/>
+
+
+</android.support.constraint.ConstraintLayout>

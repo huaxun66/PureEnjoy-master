@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -16,16 +17,9 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
 import com.watson.pureenjoy.music.di.component.DaggerMusicPersonalityRecommendComponent;
-import com.watson.pureenjoy.music.http.entity.RecommendItem;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendAlbumInfo;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendListInfo;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendRadioInfo;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendResult;
 import com.watson.pureenjoy.music.mvp.contract.MusicPersonalityRecommendContract;
-import com.watson.pureenjoy.music.mvp.presentert.MusicPersonalityRecommendPresenter;
+import com.watson.pureenjoy.music.mvp.presenter.MusicPersonalityRecommendPresenter;
 import com.watson.pureenjoy.music.mvp.ui.adapter.MusicRecommendAdapter;
-
-import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -63,19 +57,6 @@ public class MusicPersonalityRecommendFragment extends MusicBaseFragment<MusicPe
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-        mGridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                int type = mAdapter.getItemViewType(position);
-                switch (type) {
-                    case RecommendItem.TYPE_BANNER: //Banner
-                    case RecommendItem.TYPE_HEADER: //标题
-                        return 3;
-                    default:
-                        return 1;
-                }
-            }
-        });
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         initListener();
@@ -88,16 +69,23 @@ public class MusicPersonalityRecommendFragment extends MusicBaseFragment<MusicPe
             mPresenter.requestRecommendResponse(getContext());
         });
         mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            switch (view.getId()) {
-                case R.id.iv_fm:
-                    break;
-                case R.id.tv_recommend:
-                    break;
-                case R.id.iv_songSheet:
+            if (view.getId() == R.id.iv_fm) {
+
+            } else if (view.getId() == R.id.tv_recommend) {
+
+            } else if (view.getId() == R.id.iv_songSheet) {
+                ARouter.getInstance().build(RouterHub.MUSIC_SONG_SHEET_ACTIVITY).navigation(getContext());
+            } else if (view.getId() == R.id.iv_rank) {
+
+            } else if (view.getId() == R.id.tv_title) {
+                String title = ((TextView)view).getText().toString();
+                if (title.equals(getString(R.string.music_recommend_list))) {
                     ARouter.getInstance().build(RouterHub.MUSIC_SONG_SHEET_ACTIVITY).navigation(getContext());
-                    break;
-                case R.id.iv_rank:
-                    break;
+                } else if (title.equals(getString(R.string.music_recommend_album))) {
+
+                } else if (title.equals(getString(R.string.music_recommend_radio))) {
+
+                }
             }
         });
     }
@@ -108,37 +96,11 @@ public class MusicPersonalityRecommendFragment extends MusicBaseFragment<MusicPe
     }
 
     @Override
-    public void setRecommendResult(RecommendResult recommendResult) {
+    public void getRecommendResponseFinish() {
         if (isRefresh) {
             mSmartRefreshLayout.finishRefresh(true);
             isRefresh = false;
         }
-        setRecommendData(recommendResult);
     }
 
-    private void setRecommendData(RecommendResult recommendResult) {
-        ArrayList<RecommendItem> list = new ArrayList<>();
-        if (recommendResult.getRecommendFocus().isSuccess()) {
-            list.add(new RecommendItem(recommendResult.getRecommendFocus()));
-        }
-        if (recommendResult.getRecommendList().isSuccess()) {
-            list.add(new RecommendItem(getString(R.string.music_recommend_list)));
-            for(RecommendListInfo info : recommendResult.getRecommendList().getResult()) {
-                list.add(new RecommendItem(info));
-            }
-        }
-        if (recommendResult.getRecommendAlbum().isSuccess()) {
-            list.add(new RecommendItem(getString(R.string.music_recommend_album)));
-            for(RecommendAlbumInfo info : recommendResult.getRecommendAlbum().getResult()) {
-                list.add(new RecommendItem(info));
-            }
-        }
-        if (recommendResult.getRecommendRadio().isSuccess()) {
-            list.add(new RecommendItem(getString(R.string.music_recommend_radio)));
-            for(RecommendRadioInfo info : recommendResult.getRecommendRadio().getResult()) {
-                list.add(new RecommendItem(info));
-            }
-        }
-        mAdapter.setNewData(list);
-    }
 }

@@ -12,7 +12,8 @@
         app:isShowBottomLine="false"
         app:leftImage="@drawable/public_nav_back_white"
         app:title="@string/music_song_sheet"
-        android:background="@color/music_theme"/>
+        app:titleColor="@color/public_white"
+        app:backgroundColor="@color/music_theme"/>
 
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout

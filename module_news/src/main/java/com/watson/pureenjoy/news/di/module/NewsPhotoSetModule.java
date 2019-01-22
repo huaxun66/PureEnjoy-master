@@ -35,8 +35,8 @@ public class NewsPhotoSetModule {
 
     @ActivityScope
     @Provides
-    public NewsPhotoSetAdapter provideNewsPhotoSetAdapter(IRepositoryManager iRepositoryManager) {
-        return new NewsPhotoSetAdapter(iRepositoryManager.getContext());
+    public NewsPhotoSetAdapter provideNewsPhotoSetAdapter(NewsPhotoSetContract.View view) {
+        return new NewsPhotoSetAdapter(view.getContext());
     }
 
     @ActivityScope

@@ -236,19 +236,6 @@ public class NewsDetailActivity extends NewsBaseActivity<NewsDetailPresenter> im
         super.onDestroy();
     }
 
-
-    @Override
-    public void showMessage(@NonNull String message) {
-    }
-
-    @Override
-    public void showLoading() {
-    }
-
-    @Override
-    public void hideLoading() {
-    }
-
     @Override
     public void setNewsDetail(NewsDetail newsDetail) {
 

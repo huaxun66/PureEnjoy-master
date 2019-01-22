@@ -9,6 +9,7 @@
     <dimen name="public_font_13sp">13sp</dimen>
     <dimen name="public_font_14sp">14sp</dimen>
     <dimen name="public_font_16sp">16sp</dimen>
+    <dimen name="public_font_17sp">17sp</dimen>
     <dimen name="public_font_18sp">18sp</dimen>
     <dimen name="public_font_20sp">20sp</dimen>
     <dimen name="public_font_24sp">24sp</dimen>
@@ -42,16 +43,19 @@
     <dimen name="public_height_75dp">75dp</dimen>
     <dimen name="public_height_80dp">80dp</dimen>
     <dimen name="public_height_90dp">90dp</dimen>
+    <dimen name="public_height_100dp">100dp</dimen>
     <dimen name="public_height_101_5dp">101.5dp</dimen>
     <dimen name="public_height_120dp">120dp</dimen>
     <dimen name="public_height_150dp">150dp</dimen>
     <dimen name="public_height_174dp">174dp</dimen>
+    <dimen name="public_height_180dp">180dp</dimen>
     <dimen name="public_height_200dp">200dp</dimen>
     <dimen name="public_height_280dp">280dp</dimen>
 
 
     //宽
     <dimen name="public_width_0dp">0dp</dimen>
+    <dimen name="public_width_0_5dp">0.5dp</dimen>
     <dimen name="public_width_12dp">12dp</dimen>
     <dimen name="public_width_15dp">15dp</dimen>
     <dimen name="public_width_16dp">16dp</dimen>
@@ -108,6 +112,7 @@
 
     //paddingBottom
     <dimen name="public_pad_bottom_3dp">3dp</dimen>
+    <dimen name="public_pad_bottom_5dp">5dp</dimen>
     <dimen name="public_pad_bottom_6dp">6dp</dimen>
     <dimen name="public_pad_bottom_10dp">10dp</dimen>
     <dimen name="public_pad_bottom_15dp">15dp</dimen>
@@ -155,6 +160,7 @@
     <dimen name="public_mar_bottom_3dp">3dp</dimen>
     <dimen name="public_mar_bottom_4dp">4dp</dimen>
     <dimen name="public_mar_bottom_5dp">5dp</dimen>
+    <dimen name="public_mar_bottom_8dp">8dp</dimen>
     <dimen name="public_mar_bottom_10dp">10dp</dimen>
     <dimen name="public_mar_bottom_15dp">15dp</dimen>
     <dimen name="public_mar_bottom_18dp">18dp</dimen>

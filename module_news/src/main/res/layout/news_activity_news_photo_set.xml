@@ -19,7 +19,7 @@
         android:layout_marginTop="@dimen/public_mar_top_15dp"
         android:background="@null"
         android:scaleType="centerInside"
-        android:src="@drawable/public_ic_arrow_back_white_24dp" />
+        android:src="@drawable/public_nav_back_white" />
 
     <TextView
         android:id="@+id/tv_index"

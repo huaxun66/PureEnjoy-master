@@ -52,10 +52,14 @@ public class TopBar extends RelativeLayout {
     private String mLeftText;
     //右侧文字
     private String mRightText;
+    //标题文字颜色
+    private int mTitleColor = -1; //颜色没有负值，初始化设置为-1，使用默认颜色
     //左侧文字颜色
     private int mLeftTextColor = -1; //颜色没有负值，初始化设置为-1，使用默认颜色
     //右侧文字颜色
     private int mRightTextColor = -1; //颜色没有负值，初始化设置为-1，使用默认颜色
+    //背景颜色
+    private int mBackgroundColor = -1; //颜色没有负值，初始化设置为-1，使用默认颜色
     //左侧图标资源
     private Drawable mLeftImage;
     //左侧第二图标资源
@@ -109,6 +113,8 @@ public class TopBar extends RelativeLayout {
             int attr = a.getIndex(i);
             if (attr == R.styleable.TopBar_title) {
                 mTitle = a.getString(attr);
+            } else if (attr == R.styleable.TopBar_titleColor) {
+                mTitleColor = a.getColor(attr, ActivityCompat.getColor(mContext, R.color.public_custom_color_text_main));
             } else if (attr == R.styleable.TopBar_leftText) {
                 mLeftText = a.getString(attr);
             }else if (attr == R.styleable.TopBar_rightText) {
@@ -139,6 +145,8 @@ public class TopBar extends RelativeLayout {
                 isShowBottomLine = a.getBoolean(attr, true);
             } else if (attr == R.styleable.TopBar_isTitleBold) {
                 isTitleBold = a.getBoolean(attr, false);
+            } else if (attr == R.styleable.TopBar_backgroundColor) {
+                mBackgroundColor = a.getColor(attr, ActivityCompat.getColor(mContext, R.color.public_white));
             }
         }
         a.recycle();
@@ -172,6 +180,14 @@ public class TopBar extends RelativeLayout {
         }
         if (!StringUtil.isEmpty(mRightText)) {
             setRightText(mRightText);
+        }
+
+        if (mBackgroundColor != -1) {
+            setBackgroundColor(mBackgroundColor);
+        }
+
+        if (mTitleColor != -1) {
+            setTitleColor(mTitleColor);
         }
 
         if (mLeftTextColor != -1) {
@@ -212,6 +228,22 @@ public class TopBar extends RelativeLayout {
     }
 
     /**
+     * ----------------设置背景--------------------
+     */
+
+    public void setBackgroundColor(int color) {
+        menu.setBackgroundColor(color);
+        ivLeft.setBackground(null);
+        ivLeftSecond.setBackground(null);
+        tvLeft.setBackground(null);
+        ivRight.setBackground(null);
+        ivRightSecond.setBackground(null);
+        ivRightThird.setBackground(null);
+        tvRight.setBackground(null);
+    }
+
+
+    /**
      * ----------------设置标题--------------------
      */
     public void setTitleText(String title) {
@@ -221,6 +253,10 @@ public class TopBar extends RelativeLayout {
 
     public void setTitleTextSize(float size) {
         tvTitle.setTextSize(size);
+    }
+
+    public void setTitleColor(int color) {
+        tvTitle.setTextColor(color);
     }
 
     /**

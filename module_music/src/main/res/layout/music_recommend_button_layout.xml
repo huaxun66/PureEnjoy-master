@@ -64,7 +64,7 @@
             android:id="@+id/iv_songSheet"
             android:layout_width="@dimen/public_width_45dp"
             android:layout_height="@dimen/public_height_45dp"
-            android:src="@drawable/music_icon_play"
+            android:src="@drawable/music_sheet_button"
             android:layout_centerHorizontal="true"/>
 
         <TextView

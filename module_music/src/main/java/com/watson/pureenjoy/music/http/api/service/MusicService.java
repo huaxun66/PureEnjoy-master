@@ -9,7 +9,6 @@ import com.watson.pureenjoy.music.http.entity.sheet.SheetResponse;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
-import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 
@@ -21,9 +20,12 @@ public interface MusicService {
     @GET
     Observable<RecommendResponse> getRecommendResponse(@Url String url);
 
-    @Headers({DOMAIN_NAME_HEADER + Api.MUSIC_DOMAIN, MusicConstants.HEADER_AGENT})
-    @GET
-    Observable<SheetResponse> getSongSheetList(@Query("method") String method,
+    @Headers({DOMAIN_NAME_HEADER + Api.MUSIC_DOMAIN_NAME, MusicConstants.HEADER_AGENT})
+    @GET("restserver/ting")
+    Observable<SheetResponse> getSongSheetResponse(@Query("from") String from,
+                                               @Query("version") String version,
+                                               @Query("format") String format,
+                                               @Query("method") String method,
                                                @Query("page_size") int page_size,
                                                @Query("page_no") int page_no);
 

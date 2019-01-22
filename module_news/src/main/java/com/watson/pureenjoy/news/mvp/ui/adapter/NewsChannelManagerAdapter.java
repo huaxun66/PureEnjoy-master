@@ -13,14 +13,15 @@ import com.watson.pureenjoy.news.http.entity.ChannelItem;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import static com.watson.pureenjoy.news.app.NewsConstants.RECOMMEND_TYPE_ID;
 
 public class NewsChannelManagerAdapter extends BaseMultiItemQuickAdapter<ChannelItem, BaseViewHolder> {
-    private ArrayList<ChannelItem> datas;
+    private List<ChannelItem> datas;
     private boolean isEdit;
 
-    public NewsChannelManagerAdapter(ArrayList<ChannelItem> datas, boolean isEdit) {
+    public NewsChannelManagerAdapter(List<ChannelItem> datas, boolean isEdit) {
         super(datas);
         this.datas = datas;
         this.isEdit = isEdit;

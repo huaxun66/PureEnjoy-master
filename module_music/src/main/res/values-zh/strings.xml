@@ -13,4 +13,13 @@
     <string name="music_recommend_album">最新专辑</string>
     <string name="music_recommend_radio">主播电台</string>
 
+    <string name="music_classic_sheet">精品歌单</string>
+    <string name="music_classic_sheet_title">极简主义 | 听见。即诗。</string>
+    <string name="music_classic_sheet_des">仅需要几段简约的音符起伏，就能更新你的听觉体验。</string>
+
+    <string name="music_all_sheet">全部歌单</string>
+    <string name="music_sheet_type_chinese">华语</string>
+    <string name="music_sheet_type_rock">摇滚</string>
+    <string name="music_sheet_type_ballad">民谣</string>
+
 </resources>

@@ -2,15 +2,15 @@
 <resources>
     <color name="public_colorPrimary">@color/public_white</color>
     <color name="public_colorPrimaryDark">@color/public_black_transparency_600</color>
-    <color name="public_colorAccent">@color/public_orange_red_500</color>
+    <color name="public_colorAccent">#D33930</color>
 
     <!-- app -->
     <color name="public_custom_color_app_bg">#F8F8F8</color>
     <color name="public_custom_color_image_bg">@color/public_grey_300</color>
     <color name="public_custom_color_app_title_bg">#FFFFFF</color>
     <color name="public_custom_color_app_content_bg">#FFFFFF</color>
-    <color name="public_custom_color_text_main">@color/public_black</color>
-    <color name="public_custom_color_text_sub">@color/public_grey_500</color>
+    <color name="public_custom_color_text_main">#313B40</color>
+    <color name="public_custom_color_text_sub">#7C868D</color>
     <color name="public_custom_color_app_content_div">@color/public_grey_500</color>
 
     <color name="public_tab_background_color">#90FFFFFF</color>

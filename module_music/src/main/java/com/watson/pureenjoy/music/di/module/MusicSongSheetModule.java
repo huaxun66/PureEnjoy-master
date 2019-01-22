@@ -17,18 +17,19 @@ package com.watson.pureenjoy.music.di.module;
 
 import android.support.v7.widget.GridLayoutManager;
 
-import com.jess.arms.di.scope.FragmentScope;
+import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendItem;
-import com.watson.pureenjoy.music.mvp.contract.MusicPersonalityRecommendContract;
-import com.watson.pureenjoy.music.mvp.model.MusicPersonalityRecommendModel;
-import com.watson.pureenjoy.music.mvp.ui.adapter.MusicRecommendAdapter;
+import com.watson.pureenjoy.music.http.entity.sheet.SheetItem;
+import com.watson.pureenjoy.music.mvp.contract.MusicSongSheetContract;
+import com.watson.pureenjoy.music.mvp.model.MusicSongSheetModel;
+import com.watson.pureenjoy.music.mvp.ui.adapter.MusicSongSheetAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import dagger.Module;
 import dagger.Provides;
+import me.jessyan.armscomponent.commonres.view.CustomLoadingMoreView;
 
 /**
  * ================================================
@@ -37,44 +38,49 @@ import dagger.Provides;
  * ================================================
  */
 @Module
-public class MusicPersonalityRecommendModule {
+public class MusicSongSheetModule {
 
-    @FragmentScope
+    @ActivityScope
     @Provides
-    public MusicPersonalityRecommendContract.Model provideMusicPersonalityRecommendModel(IRepositoryManager iRepositoryManager) {
-        return new MusicPersonalityRecommendModel(iRepositoryManager);
+    public MusicSongSheetContract.Model provideMusicSongSheetModel(IRepositoryManager iRepositoryManager) {
+        return new MusicSongSheetModel(iRepositoryManager);
     }
 
-    @FragmentScope
+    @ActivityScope
     @Provides
-    public GridLayoutManager provideLayoutManager(MusicPersonalityRecommendContract.View view, MusicRecommendAdapter mAdapter) {
-        GridLayoutManager mGridLayoutManager = new GridLayoutManager(view.getContext(), 3);
+    public GridLayoutManager provideLayoutManager(MusicSongSheetContract.View view, MusicSongSheetAdapter mAdapter) {
+        GridLayoutManager mGridLayoutManager =  new GridLayoutManager(view.getContext(), 2);
         mGridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
                 int type = mAdapter.getItemViewType(position);
                 switch (type) {
-                    case RecommendItem.TYPE_BANNER: //Banner
-                    case RecommendItem.TYPE_HEADER: //标题
-                        return 3;
-                    default:
+                    case SheetItem.TYPE_SHEET_ITEM:
                         return 1;
+                    default:
+                        return 2;
                 }
             }
         });
         return mGridLayoutManager;
     }
 
-    @FragmentScope
+    @ActivityScope
     @Provides
-    public List<RecommendItem> provideRecommendList() {
+    public List<SheetItem> provideSheetList() {
         return new ArrayList<>();
     }
 
-    @FragmentScope
+    @ActivityScope
     @Provides
-    public MusicRecommendAdapter provideNewsListAdapter(MusicPersonalityRecommendContract.View view, List<RecommendItem> list) {
-        return new MusicRecommendAdapter(view.getContext(), list);
+    public MusicSongSheetAdapter provideMusicSongSheetAdapter(MusicSongSheetContract.View view, List<SheetItem> list) {
+        return new MusicSongSheetAdapter(view.getContext(), list);
+    }
+
+    @ActivityScope
+    @Provides
+    public CustomLoadingMoreView provideLoadingMoreView() {
+        return new CustomLoadingMoreView();
     }
 
 }

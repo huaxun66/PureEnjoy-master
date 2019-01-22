@@ -20,6 +20,7 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.watson.pureenjoy.news.http.entity.ChannelItem;
 import com.watson.pureenjoy.news.mvp.contract.NewsChannelManagerContract;
+import com.watson.pureenjoy.news.mvp.ui.adapter.NewsChannelManagerAdapter;
 
 import java.util.List;
 
@@ -31,10 +32,17 @@ import me.jessyan.rxerrorhandler.core.RxErrorHandler;
 import me.jessyan.rxerrorhandler.handler.ErrorHandleSubscriber;
 import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 
+import static com.watson.pureenjoy.news.app.NewsConstants.RECOMMEND_TYPE_ID;
+import static com.watson.pureenjoy.news.http.entity.ChannelItem.TYPE_TITLE;
+
 @ActivityScope
 public class NewsChannelManagerPresenter extends BasePresenter<NewsChannelManagerContract.Model, NewsChannelManagerContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
+    @Inject
+    List<ChannelItem> mDatas;
+    @Inject
+    NewsChannelManagerAdapter mAdapter;
 
     @Inject
     public NewsChannelManagerPresenter(NewsChannelManagerContract.Model model, NewsChannelManagerContract.View rootView) {
@@ -53,10 +61,21 @@ public class NewsChannelManagerPresenter extends BasePresenter<NewsChannelManage
                 .subscribe(new ErrorHandleSubscriber<List<ChannelItem>>(mErrorHandler) {
                     @Override
                     public void onNext(List<ChannelItem> allChannels) {
+                        mDatas.clear();
+                        mDatas.addAll(selectedChannels);
+                        mDatas.add(generateRecommendTitleItem());
                         allChannels.removeAll(selectedChannels);
-                        mRootView.setRecommendChannels(allChannels);
+                        mDatas.addAll(allChannels);
+                        mAdapter.setNewData(mDatas);
                     }
                 });
+    }
+
+    private ChannelItem generateRecommendTitleItem() {
+        ChannelItem titleItem = new ChannelItem();
+        titleItem.setType(TYPE_TITLE);
+        titleItem.setTypeId(RECOMMEND_TYPE_ID);
+        return titleItem;
     }
 
     public void updateSelectedChannels(List<ChannelItem> selectedChannels) {
@@ -67,5 +86,7 @@ public class NewsChannelManagerPresenter extends BasePresenter<NewsChannelManage
     public void onDestroy() {
         super.onDestroy();
         this.mErrorHandler = null;
+        this.mAdapter = null;
+        this.mDatas = null;
     }
 }

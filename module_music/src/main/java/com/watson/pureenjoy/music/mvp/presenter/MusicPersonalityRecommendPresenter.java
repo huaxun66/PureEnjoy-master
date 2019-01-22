@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.watson.pureenjoy.music.mvp.presentert;
+package com.watson.pureenjoy.music.mvp.presenter;
 
 import android.content.Context;
 
@@ -22,8 +22,16 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.watson.pureenjoy.music.R;
+import com.watson.pureenjoy.music.http.entity.recommend.RecommendAlbumInfo;
+import com.watson.pureenjoy.music.http.entity.recommend.RecommendItem;
+import com.watson.pureenjoy.music.http.entity.recommend.RecommendListInfo;
+import com.watson.pureenjoy.music.http.entity.recommend.RecommendRadioInfo;
 import com.watson.pureenjoy.music.http.entity.recommend.RecommendResponse;
+import com.watson.pureenjoy.music.http.entity.recommend.RecommendResult;
 import com.watson.pureenjoy.music.mvp.contract.MusicPersonalityRecommendContract;
+import com.watson.pureenjoy.music.mvp.ui.adapter.MusicRecommendAdapter;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -38,6 +46,10 @@ import me.jessyan.rxerrorhandler.handler.RetryWithDelay;
 public class MusicPersonalityRecommendPresenter extends BasePresenter<MusicPersonalityRecommendContract.Model, MusicPersonalityRecommendContract.View> {
     @Inject
     RxErrorHandler mErrorHandler;
+    @Inject
+    MusicRecommendAdapter mAdapter;
+    @Inject
+    List<RecommendItem> allData;
 
     @Inject
     public MusicPersonalityRecommendPresenter(MusicPersonalityRecommendContract.Model model, MusicPersonalityRecommendContract.View rootView) {
@@ -56,8 +68,9 @@ public class MusicPersonalityRecommendPresenter extends BasePresenter<MusicPerso
                 .subscribe(new ErrorHandleSubscriber<RecommendResponse>(mErrorHandler) {
                     @Override
                     public void onNext(RecommendResponse response) {
+                        mRootView.getRecommendResponseFinish();
                         if (response.isSuccess()) {
-                            mRootView.setRecommendResult(response.getResult());
+                            setRecommendData(context, response.getResult());
                         } else {
                             mRootView.showMessage(ArmsUtils.getString(context, R.string.public_server_error));
                         }
@@ -65,9 +78,38 @@ public class MusicPersonalityRecommendPresenter extends BasePresenter<MusicPerso
                 });
     }
 
+
+    private void setRecommendData(Context context, RecommendResult recommendResult) {
+        allData.clear();
+        if (recommendResult.getRecommendFocus().isSuccess()) {
+            allData.add(new RecommendItem(recommendResult.getRecommendFocus()));
+        }
+        if (recommendResult.getRecommendList().isSuccess()) {
+            allData.add(new RecommendItem(context.getString(R.string.music_recommend_list)));
+            for(RecommendListInfo info : recommendResult.getRecommendList().getResult()) {
+                allData.add(new RecommendItem(info));
+            }
+        }
+        if (recommendResult.getRecommendAlbum().isSuccess()) {
+            allData.add(new RecommendItem(context.getString(R.string.music_recommend_album)));
+            for(RecommendAlbumInfo info : recommendResult.getRecommendAlbum().getResult()) {
+                allData.add(new RecommendItem(info));
+            }
+        }
+        if (recommendResult.getRecommendRadio().isSuccess()) {
+            allData.add(new RecommendItem(context.getString(R.string.music_recommend_radio)));
+            for(RecommendRadioInfo info : recommendResult.getRecommendRadio().getResult()) {
+                allData.add(new RecommendItem(info));
+            }
+        }
+        mAdapter.setNewData(allData);
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         this.mErrorHandler = null;
+        this.mAdapter = null;
+        this.allData = null;
     }
 }

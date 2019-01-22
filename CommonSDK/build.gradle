@@ -49,5 +49,6 @@ dependencies {
     api rootProject.ext.dependencies["fastjson"]
 
     //view
+    api rootProject.ext.dependencies["constraintLayout"]
     api rootProject.ext.dependencies["toasty"]
 }

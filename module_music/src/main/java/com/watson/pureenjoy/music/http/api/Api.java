@@ -26,7 +26,7 @@ package com.watson.pureenjoy.music.http.api;
  */
 public interface Api {
     String MUSIC_DOMAIN_NAME = "music";
-    String MUSIC_DOMAIN = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.6.5.6&format=json";
+    String MUSIC_DOMAIN = "http://tingapi.ting.baidu.com/v1/";
     String MUSIC_RECOMMEND_URL = "http://tingapi.ting.baidu.com/v1/restserver/ting?from=android&version=5.8.1.0&channel=ppzs&operator=3&method=baidu.ting.plaza.index&cuid=89CF1E1A06826F9AB95A34DC0F6AAA14";
 
 }

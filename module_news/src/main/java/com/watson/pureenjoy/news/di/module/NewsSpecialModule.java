@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 import dagger.Module;
 import dagger.Provides;
+import me.jessyan.armscomponent.commonres.view.DividerItemDecoration;
 
 /**
  * ================================================
@@ -40,20 +41,26 @@ public class NewsSpecialModule {
 
     @ActivityScope
     @Provides
-    public RecyclerView.LayoutManager provideLayoutManager(IRepositoryManager iRepositoryManager) {
-        return new LinearLayoutManager(iRepositoryManager.getContext());
+    public RecyclerView.LayoutManager provideLayoutManager(NewsSpecialContract.View view) {
+        return new LinearLayoutManager(view.getContext());
     }
 
     @ActivityScope
     @Provides
-    public NewsSpecialAdapter provideNewsSpecialAdapter(IRepositoryManager iRepositoryManager) {
-        return new NewsSpecialAdapter(iRepositoryManager.getContext(), new ArrayList<>());
+    public NewsSpecialAdapter provideNewsSpecialAdapter(NewsSpecialContract.View view) {
+        return new NewsSpecialAdapter(view.getContext(), new ArrayList<>());
     }
 
     @ActivityScope
     @Provides
     public NewsSpecialContract.Model provideNewsSpecialModel(IRepositoryManager iRepositoryManager) {
         return new NewsSpecialModel(iRepositoryManager);
+    }
+
+    @ActivityScope
+    @Provides
+    public DividerItemDecoration provideItemDecoration(NewsSpecialContract.View view) {
+        return new DividerItemDecoration(view.getContext(), DividerItemDecoration.VERTICAL_LIST);
     }
 
 

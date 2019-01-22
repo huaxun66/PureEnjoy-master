@@ -19,11 +19,13 @@ import android.support.v7.widget.GridLayoutManager;
 
 import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
+import com.watson.pureenjoy.news.http.entity.ChannelItem;
 import com.watson.pureenjoy.news.mvp.contract.NewsChannelManagerContract;
 import com.watson.pureenjoy.news.mvp.model.NewsChannelManagerModel;
 import com.watson.pureenjoy.news.mvp.ui.adapter.NewsChannelManagerAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dagger.Module;
 import dagger.Provides;
@@ -39,14 +41,33 @@ public class NewsChannelManagerModule {
 
     @ActivityScope
     @Provides
-    public GridLayoutManager provideLayoutManager(IRepositoryManager iRepositoryManager) {
-        return new GridLayoutManager(iRepositoryManager.getContext(), 4);
+    public GridLayoutManager provideLayoutManager(NewsChannelManagerContract.View view, NewsChannelManagerAdapter mAdapter) {
+        GridLayoutManager mGridLayoutManager = new GridLayoutManager(view.getContext(), 4);
+        mGridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                int type = mAdapter.getItemViewType(position);
+                switch (type) {
+                    case ChannelItem.TYPE_TITLE: //标题
+                        return 4;
+                    default:
+                        return 1;
+                }
+            }
+        });
+        return mGridLayoutManager;
     }
 
     @ActivityScope
     @Provides
-    public NewsChannelManagerAdapter provideNewsChannelManagerAdapter() {
-        return new NewsChannelManagerAdapter(new ArrayList<>(),false);
+    public List<ChannelItem> provideAllChannelList() {
+        return new ArrayList<>();
+    }
+
+    @ActivityScope
+    @Provides
+    public NewsChannelManagerAdapter provideNewsChannelManagerAdapter(List<ChannelItem> list) {
+        return new NewsChannelManagerAdapter(list,false);
     }
 
     @ActivityScope

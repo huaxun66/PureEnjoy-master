@@ -39,6 +39,11 @@ public class MusicSongSheetModel extends BaseModel implements MusicSongSheetCont
     public Observable<SheetResponse> getSongSheetList(int pageNo, int pageSize) {
         return mRepositoryManager
                 .obtainRetrofitService(MusicService.class)
-                .getSongSheetList(MusicConstants.METHOD_SHEET, pageSize, pageNo);
+                .getSongSheetResponse("android",
+                        "5.6.5.6",
+                        "json",
+                        MusicConstants.METHOD_SHEET,
+                        pageSize,
+                        pageNo);
     }
 }

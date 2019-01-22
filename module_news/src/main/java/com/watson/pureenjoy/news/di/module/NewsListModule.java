@@ -30,6 +30,8 @@ import java.util.List;
 
 import dagger.Module;
 import dagger.Provides;
+import me.jessyan.armscomponent.commonres.view.CustomLoadingMoreView;
+import me.jessyan.armscomponent.commonres.view.DividerItemDecoration;
 
 /**
  * ================================================
@@ -43,14 +45,14 @@ public class NewsListModule {
 
     @FragmentScope
     @Provides
-    public RecyclerView.LayoutManager provideLayoutManager(IRepositoryManager iRepositoryManager) {
-         return new LinearLayoutManager(iRepositoryManager.getContext());
+    public RecyclerView.LayoutManager provideLayoutManager(NewsListContract.View view) {
+         return new LinearLayoutManager(view.getContext());
     }
 
     @FragmentScope
     @Provides
-    public NewsListAdapter provideNewsListAdapter(IRepositoryManager iRepositoryManager) {
-        return new NewsListAdapter(iRepositoryManager.getContext(), new ArrayList<>());
+    public NewsListAdapter provideNewsListAdapter(NewsListContract.View view, List<NewsItem> list) {
+        return new NewsListAdapter(view.getContext(), list);
     }
 
     @FragmentScope
@@ -63,6 +65,18 @@ public class NewsListModule {
     @FragmentScope
     public NewsListContract.Model provideNewsListModel(IRepositoryManager iRepositoryManager) {
         return new NewsListModel(iRepositoryManager);
+    }
+
+    @Provides
+    @FragmentScope
+    public DividerItemDecoration provideItemDecoration(NewsListContract.View view) {
+        return new DividerItemDecoration(view.getContext(), DividerItemDecoration.VERTICAL_LIST);
+    }
+
+    @Provides
+    @FragmentScope
+    public CustomLoadingMoreView provideLoadingMoreView() {
+        return new CustomLoadingMoreView();
     }
 
 }

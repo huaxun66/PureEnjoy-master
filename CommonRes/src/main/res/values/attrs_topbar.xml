@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="TopBar">
         <attr name="title" format="string" />
+        <attr name="titleColor" format="color" />
         <attr name="leftText" format="string" />
         <attr name="leftTextColor" format="color" />
         <attr name="leftImage" format="reference" />
@@ -17,6 +18,6 @@
         <attr name="isShowRightThirdImage" format="boolean" />
         <attr name="isTitleBold" format="boolean" />
         <attr name="isShowBottomLine" format="boolean" />
-        <attr name="backgroundImage" format="reference" />
+        <attr name="backgroundColor" format="color" />
     </declare-styleable>
 </resources>

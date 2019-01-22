@@ -1,5 +1,6 @@
 package com.watson.pureenjoy.news.mvp.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,7 +51,6 @@ import static com.watson.pureenjoy.news.app.NewsConstants.PHOTO_SET_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.POST_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.SPECIAL_ID;
 import static com.watson.pureenjoy.news.app.NewsConstants.URL;
-import static me.jessyan.armscomponent.commonsdk.utils.StatusBarUtil.DEFAULT_STATUS_BAR_ALPHA;
 
 @Route(path = RouterHub.NEWS_SPECIAL_ACTIVITY)
 public class NewsSpecialActivity extends NewsBaseActivity<NewsSpecialPresenter> implements NewsSpecialContract.View {
@@ -73,6 +74,8 @@ public class NewsSpecialActivity extends NewsBaseActivity<NewsSpecialPresenter> 
     RecyclerView.LayoutManager layoutManager;
     @Inject
     NewsSpecialAdapter adapter;
+    @Inject
+    DividerItemDecoration itemDecoration;
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
@@ -87,7 +90,7 @@ public class NewsSpecialActivity extends NewsBaseActivity<NewsSpecialPresenter> 
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {
-        StatusBarUtil.setTranslucentForImageViewInFragment(NewsSpecialActivity.this,0,null);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         return R.layout.news_activity_news_special;
     }
 
@@ -95,7 +98,7 @@ public class NewsSpecialActivity extends NewsBaseActivity<NewsSpecialPresenter> 
     public void initData(@Nullable Bundle savedInstanceState) {
         initListener();
         mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        mRecyclerView.addItemDecoration(itemDecoration);
         mRecyclerView.setAdapter(adapter);
         mPresenter.requestNewsSpecial(specialId);
     }
@@ -133,7 +136,7 @@ public class NewsSpecialActivity extends NewsBaseActivity<NewsSpecialPresenter> 
                 if (state == State.EXPAND) {//展开状态
                     toolBarTitle.setText("");
                     mBack.setImageDrawable(expandBack);
-                    StatusBarUtil.setTranslucentForCoordinatorLayout(NewsSpecialActivity.this, DEFAULT_STATUS_BAR_ALPHA);
+                    StatusBarUtil.setTranslucentForCoordinatorLayout(NewsSpecialActivity.this, 0);
                 } else if (state == State.COLLAPSED) {//折叠状态
                     toolBarTitle.setText(getString(R.string.news_special));
                     StatusBarUtil.setTransparent(NewsSpecialActivity.this);
@@ -164,6 +167,10 @@ public class NewsSpecialActivity extends NewsBaseActivity<NewsSpecialPresenter> 
         adapter.setNewData(specialList);
     }
 
+    @Override
+    public Context getContext() {
+        return this;
+    }
 
     private void updateTag(List<NewsSpecialItem> list) {
         if (list != null && list.size() > 0) {

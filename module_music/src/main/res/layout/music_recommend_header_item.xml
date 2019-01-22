@@ -13,7 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/public_mar_left_4dp"
         android:textSize="@dimen/public_font_14sp"
-        android:textColor="@color/public_black"
+        android:textColor="@color/public_custom_color_text_main"
         android:textStyle="bold"
         tools:text="@string/music_recommend_list" />
 
