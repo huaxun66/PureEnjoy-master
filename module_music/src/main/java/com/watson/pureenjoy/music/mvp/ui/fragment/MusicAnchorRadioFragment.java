@@ -23,7 +23,7 @@ public class MusicAnchorRadioFragment extends MusicBaseFragment {
 
     @Override
     public View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return LayoutInflater.from(getContext()).inflate(R.layout.music_anchor_radio_fragment, null);
+        return LayoutInflater.from(getContext()).inflate(R.layout.music_fragment_anchor_radio, null);
     }
 
     @Override

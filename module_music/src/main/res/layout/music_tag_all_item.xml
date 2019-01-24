@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/public_height_40dp"
+    android:padding="@dimen/public_padding_5dp">
+
+    <TextView
+        android:id="@+id/tag_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textSize="@dimen/public_font_12sp"
+        android:textColor="@color/public_custom_color_text_main"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/music_all_sheet"
+        android:background="@drawable/music_sheet_tag_all_bg"/>
+
+</RelativeLayout>

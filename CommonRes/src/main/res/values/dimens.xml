@@ -45,8 +45,10 @@
     <dimen name="public_height_90dp">90dp</dimen>
     <dimen name="public_height_100dp">100dp</dimen>
     <dimen name="public_height_101_5dp">101.5dp</dimen>
+    <dimen name="public_height_110dp">110dp</dimen>
     <dimen name="public_height_120dp">120dp</dimen>
     <dimen name="public_height_150dp">150dp</dimen>
+    <dimen name="public_height_160dp">160dp</dimen>
     <dimen name="public_height_174dp">174dp</dimen>
     <dimen name="public_height_180dp">180dp</dimen>
     <dimen name="public_height_200dp">200dp</dimen>

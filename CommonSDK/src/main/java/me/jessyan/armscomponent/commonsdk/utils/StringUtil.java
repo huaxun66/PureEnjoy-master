@@ -18,6 +18,8 @@ package me.jessyan.armscomponent.commonsdk.utils;
 import android.content.Context;
 import android.text.TextUtils;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -87,6 +89,18 @@ public class StringUtil {
             return true;
         }
         return false;
+    }
+
+
+    public static String encode(String str) {
+        if (str == null) return "";
+
+        try {
+            return URLEncoder.encode(str, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        return str;
     }
 
 

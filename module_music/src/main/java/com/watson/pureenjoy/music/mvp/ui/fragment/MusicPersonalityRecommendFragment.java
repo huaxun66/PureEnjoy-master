@@ -52,7 +52,7 @@ public class MusicPersonalityRecommendFragment extends MusicBaseFragment<MusicPe
 
     @Override
     public View initView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return LayoutInflater.from(getContext()).inflate(R.layout.music_personality_recommend_fragment, null);
+        return LayoutInflater.from(getContext()).inflate(R.layout.music_fragment_personality_recommend, null);
     }
 
     @Override

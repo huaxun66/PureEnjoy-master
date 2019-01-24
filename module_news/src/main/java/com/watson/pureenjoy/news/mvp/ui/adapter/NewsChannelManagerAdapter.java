@@ -33,7 +33,7 @@ public class NewsChannelManagerAdapter extends BaseMultiItemQuickAdapter<Channel
     }
 
     private void addMultiItemType() {
-        addItemType(ChannelItem.TYPE_TITLE, R.layout.news_recommend_title);
+        addItemType(ChannelItem.TYPE_TITLE, R.layout.news_channel_title_item);
         addItemType(ChannelItem.TYPE_CONTENT, R.layout.news_channel_item);
     }
 

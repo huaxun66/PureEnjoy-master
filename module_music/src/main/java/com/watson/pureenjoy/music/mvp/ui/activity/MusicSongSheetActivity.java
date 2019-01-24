@@ -1,6 +1,8 @@
 package com.watson.pureenjoy.music.mvp.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,6 +17,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
+import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.di.component.DaggerMusicSongSheetComponent;
 import com.watson.pureenjoy.music.mvp.contract.MusicSongSheetContract;
 import com.watson.pureenjoy.music.mvp.presenter.MusicSongSheetPresenter;
@@ -26,6 +29,8 @@ import butterknife.BindView;
 import me.jessyan.armscomponent.commonres.view.CustomLoadingMoreView;
 import me.jessyan.armscomponent.commonres.view.TopBar;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
+
+import static com.watson.pureenjoy.music.app.MusicConstants.TAG_SELECTED;
 
 @Route(path = RouterHub.MUSIC_SONG_SHEET_ACTIVITY)
 public class MusicSongSheetActivity extends MusicBaseActivity<MusicSongSheetPresenter> implements MusicSongSheetContract.View,
@@ -46,6 +51,9 @@ public class MusicSongSheetActivity extends MusicBaseActivity<MusicSongSheetPres
 
     private boolean isRefresh;
     private int currentPageNo;
+    private String currentTag = MusicConstants.TAG_ALL; //默认全部
+
+    private final int REQUEST_CODE = 100;
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
@@ -64,7 +72,9 @@ public class MusicSongSheetActivity extends MusicBaseActivity<MusicSongSheetPres
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        mTopBar.setTitleColor(Color.WHITE);
         mAdapter.setLoadMoreView(mCustomLoadingMoreView);
+        mAdapter.setSelectedTag(currentTag);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
         initListener();
@@ -75,6 +85,18 @@ public class MusicSongSheetActivity extends MusicBaseActivity<MusicSongSheetPres
         mTopBar.setLeftImageClickListener(v -> finish());
         mSmartRefreshLayout.setOnRefreshListener(this);
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
+        mAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+            if (view.getId() == R.id.tag_rl) {
+                Intent intent = new Intent(getContext(), MusicSheetTagActivity.class);
+                intent.putExtra(TAG_SELECTED, currentTag);
+                startActivityForResult(intent, REQUEST_CODE);
+                overridePendingTransition(R.anim.public_translate_bottom_to_center, R.anim.public_translate_center_to_top);
+            }
+        });
+        mAdapter.setOnTagClickListener(tag -> {
+            currentTag = tag;
+            getData(0, true);
+        });
     }
 
     private void getData(int pageNo, boolean showLoading) {
@@ -82,7 +104,11 @@ public class MusicSongSheetActivity extends MusicBaseActivity<MusicSongSheetPres
             isRefresh = true;
             currentPageNo= 0;
         }
-        mPresenter.requestSongSheetList(this, pageNo, 10, showLoading);
+        if (currentTag.equals(MusicConstants.TAG_ALL)) {
+            mPresenter.requestSongSheetList(this, pageNo, 10, showLoading);
+        } else {
+            mPresenter.requestSongSheetListByTag(this, currentTag, pageNo, 10, showLoading);
+        }
     }
 
     @Override
@@ -114,5 +140,23 @@ public class MusicSongSheetActivity extends MusicBaseActivity<MusicSongSheetPres
     @Override
     public void onRefresh(RefreshLayout refreshlayout) {
         getData(0, false);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case REQUEST_CODE:
+                if (resultCode == RESULT_OK && data != null) {
+                    if (data.getStringExtra(TAG_SELECTED) !=  null) {
+                        currentTag = data.getStringExtra(TAG_SELECTED);
+                        mAdapter.setSelectedTag(currentTag);
+                        mAdapter.notifyItemChanged(1);
+                        getData(0, true);
+                    }
+                }
+                break;
+        }
     }
 }

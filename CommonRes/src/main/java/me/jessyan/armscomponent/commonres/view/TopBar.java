@@ -4,6 +4,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
@@ -113,11 +114,9 @@ public class TopBar extends RelativeLayout {
             int attr = a.getIndex(i);
             if (attr == R.styleable.TopBar_title) {
                 mTitle = a.getString(attr);
-            } else if (attr == R.styleable.TopBar_titleColor) {
-                mTitleColor = a.getColor(attr, ActivityCompat.getColor(mContext, R.color.public_custom_color_text_main));
             } else if (attr == R.styleable.TopBar_leftText) {
                 mLeftText = a.getString(attr);
-            }else if (attr == R.styleable.TopBar_rightText) {
+            } else if (attr == R.styleable.TopBar_rightText) {
                 mRightText = a.getString(attr);
             } else if (attr == R.styleable.TopBar_isShowLeftImage) {
                 isShowLeftImage = a.getBoolean(attr, false);
@@ -145,6 +144,8 @@ public class TopBar extends RelativeLayout {
                 isShowBottomLine = a.getBoolean(attr, true);
             } else if (attr == R.styleable.TopBar_isTitleBold) {
                 isTitleBold = a.getBoolean(attr, false);
+            } else if (attr == R.styleable.TopBar_titleColor) {
+                mTitleColor = a.getColor(attr, ActivityCompat.getColor(mContext, R.color.public_custom_color_text_main));
             } else if (attr == R.styleable.TopBar_backgroundColor) {
                 mBackgroundColor = a.getColor(attr, ActivityCompat.getColor(mContext, R.color.public_white));
             }

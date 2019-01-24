@@ -20,44 +20,28 @@ import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.http.api.service.MusicService;
-import com.watson.pureenjoy.music.http.entity.sheet.SheetResponse;
-import com.watson.pureenjoy.music.mvp.contract.MusicSongSheetContract;
+import com.watson.pureenjoy.music.http.entity.sheet.SheetTagResponse;
+import com.watson.pureenjoy.music.mvp.contract.MusicSheetTagContract;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import me.jessyan.armscomponent.commonsdk.utils.StringUtil;
 
 @ActivityScope
-public class MusicSongSheetModel extends BaseModel implements MusicSongSheetContract.Model {
+public class MusicSheetTagModel extends BaseModel implements MusicSheetTagContract.Model {
 
     @Inject
-    public MusicSongSheetModel(IRepositoryManager repositoryManager) {
+    public MusicSheetTagModel(IRepositoryManager repositoryManager) {
         super(repositoryManager);
     }
 
     @Override
-    public Observable<SheetResponse> getSongSheetList(int pageNo, int pageSize) {
+    public Observable<SheetTagResponse> getSheetTag() {
         return mRepositoryManager
                 .obtainRetrofitService(MusicService.class)
-                .getSongSheetResponse(MusicConstants.ANDROID,
+                .getSheetTagResponse(MusicConstants.ANDROID,
                         MusicConstants.VERSION,
                         MusicConstants.JSON,
-                        MusicConstants.METHOD_SHEET,
-                        pageSize,
-                        pageNo);
-    }
-
-    @Override
-    public Observable<SheetResponse> getSongSheetListByTag(String tag, int pageNo, int pageSize) {
-        return mRepositoryManager
-                .obtainRetrofitService(MusicService.class)
-                .getSongSheetResponseByTag(MusicConstants.ANDROID,
-                        MusicConstants.VERSION,
-                        MusicConstants.JSON,
-                        MusicConstants.METHOD_SHEET_SEARCH,
-                        pageSize,
-                        pageNo,
-                        StringUtil.encode(tag));
+                        MusicConstants.METHOD_SHEET_TAG);
     }
 }

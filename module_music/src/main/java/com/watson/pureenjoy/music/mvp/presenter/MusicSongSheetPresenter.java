@@ -78,6 +78,30 @@ public class MusicSongSheetPresenter extends BasePresenter<MusicSongSheetContrac
                 });
     }
 
+    public void requestSongSheetListByTag(Context context, String tag, int pageNo, int pageSize, boolean showLoading) {
+        mModel.getSongSheetListByTag(tag, pageNo, pageSize)
+                .subscribeOn(Schedulers.io())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .doOnSubscribe(disposable -> {
+                    if (showLoading) mRootView.showLoading();
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally(() -> mRootView.hideLoading())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<SheetResponse>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull SheetResponse response) {
+                        mRootView.getSongSheetListSuccess(response.getHavemore().equals("1"));
+                        if (response.isSuccess()) {
+                            setSheetData(pageNo, response.getContent());
+                        } else {
+                            mRootView.showMessage(ArmsUtils.getString(context, R.string.public_server_error));
+                        }
+                    }
+                });
+    }
+
 
     private void setSheetData(int pageNo, List<SheetInfo> content) {
         if (pageNo == 0) {

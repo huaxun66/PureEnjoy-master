@@ -13,7 +13,7 @@
         app:leftImage="@drawable/public_nav_back_white"
         app:title="@string/music_song_sheet"
         app:titleColor="@color/public_white"
-        app:backgroundColor="@color/music_theme"/>
+        app:backgroundColor="@color/music_theme" />
 
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
