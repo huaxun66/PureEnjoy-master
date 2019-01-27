@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/public_height_50dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_0_5dp"
+        android:layout_marginStart="@dimen/public_mar_left_40dp"
+        android:background="@color/public_custom_color_app_content_div"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/index"
+        android:layout_width="@dimen/public_width_15dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/public_mar_left_15dp"
+        android:gravity="center"
+        android:textColor="@color/public_custom_color_text_sub"
+        android:textSize="@dimen/public_font_13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="10" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/public_mar_left_15dp"
+        android:layout_marginTop="@dimen/public_mar_top_5dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/public_custom_color_text_main"
+        android:textSize="@dimen/public_font_14sp"
+        app:layout_constraintStart_toEndOf="@id/index"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="独角戏" />
+
+    <TextView
+        android:id="@+id/author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/public_mar_left_15dp"
+        android:layout_marginTop="@dimen/public_mar_top_5dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/public_custom_color_text_sub"
+        android:textSize="@dimen/public_font_11sp"
+        app:layout_constraintStart_toEndOf="@id/index"
+        app:layout_constraintTop_toBottomOf="@id/name"
+        tools:text="许茹芸" />
+
+
+    <ImageView
+        android:id="@+id/more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/public_mar_right_15dp"
+        android:src="@drawable/music_sheet_more"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/public_mar_right_15dp"
+        android:src="@drawable/music_sheet_play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/more"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

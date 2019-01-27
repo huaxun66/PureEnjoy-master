@@ -15,12 +15,21 @@
 
     <string name="music_classic_sheet">精品歌单</string>
     <string name="music_filter_sheet">筛选歌单</string>
-    <string name="music_classic_sheet_title">极简主义 | 听见。即诗。</string>
-    <string name="music_classic_sheet_des">仅需要几段简约的音符起伏，就能更新你的听觉体验。</string>
 
     <string name="music_all_sheet">全部歌单</string>
     <string name="music_sheet_type_chinese">华语</string>
     <string name="music_sheet_type_rock">摇滚</string>
     <string name="music_sheet_type_ballad">民谣</string>
 
+    <string name="music_comment">评论</string>
+    <string name="music_share">分享</string>
+    <string name="music_download">下载</string>
+    <string name="music_multiSelect">多选</string>
+
+    <string name="music_play_all">播放全部</string>
+    <string name="music_song_num">(共%1$d首)</string>
+    <string name="music_collection_num">收藏(%1$s)</string>
+    <string name="music_collection">收藏</string>
+
+    <string name="music_latest_update">最近更新</string>
 </resources>

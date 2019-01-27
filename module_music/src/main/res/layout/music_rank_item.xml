@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/public_height_120dp">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/public_width_120dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/public_mar_left_5dp"
+        android:layout_marginTop="@dimen/public_mar_top_2dp"
+        android:layout_marginBottom="@dimen/public_mar_bottom_2dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/public_mar_left_5dp"
+        android:layout_marginBottom="@dimen/public_mar_bottom_5dp"
+        android:textColor="@color/public_white"
+        android:textSize="@dimen/public_font_11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/img"
+        app:layout_constraintStart_toStartOf="@id/img"
+        tools:text="每天更新" />
+
+    <TextView
+        android:id="@+id/tv_no1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/public_mar_left_10dp"
+        android:layout_marginEnd="@dimen/public_mar_right_10dp"
+        android:layout_marginTop="@dimen/public_mar_top_25dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/public_custom_color_text_sub"
+        android:textSize="@dimen/public_font_12sp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toTopOf="@+id/tv_no2"
+        app:layout_constraintStart_toEndOf="@id/img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="1.追梦" />
+
+    <TextView
+        android:id="@+id/tv_no2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/public_mar_left_10dp"
+        android:layout_marginEnd="@dimen/public_mar_right_10dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/public_custom_color_text_sub"
+        android:textSize="@dimen/public_font_12sp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toTopOf="@+id/tv_no3"
+        app:layout_constraintStart_toEndOf="@id/img"
+        app:layout_constraintTop_toBottomOf="@id/tv_no1"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="2.怎么会爱上你" />
+
+    <TextView
+        android:id="@+id/tv_no3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/public_mar_left_10dp"
+        android:layout_marginEnd="@dimen/public_mar_right_10dp"
+        android:layout_marginBottom="@dimen/public_mar_bottom_25dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/public_custom_color_text_sub"
+        android:textSize="@dimen/public_font_12sp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img"
+        app:layout_constraintTop_toBottomOf="@id/tv_no2"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="3.游荡" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_0_5dp"
+        android:layout_marginStart="@dimen/public_mar_left_135dp"
+        android:background="@color/public_custom_color_app_content_div"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

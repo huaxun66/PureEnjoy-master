@@ -22,6 +22,7 @@ import com.jess.arms.mvp.BasePresenter;
 import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.watson.pureenjoy.music.R;
+import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetTagInfo;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetTagItem;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetTagResponse;
@@ -81,6 +82,8 @@ public class MusicSheetTagPresenter extends BasePresenter<MusicSheetTagContract.
     private void setSheetTagData(List<SheetTagInfo> content, String selectedTag) {
         allData.add(new SheetTagItem(SheetTagItem.TYPE_TAG_ALL));
         for(SheetTagInfo info : content) {
+            if (info.getTitle().equals(MusicConstants.TAG_CATEGORY_RECOMMEND))
+                continue;
             allData.add(new SheetTagItem(SheetTagItem.TYPE_TAG_SPLIT));
             allData.add(new SheetTagItem(info));
         }

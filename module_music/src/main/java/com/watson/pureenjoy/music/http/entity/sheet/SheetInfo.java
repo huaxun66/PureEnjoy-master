@@ -1,7 +1,10 @@
 package com.watson.pureenjoy.music.http.entity.sheet;
 
 
-public class SheetInfo {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class SheetInfo implements Parcelable {
 
     private String listid;
     private String listenum;
@@ -14,6 +17,7 @@ public class SheetInfo {
     private String width;
     private String height;
     private String[] songIds;
+    private String pic; //热门歌单使用
 
     public String getListid() {
         return listid;
@@ -98,4 +102,64 @@ public class SheetInfo {
     public String[] getSongIds() {
         return songIds;
     }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.listid);
+        dest.writeString(this.listenum);
+        dest.writeString(this.collectnum);
+        dest.writeString(this.title);
+        dest.writeString(this.pic_300);
+        dest.writeString(this.tag);
+        dest.writeString(this.desc);
+        dest.writeString(this.pic_w300);
+        dest.writeString(this.width);
+        dest.writeString(this.height);
+        dest.writeStringArray(this.songIds);
+        dest.writeString(this.pic);
+    }
+
+    public SheetInfo() {
+    }
+
+    protected SheetInfo(Parcel in) {
+        this.listid = in.readString();
+        this.listenum = in.readString();
+        this.collectnum = in.readString();
+        this.title = in.readString();
+        this.pic_300 = in.readString();
+        this.tag = in.readString();
+        this.desc = in.readString();
+        this.pic_w300 = in.readString();
+        this.width = in.readString();
+        this.height = in.readString();
+        this.songIds = in.createStringArray();
+        this.pic = in.readString();
+    }
+
+    public static final Creator<SheetInfo> CREATOR = new Creator<SheetInfo>() {
+        @Override
+        public SheetInfo createFromParcel(Parcel source) {
+            return new SheetInfo(source);
+        }
+
+        @Override
+        public SheetInfo[] newArray(int size) {
+            return new SheetInfo[size];
+        }
+    };
 }

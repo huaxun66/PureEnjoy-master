@@ -3,7 +3,11 @@ package com.watson.pureenjoy.music.http.api.service;
 
 import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.http.api.Api;
+import com.watson.pureenjoy.music.http.entity.rank.RankDetailResponse;
+import com.watson.pureenjoy.music.http.entity.rank.RankResponse;
 import com.watson.pureenjoy.music.http.entity.recommend.RecommendResponse;
+import com.watson.pureenjoy.music.http.entity.sheet.SheetDetailResponse;
+import com.watson.pureenjoy.music.http.entity.sheet.SheetHotResponse;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetResponse;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetTagResponse;
 
@@ -48,4 +52,40 @@ public interface MusicService {
                                                      @Query("version") String version,
                                                      @Query("format") String format,
                                                      @Query("method") String method);
+
+    @Headers({DOMAIN_NAME_HEADER + Api.MUSIC_DOMAIN_NAME, MusicConstants.HEADER_AGENT})
+    @GET("restserver/ting")
+    Observable<SheetHotResponse> getHotSheetResponse(@Query("from") String from,
+                                                     @Query("version") String version,
+                                                     @Query("format") String format,
+                                                     @Query("method") String method,
+                                                     @Query("num") int num);
+
+    @Headers({DOMAIN_NAME_HEADER + Api.MUSIC_DOMAIN_NAME, MusicConstants.HEADER_AGENT})
+    @GET("restserver/ting")
+    Observable<SheetDetailResponse> getSheetDetailResponse(@Query("from") String from,
+                                                           @Query("version") String version,
+                                                           @Query("format") String format,
+                                                           @Query("method") String method,
+                                                           @Query("listid") String listid);
+
+    @Headers({DOMAIN_NAME_HEADER + Api.MUSIC_DOMAIN_NAME, MusicConstants.HEADER_AGENT})
+    @GET("restserver/ting")
+    Observable<RankResponse> getMusicRank(@Query("from") String from,
+                                                    @Query("version") String version,
+                                                    @Query("format") String format,
+                                                    @Query("method") String method,
+                                                    @Query("kflag") int kflag);
+
+    @Headers({DOMAIN_NAME_HEADER + Api.MUSIC_DOMAIN_NAME, MusicConstants.HEADER_AGENT})
+    @GET("restserver/ting")
+    Observable<RankDetailResponse> getRankDetail(@Query("from") String from,
+                                                 @Query("version") String version,
+                                                 @Query("format") String format,
+                                                 @Query("method") String method,
+                                                 @Query("type") int type,
+                                                 @Query("offset") int offset,
+                                                 @Query("size") int size,
+                                                 @Query("fields") String fields);
+
 }

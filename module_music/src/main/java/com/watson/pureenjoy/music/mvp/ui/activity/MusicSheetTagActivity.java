@@ -69,7 +69,7 @@ public class MusicSheetTagActivity extends MusicBaseActivity<MusicSheetTagPresen
     }
 
     private void initListener() {
-        mTopBar.setLeftImageClickListener(v -> finish());
+        mTopBar.setLeftTextClickListener(v -> finishWithAnim());
         mAdapter.setOnTagClickListener(tag -> {
             if (!tag.equals(selectedTag)) {
                 Intent intent = new Intent();

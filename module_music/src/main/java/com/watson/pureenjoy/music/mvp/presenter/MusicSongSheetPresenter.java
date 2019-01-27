@@ -106,11 +106,11 @@ public class MusicSongSheetPresenter extends BasePresenter<MusicSongSheetContrac
     private void setSheetData(int pageNo, List<SheetInfo> content) {
         if (pageNo == 0) {
             allData.clear();
-            allData.add(new SheetItem(content.get(0).getPic_300()));
+            allData.add(new SheetItem(SheetItem.TYPE_HOT_BANNER, content.get(0)));
             allData.add(new SheetItem());
         }
         for(SheetInfo info : content) {
-            allData.add(new SheetItem(info));
+            allData.add(new SheetItem(SheetItem.TYPE_SHEET_ITEM, info));
         }
         mAdapter.setNewData(allData);
     }

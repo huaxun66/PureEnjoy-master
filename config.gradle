@@ -42,6 +42,7 @@ ext {
             "glide-compiler"           : "com.github.bumptech.glide:compiler:${version["glideSdkVersion"]}",
             "glide-loader-okhttp3"     : "com.github.bumptech.glide:okhttp3-integration:${version["glideSdkVersion"]}",
             "picasso"                  : "com.squareup.picasso:picasso:2.5.2",
+            "glide-transformation"     : "jp.wasabeef:glide-transformations:2.0.1",
 
             //view
             "constraintLayout"         : 'com.android.support.constraint:constraint-layout:1.0.2',

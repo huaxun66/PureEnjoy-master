@@ -1,87 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/public_height_150dp"
-    android:background="@drawable/music_hot_sheet_bg">
+    android:layout_height="@dimen/public_height_120dp">
 
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="@dimen/public_width_100dp"
-        android:layout_height="@dimen/public_height_100dp"
-        android:layout_marginLeft="@dimen/public_mar_left_15dp"
-        android:layout_marginTop="@dimen/public_mar_top_32dp"
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="@dimen/public_width_120dp"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/public_mar_top_5dp"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scaleType="fitXY"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <RelativeLayout
-        android:id="@+id/classic_header"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/public_height_20dp"
-        app:layout_constraintLeft_toRightOf="@id/img"
-        app:layout_constraintTop_toTopOf="@id/img"
-        android:layout_marginLeft="@dimen/public_mar_left_10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/classic_icon"
-            android:layout_width="@dimen/public_width_20dp"
-            android:layout_height="@dimen/public_height_20dp"
-            android:src="@drawable/music_classic_sheet"/>
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/public_nav_feedback"/>
 
-        <TextView
-            android:id="@+id/classic_sheet"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:includeFontPadding="false"
-            android:layout_marginLeft="@dimen/public_mar_left_5dp"
-            android:layout_toRightOf="@+id/classic_icon"
-            android:layout_centerVertical="true"
-            android:textColor="@color/public_white"
-            android:textSize="@dimen/public_font_17sp"
-            android:text="@string/music_classic_sheet"/>
+            <TextView
+                android:id="@+id/count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="@dimen/public_mar_right_5dp"
+                android:layout_marginTop="@dimen/public_mar_top_5dp"
+                android:drawableLeft="@drawable/music_icon_earphone"
+                android:drawablePadding="@dimen/public_padding_2dp"
+                android:textColor="@color/public_white"
+                android:textSize="@dimen/public_font_11sp"
+                tools:text="100万" />
 
-        <ImageView
-            android:layout_width="@dimen/public_width_15dp"
-            android:layout_height="@dimen/public_height_15dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/public_mar_left_2dp"
-            android:layout_toRightOf="@+id/classic_sheet"
-            android:src="@drawable/public_nav_back_right_white"/>
+            <com.flyco.labelview.LabelView
+                android:id="@+id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:lv_background_color="@color/music_theme"
+                app:lv_fill_triangle="true"
+                app:lv_text="hot"
+                app:lv_text_size="@dimen/public_font_10sp" />
 
-    </RelativeLayout>
+        </RelativeLayout>
 
+    </android.support.v7.widget.CardView>
 
     <TextView
-        android:id="@+id/classic_sheet_title"
+        android:id="@+id/title"
         android:layout_width="@dimen/public_width_0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/public_mar_left_10dp"
-        android:layout_marginRight="@dimen/public_mar_right_10dp"
-        android:layout_marginTop="@dimen/public_mar_top_15dp"
-        app:layout_constraintLeft_toRightOf="@id/img"
-        app:layout_constraintTop_toBottomOf="@id/classic_header"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textColor="@color/public_white"
+        android:layout_marginEnd="@dimen/public_mar_right_10dp"
+        android:layout_marginStart="@dimen/public_mar_left_10dp"
+        android:layout_marginTop="@dimen/public_mar_top_20dp"
+        android:textColor="@color/public_custom_color_text_main"
         android:textSize="@dimen/public_font_14sp"
-        android:text="@string/music_classic_sheet_title"/>
-
-
-    <TextView
-        android:id="@+id/classic_sheet_des"
-        android:layout_width="@dimen/public_width_0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/public_mar_left_10dp"
-        android:layout_marginRight="@dimen/public_mar_right_10dp"
-        android:layout_marginTop="@dimen/public_mar_top_10dp"
-        app:layout_constraintLeft_toRightOf="@id/img"
-        app:layout_constraintTop_toBottomOf="@id/classic_sheet_title"
-        app:layout_constraintRight_toRightOf="parent"
         android:maxLines="2"
         android:ellipsize="end"
-        android:textColor="@color/public_white_transparency_500"
-        android:textSize="@dimen/public_font_11sp"
-        android:text="@string/music_classic_sheet_des"/>
+        app:layout_constraintLeft_toRightOf="@id/cardView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cardView"
+        tools:text="123456" />
+
+
+    <ImageView
+        android:id="@+id/classic_icon"
+        android:layout_width="@dimen/public_width_15dp"
+        android:layout_height="@dimen/public_height_15dp"
+        android:layout_marginStart="@dimen/public_mar_left_10dp"
+        android:layout_marginTop="@dimen/public_mar_top_10dp"
+        android:src="@drawable/music_classic_sheet"
+        app:layout_constraintLeft_toRightOf="@id/cardView"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+
+    <me.jessyan.armscomponent.commonres.view.flowlayout.TagFlowLayout
+        android:id="@+id/tfl_tag"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/public_mar_right_10dp"
+        android:layout_marginStart="@dimen/public_mar_left_10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/cardView"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/classic_icon"
+        app:max_select="1" />
 
 
 </android.support.constraint.ConstraintLayout>

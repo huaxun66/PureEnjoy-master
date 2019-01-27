@@ -17,6 +17,9 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
 import com.watson.pureenjoy.music.di.component.DaggerMusicPersonalityRecommendComponent;
+import com.watson.pureenjoy.music.http.entity.recommend.RecommendItem;
+import com.watson.pureenjoy.music.http.entity.recommend.RecommendListInfo;
+import com.watson.pureenjoy.music.http.entity.sheet.SheetInfo;
 import com.watson.pureenjoy.music.mvp.contract.MusicPersonalityRecommendContract;
 import com.watson.pureenjoy.music.mvp.presenter.MusicPersonalityRecommendPresenter;
 import com.watson.pureenjoy.music.mvp.ui.adapter.MusicRecommendAdapter;
@@ -25,6 +28,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
+
+import static com.watson.pureenjoy.music.app.MusicConstants.SHEET_INFO;
 
 @Route(path = RouterHub.MUSIC_PERSONALITY_RECOMMEND_FRAGMENT)
 public class MusicPersonalityRecommendFragment extends MusicBaseFragment<MusicPersonalityRecommendPresenter> implements MusicPersonalityRecommendContract.View {
@@ -76,7 +81,7 @@ public class MusicPersonalityRecommendFragment extends MusicBaseFragment<MusicPe
             } else if (view.getId() == R.id.iv_songSheet) {
                 ARouter.getInstance().build(RouterHub.MUSIC_SONG_SHEET_ACTIVITY).navigation(getContext());
             } else if (view.getId() == R.id.iv_rank) {
-
+                ARouter.getInstance().build(RouterHub.MUSIC_RANK_ACTIVITY).navigation(getContext());
             } else if (view.getId() == R.id.tv_title) {
                 String title = ((TextView)view).getText().toString();
                 if (title.equals(getString(R.string.music_recommend_list))) {
@@ -86,6 +91,23 @@ public class MusicPersonalityRecommendFragment extends MusicBaseFragment<MusicPe
                 } else if (title.equals(getString(R.string.music_recommend_radio))) {
 
                 }
+            }
+        });
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            if (adapter.getItemViewType(position) == RecommendItem.TYPE_RECOMMEND_SONG) {
+                RecommendListInfo mRecommendListInfo = ((RecommendItem)adapter.getData().get(position)).getRecommendListInfo();
+                SheetInfo mSheetInfo = new SheetInfo();
+                mSheetInfo.setTitle(mRecommendListInfo.getTitle());
+                mSheetInfo.setListid(mRecommendListInfo.getListid());
+                mSheetInfo.setListenum(mRecommendListInfo.getListenum());
+                mSheetInfo.setPic(mRecommendListInfo.getPic());
+                ARouter.getInstance().build(RouterHub.MUSIC_SHEET_DETAIL_ACTIVITY)
+                        .withParcelable(SHEET_INFO, mSheetInfo)
+                        .navigation();
+            } else if (adapter.getItemViewType(position) == RecommendItem.TYPE_NEW_ALBUM) {
+
+            } else if (adapter.getItemViewType(position) == RecommendItem.TYPE_ANCHOR_RADIO) {
+
             }
         });
     }

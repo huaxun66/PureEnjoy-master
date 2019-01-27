@@ -15,12 +15,22 @@
 
     <string name="music_classic_sheet">Classic Sheet</string>
     <string name="music_filter_sheet">Filter Sheet</string>
-    <string name="music_classic_sheet_title">Minimalism | Listen. That is poetry.</string>
-    <string name="music_classic_sheet_des">It takes only a few simple notes to update your auditory experience.</string>
 
     <string name="music_all_sheet">All Sheet</string>
     <string name="music_sheet_type_chinese">Chinese</string>
     <string name="music_sheet_type_rock">Rock</string>
     <string name="music_sheet_type_ballad">Ballad</string>
+
+    <string name="music_comment">Comment</string>
+    <string name="music_share">Share</string>
+    <string name="music_download">Download</string>
+    <string name="music_multiSelect">MultiSelect</string>
+
+    <string name="music_play_all">Play All</string>
+    <string name="music_song_num">(%1$dSongs)</string>
+    <string name="music_collection_num">Collection(%1$s)</string>
+    <string name="music_collection">Collection</string>
+
+    <string name="music_latest_update">Latest Update</string>
 
 </resources>

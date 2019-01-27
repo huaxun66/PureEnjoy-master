@@ -92,7 +92,11 @@ public interface RouterHub {
     String MUSIC_PERSONALITY_RECOMMEND_FRAGMENT = MUSIC + "/MusicPersonalityRecommendFragment";
     String MUSIC_ANCHOR_RADIO_FRAGMENT = MUSIC + "/MusicAnchorRadioFragment";
     String MUSIC_SONG_SHEET_ACTIVITY = MUSIC + "/MusicSongSheetActivity";
+    String MUSIC_HOT_SHEET_ACTIVITY = MUSIC + "/MusicHotSheetActivity";
     String MUSIC_SHEET_TAG_ACTIVITY = MUSIC + "/MusicSheetTagActivity";
+    String MUSIC_SHEET_DETAIL_ACTIVITY = MUSIC + "/MusicSheetDetailActivity";
+    String MUSIC_RANK_ACTIVITY = MUSIC + "/MusicRankActivity";
+    String MUSIC_RANK_DETAIL_ACTIVITY = MUSIC + "/MusicRankDetailActivity";
 
     /**
      * 视频分组

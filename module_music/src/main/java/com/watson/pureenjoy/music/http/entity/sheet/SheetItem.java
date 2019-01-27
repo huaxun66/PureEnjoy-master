@@ -1,10 +1,6 @@
 package com.watson.pureenjoy.music.http.entity.sheet;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendAlbumInfo;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendFocus;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendListInfo;
-import com.watson.pureenjoy.music.http.entity.recommend.RecommendRadioInfo;
 
 public class SheetItem implements MultiItemEntity {
     public static final int TYPE_HOT_BANNER = 0; //热门歌单
@@ -14,28 +10,18 @@ public class SheetItem implements MultiItemEntity {
 
     private int type;
 
-    private String imgUrl;
     private SheetInfo mSheetInfo;
 
-    public SheetItem(String imgUrl) {
-        this.imgUrl = imgUrl;
-        type = TYPE_HOT_BANNER;
-    }
-
-    public SheetItem(SheetInfo mSheetInfo) {
+    public SheetItem(int type, SheetInfo mSheetInfo) {
         this.mSheetInfo = mSheetInfo;
-        type = TYPE_SHEET_ITEM;
+        this.type = type;
     }
 
     public SheetItem() {
         type = TYPE_HEADER;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public SheetInfo getmSheetInfo() {
+    public SheetInfo getSheetInfo() {
         return mSheetInfo;
     }
 

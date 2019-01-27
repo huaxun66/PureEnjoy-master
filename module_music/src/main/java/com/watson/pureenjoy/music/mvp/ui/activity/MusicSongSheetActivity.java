@@ -10,6 +10,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -19,6 +20,7 @@ import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
 import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.di.component.DaggerMusicSongSheetComponent;
+import com.watson.pureenjoy.music.http.entity.sheet.SheetItem;
 import com.watson.pureenjoy.music.mvp.contract.MusicSongSheetContract;
 import com.watson.pureenjoy.music.mvp.presenter.MusicSongSheetPresenter;
 import com.watson.pureenjoy.music.mvp.ui.adapter.MusicSongSheetAdapter;
@@ -30,7 +32,9 @@ import me.jessyan.armscomponent.commonres.view.CustomLoadingMoreView;
 import me.jessyan.armscomponent.commonres.view.TopBar;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
+import static com.watson.pureenjoy.music.app.MusicConstants.RANK_INFO;
 import static com.watson.pureenjoy.music.app.MusicConstants.TAG_SELECTED;
+import static me.jessyan.armscomponent.commonsdk.core.RouterHub.MUSIC_HOT_SHEET_ACTIVITY;
 
 @Route(path = RouterHub.MUSIC_SONG_SHEET_ACTIVITY)
 public class MusicSongSheetActivity extends MusicBaseActivity<MusicSongSheetPresenter> implements MusicSongSheetContract.View,
@@ -91,11 +95,18 @@ public class MusicSongSheetActivity extends MusicBaseActivity<MusicSongSheetPres
                 intent.putExtra(TAG_SELECTED, currentTag);
                 startActivityForResult(intent, REQUEST_CODE);
                 overridePendingTransition(R.anim.public_translate_bottom_to_center, R.anim.public_translate_center_to_top);
+            } else if (view.getId() == R.id.background) {
+                ARouter.getInstance().build(MUSIC_HOT_SHEET_ACTIVITY).navigation();
             }
         });
         mAdapter.setOnTagClickListener(tag -> {
             currentTag = tag;
             getData(0, true);
+        });
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            ARouter.getInstance().build(RouterHub.MUSIC_SHEET_DETAIL_ACTIVITY)
+                    .withParcelable(RANK_INFO, ((SheetItem)adapter.getData().get(position)).getSheetInfo())
+                    .navigation();
         });
     }
 

@@ -2,6 +2,7 @@ package com.watson.pureenjoy.music.mvp.ui.adapter;
 
 import android.content.Context;
 
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jess.arms.http.imageloader.ImageLoader;
@@ -32,7 +33,7 @@ public class MusicSongSheetAdapter extends BaseMultiItemQuickAdapter<SheetItem, 
     }
 
     private void addMultiItemType() {
-        addItemType(SheetItem.TYPE_HOT_BANNER, R.layout.music_sheet_hot_item);
+        addItemType(SheetItem.TYPE_HOT_BANNER, R.layout.music_sheet_hot_header_item);
         addItemType(SheetItem.TYPE_HEADER, R.layout.music_sheet_header_item);
         addItemType(SheetItem.TYPE_SHEET_ITEM, R.layout.music_sheet_song_item);
     }
@@ -55,13 +56,27 @@ public class MusicSongSheetAdapter extends BaseMultiItemQuickAdapter<SheetItem, 
     }
 
     private void convertHotContent(BaseViewHolder helper, SheetItem item) {
+        SheetInfo mSheetInfo = item.getSheetInfo();
+        helper.setText(R.id.classic_sheet_title, mSheetInfo.getTitle())
+              .setText(R.id.classic_sheet_des, mSheetInfo.getDesc());
+        mImageLoader.loadImage(mContext,
+                CommonImageConfigImpl
+                        .builder()
+                        .blurValue(25)
+                        .url(mSheetInfo.getPic_w300())
+                        .fallback(R.drawable.music_hot_sheet_bg)
+                        .errorPic(R.drawable.music_hot_sheet_bg)
+                        .imageView(helper.getView(R.id.background))
+                        .build());
+
         mImageLoader.loadImage(mContext,
                 CommonImageConfigImpl
                         .builder()
                         .imageRadius(20)
-                        .url(item.getImgUrl())
+                        .url(mSheetInfo.getPic_300())
                         .imageView(helper.getView(R.id.img))
                         .build());
+        helper.addOnClickListener(R.id.background);
     }
 
     private void convertHeaderContent(BaseViewHolder helper, SheetItem item) {
@@ -92,7 +107,7 @@ public class MusicSongSheetAdapter extends BaseMultiItemQuickAdapter<SheetItem, 
 
 
     private void convertSheetContent(BaseViewHolder helper, SheetItem item) {
-        SheetInfo mSheetInfo = item.getmSheetInfo();
+        SheetInfo mSheetInfo = item.getSheetInfo();
         mImageLoader.loadImage(mContext,
                 CommonImageConfigImpl
                         .builder()

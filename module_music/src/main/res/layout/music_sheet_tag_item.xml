@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/public_pad_left_3dp"
+    android:paddingEnd="@dimen/public_pad_right_3dp"
+    android:paddingTop="@dimen/public_pad_top_2dp"
+    android:paddingBottom="@dimen/public_pad_bottom_2dp"
+    android:background="@drawable/music_stroke_radius_red_bg"
+    android:textColor="@color/music_theme"
+    android:textSize="@dimen/public_font_10sp"/>
