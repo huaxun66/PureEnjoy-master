@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,16 +27,21 @@ import com.watson.pureenjoy.music.mvp.ui.adapter.MusicRankDetailAdapter;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import me.jessyan.armscomponent.commonres.view.TopBar;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 import me.jessyan.armscomponent.commonsdk.imgaEngine.config.CommonImageConfigImpl;
+import me.jessyan.armscomponent.commonsdk.utils.StatusBarUtil;
+import me.jessyan.armscomponent.commonsdk.utils.StringUtil;
 
 import static com.watson.pureenjoy.music.app.MusicConstants.RANK_INFO;
 
 @Route(path = RouterHub.MUSIC_RANK_DETAIL_ACTIVITY)
 public class MusicRankDetailActivity extends MusicBaseActivity<MusicRankDetailPresenter> implements MusicRankDetailContract.View, BaseQuickAdapter.RequestLoadMoreListener {
     @BindView(R2.id.top_bar)
-    TopBar mTopBar;
+    ConstraintLayout mTopBar;
+    @BindView(R2.id.top_back)
+    ImageView mTopBack;
+    @BindView(R2.id.top_title)
+    TextView mTopTitle;
     @BindView(R2.id.background)
     ImageView mHeaderBackground;
     @BindView(R2.id.update_time)
@@ -55,8 +61,8 @@ public class MusicRankDetailActivity extends MusicBaseActivity<MusicRankDetailPr
     @Autowired(name = RANK_INFO)
     RankInfo mRankInfo;
 
-    private ImageLoader mImageLoader;
     private boolean isRefresh;
+    private ImageLoader mImageLoader;
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
@@ -70,13 +76,14 @@ public class MusicRankDetailActivity extends MusicBaseActivity<MusicRankDetailPr
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {
+        StatusBarUtil.setTranslucentForImageView(this, 0, null);
         return R.layout.music_activity_rank_detail;
     }
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         mImageLoader = ArmsUtils.obtainAppComponentFromContext(this).imageLoader();
-        mTopBar.setTitleColor(Color.WHITE);
+        mTopTitle.setText(getString(R.string.music_rank));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
         setHeaderData();
@@ -88,7 +95,7 @@ public class MusicRankDetailActivity extends MusicBaseActivity<MusicRankDetailPr
         if (offset == 0) {
             isRefresh = true;
         }
-        mPresenter.requestRankDetail(this, mRankInfo.getType(), offset, 10, showLoading);
+        mPresenter.requestRankDetail(this, mRankInfo.getType(), offset, 20, showLoading);
     }
 
     @Override
@@ -102,15 +109,24 @@ public class MusicRankDetailActivity extends MusicBaseActivity<MusicRankDetailPr
                 CommonImageConfigImpl
                         .builder()
                         .url(mRankInfo.getPic_s444())
-                        .fallback(R.drawable.music_hot_sheet_bg)
-                        .errorPic(R.drawable.music_hot_sheet_bg)
                         .imageView(mHeaderBackground)
                         .build());
     }
 
     private void initListener() {
-        mTopBar.setLeftImageClickListener(v -> finish());
+        mTopBack.setOnClickListener(v -> finish());
         mAdapter.setOnLoadMoreListener(this, mRecyclerView);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int scrollY = 0;
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                scrollY += dy;
+                if (scrollY > 0) {
+                    mTopTitle.setText(mRankInfo.getName());
+                } else {
+                    mTopTitle.setText(getString(R.string.music_rank));
+                }
+            }
+        });
     }
 
     @Override
@@ -120,7 +136,7 @@ public class MusicRankDetailActivity extends MusicBaseActivity<MusicRankDetailPr
             mUpdateTime.setText(getString(R.string.music_latest_update) + rankInfo.getUpdate_date());
             mNum.setText(getString(R.string.music_song_num, rankInfo.getBillboard_songnum()!=null ? Integer.parseInt(rankInfo.getBillboard_songnum()) : 100));
         } else {
-            if (rankInfo.getHavemore() == 1) {
+            if (StringUtil.isEmpty(rankInfo.getBillboard_songnum()) || mAdapter.getData().size() < Integer.parseInt(rankInfo.getBillboard_songnum())) {
                 mAdapter.loadMoreEnd();
             } else {
                 mAdapter.loadMoreComplete();

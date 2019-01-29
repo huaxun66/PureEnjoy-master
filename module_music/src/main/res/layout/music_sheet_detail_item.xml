@@ -27,7 +27,7 @@
 
     <TextView
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/public_mar_left_15dp"
         android:layout_marginTop="@dimen/public_mar_top_5dp"
@@ -36,12 +36,13 @@
         android:textColor="@color/public_custom_color_text_main"
         android:textSize="@dimen/public_font_14sp"
         app:layout_constraintStart_toEndOf="@id/index"
+        app:layout_constraintEnd_toStartOf="@id/play"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="独角戏" />
 
     <TextView
         android:id="@+id/author"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/public_mar_left_15dp"
         android:layout_marginTop="@dimen/public_mar_top_5dp"
@@ -50,6 +51,7 @@
         android:textColor="@color/public_custom_color_text_sub"
         android:textSize="@dimen/public_font_11sp"
         app:layout_constraintStart_toEndOf="@id/index"
+        app:layout_constraintEnd_toStartOf="@id/play"
         app:layout_constraintTop_toBottomOf="@id/name"
         tools:text="许茹芸" />
 

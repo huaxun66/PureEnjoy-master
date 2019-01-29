@@ -7,9 +7,11 @@ import android.widget.Toast;
 
 import com.jess.arms.mvp.IPresenter;
 import com.jess.arms.mvp.IView;
+import com.watson.pureenjoy.music.R;
 
 import es.dmoral.toasty.Toasty;
 import me.jessyan.armscomponent.commonres.dialog.ProgressDialog;
+import me.jessyan.armscomponent.commonsdk.utils.StatusBarUtil;
 
 /**
  * Created by jess on 8/5/16 13:13
@@ -20,6 +22,7 @@ public abstract class MusicBaseActivity<P extends IPresenter> extends com.jess.a
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        StatusBarUtil.setColor(this, getResources().getColor(R.color.music_theme), 0);
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setIndicatorName("LineScalePulseOutRapidIndicator");
         super.onCreate(savedInstanceState);

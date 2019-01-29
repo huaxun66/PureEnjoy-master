@@ -4,7 +4,7 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
-import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
@@ -234,6 +234,17 @@ public class TopBar extends RelativeLayout {
 
     public void setBackgroundColor(int color) {
         menu.setBackgroundColor(color);
+        ivLeft.setBackground(null);
+        ivLeftSecond.setBackground(null);
+        tvLeft.setBackground(null);
+        ivRight.setBackground(null);
+        ivRightSecond.setBackground(null);
+        ivRightThird.setBackground(null);
+        tvRight.setBackground(null);
+    }
+
+    public void setBackgroundBitmap(Bitmap bitmap) {
+        menu.setBackground(new BitmapDrawable(getResources(), bitmap));
         ivLeft.setBackground(null);
         ivLeftSecond.setBackground(null);
         tvLeft.setBackground(null);

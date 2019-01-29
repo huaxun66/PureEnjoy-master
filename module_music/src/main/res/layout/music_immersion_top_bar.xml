@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/public_height_65dp">
+
+    <ImageView
+        android:id="@+id/top_back"
+        android:layout_width="@dimen/public_width_50dp"
+        android:layout_height="@dimen/public_height_50dp"
+        android:paddingEnd="@dimen/public_pad_right_14dp"
+        android:paddingStart="@dimen/public_pad_left_14dp"
+        android:src="@drawable/public_nav_back_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/top_title"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/public_mar_right_50dp"
+        android:ellipsize="marquee"
+        android:gravity="center"
+        android:singleLine="true"
+        android:textColor="@color/public_white"
+        android:textSize="@dimen/public_font_16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/top_back"
+        app:layout_constraintTop_toTopOf="@id/top_back"
+        tools:text="TitleCenter" />
+
+</android.support.constraint.ConstraintLayout>

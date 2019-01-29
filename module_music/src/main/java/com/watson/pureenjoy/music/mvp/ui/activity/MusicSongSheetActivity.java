@@ -32,7 +32,7 @@ import me.jessyan.armscomponent.commonres.view.CustomLoadingMoreView;
 import me.jessyan.armscomponent.commonres.view.TopBar;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
-import static com.watson.pureenjoy.music.app.MusicConstants.RANK_INFO;
+import static com.watson.pureenjoy.music.app.MusicConstants.SHEET_INFO;
 import static com.watson.pureenjoy.music.app.MusicConstants.TAG_SELECTED;
 import static me.jessyan.armscomponent.commonsdk.core.RouterHub.MUSIC_HOT_SHEET_ACTIVITY;
 
@@ -105,7 +105,7 @@ public class MusicSongSheetActivity extends MusicBaseActivity<MusicSongSheetPres
         });
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
             ARouter.getInstance().build(RouterHub.MUSIC_SHEET_DETAIL_ACTIVITY)
-                    .withParcelable(RANK_INFO, ((SheetItem)adapter.getData().get(position)).getSheetInfo())
+                    .withParcelable(SHEET_INFO, ((SheetItem)adapter.getData().get(position)).getSheetInfo())
                     .navigation();
         });
     }

@@ -32,5 +32,6 @@
     <string name="music_collection">Collection</string>
 
     <string name="music_latest_update">Latest Update</string>
+    <string name="music_no_more">No More</string>
 
 </resources>

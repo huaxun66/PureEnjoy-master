@@ -67,9 +67,13 @@ public class MusicRankDetailPresenter extends BasePresenter<MusicRankDetailContr
                 .subscribe(new ErrorHandleSubscriber<RankDetailResponse>(mErrorHandler) {
                     @Override
                     public void onNext(@NonNull RankDetailResponse response) {
-                        mRootView.getRankDetailSuccess(response.getBillboard());
-                        if (response.isSuccess() && response.getSong_list()!=null) {
-                            setSheetData(offset, response.getSong_list());
+                        if (response.isSuccess()) {
+                            if (response.getSong_list()!=null) {
+                                setSheetData(offset, response.getSong_list());
+                                mRootView.getRankDetailSuccess(response.getBillboard());
+                            } else {
+                                mRootView.showMessage(ArmsUtils.getString(context, R.string.music_no_more));
+                            }
                         } else {
                             mRootView.showMessage(ArmsUtils.getString(context, R.string.public_server_error));
                         }

@@ -3,14 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/public_height_200dp">
-
-    <ImageView
-        android:id="@+id/background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:src="@drawable/music_hot_sheet_bg" />
+    android:layout_height="@dimen/public_height_200dp"
+    android:background="@android:color/transparent">
 
     <ImageView
         android:id="@+id/img"
@@ -20,7 +14,8 @@
         android:layout_marginTop="@dimen/public_mar_top_20dp"
         android:scaleType="fitXY"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/music_placeholder"/>
 
     <TextView
         android:id="@+id/count"

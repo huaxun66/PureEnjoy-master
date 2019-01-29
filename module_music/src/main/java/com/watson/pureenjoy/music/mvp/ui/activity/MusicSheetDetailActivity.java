@@ -1,16 +1,22 @@
 package com.watson.pureenjoy.music.mvp.ui.activity;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.utils.ArmsUtils;
@@ -26,9 +32,10 @@ import com.watson.pureenjoy.music.mvp.ui.adapter.MusicSheetDetailAdapter;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import me.jessyan.armscomponent.commonres.view.TopBar;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 import me.jessyan.armscomponent.commonsdk.imgaEngine.config.CommonImageConfigImpl;
+import me.jessyan.armscomponent.commonsdk.utils.FastBlurUtil;
+import me.jessyan.armscomponent.commonsdk.utils.StatusBarUtil;
 import me.jessyan.armscomponent.commonsdk.utils.StringUtil;
 
 import static com.watson.pureenjoy.music.app.MusicConstants.SHEET_INFO;
@@ -36,9 +43,13 @@ import static com.watson.pureenjoy.music.app.MusicConstants.SHEET_INFO;
 @Route(path = RouterHub.MUSIC_SHEET_DETAIL_ACTIVITY)
 public class MusicSheetDetailActivity extends MusicBaseActivity<MusicSheetDetailPresenter> implements MusicSheetDetailContract.View {
     @BindView(R2.id.top_bar)
-    TopBar mTopBar;
-    @BindView(R2.id.background)
-    ImageView mHeaderBackground;
+    ConstraintLayout mTopBar;
+    @BindView(R2.id.top_back)
+    ImageView mTopBack;
+    @BindView(R2.id.top_title)
+    TextView mTopTitle;
+    @BindView(R2.id.root)
+    RelativeLayout mRoot;
     @BindView(R2.id.img)
     ImageView mHeaderImg;
     @BindView(R2.id.count)
@@ -76,13 +87,14 @@ public class MusicSheetDetailActivity extends MusicBaseActivity<MusicSheetDetail
 
     @Override
     public int initView(@Nullable Bundle savedInstanceState) {
+        StatusBarUtil.setTranslucentForImageView(this, 0, null);
         return R.layout.music_activity_sheet_detail;
     }
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         mImageLoader = ArmsUtils.obtainAppComponentFromContext(this).imageLoader();
-        mTopBar.setTitleColor(Color.WHITE);
+        mTopTitle.setText(getString(R.string.music_song_sheet));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
         setHeaderData();
@@ -92,20 +104,23 @@ public class MusicSheetDetailActivity extends MusicBaseActivity<MusicSheetDetail
 
     private void setHeaderData() {
         String imgUrl = StringUtil.isEmpty(mSheetInfo.getPic()) ? mSheetInfo.getPic_300() : mSheetInfo.getPic();
-        mImageLoader.loadImage(this,
-                CommonImageConfigImpl
-                        .builder()
-                        .blurValue(25)
-                        .url(imgUrl)
-                        .fallback(R.drawable.music_hot_sheet_bg)
-                        .errorPic(R.drawable.music_hot_sheet_bg)
-                        .imageView(mHeaderBackground)
-                        .build());
+        Glide.with(this)
+                .asBitmap()
+                .load(imgUrl)
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        Bitmap bitmapBlur = FastBlurUtil.doBlur(resource, 25, true);
+                        mRoot.setBackground(new BitmapDrawable(getResources(), bitmapBlur));
+                    }
+                });
 
         mImageLoader.loadImage(this,
                 CommonImageConfigImpl
                         .builder()
                         .url(imgUrl)
+                        .fallback(R.drawable.music_placeholder)
+                        .errorPic(R.drawable.music_placeholder)
                         .imageRadius(20)
                         .imageView(mHeaderImg)
                         .build());
@@ -116,7 +131,27 @@ public class MusicSheetDetailActivity extends MusicBaseActivity<MusicSheetDetail
     }
 
     private void initListener() {
-        mTopBar.setLeftImageClickListener(v -> finish());
+        mTopBack.setOnClickListener(v -> finish());
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            int scrollY = 0;
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                //折叠
+                if (scrollY + dy > 0) {
+                    if (scrollY <= 0) {
+                        mTopTitle.setFocusable(true);
+                        mTopTitle.setFocusableInTouchMode(true);
+                        mTopTitle.requestFocus();
+                        mTopTitle.setText(mSheetInfo.getTitle());
+                    }
+                //展开
+                } else {
+                    if (scrollY > 0) {
+                        mTopTitle.setText(getString(R.string.music_song_sheet));
+                    }
+                }
+                scrollY += dy;
+            }
+        });
     }
 
     @Override

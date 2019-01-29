@@ -1,8 +1,13 @@
 package com.watson.pureenjoy.music.mvp.ui.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.jess.arms.http.imageloader.ImageLoader;
@@ -15,6 +20,7 @@ import com.watson.pureenjoy.music.http.entity.sheet.SheetItem;
 import java.util.List;
 
 import me.jessyan.armscomponent.commonsdk.imgaEngine.config.CommonImageConfigImpl;
+import me.jessyan.armscomponent.commonsdk.utils.FastBlurUtil;
 
 public class MusicSongSheetAdapter extends BaseMultiItemQuickAdapter<SheetItem, BaseViewHolder> {
     private Context mContext;
@@ -59,15 +65,18 @@ public class MusicSongSheetAdapter extends BaseMultiItemQuickAdapter<SheetItem, 
         SheetInfo mSheetInfo = item.getSheetInfo();
         helper.setText(R.id.classic_sheet_title, mSheetInfo.getTitle())
               .setText(R.id.classic_sheet_des, mSheetInfo.getDesc());
-        mImageLoader.loadImage(mContext,
-                CommonImageConfigImpl
-                        .builder()
-                        .blurValue(25)
-                        .url(mSheetInfo.getPic_w300())
-                        .fallback(R.drawable.music_hot_sheet_bg)
-                        .errorPic(R.drawable.music_hot_sheet_bg)
-                        .imageView(helper.getView(R.id.background))
-                        .build());
+        Glide.with(mContext)
+                .asBitmap()
+                .load(mSheetInfo.getPic_300())
+                .into(new SimpleTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                        //裁剪上三分之一部分
+                        Bitmap bitmapTop = Bitmap.createBitmap(resource, 0, 0, resource.getWidth(), resource.getHeight()/3);
+                        Bitmap bitmapBlur = FastBlurUtil.doBlur(bitmapTop, 25, true);
+                        helper.setImageBitmap(R.id.background, bitmapBlur);
+                    }
+                });
 
         mImageLoader.loadImage(mContext,
                 CommonImageConfigImpl
