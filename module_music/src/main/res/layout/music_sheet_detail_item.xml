@@ -36,7 +36,7 @@
         android:textColor="@color/public_custom_color_text_main"
         android:textSize="@dimen/public_font_14sp"
         app:layout_constraintStart_toEndOf="@id/index"
-        app:layout_constraintEnd_toStartOf="@id/play"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="独角戏" />
 
@@ -51,7 +51,7 @@
         android:textColor="@color/public_custom_color_text_sub"
         android:textSize="@dimen/public_font_11sp"
         app:layout_constraintStart_toEndOf="@id/index"
-        app:layout_constraintEnd_toStartOf="@id/play"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name"
         tools:text="许茹芸" />
 

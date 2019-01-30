@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/public_custom_color_app_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/music_my_music_header_layout"/>
+
+    <RelativeLayout
+        android:id="@+id/operator_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_30dp"
+        android:background="@color/music_operator_bg">
+
+        <ImageView
+            android:id="@+id/operator_img"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/music_spread"
+            android:layout_marginStart="@dimen/public_mar_left_7dp"/>
+
+        <TextView
+            android:id="@+id/operator_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/operator_img"
+            android:layout_marginStart="@dimen/public_mar_left_10dp"
+            android:textSize="@dimen/public_font_11sp"
+            android:text="@string/music_my_sheet"/>
+
+        <ImageView
+            android:id="@+id/operator_more"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/music_sheet_more"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/public_mar_left_7dp"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>
+
+

@@ -51,7 +51,7 @@
                     android:maxLines="1"
                     android:paddingEnd="@dimen/public_pad_right_7dp"
                     android:paddingStart="@dimen/public_pad_left_7dp"
-                    android:textColor="@color/public_white"
+                    android:textColor="@color/public_white_transparency_750"
                     android:textColorHint="@color/public_white_transparency_800"
                     android:textSize="@dimen/public_font_14sp" />
 

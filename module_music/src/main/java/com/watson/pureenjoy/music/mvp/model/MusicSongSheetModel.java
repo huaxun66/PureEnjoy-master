@@ -45,7 +45,7 @@ public class MusicSongSheetModel extends BaseModel implements MusicSongSheetCont
                         MusicConstants.JSON,
                         MusicConstants.METHOD_SHEET,
                         pageSize,
-                        pageNo);
+                        ++pageNo); //页码从1开始
     }
 
     @Override
@@ -57,7 +57,7 @@ public class MusicSongSheetModel extends BaseModel implements MusicSongSheetCont
                         MusicConstants.JSON,
                         MusicConstants.METHOD_SHEET_SEARCH,
                         pageSize,
-                        pageNo,
+                        ++pageNo, //页码从1开始
                         StringUtil.encode(tag));
     }
 }

@@ -1,8 +1,9 @@
 <resources>
     <string name="music_module_name">ModuleMusic</string>
 
-    <string name="music_personality_recommend">Personality Recommend</string>
+    <string name="music_personality_recommend">Recommend</string>
     <string name="music_anchor_radio">Anchor Radio</string>
+    <string name="music_my_music">My Music</string>
 
     <string name="music_personal_fm">Personal FM</string>
     <string name="music_daily_recommend">Recommend</string>
@@ -33,5 +34,11 @@
 
     <string name="music_latest_update">Latest Update</string>
     <string name="music_no_more">No More</string>
+
+    <string name="music_local_music">Local Music</string>
+    <string name="music_recent_play">Recently Play</string>
+    <string name="music_my_radio">My Radio</string>
+    <string name="music_my_collect">My Collection</string>
+    <string name="music_my_sheet">My Song Sheet(%1$d)</string>
 
 </resources>

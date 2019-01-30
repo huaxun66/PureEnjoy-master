@@ -3,6 +3,7 @@
 
     <string name="music_personality_recommend">个性推荐</string>
     <string name="music_anchor_radio">主播电台</string>
+    <string name="music_my_music">我的音乐</string>
 
     <string name="music_personal_fm">私人FM</string>
     <string name="music_daily_recommend">每日推荐</string>
@@ -33,4 +34,12 @@
 
     <string name="music_latest_update">最近更新</string>
     <string name="music_no_more">没有更多了</string>
+
+    <string name="music_local_music">本地音乐</string>
+    <string name="music_recent_play">最近播放</string>
+    <string name="music_my_radio">我的电台</string>
+    <string name="music_my_collect">我的收藏</string>
+    <string name="music_my_sheet">我创建的歌单(%1$d)</string>
+
+
 </resources>

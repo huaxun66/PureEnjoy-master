@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="music_white">#FFFFFF</color>
-    <color name="music_theme">#D33930</color>
+    <color name="music_theme">#D94038</color>
+    <color name="music_search_bg">#DF645C</color>
+    <color name="music_operator_bg">#EEEFF1</color>
 
 </resources>

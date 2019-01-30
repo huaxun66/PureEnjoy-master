@@ -165,6 +165,7 @@
     <dimen name="public_mar_left_20dp">20dp</dimen>
     <dimen name="public_mar_left_40dp">40dp</dimen>
     <dimen name="public_mar_left_50dp">50dp</dimen>
+    <dimen name="public_mar_left_55dp">55dp</dimen>
     <dimen name="public_mar_left_135dp">135dp</dimen>
     <dimen name="public_mar_left_165dp">165dp</dimen>
 

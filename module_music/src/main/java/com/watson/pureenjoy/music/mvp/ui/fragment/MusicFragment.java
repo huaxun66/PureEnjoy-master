@@ -53,8 +53,10 @@ public class MusicFragment extends MusicBaseFragment {
         List<BaseFragment> fragmentList = new ArrayList<>();
         titleList.add(getString(R.string.music_personality_recommend));
         titleList.add(getString(R.string.music_anchor_radio));
+        titleList.add(getString(R.string.music_my_music));
         fragmentList.add((BaseFragment) ARouter.getInstance().build(RouterHub.MUSIC_PERSONALITY_RECOMMEND_FRAGMENT).navigation());
         fragmentList.add((BaseFragment) ARouter.getInstance().build(RouterHub.MUSIC_ANCHOR_RADIO_FRAGMENT).navigation());
+        fragmentList.add((BaseFragment) ARouter.getInstance().build(RouterHub.MUSIC_MY_MUSIC_FRAGMENT).navigation());
         FragmentViewPagerAdapter adapter = new FragmentViewPagerAdapter(getChildFragmentManager(), titleList, fragmentList);
         mViewPager.setAdapter(adapter);
         mTabBar.setViewPager(mViewPager);

@@ -2,7 +2,7 @@
 <resources>
     <color name="public_colorPrimary">@color/public_white</color>
     <color name="public_colorPrimaryDark">@color/public_black_transparency_600</color>
-    <color name="public_colorAccent">#D33930</color>
+    <color name="public_colorAccent">#D94038</color>
 
     <!-- app -->
     <color name="public_custom_color_app_bg">#F8F8F8</color>

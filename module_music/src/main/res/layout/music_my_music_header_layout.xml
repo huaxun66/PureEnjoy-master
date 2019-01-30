@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/local_music"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_50dp">
+
+        <ImageView
+            android:id="@+id/local_img"
+            android:layout_width="@dimen/public_width_25dp"
+            android:layout_height="@dimen/public_height_25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/public_mar_left_15dp"
+            android:src="@drawable/music_my_local" />
+
+        <TextView
+            android:id="@+id/local_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/public_mar_left_15dp"
+            android:layout_toEndOf="@+id/local_img"
+            android:text="@string/music_local_music"
+            android:textColor="@color/public_custom_color_text_main" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/public_mar_right_10dp"
+            android:drawableEnd="@drawable/music_arrow_right"
+            android:textColor="@color/public_custom_color_text_sub"
+            android:textSize="@dimen/public_font_12sp"
+            tools:text="7" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/public_height_0_5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/local_title"
+            android:background="@color/public_custom_color_app_content_div" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/recent_play"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_50dp">
+
+        <ImageView
+            android:id="@+id/recent_img"
+            android:layout_width="@dimen/public_width_25dp"
+            android:layout_height="@dimen/public_height_25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/public_mar_left_15dp"
+            android:src="@drawable/music_my_recent" />
+
+        <TextView
+            android:id="@+id/recent_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/public_mar_left_15dp"
+            android:layout_toEndOf="@+id/recent_img"
+            android:text="@string/music_recent_play"
+            android:textColor="@color/public_custom_color_text_main" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/public_mar_right_10dp"
+            android:drawableEnd="@drawable/music_arrow_right"
+            android:textColor="@color/public_custom_color_text_sub"
+            android:textSize="@dimen/public_font_12sp"
+            tools:text="7" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/public_height_0_5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/recent_title"
+            android:background="@color/public_custom_color_app_content_div" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/my_radio"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_50dp">
+
+        <ImageView
+            android:id="@+id/radio_img"
+            android:layout_width="@dimen/public_width_25dp"
+            android:layout_height="@dimen/public_height_25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/public_mar_left_15dp"
+            android:src="@drawable/music_my_radio" />
+
+        <TextView
+            android:id="@+id/radio_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/public_mar_left_15dp"
+            android:layout_toEndOf="@+id/radio_img"
+            android:text="@string/music_my_radio"
+            android:textColor="@color/public_custom_color_text_main" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/public_mar_right_10dp"
+            android:drawableEnd="@drawable/music_arrow_right"
+            android:textColor="@color/public_custom_color_text_sub"
+            android:textSize="@dimen/public_font_12sp"
+            tools:text="7" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/public_height_0_5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/radio_title"
+            android:background="@color/public_custom_color_app_content_div" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/my_collect"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_50dp">
+
+        <ImageView
+            android:id="@+id/collect_img"
+            android:layout_width="@dimen/public_width_25dp"
+            android:layout_height="@dimen/public_height_25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/public_mar_left_15dp"
+            android:src="@drawable/music_my_collect" />
+
+        <TextView
+            android:id="@+id/collect_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/public_mar_left_15dp"
+            android:layout_toEndOf="@+id/collect_img"
+            android:text="@string/music_my_collect"
+            android:textColor="@color/public_custom_color_text_main" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/public_mar_right_10dp"
+            android:drawableEnd="@drawable/music_arrow_right"
+            android:textColor="@color/public_custom_color_text_sub"
+            android:textSize="@dimen/public_font_12sp"
+            tools:text="7" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
