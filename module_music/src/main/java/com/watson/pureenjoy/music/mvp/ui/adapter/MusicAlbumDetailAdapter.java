@@ -5,21 +5,20 @@ import android.content.Context;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.watson.pureenjoy.music.R;
-import com.watson.pureenjoy.music.http.entity.sheet.SheetDetailInfo;
+import com.watson.pureenjoy.music.http.entity.album.AlbumSongInfo;
 
 import java.util.List;
 
-public class MusicSheetDetailAdapter extends BaseQuickAdapter<SheetDetailInfo, BaseViewHolder> {
+public class MusicAlbumDetailAdapter extends BaseQuickAdapter<AlbumSongInfo, BaseViewHolder> {
     private Context mContext;
 
-
-    public MusicSheetDetailAdapter(Context context, int layoutResId, List<SheetDetailInfo> data) {
+    public MusicAlbumDetailAdapter(Context context, int layoutResId, List<AlbumSongInfo> data) {
         super(layoutResId, data);
         this.mContext = context;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, SheetDetailInfo info) {
+    protected void convert(BaseViewHolder helper, AlbumSongInfo info) {
         helper.setText(R.id.index, String.valueOf(helper.getLayoutPosition() + 1))
                 .setText(R.id.name, info.getTitle())
                 .setText(R.id.author, info.getAuthor() + " - " + info.getAlbum_title());

@@ -1,20 +1,6 @@
 package com.watson.pureenjoy.music.http.entity.recommend;
 
-/**
- * Created by wm on 2016/7/28.
- */
 public class RecommendAlbumInfo {
-
-
-    /**
-     * desc : 祁隆
-     * pic : http://business.cdn.qianqian.com/qianqian/pic/bos_client_1469672285aa1239d0e00543d967a138198f6ab19c.jpg
-     * type_id : 268081987
-     * type : 2
-     * title : 惦记
-     * tip_type : 3
-     * author : 祁隆
-     */
 
     private String desc;
     private String pic;

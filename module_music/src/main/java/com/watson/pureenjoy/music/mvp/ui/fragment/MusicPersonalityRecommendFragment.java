@@ -17,6 +17,8 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
 import com.watson.pureenjoy.music.di.component.DaggerMusicPersonalityRecommendComponent;
+import com.watson.pureenjoy.music.http.entity.album.AlbumInfo;
+import com.watson.pureenjoy.music.http.entity.recommend.RecommendAlbumInfo;
 import com.watson.pureenjoy.music.http.entity.recommend.RecommendItem;
 import com.watson.pureenjoy.music.http.entity.recommend.RecommendListInfo;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetInfo;
@@ -29,6 +31,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
+import static com.watson.pureenjoy.music.app.MusicConstants.ALBUM_INFO;
 import static com.watson.pureenjoy.music.app.MusicConstants.SHEET_INFO;
 
 @Route(path = RouterHub.MUSIC_PERSONALITY_RECOMMEND_FRAGMENT)
@@ -77,7 +80,7 @@ public class MusicPersonalityRecommendFragment extends MusicBaseFragment<MusicPe
             if (view.getId() == R.id.iv_fm) {
 
             } else if (view.getId() == R.id.tv_recommend) {
-
+                ARouter.getInstance().build(RouterHub.MUSIC_RECOMMEND_SONG_ACTIVITY).navigation(getContext());
             } else if (view.getId() == R.id.iv_songSheet) {
                 ARouter.getInstance().build(RouterHub.MUSIC_SONG_SHEET_ACTIVITY).navigation(getContext());
             } else if (view.getId() == R.id.iv_rank) {
@@ -87,7 +90,7 @@ public class MusicPersonalityRecommendFragment extends MusicBaseFragment<MusicPe
                 if (title.equals(getString(R.string.music_recommend_list))) {
                     ARouter.getInstance().build(RouterHub.MUSIC_SONG_SHEET_ACTIVITY).navigation(getContext());
                 } else if (title.equals(getString(R.string.music_recommend_album))) {
-
+                    ARouter.getInstance().build(RouterHub.MUSIC_ALBUM_ACTIVITY).navigation(getContext());
                 } else if (title.equals(getString(R.string.music_recommend_radio))) {
 
                 }
@@ -105,7 +108,16 @@ public class MusicPersonalityRecommendFragment extends MusicBaseFragment<MusicPe
                         .withParcelable(SHEET_INFO, mSheetInfo)
                         .navigation();
             } else if (adapter.getItemViewType(position) == RecommendItem.TYPE_NEW_ALBUM) {
-
+                RecommendAlbumInfo mRecommendAlbumInfo = ((RecommendItem)adapter.getData().get(position)).getRecommendAlbumInfo();
+                AlbumInfo mAlbumInfo = new AlbumInfo();
+                mAlbumInfo.setAlbum_id(mRecommendAlbumInfo.getType_id());
+                mAlbumInfo.setTitle(mRecommendAlbumInfo.getTitle());
+                mAlbumInfo.setInfo(mRecommendAlbumInfo.getDesc());
+                mAlbumInfo.setPic_big(mRecommendAlbumInfo.getPic());
+                mAlbumInfo.setPic_small(mRecommendAlbumInfo.getPic());
+                ARouter.getInstance().build(RouterHub.MUSIC_ALBUM_DETAIL_ACTIVITY)
+                        .withParcelable(ALBUM_INFO, mAlbumInfo)
+                        .navigation();
             } else if (adapter.getItemViewType(position) == RecommendItem.TYPE_ANCHOR_RADIO) {
 
             }

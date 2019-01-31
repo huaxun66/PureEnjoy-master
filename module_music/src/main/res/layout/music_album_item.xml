@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/public_padding_2dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_160dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0dp"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/album_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardView"
+        android:layout_marginTop="@dimen/public_mar_top_8dp"
+        android:layout_marginStart="@dimen/public_mar_left_5dp"
+        android:layout_marginEnd="@dimen/public_mar_right_5dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/public_black"
+        android:textSize="@dimen/public_font_12sp"
+        tools:text="专辑名称" />
+
+    <TextView
+        android:id="@+id/artist_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/album_name"
+        android:layout_marginTop="@dimen/public_pad_top_2dp"
+        android:layout_marginStart="@dimen/public_mar_left_5dp"
+        android:layout_marginEnd="@dimen/public_mar_right_5dp"
+        android:layout_marginBottom="@dimen/public_mar_bottom_8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="歌手"
+        android:textSize="@dimen/public_font_11sp" />
+
+</RelativeLayout>

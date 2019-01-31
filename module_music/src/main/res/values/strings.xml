@@ -41,4 +41,6 @@
     <string name="music_my_collect">My Collection</string>
     <string name="music_my_sheet">My Song Sheet(%1$d)</string>
 
+    <string name="music_recommend_song">Recommend Song</string>
+
 </resources>

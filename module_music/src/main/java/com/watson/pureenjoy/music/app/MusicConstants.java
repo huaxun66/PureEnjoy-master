@@ -20,6 +20,7 @@ public class MusicConstants {
 
     public static final String SHEET_INFO = "sheetInfo";
     public static final String RANK_INFO = "rankInfo";
+    public static final String ALBUM_INFO = "albumInfo";
 
     public static final String RANK_HOT = "热歌榜";
     public static final String RANK_NEW = "新歌榜";
@@ -44,4 +45,7 @@ public class MusicConstants {
     public static final String METHOD_SHEET_DETAIL = "baidu.ting.diy.gedanInfo";
     public static final String METHOD_RANK = "baidu.ting.billboard.billCategory";
     public static final String METHOD_RANK_DETAIL = "baidu.ting.billboard.billList";
+    public static final String METHOD_ALBUM = "baidu.ting.plaza.getRecommendAlbum";
+    public static final String METHOD_ALBUM_DETAIL = "baidu.ting.album.getAlbumInfo";
+    public static final String METHOD_RECOMMEND_SONG = "baidu.ting.song.getEditorRecommend";
 }

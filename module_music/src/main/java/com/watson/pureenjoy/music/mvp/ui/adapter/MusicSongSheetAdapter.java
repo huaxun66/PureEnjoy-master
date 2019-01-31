@@ -2,6 +2,7 @@ package com.watson.pureenjoy.music.mvp.ui.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
@@ -74,7 +75,7 @@ public class MusicSongSheetAdapter extends BaseMultiItemQuickAdapter<SheetItem, 
                         //裁剪上三分之一部分
                         Bitmap bitmapTop = Bitmap.createBitmap(resource, 0, 0, resource.getWidth(), resource.getHeight()/3);
                         Bitmap bitmapBlur = FastBlurUtil.doBlur(bitmapTop, 25, true);
-                        helper.setImageBitmap(R.id.background, bitmapBlur);
+                        helper.getView(R.id.root).setBackground(new BitmapDrawable(mContext.getResources(), bitmapBlur));
                     }
                 });
 
