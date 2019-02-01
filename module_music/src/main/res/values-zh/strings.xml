@@ -39,9 +39,14 @@
     <string name="music_recent_play">最近播放</string>
     <string name="music_my_radio">我的电台</string>
     <string name="music_my_collect">我的收藏</string>
-    <string name="music_my_sheet">我创建的歌单(%1$d)</string>
+    <string name="music_my_create_sheet">我创建的歌单(%1$d)</string>
+    <string name="music_my_collect_sheet">我收藏的歌单(%1$d)</string>
 
     <string name="music_recommend_song">推荐歌曲</string>
 
+    <string name="music_song">歌曲</string>
+    <string name="music_artist">歌手</string>
+    <string name="music_album">专辑</string>
+    <string name="music_folder">文件夹</string>
 
 </resources>

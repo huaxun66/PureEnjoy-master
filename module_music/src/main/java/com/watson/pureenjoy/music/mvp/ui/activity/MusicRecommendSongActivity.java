@@ -52,8 +52,6 @@ public class MusicRecommendSongActivity extends MusicBaseActivity<MusicRecommend
     TextView mDescription;
     @BindView(R2.id.num)
     TextView mNum;
-    @BindView(R2.id.collection)
-    TextView mCollection;
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
 

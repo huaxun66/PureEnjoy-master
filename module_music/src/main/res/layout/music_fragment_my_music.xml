@@ -8,30 +8,30 @@
     <include layout="@layout/music_my_music_header_layout"/>
 
     <RelativeLayout
-        android:id="@+id/operator_bar"
+        android:id="@+id/operator_bar_create"
         android:layout_width="match_parent"
         android:layout_height="@dimen/public_height_30dp"
         android:background="@color/music_operator_bg">
 
         <ImageView
-            android:id="@+id/operator_img"
+            android:id="@+id/operator_img_create"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/music_spread"
             android:layout_marginStart="@dimen/public_mar_left_7dp"/>
 
         <TextView
-            android:id="@+id/operator_title"
+            android:id="@+id/operator_title_create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/operator_img"
+            android:layout_toRightOf="@+id/operator_img_create"
             android:layout_marginStart="@dimen/public_mar_left_10dp"
             android:textSize="@dimen/public_font_11sp"
-            android:text="@string/music_my_sheet"/>
+            android:text="@string/music_my_create_sheet"/>
 
         <ImageView
-            android:id="@+id/operator_more"
+            android:id="@+id/operator_more_create"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/music_sheet_more"
@@ -41,9 +41,47 @@
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/recycler_view_create"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/operator_bar_collect"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_30dp"
+        android:background="@color/music_operator_bg">
+
+        <ImageView
+            android:id="@+id/operator_img_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/music_spread"
+            android:layout_marginStart="@dimen/public_mar_left_7dp"/>
+
+        <TextView
+            android:id="@+id/operator_title_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/operator_img_collect"
+            android:layout_marginStart="@dimen/public_mar_left_10dp"
+            android:textSize="@dimen/public_font_11sp"
+            android:text="@string/music_my_collect_sheet"/>
+
+        <ImageView
+            android:id="@+id/operator_more_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/music_sheet_more"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/public_mar_left_7dp"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_collect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
 

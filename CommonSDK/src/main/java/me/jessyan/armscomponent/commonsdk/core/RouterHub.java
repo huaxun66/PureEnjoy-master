@@ -101,6 +101,7 @@ public interface RouterHub {
     String MUSIC_ALBUM_ACTIVITY = MUSIC + "/MusicAlbumActivity";
     String MUSIC_ALBUM_DETAIL_ACTIVITY = MUSIC + "/MusicAlbumDetailActivity";
     String MUSIC_RECOMMEND_SONG_ACTIVITY = MUSIC + "/MusicRecommendSongActivity";
+    String MUSIC_LOCAL_MUSIC_ACTIVITY = MUSIC + "/MusicLocalMusicActivity";
 
     /**
      * 视频分组

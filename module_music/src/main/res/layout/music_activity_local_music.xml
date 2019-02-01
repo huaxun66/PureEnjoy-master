@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/public_custom_color_app_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/music_theme"
+        android:orientation="vertical">
+
+        <me.jessyan.armscomponent.commonres.view.TopBar
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:backgroundColor="@color/music_theme"
+            app:isShowBottomLine="false"
+            app:leftImage="@drawable/public_nav_back_white"
+            app:title="@string/music_local_music"
+            app:titleColor="@color/public_white" />
+
+        <me.jessyan.armscomponent.commonres.view.EasyTabBarTxtScroll
+            android:id="@+id/easyTabBar_fragment_local"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/public_height_40dp"
+            android:layout_marginBottom="@dimen/public_mar_bottom_5dp"
+            app:indicatorColor="@color/public_white"
+            app:indicatorFit="tabText"
+            app:indicatorHeight="@dimen/public_height_2dp"
+            app:indicatorPaddingLeft="@dimen/public_padding_15dp"
+            app:indicatorPaddingRight="@dimen/public_padding_15dp"
+            app:indicatorType="line"
+            app:tabPaddingBottom="@dimen/public_pad_bottom_6dp"
+            app:tabPaddingLeft="@dimen/public_padding_15dp"
+            app:tabPaddingRight="@dimen/public_padding_15dp"
+            app:tabPaddingTop="@dimen/public_pad_top_6dp"
+            app:tabSelectTextColor="@color/public_white"
+            app:tabTextSize="@dimen/public_font_13sp"
+            app:tabUnSelectTextColor="@color/public_white"
+            app:tabWeight="true" />
+
+    </LinearLayout>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_fragment_local"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

@@ -95,8 +95,6 @@ public class MusicSongSheetActivity extends MusicBaseActivity<MusicSongSheetPres
                 intent.putExtra(TAG_SELECTED, currentTag);
                 startActivityForResult(intent, REQUEST_CODE);
                 overridePendingTransition(R.anim.public_translate_bottom_to_center, R.anim.public_translate_center_to_top);
-            } else if (view.getId() == R.id.background) {
-                ARouter.getInstance().build(MUSIC_HOT_SHEET_ACTIVITY).navigation();
             }
         });
         mAdapter.setOnTagClickListener(tag -> {
@@ -104,9 +102,13 @@ public class MusicSongSheetActivity extends MusicBaseActivity<MusicSongSheetPres
             getData(0, true);
         });
         mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            ARouter.getInstance().build(RouterHub.MUSIC_SHEET_DETAIL_ACTIVITY)
-                    .withParcelable(SHEET_INFO, ((SheetItem)adapter.getData().get(position)).getSheetInfo())
-                    .navigation();
+            if (adapter.getItemViewType(position) == SheetItem.TYPE_HOT_BANNER) {
+                ARouter.getInstance().build(MUSIC_HOT_SHEET_ACTIVITY).navigation();
+            } else if (adapter.getItemViewType(position) == SheetItem.TYPE_SHEET_ITEM) {
+                ARouter.getInstance().build(RouterHub.MUSIC_SHEET_DETAIL_ACTIVITY)
+                        .withParcelable(SHEET_INFO, ((SheetItem)adapter.getData().get(position)).getSheetInfo())
+                        .navigation();
+            }
         });
     }
 

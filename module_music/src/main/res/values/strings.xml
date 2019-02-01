@@ -39,8 +39,14 @@
     <string name="music_recent_play">Recently Play</string>
     <string name="music_my_radio">My Radio</string>
     <string name="music_my_collect">My Collection</string>
-    <string name="music_my_sheet">My Song Sheet(%1$d)</string>
+    <string name="music_my_create_sheet">My Created Sheet(%1$d)</string>
+    <string name="music_my_collect_sheet">My Collected Sheet(%1$d)</string>
 
     <string name="music_recommend_song">Recommend Song</string>
+
+    <string name="music_song">Song</string>
+    <string name="music_artist">Artist</string>
+    <string name="music_album">Album</string>
+    <string name="music_folder">Folder</string>
 
 </resources>

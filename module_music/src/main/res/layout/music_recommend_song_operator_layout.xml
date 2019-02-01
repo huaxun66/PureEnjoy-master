@@ -28,6 +28,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/music_song_num"
+        android:textColor="@color/public_custom_color_text_sub"
+        android:textSize="@dimen/public_font_12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/play_all"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/multi_select"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

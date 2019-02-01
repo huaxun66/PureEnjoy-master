@@ -52,8 +52,8 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.navigationBar)
     EasyNavigationBar navigationBar;
 
-    private int[] normalIcon = {R.drawable.ic_navi_news, R.drawable.ic_navi_music, R.drawable.ic_navi_video};
-    private int[] selectIcon = {R.drawable.ic_navi_news, R.drawable.ic_navi_music, R.drawable.ic_navi_video};
+    private int[] normalIcon = {R.drawable.ic_navi_news_normal, R.drawable.ic_navi_music_normal, R.drawable.ic_navi_video_normal};
+    private int[] selectIcon = {R.drawable.ic_navi_news_select, R.drawable.ic_navi_music_select, R.drawable.ic_navi_video_select};
     private String[] tabText = new String[3];
     private List<Fragment> fragmentList = new ArrayList<>();
     private long mPressedTime;

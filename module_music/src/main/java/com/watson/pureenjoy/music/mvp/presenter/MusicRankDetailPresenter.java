@@ -68,9 +68,9 @@ public class MusicRankDetailPresenter extends BasePresenter<MusicRankDetailContr
                     @Override
                     public void onNext(@NonNull RankDetailResponse response) {
                         if (response.isSuccess()) {
+                            mRootView.getRankDetailSuccess(response.getBillboard());
                             if (response.getSong_list()!=null) {
                                 setSheetData(offset, response.getSong_list());
-                                mRootView.getRankDetailSuccess(response.getBillboard());
                             } else {
                                 mRootView.showMessage(ArmsUtils.getString(context, R.string.music_no_more));
                             }
