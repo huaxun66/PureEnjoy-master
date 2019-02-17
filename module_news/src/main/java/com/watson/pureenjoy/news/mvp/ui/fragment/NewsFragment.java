@@ -138,7 +138,7 @@ public class NewsFragment extends NewsBaseFragment<NewsPresenter> implements New
         }
         FragmentViewPagerAdapter adapter = new FragmentViewPagerAdapter(getChildFragmentManager(), titleList, fragmentList);
         mViewPager.setAdapter(adapter);
-//        mViewPager.setOffscreenPageLimit(titleList.size());
+        mViewPager.setOffscreenPageLimit(1);
         mTabBar.setViewPager(mViewPager);
     }
 

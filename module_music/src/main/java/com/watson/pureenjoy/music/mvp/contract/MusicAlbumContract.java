@@ -19,5 +19,6 @@ public interface MusicAlbumContract {
 
     interface Model extends IModel{
         Observable<AlbumResponse> getRecommendAlbum(int offset, int limit);
+        Observable<AlbumResponse> getRecommendAlbumFromNet(int offset, int limit);
     }
 }

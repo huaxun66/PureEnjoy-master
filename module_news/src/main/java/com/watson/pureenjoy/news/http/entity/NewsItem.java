@@ -1,55 +1,130 @@
 package com.watson.pureenjoy.news.http.entity;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 import com.watson.pureenjoy.news.app.NewsConstants;
 
 import java.util.List;
 import java.util.Objects;
 
+@Entity(tableName = "news")
 public class NewsItem implements MultiItemEntity {
 
+    @PrimaryKey(autoGenerate = true)//主键是否自动增长，默认为false
+    private int id;
+
+    @ColumnInfo(name = "type_id")
+    private String typeId;
+    @Ignore
     private String template;
+    @Ignore
     private String skipID;
+    @Ignore
     private String lmodify;
+    @ColumnInfo(name = "post_id")
     private String postid;
+    @ColumnInfo(name = "source")
     private String source;
+    @ColumnInfo(name = "title")
     private String title;
+    @ColumnInfo(name = "m_time")
     private String mtime;
+    @Ignore
     private int hasImg;
+    @Ignore
     private String topic_background;
+    @Ignore
     private String digest;
+    @ColumnInfo(name = "photo_set_id")
     private String photosetID;
+    @Ignore
     private String boardid;
+    @Ignore
     private String alias;
+    @Ignore
     private int hasAD;
+    @ColumnInfo(name = "img_src")
     private String imgsrc;
+    @Ignore
     private String ptime;
+    @Ignore
     private String daynum;
+    @Ignore
     private int hasHead;
+    @Ignore
     private int order;
+    @Ignore
     private int votecount;
+    @Ignore
     private boolean hasCover;
+    @Ignore
     private String docid;
+    @Ignore
     private String tname;
+    @Ignore
     private int priority;
+    @Ignore
     private String ename;
+    @Ignore
     private int replyCount;
+    @Ignore
     private int imgsum;
+    @Ignore
     private boolean hasIcon;
+    @ColumnInfo(name = "skip_type")
     private String skipType;
+    @Ignore
     private String cid;
+    @Ignore
     private String url_3w;
+    @ColumnInfo(name = "url")
     private String url;
+    @Ignore
     private String ltitle;
+    @Ignore
     private String subtitle;
+    @Ignore
     private String articleType;
+    @Ignore
     private String TAG;
+    @Ignore
     private String TAGS;
+    @Ignore
     private List<ImgextraEntity> imgextra;
+    @Ignore
     private List<AdsEntity> ads;
-
-
+    @ColumnInfo(name = "special_id")
     private String specialID;
+    @ColumnInfo(name = "current_time")
+    private Long currentTime;
+
+    public Long getCurrentTime() {
+        return currentTime;
+    }
+
+    public void setCurrentTime(Long currentTime) {
+        this.currentTime = currentTime;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
 
     public String getSpecialID() {
         return specialID;
@@ -385,10 +460,6 @@ public class NewsItem implements MultiItemEntity {
     }
 
     public static class ImgextraEntity {
-        /**
-         * imgsrc : http://cms-bucket.nosdn.127.net/3da0c64f6627454183d701e6b422e29020170923224700.jpeg
-         */
-
         private String imgsrc;
 
         public String getImgsrc() {

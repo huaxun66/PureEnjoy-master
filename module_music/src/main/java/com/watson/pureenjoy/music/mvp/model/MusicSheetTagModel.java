@@ -19,6 +19,7 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.watson.pureenjoy.music.app.MusicConstants;
+import com.watson.pureenjoy.music.http.api.cache.MusicCache;
 import com.watson.pureenjoy.music.http.api.service.MusicService;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetTagResponse;
 import com.watson.pureenjoy.music.mvp.contract.MusicSheetTagContract;
@@ -26,6 +27,7 @@ import com.watson.pureenjoy.music.mvp.contract.MusicSheetTagContract;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.rx_cache2.EvictProvider;
 
 @ActivityScope
 public class MusicSheetTagModel extends BaseModel implements MusicSheetTagContract.Model {
@@ -37,6 +39,13 @@ public class MusicSheetTagModel extends BaseModel implements MusicSheetTagContra
 
     @Override
     public Observable<SheetTagResponse> getSheetTag() {
+        return mRepositoryManager
+                .obtainCacheService(MusicCache.class)
+                .getSheetTagResponse(getSheetTagFromNet(), new EvictProvider(false));
+    }
+
+    @Override
+    public Observable<SheetTagResponse> getSheetTagFromNet() {
         return mRepositoryManager
                 .obtainRetrofitService(MusicService.class)
                 .getSheetTagResponse(MusicConstants.ANDROID,

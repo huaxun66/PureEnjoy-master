@@ -17,5 +17,6 @@ public interface MusicSheetDetailContract {
 
     interface Model extends IModel{
         Observable<SheetDetailResponse> getSheetDetail(String listid);
+        Observable<SheetDetailResponse> getSheetDetailFromNet(String listid);
     }
 }

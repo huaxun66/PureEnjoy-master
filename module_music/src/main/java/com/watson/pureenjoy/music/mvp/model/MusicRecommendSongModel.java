@@ -19,6 +19,7 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.watson.pureenjoy.music.app.MusicConstants;
+import com.watson.pureenjoy.music.http.api.cache.MusicCache;
 import com.watson.pureenjoy.music.http.api.service.MusicService;
 import com.watson.pureenjoy.music.http.entity.recommendSong.RecommendSongResponse;
 import com.watson.pureenjoy.music.mvp.contract.MusicRecommendSongContract;
@@ -26,6 +27,7 @@ import com.watson.pureenjoy.music.mvp.contract.MusicRecommendSongContract;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.rx_cache2.EvictProvider;
 
 @ActivityScope
 public class MusicRecommendSongModel extends BaseModel implements MusicRecommendSongContract.Model {
@@ -37,6 +39,13 @@ public class MusicRecommendSongModel extends BaseModel implements MusicRecommend
 
     @Override
     public Observable<RecommendSongResponse> getRecommendSong(int num) {
+        return mRepositoryManager
+                .obtainCacheService(MusicCache.class)
+                .getRecommendSong(getRecommendSongFromNet(num), new EvictProvider(false));
+    }
+
+    @Override
+    public Observable<RecommendSongResponse> getRecommendSongFromNet(int num) {
         return mRepositoryManager
                 .obtainRetrofitService(MusicService.class)
                 .getRecommendSong(MusicConstants.ANDROID,

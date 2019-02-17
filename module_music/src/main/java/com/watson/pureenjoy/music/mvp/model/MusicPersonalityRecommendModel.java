@@ -18,6 +18,7 @@ package com.watson.pureenjoy.music.mvp.model;
 import com.jess.arms.di.scope.FragmentScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
+import com.watson.pureenjoy.music.http.api.cache.MusicCache;
 import com.watson.pureenjoy.music.http.api.service.MusicService;
 import com.watson.pureenjoy.music.http.entity.recommend.RecommendResponse;
 import com.watson.pureenjoy.music.mvp.contract.MusicPersonalityRecommendContract;
@@ -25,6 +26,7 @@ import com.watson.pureenjoy.music.mvp.contract.MusicPersonalityRecommendContract
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.rx_cache2.EvictProvider;
 
 import static com.watson.pureenjoy.music.http.api.Api.MUSIC_RECOMMEND_URL;
 
@@ -38,6 +40,13 @@ public class MusicPersonalityRecommendModel extends BaseModel implements MusicPe
 
     @Override
     public Observable<RecommendResponse> getRecommendResponse() {
+        return mRepositoryManager
+                .obtainCacheService(MusicCache.class)
+                .getRecommendResponse(getRecommendResponseFromNet(), new EvictProvider(false));
+    }
+
+    @Override
+    public Observable<RecommendResponse> getRecommendResponseFromNet() {
         return mRepositoryManager
                 .obtainRetrofitService(MusicService.class)
                 .getRecommendResponse(MUSIC_RECOMMEND_URL);

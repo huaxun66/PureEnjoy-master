@@ -1,12 +1,13 @@
-package com.watson.pureenjoy.app.app.utils.crash;
+package com.watson.pureEnjoy.app.app.utils.crash;
 
 import android.os.Environment;
 
 import com.jess.arms.utils.LogUtils;
-import com.watson.pureenjoy.app.app.utils.SystemUtil;
 
 import java.io.File;
 import java.util.Calendar;
+
+import me.jessyan.armscomponent.commonsdk.utils.SystemUtil;
 
 public class CrashUtils {
 

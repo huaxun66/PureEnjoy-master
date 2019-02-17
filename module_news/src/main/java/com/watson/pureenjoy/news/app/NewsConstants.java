@@ -45,4 +45,6 @@ public class NewsConstants {
     public static final String URL = "url";
     public static final String BIG_IMG = "bigimg";
 
+    public static final Long NEWS_EXPIRE_TIME = (long)2*3600*1000; //数据库超时时间2小时
+
 }

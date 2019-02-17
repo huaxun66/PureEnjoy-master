@@ -17,5 +17,6 @@ public interface MusicRecommendSongContract {
 
     interface Model extends IModel{
         Observable<RecommendSongResponse> getRecommendSong(int num);
+        Observable<RecommendSongResponse> getRecommendSongFromNet(int num);
     }
 }

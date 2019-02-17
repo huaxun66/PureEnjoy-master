@@ -19,6 +19,7 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.watson.pureenjoy.music.app.MusicConstants;
+import com.watson.pureenjoy.music.http.api.cache.MusicCache;
 import com.watson.pureenjoy.music.http.api.service.MusicService;
 import com.watson.pureenjoy.music.http.entity.album.AlbumResponse;
 import com.watson.pureenjoy.music.mvp.contract.MusicAlbumContract;
@@ -26,6 +27,8 @@ import com.watson.pureenjoy.music.mvp.contract.MusicAlbumContract;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.rx_cache2.DynamicKey;
+import io.rx_cache2.EvictDynamicKey;
 
 @ActivityScope
 public class MusicAlbumModel extends BaseModel implements MusicAlbumContract.Model {
@@ -37,6 +40,13 @@ public class MusicAlbumModel extends BaseModel implements MusicAlbumContract.Mod
 
     @Override
     public Observable<AlbumResponse> getRecommendAlbum(int offset, int limit) {
+        return mRepositoryManager
+                .obtainCacheService(MusicCache.class)
+                .getRecommendAlbum(getRecommendAlbumFromNet(offset, limit), new DynamicKey(offset), new EvictDynamicKey(false));
+    }
+
+    @Override
+    public Observable<AlbumResponse> getRecommendAlbumFromNet(int offset, int limit) {
         return mRepositoryManager
                 .obtainRetrofitService(MusicService.class)
                 .getRecommendAlbum(MusicConstants.ANDROID,

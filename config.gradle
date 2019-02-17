@@ -19,7 +19,8 @@ ext {
             rxlifecycle2SdkVersion  : "2.2.2",
             espressoSdkVersion      : "3.0.1",
             canarySdkVersion        : "1.5.4",
-            fragmentationVersion    : "1.1.6"
+            fragmentationVersion    : "1.1.6",
+            jitpackVersion          : "1.1.1"
     ]
 
     dependencies = [
@@ -112,6 +113,8 @@ ext {
             "fragmentation"            : "me.yokeyword:fragmentation:${version["fragmentationVersion"]}",
             "fragmentation-core"       : "me.yokeyword:fragmentation-core:${version["fragmentationVersion"]}",
             "fragmentation-swipeback"  : "me.yokeyword:fragmentation-swipeback:${version["fragmentationVersion"]}",
+            "jitpack-room"             : "android.arch.persistence.room:runtime:${version["jitpackVersion"]}",
+            "jitpack-room-compiler"    : "android.arch.persistence.room:compiler:${version["jitpackVersion"]}",
 
             //test
             "junit"                    : "junit:junit:4.12",

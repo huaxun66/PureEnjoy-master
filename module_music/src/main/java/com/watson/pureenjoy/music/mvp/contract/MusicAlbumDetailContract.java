@@ -17,5 +17,6 @@ public interface MusicAlbumDetailContract {
 
     interface Model extends IModel{
         Observable<AlbumDetailResponse> getAlbumDetail(String albumid);
+        Observable<AlbumDetailResponse> getAlbumDetailFromNet(String albumid);
     }
 }

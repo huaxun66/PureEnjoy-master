@@ -16,5 +16,6 @@ public interface MusicRankContract {
 
     interface Model extends IModel{
         Observable<RankResponse> getMusicRank();
+        Observable<RankResponse> getMusicRankFromNet();
     }
 }

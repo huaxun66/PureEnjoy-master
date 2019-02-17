@@ -131,7 +131,7 @@ public class NewsListFragment extends NewsBaseFragment<NewsListPresenter> implem
         if (offset == 0) {
             isRefresh = true;
         }
-        mPresenter.requestNewsList(typeId, offset, 10, showLoading);
+        mPresenter.requestNewsList(getContext(), typeId, offset, 10, showLoading);
     }
 
     @Override

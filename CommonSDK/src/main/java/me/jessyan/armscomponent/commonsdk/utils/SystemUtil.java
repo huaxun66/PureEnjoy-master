@@ -1,18 +1,11 @@
-package com.watson.pureenjoy.app.app.utils;
+package me.jessyan.armscomponent.commonsdk.utils;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Environment;
-import android.support.v4.content.ContextCompat;
-import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
-
 
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -227,22 +220,22 @@ public class SystemUtil {
         return android.os.Build.BRAND;
     }
 
-    /**
-     * 获取手机IMEI(需要“android.permission.READ_PHONE_STATE”权限)
-     *
-     * @return 手机IMEI
-     */
-    public static String getIMEI(Context ctx) {
-        //添加简单权限验证，无权限直接返回null，作为临时处理方案
-        if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.READ_PHONE_STATE)
-                == PackageManager.PERMISSION_GRANTED) {
-            TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Activity.TELEPHONY_SERVICE);
-            if (tm != null) {
-                return tm.getDeviceId();
-            }
-        }
-        return "";
-    }
+//    /**
+//     * 获取手机IMEI(需要“android.permission.READ_PHONE_STATE”权限)
+//     *
+//     * @return 手机IMEI
+//     */
+//    public static String getIMEI(Context ctx) {
+//        //添加简单权限验证，无权限直接返回null，作为临时处理方案
+//        if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.READ_PHONE_STATE)
+//                == PackageManager.PERMISSION_GRANTED) {
+//            TelephonyManager tm = (TelephonyManager) ctx.getSystemService(Activity.TELEPHONY_SERVICE);
+//            if (tm != null) {
+//                return tm.getDeviceId();
+//            }
+//        }
+//        return "";
+//    }
 
     /**
      * 获取ip地址

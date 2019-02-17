@@ -16,5 +16,6 @@ public interface MusicSheetTagContract {
 
     interface Model extends IModel{
         Observable<SheetTagResponse> getSheetTag();
+        Observable<SheetTagResponse> getSheetTagFromNet();
     }
 }

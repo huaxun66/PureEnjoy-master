@@ -53,5 +53,7 @@ dependencies {
     api rootProject.ext.dependencies["nineoldandroids"]
     api rootProject.ext.dependencies["picasso"]
     api rootProject.ext.dependencies["glide-transformation"]
+    api rootProject.ext.dependencies["jitpack-room"]
+    annotationProcessor rootProject.ext.dependencies["jitpack-room-compiler"]
 
 }

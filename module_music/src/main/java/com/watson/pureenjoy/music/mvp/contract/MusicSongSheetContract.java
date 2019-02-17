@@ -17,6 +17,8 @@ public interface MusicSongSheetContract {
 
     interface Model extends IModel{
         Observable<SheetResponse> getSongSheetList(int pageNo, int pageSize);
+        Observable<SheetResponse> getSongSheetListFromNet(int pageNo, int pageSize);
         Observable<SheetResponse> getSongSheetListByTag(String tag, int pageNo, int pageSize);
+        Observable<SheetResponse> getSongSheetListByTagFromNet(String tag, int pageNo, int pageSize);
     }
 }

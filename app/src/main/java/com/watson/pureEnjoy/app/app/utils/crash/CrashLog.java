@@ -1,4 +1,4 @@
-package com.watson.pureenjoy.app.app.utils.crash;
+package com.watson.pureEnjoy.app.app.utils.crash;
 
 import java.io.Serializable;
 

@@ -31,6 +31,7 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
+
 @FragmentScope
 public class NewsListModel extends BaseModel implements NewsListContract.Model {
 
@@ -53,4 +54,5 @@ public class NewsListModel extends BaseModel implements NewsListContract.Model {
                 .obtainRetrofitService(NewsService.class)
                 .getNewsPhotoSet(photoId);
     }
+
 }

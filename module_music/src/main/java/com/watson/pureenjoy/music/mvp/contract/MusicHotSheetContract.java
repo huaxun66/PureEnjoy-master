@@ -16,5 +16,6 @@ public interface MusicHotSheetContract {
 
     interface Model extends IModel{
         Observable<SheetHotResponse> getHotSheetList(int num);
+        Observable<SheetHotResponse> getHotSheetListFromNet(int num);
     }
 }

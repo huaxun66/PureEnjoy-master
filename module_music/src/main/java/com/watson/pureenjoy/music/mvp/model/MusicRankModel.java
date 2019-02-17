@@ -19,6 +19,7 @@ import com.jess.arms.di.scope.ActivityScope;
 import com.jess.arms.integration.IRepositoryManager;
 import com.jess.arms.mvp.BaseModel;
 import com.watson.pureenjoy.music.app.MusicConstants;
+import com.watson.pureenjoy.music.http.api.cache.MusicCache;
 import com.watson.pureenjoy.music.http.api.service.MusicService;
 import com.watson.pureenjoy.music.http.entity.rank.RankResponse;
 import com.watson.pureenjoy.music.mvp.contract.MusicRankContract;
@@ -26,6 +27,7 @@ import com.watson.pureenjoy.music.mvp.contract.MusicRankContract;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.rx_cache2.EvictProvider;
 
 @ActivityScope
 public class MusicRankModel extends BaseModel implements MusicRankContract.Model {
@@ -37,6 +39,13 @@ public class MusicRankModel extends BaseModel implements MusicRankContract.Model
 
     @Override
     public Observable<RankResponse> getMusicRank() {
+        return mRepositoryManager
+                .obtainCacheService(MusicCache.class)
+                .getMusicRank(getMusicRankFromNet(), new EvictProvider(false));
+    }
+
+    @Override
+    public Observable<RankResponse> getMusicRankFromNet() {
         return mRepositoryManager
                 .obtainRetrofitService(MusicService.class)
                 .getMusicRank(MusicConstants.ANDROID,

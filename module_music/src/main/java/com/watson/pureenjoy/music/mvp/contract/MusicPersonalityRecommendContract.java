@@ -17,5 +17,6 @@ public interface MusicPersonalityRecommendContract {
 
     interface Model extends IModel{
         Observable<RecommendResponse> getRecommendResponse();
+        Observable<RecommendResponse> getRecommendResponseFromNet();
     }
 }
