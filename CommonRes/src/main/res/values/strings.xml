@@ -30,6 +30,7 @@
     <string name="str_sure">Sure</string>
     <string name="str_cancel">Cancel</string>
     <string name="str_wait">Please Wait</string>
+    <string name="str_delete">Delete</string>
 
     <string name="public_str_search">Search</string>
     <string name="public_server_error">Server Error</string>

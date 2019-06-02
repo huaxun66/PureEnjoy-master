@@ -64,11 +64,9 @@ public class MusicRankActivity extends MusicBaseActivity<MusicRankPresenter> imp
 
     private void initListener() {
         mTopBar.setLeftImageClickListener(v -> finish());
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            ARouter.getInstance().build(RouterHub.MUSIC_RANK_DETAIL_ACTIVITY)
-                    .withParcelable(RANK_INFO, ((RankInfo)adapter.getData().get(position)))
-                    .navigation();
-        });
+        mAdapter.setOnItemClickListener((adapter, view, position) -> ARouter.getInstance().build(RouterHub.MUSIC_RANK_DETAIL_ACTIVITY)
+                .withParcelable(RANK_INFO, ((RankInfo)adapter.getData().get(position)))
+                .navigation());
     }
 
     @Override

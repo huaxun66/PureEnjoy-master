@@ -29,6 +29,7 @@
             android:textColor="@color/public_custom_color_text_main" />
 
         <TextView
+            android:id="@+id/local_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -72,6 +73,7 @@
             android:textColor="@color/public_custom_color_text_main" />
 
         <TextView
+            android:id="@+id/recent_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -115,6 +117,7 @@
             android:textColor="@color/public_custom_color_text_main" />
 
         <TextView
+            android:id="@+id/radio_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -159,6 +162,7 @@
             android:textColor="@color/public_custom_color_text_main" />
 
         <TextView
+            android:id="@+id/collect_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"

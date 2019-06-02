@@ -12,6 +12,7 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
+import com.watson.pureenjoy.music.http.entity.rank.RankInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,8 @@ import me.jessyan.armscomponent.commonres.adapter.FragmentViewPagerAdapter;
 import me.jessyan.armscomponent.commonres.view.EasyTabBarTxtScroll;
 import me.jessyan.armscomponent.commonres.view.TopBar;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
+
+import static com.watson.pureenjoy.music.app.MusicConstants.RANK_INFO;
 
 @Route(path = RouterHub.MUSIC_LOCAL_MUSIC_ACTIVITY)
 public class MusicLocalMusicActivity extends MusicBaseActivity {
@@ -50,10 +53,10 @@ public class MusicLocalMusicActivity extends MusicBaseActivity {
         titleList.add(getString(R.string.music_artist));
         titleList.add(getString(R.string.music_album));
         titleList.add(getString(R.string.music_folder));
-        fragmentList.add((BaseFragment) ARouter.getInstance().build(RouterHub.MUSIC_ANCHOR_RADIO_FRAGMENT).navigation());
-        fragmentList.add((BaseFragment) ARouter.getInstance().build(RouterHub.MUSIC_ANCHOR_RADIO_FRAGMENT).navigation());
-        fragmentList.add((BaseFragment) ARouter.getInstance().build(RouterHub.MUSIC_ANCHOR_RADIO_FRAGMENT).navigation());
-        fragmentList.add((BaseFragment) ARouter.getInstance().build(RouterHub.MUSIC_ANCHOR_RADIO_FRAGMENT).navigation());
+        fragmentList.add((BaseFragment) ARouter.getInstance().build(RouterHub.MUSIC_LOCAL_SONG_FRAGMENT).navigation());
+        fragmentList.add((BaseFragment) ARouter.getInstance().build(RouterHub.MUSIC_LOCAL_SINGER_FRAGMENT).navigation());
+        fragmentList.add((BaseFragment) ARouter.getInstance().build(RouterHub.MUSIC_LOCAL_ALBUM_FRAGMENT).navigation());
+        fragmentList.add((BaseFragment) ARouter.getInstance().build(RouterHub.MUSIC_LOCAL_FOLDER_FRAGMENT).navigation());
         FragmentViewPagerAdapter adapter = new FragmentViewPagerAdapter(getSupportFragmentManager(), titleList, fragmentList);
         mViewPager.setAdapter(adapter);
         mTabBar.setViewPager(mViewPager);
@@ -62,5 +65,6 @@ public class MusicLocalMusicActivity extends MusicBaseActivity {
 
     private void initListener() {
         mTopBar.setLeftImageClickListener(v -> finish());
+        mTopBar.setRightImageClickListener(v -> ARouter.getInstance().build(RouterHub.MUSIC_SCAN_ACTIVITY).navigation());
     }
 }

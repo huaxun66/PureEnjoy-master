@@ -1,5 +1,6 @@
 package com.watson.pureenjoy.music.mvp.ui.fragment;
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.wang.avi.AVLoadingIndicatorView;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
 import me.jessyan.armscomponent.commonres.adapter.FragmentViewPagerAdapter;
 import me.jessyan.armscomponent.commonres.view.EasyTabBarTxtScroll;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
@@ -49,6 +52,7 @@ public class MusicFragment extends MusicBaseFragment {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         initListener();
+        requestPermissions();
         List<String> titleList = new ArrayList<>();
         List<BaseFragment> fragmentList = new ArrayList<>();
         titleList.add(getString(R.string.music_personality_recommend));
@@ -60,6 +64,20 @@ public class MusicFragment extends MusicBaseFragment {
         FragmentViewPagerAdapter adapter = new FragmentViewPagerAdapter(getChildFragmentManager(), titleList, fragmentList);
         mViewPager.setAdapter(adapter);
         mTabBar.setViewPager(mViewPager);
+    }
+
+    private void requestPermissions() {
+        new RxPermissions(this)
+                .request(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .subscribe(granted -> {
+                    if (granted) { // 在android 6.0之前会默认返回true
+                        // 已经获取权限
+                        Toasty.error(getContext(), "666");
+                    } else {
+                        // 未获取权限
+                        Toasty.error(getContext(), "您没有授权该权限，请在设置中打开授权");
+                    }
+                });
     }
 
     @Override

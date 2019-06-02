@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/public_height_500dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_50dp"
+        android:layout_marginStart="@dimen/public_mar_left_10dp"
+        android:gravity="center_vertical"
+        android:text="@string/music_collect_sheet" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_0_5dp"
+        android:background="@color/public_common_touch_bg" />
+
+    <LinearLayout
+        android:id="@+id/pop_add_sheet_ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_50dp"
+        android:background="@drawable/public_selector_layout"
+        android:clickable="true">
+
+        <ImageView
+            android:layout_width="@dimen/public_width_50dp"
+            android:layout_height="match_parent"
+            android:padding="@dimen/public_padding_10dp"
+            android:layout_margin="@dimen/public_mar_left_10dp"
+            android:src="@drawable/public_nav_add"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/music_new_sheet" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_0_5dp"
+        android:background="@color/public_common_touch_bg" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/pop_add_sheet_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

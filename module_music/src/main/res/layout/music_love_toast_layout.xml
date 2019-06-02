@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/music_shape_love"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="@dimen/public_padding_10dp">
+
+    <ImageView
+        android:id="@+id/toast_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/music_selector_love"/>
+
+    <TextView
+        android:id="@+id/toast_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/public_mar_top_5dp"
+        android:text="@string/music_set_song_love_success"
+        android:textColor="@color/public_white"
+        android:textSize="@dimen/public_font_16sp" />
+</LinearLayout>

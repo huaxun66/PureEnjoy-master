@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="music_module_name">ModuleMusic</string>
 
     <string name="music_personality_recommend">Recommend</string>
@@ -42,11 +42,41 @@
     <string name="music_my_create_sheet">My Created Sheet(%1$d)</string>
     <string name="music_my_collect_sheet">My Collected Sheet(%1$d)</string>
 
+    <string name="music_scan">Scan Music</string>
+    <string name="music_scan_exclude_60s">Do not scan music less than 60s</string>
+    <string name="music_scan_start">Start Scan</string>
+    <string name="music_scan_stop">Stop Scan</string>
+    <string name="music_local_music_empty">Local music is empty, please download</string>
+    <string name="music_database_error">Database error</string>
+    <string name="music_scan_complete">%1$d Songs has completed</string>
+    <string name="music_finish">Finish</string>
+
+
     <string name="music_recommend_song">Recommend Song</string>
 
     <string name="music_song">Song</string>
     <string name="music_artist">Artist</string>
     <string name="music_album">Album</string>
     <string name="music_folder">Folder</string>
+    <string name="music_manager">Manager</string>
+    <string name="music_add">Add</string>
+    <string name="music_love">Love</string>
+    <string name="music_delete">Delete</string>
+    <string name="music_cancel">Cancel</string>
+    <string name="music_collect_sheet">Collect To Sheet</string>
+    <string name="music_new_sheet">New Sheet</string>
+    <string name="music_my_sheet">My Sheet</string>
+    <string name="music_sheet_song_num">%1$dSongs</string>
+    <string name="music_sheet_contains_song">The song is exist in sheet</string>
+    <string name="music_add_sheet_song_success">Add to sheet success</string>
+    <string name="music_set_song_love_success">Set song love success</string>
+    <string name="music_cancel_song_love_success">Cancel song love success</string>
+    <string name="music_confirm_delete">Confirm to delete from sheet？</string>
+    <string name="music_delete_song_file">Delete the song file</string>
+    <string name="music_song_not_exist">Song not exist</string>
+
+    <string name="duration_format" translatable="false"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
+    <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>
+    <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g></string>
 
 </resources>

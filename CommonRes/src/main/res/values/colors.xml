@@ -22,5 +22,7 @@
 
     <color name="public_refresh_tip">#7C868D</color>
 
+    <color name="public_common_touch_bg">#FFEEEEEE</color>
+    <color name="public_common_bg">@color/public_white</color>
 
 </resources>

@@ -10,6 +10,7 @@
     <dimen name="public_font_12sp">12sp</dimen>
     <dimen name="public_font_13sp">13sp</dimen>
     <dimen name="public_font_14sp">14sp</dimen>
+    <dimen name="public_font_15sp">15sp</dimen>
     <dimen name="public_font_16sp">16sp</dimen>
     <dimen name="public_font_17sp">17sp</dimen>
     <dimen name="public_font_18sp">18sp</dimen>
@@ -19,6 +20,7 @@
     <dimen name="public_font_32sp">32sp</dimen>
     <dimen name="public_font_36sp">36sp</dimen>
     <dimen name="public_font_48sp">48sp</dimen>
+    <dimen name="public_font_50sp">50sp</dimen>
 
     //高
     <dimen name="public_height_0dp">0dp</dimen>
@@ -58,7 +60,7 @@
     <dimen name="public_height_200dp">200dp</dimen>
     <dimen name="public_height_250dp">250dp</dimen>
     <dimen name="public_height_280dp">280dp</dimen>
-
+    <dimen name="public_height_500dp">500dp</dimen>
 
     //宽
     <dimen name="public_width_0dp">0dp</dimen>
@@ -76,6 +78,7 @@
     <dimen name="public_width_40dp">40dp</dimen>
     <dimen name="public_width_45dp">45dp</dimen>
     <dimen name="public_width_50dp">50dp</dimen>
+    <dimen name="public_width_60dp">60dp</dimen>
     <dimen name="public_width_67dp">67dp</dimen>
     <dimen name="public_width_80dp">80dp</dimen>
     <dimen name="public_width_100dp">100dp</dimen>
@@ -83,6 +86,7 @@
     <dimen name="public_width_120dp">120dp</dimen>
     <dimen name="public_width_150dp">150dp</dimen>
     <dimen name="public_width_180dp">180dp</dimen>
+    <dimen name="public_width_200dp">200dp</dimen>
 
     //padding
     <dimen name="public_padding_2dp">2dp</dimen>
@@ -163,6 +167,7 @@
     <dimen name="public_mar_left_12dp">12dp</dimen>
     <dimen name="public_mar_left_14dp">14dp</dimen>
     <dimen name="public_mar_left_15dp">15dp</dimen>
+    <dimen name="public_mar_left_16dp">16dp</dimen>
     <dimen name="public_mar_left_20dp">20dp</dimen>
     <dimen name="public_mar_left_40dp">40dp</dimen>
     <dimen name="public_mar_left_50dp">50dp</dimen>
@@ -178,6 +183,7 @@
     <dimen name="public_mar_right_11dp">11dp</dimen>
     <dimen name="public_mar_right_12dp">12dp</dimen>
     <dimen name="public_mar_right_15dp">15dp</dimen>
+    <dimen name="public_mar_right_16dp">16dp</dimen>
     <dimen name="public_mar_right_20dp">20dp</dimen>
     <dimen name="public_mar_right_50dp">50dp</dimen>
 
@@ -193,4 +199,5 @@
     <dimen name="public_mar_bottom_20dp">20dp</dimen>
     <dimen name="public_mar_bottom_25dp">25dp</dimen>
     <dimen name="public_mar_bottom_30dp">30dp</dimen>
+    <dimen name="public_mar_bottom_50dp">50dp</dimen>
 </resources>

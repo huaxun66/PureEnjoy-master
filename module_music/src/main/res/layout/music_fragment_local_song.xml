@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/operator_layout"
+        layout="@layout/music_local_song_operator_layout" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:layout_below="@id/operator_layout"/>
+
+    <com.watson.pureenjoy.music.mvp.ui.view.SlideBar
+        android:id="@+id/slider_bar"
+        android:layout_width="@dimen/public_width_200dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="@dimen/public_pad_top_5dp"
+        android:paddingBottom="@dimen/public_pad_bottom_5dp"
+        android:layout_below="@id/operator_layout"/>
+
+    <TextView
+        android:id="@+id/slider_pre_tv"
+        android:layout_width="@dimen/public_width_80dp"
+        android:layout_height="@dimen/public_height_80dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/music_shape_letter_pre"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textColor="@color/public_grey_700"
+        android:textSize="@dimen/public_font_50sp"/>
+</RelativeLayout>

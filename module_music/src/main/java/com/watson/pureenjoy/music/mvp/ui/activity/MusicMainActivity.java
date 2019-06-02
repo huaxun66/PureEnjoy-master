@@ -36,4 +36,6 @@ public class MusicMainActivity extends MusicBaseActivity {
         transaction.add(R.id.fl_container, fragment);
         transaction.commit();
     }
+
+
 }

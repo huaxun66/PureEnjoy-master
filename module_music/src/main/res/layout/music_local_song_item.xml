@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:swipeEnable="true">
+
+    <TextView
+        android:id="@+id/section_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/public_height_25dp"
+        android:background="@color/public_common_touch_bg"
+        android:gravity="center_vertical"
+        android:paddingStart="@dimen/public_pad_left_10dp"
+        android:paddingEnd="@dimen/public_pad_right_10dp"
+        android:textSize="@dimen/public_font_15sp"
+        android:textColor="@color/public_grey_700"
+        android:visibility="gone" />
+
+    <com.mcxtzhang.swipemenulib.SwipeMenuLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:swipeEnable="true">
+
+        <LinearLayout
+            android:id="@+id/local_music_item_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/public_height_50dp"
+            android:background="@drawable/public_selector_layout"
+            android:clickable="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/local_index"
+                android:layout_width="@dimen/public_width_30dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="1"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/public_height_0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/public_width_0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/local_music_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="bottom"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            tools:text="music name "
+                            android:textSize="@dimen/public_font_15sp"/>
+
+                        <TextView
+                            android:id="@+id/local_music_singer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="top"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            tools:text="singer name "
+                            android:textSize="@dimen/public_font_12sp"
+                            android:textColor="@color/public_grey_700" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/local_music_item_more_menu"
+                        android:layout_width="@dimen/public_width_50dp"
+                        android:layout_height="@dimen/public_height_50dp"
+                        android:layout_weight="0"
+                        android:layout_marginEnd="@dimen/public_mar_right_10dp"
+                        android:padding="@dimen/public_padding_15dp"
+                        android:clickable="true"
+                        android:src="@drawable/music_selector_more_menu" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/public_height_0_5dp"
+                    android:layout_weight="0"
+                    android:background="@color/public_common_touch_bg"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/swipe_delete_menu_btn"
+            android:layout_width="@dimen/public_width_60dp"
+            android:layout_height="match_parent"
+            android:background="@color/music_theme"
+            android:gravity="center"
+            android:textColor="@color/public_white"
+            android:text="@string/str_delete" />
+    </com.mcxtzhang.swipemenulib.SwipeMenuLayout>
+
+</LinearLayout>

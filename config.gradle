@@ -68,6 +68,7 @@ ext {
             "vlayout"                  : "com.alibaba.android:vlayout:1.1.0@aar",
             "lottie"                   : "com.airbnb.android:lottie:2.7.0",
             "autosize"                 : "me.jessyan:autosize:1.1.0",
+            "swipelayout"              : "com.github.mcxtzhang:SwipeDelMenuLayout:V1.2.5",
 
             //rx1
             "rxandroid"                : "io.reactivex:rxandroid:1.2.1",
@@ -115,6 +116,7 @@ ext {
             "fragmentation-swipeback"  : "me.yokeyword:fragmentation-swipeback:${version["fragmentationVersion"]}",
             "jitpack-room"             : "android.arch.persistence.room:runtime:${version["jitpackVersion"]}",
             "jitpack-room-compiler"    : "android.arch.persistence.room:compiler:${version["jitpackVersion"]}",
+            "pinyin"                   : "com.github.promeg:tinypinyin:1.0.0",
 
             //test
             "junit"                    : "junit:junit:4.12",

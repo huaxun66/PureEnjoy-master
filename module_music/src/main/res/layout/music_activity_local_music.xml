@@ -19,6 +19,7 @@
             app:backgroundColor="@color/music_theme"
             app:isShowBottomLine="false"
             app:leftImage="@drawable/public_nav_back_white"
+            app:rightImage="@drawable/music_nav_scan"
             app:title="@string/music_local_music"
             app:titleColor="@color/public_white" />
 

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_scan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <me.jessyan.armscomponent.commonres.view.TopBar
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backgroundColor="@color/music_theme"
+        app:isShowBottomLine="false"
+        app:leftImage="@drawable/public_nav_back_white"
+        app:title="@string/music_scan"
+        app:titleColor="@color/public_white" />
+
+    <com.watson.pureenjoy.music.mvp.ui.view.ScanView
+        android:id="@+id/scan_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:accent_color="?attr/colorAccent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/public_mar_top_100dp"/>
+
+    <LinearLayout
+        android:id="@+id/scan_filter_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/public_height_50dp"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/public_mar_top_20dp"
+        android:layout_below="@id/scan_view">
+
+        <CheckBox
+            android:id="@+id/scan_filter_cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/music_scan_exclude_60s"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/scan_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/public_height_25dp"
+        android:layout_marginTop="@dimen/public_mar_top_5dp"
+        android:maxLines="1"
+        android:visibility="gone"
+        android:layout_below="@id/scan_filter_ll"/>
+
+    <TextView
+        android:id="@+id/scan_path"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scan_progress"
+        android:layout_marginTop="@dimen/public_mar_top_10dp"
+        android:layout_marginStart="@dimen/public_mar_left_16dp"
+        android:layout_marginEnd="@dimen/public_mar_right_16dp"
+        android:singleLine="true"
+        android:ellipsize="start"
+        android:layout_centerHorizontal="true"/>
+
+    <TextView
+        android:id="@+id/scan_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/scan_path"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/public_mar_top_3dp"
+        android:singleLine="true"
+        android:ellipsize="end"/>
+
+    <Button
+        android:id="@+id/start_scan_btn"
+        android:layout_width="@dimen/public_width_200dp"
+        android:layout_height="@dimen/public_height_40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/public_mar_bottom_50dp"
+        android:background="@drawable/music_selector_scan_btn"
+        android:textColor="@color/music_white"
+        android:text="@string/music_scan_start"/>
+</RelativeLayout>

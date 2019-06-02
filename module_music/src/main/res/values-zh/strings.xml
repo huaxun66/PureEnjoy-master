@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="music_module_name">音乐模块</string>
 
     <string name="music_personality_recommend">个性推荐</string>
@@ -42,11 +42,40 @@
     <string name="music_my_create_sheet">我创建的歌单(%1$d)</string>
     <string name="music_my_collect_sheet">我收藏的歌单(%1$d)</string>
 
+    <string name="music_scan">扫描音乐</string>
+    <string name="music_scan_exclude_60s">不扫描60s以下的歌曲</string>
+    <string name="music_scan_start">开始扫描</string>
+    <string name="music_scan_stop">停止扫描</string>
+    <string name="music_local_music_empty">本地没有歌曲，快去下载吧</string>
+    <string name="music_database_error">数据库错误</string>
+    <string name="music_scan_complete">已扫描到%1$d首歌曲</string>
+    <string name="music_finish">完成</string>
+
     <string name="music_recommend_song">推荐歌曲</string>
 
     <string name="music_song">歌曲</string>
     <string name="music_artist">歌手</string>
     <string name="music_album">专辑</string>
     <string name="music_folder">文件夹</string>
+    <string name="music_manager">管理</string>
+    <string name="music_add">添加到</string>
+    <string name="music_love">我喜欢</string>
+    <string name="music_delete">删除</string>
+    <string name="music_cancel">取消</string>
+    <string name="music_collect_sheet">收藏到歌单</string>
+    <string name="music_new_sheet">新建歌单</string>
+    <string name="music_my_sheet">我的歌单</string>
+    <string name="music_sheet_song_num">%1$d首</string>
+    <string name="music_sheet_contains_song">该歌单已存在该歌曲</string>
+    <string name="music_add_sheet_song_success">添加到歌单成功</string>
+    <string name="music_set_song_love_success">设置我喜欢的音乐成功</string>
+    <string name="music_cancel_song_love_success">取消我喜欢的音乐成功</string>
+    <string name="music_confirm_delete">确定将所选音乐从列表中移除吗？</string>
+    <string name="music_delete_song_file">同时删除歌曲文件</string>
+    <string name="music_song_not_exist">歌曲不存在</string>
+
+    <string name="duration_format" translatable="false"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
+    <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>
+    <string name="durationformatlong" translatable="false"><xliff:g id="format">%1$d:%2$02d:%3$02d</xliff:g></string>
 
 </resources>

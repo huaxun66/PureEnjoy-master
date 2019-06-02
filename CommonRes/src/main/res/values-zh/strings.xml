@@ -32,8 +32,11 @@
     <string name="str_sure">确认</string>
     <string name="str_cancel">取消</string>
     <string name="str_wait">请稍等</string>
+    <string name="str_delete">删除</string>
 
     <string name="public_str_search">搜索</string>
     <string name="public_server_error">服务器异常</string>
+
+
 
 </resources>

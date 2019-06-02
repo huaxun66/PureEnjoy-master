@@ -42,4 +42,9 @@
         <item name="android:layout_height">@dimen/public_height_0_5dp</item>
         <item name="android:background">@color/public_custom_color_app_content_div</item>
     </style>
+
+    <style name="pop_window_animation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/public_pop_enter</item>
+        <item name="android:windowExitAnimation">@anim/public_pop_exit</item>
+    </style>
 </resources>
