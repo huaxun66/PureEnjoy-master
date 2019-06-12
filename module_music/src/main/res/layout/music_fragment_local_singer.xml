@@ -1,92 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/music_theme"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:scrollbars="none"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/public_width_30dp"
-            android:layout_marginTop="@dimen/public_mar_top_15dp">
-
-            <com.wang.avi.AVLoadingIndicatorView
-                android:id="@+id/avi"
-                style="@style/AVLoadingIndicatorView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                app:indicatorColor="@color/public_white"
-                app:indicatorName="LineScalePulseOutRapidIndicator" />
-
-            <RelativeLayout
-                android:id="@+id/search_rl"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="@dimen/public_mar_right_10dp"
-                android:layout_marginStart="@dimen/public_mar_left_12dp"
-                android:layout_toStartOf="@+id/avi"
-                android:background="@drawable/music_search_et_bg">
-
-                <me.jessyan.armscomponent.commonres.view.CustomClearEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/public_mar_right_7dp"
-                    android:layout_marginStart="@dimen/public_mar_left_7dp"
-                    android:background="@null"
-                    android:drawableRight="@drawable/public_search_close"
-                    android:drawablePadding="@dimen/public_padding_8dp"
-                    android:drawableLeft="@drawable/public_search_expand"
-                    android:gravity="center_vertical"
-                    android:hint="@string/public_str_search"
-                    android:imeOptions="actionSearch"
-                    android:inputType="text"
-                    android:maxLength="50"
-                    android:maxLines="1"
-                    android:paddingEnd="@dimen/public_pad_right_7dp"
-                    android:paddingStart="@dimen/public_pad_left_7dp"
-                    android:textColor="@color/public_white_transparency_750"
-                    android:textColorHint="@color/public_white_transparency_800"
-                    android:textSize="@dimen/public_font_14sp"
-                    android:focusable="false"/>
-
-            </RelativeLayout>
-        </RelativeLayout>
-
-        <me.jessyan.armscomponent.commonres.view.EasyTabBarTxtScroll
-            android:id="@+id/easyTabBar_fragment_music_tab"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/public_height_40dp"
-            android:layout_marginStart="@dimen/public_mar_left_15dp"
-            android:layout_marginEnd="@dimen/public_mar_right_15dp"
-            android:layout_marginBottom="@dimen/public_mar_bottom_10dp"
-            app:indicatorColor="@color/public_white"
-            app:indicatorFit="tabText"
-            app:indicatorHeight="@dimen/public_height_2dp"
-            app:indicatorPaddingLeft="@dimen/public_padding_15dp"
-            app:indicatorPaddingRight="@dimen/public_padding_15dp"
-            app:indicatorType="line"
-            app:tabPaddingBottom="@dimen/public_pad_bottom_6dp"
-            app:tabPaddingLeft="@dimen/public_padding_15dp"
-            app:tabPaddingRight="@dimen/public_padding_15dp"
-            app:tabPaddingTop="@dimen/public_pad_top_6dp"
-            app:tabSelectTextColor="@color/public_white"
-            app:tabTextSize="@dimen/public_font_13sp"
-            app:tabUnSelectTextColor="@color/public_white"
-            app:tabWeight="true" />
-
-    </LinearLayout>
-
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vp_fragment_music_display"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-</LinearLayout>
+</RelativeLayout>

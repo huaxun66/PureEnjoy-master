@@ -3,12 +3,12 @@ package com.watson.pureenjoy.music.http.entity.local;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class MusicSheetInfo implements Parcelable {
+public class LocalSheetInfo implements Parcelable {
     private int id;
     private String name;
     private int count;
 
-    public MusicSheetInfo() {
+    public LocalSheetInfo() {
     }
 
     public String getName() {
@@ -35,20 +35,20 @@ public class MusicSheetInfo implements Parcelable {
     }
 
 
-    public static final Creator<MusicSheetInfo> CREATOR = new Creator<MusicSheetInfo>() {
+    public static final Creator<LocalSheetInfo> CREATOR = new Creator<LocalSheetInfo>() {
         @Override
-        public MusicSheetInfo createFromParcel(Parcel source) {
-            return new MusicSheetInfo(source);
+        public LocalSheetInfo createFromParcel(Parcel source) {
+            return new LocalSheetInfo(source);
         }
 
         @Override
-        public MusicSheetInfo[] newArray(int size) {
-            return new MusicSheetInfo[size];
+        public LocalSheetInfo[] newArray(int size) {
+            return new LocalSheetInfo[size];
         }
     };
 
 
-    protected MusicSheetInfo(Parcel in) {
+    protected LocalSheetInfo(Parcel in) {
         this.id = in.readInt();
         this.count = in.readInt();
         this.name = in.readString();

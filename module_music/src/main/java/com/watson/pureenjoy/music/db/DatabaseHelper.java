@@ -28,7 +28,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	//最近播放表
 	public static final String LAST_PLAY_TABLE = "last_play_table";
-
 	//歌单表
 	public static final String SHEET_TABLE = "sheet_table";
 	//歌单歌曲表

@@ -53,6 +53,9 @@ public class MusicConstants {
     public static final String KEY_CURRENT = "current";
     public static final String KEY_DURATION = "duration";
 
+    public static final String KEY_TYPE = "type";
+    public static final String KEY_TITLE = "title";
+
     //歌曲列表常量
     public static final int LIST_ALLMUSIC = -1;
     public static final int LIST_MYLOVE = 10000;

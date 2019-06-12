@@ -9,7 +9,7 @@ import android.util.Log;
 import com.github.promeg.pinyinhelper.Pinyin;
 import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.http.entity.local.LocalMusicInfo;
-import com.watson.pureenjoy.music.http.entity.local.MusicSheetInfo;
+import com.watson.pureenjoy.music.http.entity.local.LocalSheetInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +43,7 @@ public class DBManager {
         return instance;
     }
 
-    // 获取音乐表歌曲数量
+    // 获取各种歌曲数量
     public int getMusicCount(int table) {
         int musicCount = 0;
         Cursor cursor = null;
@@ -70,8 +70,8 @@ public class DBManager {
         return musicCount;
     }
 
-    public List<LocalMusicInfo> getAllMusicFromMusicTable() {
-        Log.d(TAG, "getAllMusicFromMusicTable: ");
+    //获取所有本地歌曲
+    public List<LocalMusicInfo> getAllMusicList() {
         List<LocalMusicInfo> musicInfoList = new ArrayList<>();
         Cursor cursor = null;
         db.beginTransaction();
@@ -90,8 +90,67 @@ public class DBManager {
         return musicInfoList;
     }
 
+    //获取某个歌手的所有歌曲
+    public List<LocalMusicInfo> getMusicListBySinger(String singer){
+        List<LocalMusicInfo> musicInfoList = new ArrayList<>();
+        Cursor cursor = null;
+        db.beginTransaction();
+        try{
+            String sql = "select * from "+DatabaseHelper.MUSIC_TABLE+" where "+ DatabaseHelper.SINGER_COLUMN+" = ? ";
+            cursor = db.rawQuery(sql,new String[]{singer});
+            musicInfoList = cursorToMusicList(cursor);
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
+            if (cursor !=null)
+                cursor.close();
+        }
+        return musicInfoList;
+    }
+
+    //获取某个专辑的所有歌曲
+    public List<LocalMusicInfo> getMusicListByAlbum(String album){
+        List<LocalMusicInfo> musicInfoList = new ArrayList<>();
+        Cursor cursor = null;
+        db.beginTransaction();
+        try{
+            String sql = "select * from "+DatabaseHelper.MUSIC_TABLE+" where "+ DatabaseHelper.ALBUM_COLUMN+" = ? ";
+            cursor = db.rawQuery(sql,new String[]{album});
+            musicInfoList = cursorToMusicList(cursor);
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
+            if (cursor !=null)
+                cursor.close();
+        }
+        return musicInfoList;
+    }
+
+    //获取某个文件夹下的所有歌曲
+    public List<LocalMusicInfo> getMusicListByFolder(String folder){
+        List<LocalMusicInfo> musicInfoList = new ArrayList<>();
+        Cursor cursor = null;
+        db.beginTransaction();
+        try{
+            String sql = "select * from "+DatabaseHelper.MUSIC_TABLE+" where "+ DatabaseHelper.PARENT_PATH_COLUMN+" = ? ";
+            cursor = db.rawQuery(sql,new String[]{folder});
+            musicInfoList = cursorToMusicList(cursor);
+            db.setTransactionSuccessful();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            db.endTransaction();
+            if (cursor !=null)
+                cursor.close();
+        }
+        return musicInfoList;
+    }
+
     public LocalMusicInfo getSingleMusicFromMusicTable(int id) {
-        Log.i(TAG, "getSingleMusicFromMusicTable: ");
         List<LocalMusicInfo> musicInfoList = null;
         LocalMusicInfo musicInfo = null;
         Cursor cursor = null;
@@ -123,12 +182,22 @@ public class DBManager {
         return musicList;
     }
 
-    public List<MusicSheetInfo> getMySheet() {
-        List<MusicSheetInfo> musicSheetInfos = new ArrayList<>();
+    /** 歌单 **/
+
+    //创建歌单
+    public void createSheet(String name) {
+        ContentValues values = new ContentValues();
+        values.put(DatabaseHelper.NAME_COLUMN, name);
+        db.insert(DatabaseHelper.SHEET_TABLE, null, values);
+    }
+
+    //获取所有歌单
+    public List<LocalSheetInfo> getMySheet() {
+        List<LocalSheetInfo> musicSheetInfos = new ArrayList<>();
         Cursor cursor = db.query(DatabaseHelper.SHEET_TABLE, null, null, null, null, null, null);
         Cursor cursorCount = null;
         while (cursor.moveToNext()) {
-            MusicSheetInfo musicSheetInfo = new MusicSheetInfo();
+            LocalSheetInfo musicSheetInfo = new LocalSheetInfo();
             int id = Integer.valueOf(cursor.getString(cursor.getColumnIndex(ID_COLUMN)));
             musicSheetInfo.setId(id);
             musicSheetInfo.setName(cursor.getString(cursor.getColumnIndex(DatabaseHelper.NAME_COLUMN)));
@@ -145,69 +214,28 @@ public class DBManager {
         return musicSheetInfos;
     }
 
-
-    public void createSheet(String name) {
+    //添加音乐到歌单
+    public void addToSheet(int playlistId,int musicId){
         ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.NAME_COLUMN, name);
-        db.insert(DatabaseHelper.SHEET_TABLE, null, values);
+        values.put(ID_COLUMN,playlistId);
+        values.put(MUSIC_ID_COLUMN,musicId);
+        db.insert(DatabaseHelper.SHEET_SONG_TABLE,null,values);
     }
 
-    public List<LocalMusicInfo> getMusicListBySinger(String singer){
-        List<LocalMusicInfo> musicInfoList = new ArrayList<>();
-        Cursor cursor = null;
-        db.beginTransaction();
-        try{
-            String sql = "select * from "+DatabaseHelper.MUSIC_TABLE+" where "+ DatabaseHelper.SINGER_COLUMN+" = ? ";
-            cursor = db.rawQuery(sql,new String[]{singer});
-            musicInfoList = cursorToMusicList(cursor);
-            db.setTransactionSuccessful();
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            db.endTransaction();
-            if (cursor !=null)
-                cursor.close();
+    //检索音乐是否已经存在歌单中
+    public boolean isExistInSheet(int playlistId,int musicId){
+        boolean result = false;
+        Cursor cursor = db.query(DatabaseHelper.SHEET_SONG_TABLE,null,ID_COLUMN + " = ? and "+ MUSIC_ID_COLUMN + " = ? ",
+                new String[]{""+playlistId,""+musicId},null,null,null);
+        if (cursor.moveToFirst()){
+            result= true;
         }
-        return musicInfoList;
+        if (cursor!=null){
+            cursor.close();
+        }
+        return  result;
     }
 
-    public List<LocalMusicInfo> getMusicListByAlbum(String album){
-        List<LocalMusicInfo> musicInfoList = new ArrayList<>();
-        Cursor cursor = null;
-        db.beginTransaction();
-        try{
-            String sql = "select * from "+DatabaseHelper.MUSIC_TABLE+" where "+ DatabaseHelper.ALBUM_COLUMN+" = ? ";
-            cursor = db.rawQuery(sql,new String[]{album});
-            musicInfoList = cursorToMusicList(cursor);
-            db.setTransactionSuccessful();
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            db.endTransaction();
-            if (cursor !=null)
-                cursor.close();
-        }
-        return musicInfoList;
-    }
-
-    public List<LocalMusicInfo> getMusicListByFolder(String folder){
-        List<LocalMusicInfo> musicInfoList = new ArrayList<>();
-        Cursor cursor = null;
-        db.beginTransaction();
-        try{
-            String sql = "select * from "+DatabaseHelper.MUSIC_TABLE+" where "+ DatabaseHelper.PARENT_PATH_COLUMN+" = ? ";
-            cursor = db.rawQuery(sql,new String[]{folder});
-            musicInfoList = cursorToMusicList(cursor);
-            db.setTransactionSuccessful();
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            db.endTransaction();
-            if (cursor !=null)
-                cursor.close();
-        }
-        return musicInfoList;
-    }
 
     public ArrayList<Integer> getMusicIdListByPlaylist(int playlistId){
         Cursor cursor = null;
@@ -288,28 +316,6 @@ public class DBManager {
                 cursor.close();
             }
         }
-    }
-
-    //添加音乐到歌单
-    public void addToPlaylist(int playlistId,int musicId){
-        ContentValues values = new ContentValues();
-        values.put(ID_COLUMN,playlistId);
-        values.put(MUSIC_ID_COLUMN,musicId);
-        db.insert(DatabaseHelper.SHEET_SONG_TABLE,null,values);
-    }
-
-    //检索音乐是否已经存在歌单中
-    public boolean isExistPlaylist(int playlistId,int musicId){
-        boolean result = false;
-        Cursor cursor = db.query(DatabaseHelper.SHEET_SONG_TABLE,null,ID_COLUMN + " = ? and "+ MUSIC_ID_COLUMN + " = ? ",
-                new String[]{""+playlistId,""+musicId},null,null,null);
-        if (cursor.moveToFirst()){
-            result= true;
-        }
-        if (cursor!=null){
-            cursor.close();
-        }
-        return  result;
     }
 
     public void updateAllMusic(List<LocalMusicInfo> musicInfoList) {

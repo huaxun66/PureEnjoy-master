@@ -80,9 +80,9 @@ public class MusicLocalSongAdapter extends BaseQuickAdapter<LocalMusicInfo, Base
     }
 
     public void updateMusicInfoList(List<LocalMusicInfo> musicInfoList) {
-        musicInfoList.clear();
-        musicInfoList.addAll(musicInfoList);
-        setNewData(musicInfoList);
+        this.musicInfoList.clear();
+        this.musicInfoList.addAll(musicInfoList);
+        setNewData(this.musicInfoList);
     }
 
     private OnItemClickListener onItemClickListener;

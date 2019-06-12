@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Point;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +18,7 @@ import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.db.DBManager;
 import com.watson.pureenjoy.music.http.entity.local.LocalMusicInfo;
-import com.watson.pureenjoy.music.http.entity.local.MusicSheetInfo;
+import com.watson.pureenjoy.music.http.entity.local.LocalSheetInfo;
 
 import java.util.List;
 
@@ -62,6 +63,7 @@ public class MusicAddSheetWindow extends PopupWindow {
         recyclerView = view.findViewById(R.id.pop_add_sheet_rv);
         adapter = new Adapter(activity, R.layout.music_sheet_item, dbManager.getMySheet());
         recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 
         addLl = view.findViewById(R.id.pop_add_sheet_ll);
         addLl.setOnClickListener(v -> {
@@ -81,25 +83,25 @@ public class MusicAddSheetWindow extends PopupWindow {
         });
     }
 
-    private class Adapter extends BaseQuickAdapter<MusicSheetInfo, BaseViewHolder> {
+    private class Adapter extends BaseQuickAdapter<LocalSheetInfo, BaseViewHolder> {
         private Context mContext;
 
-        public Adapter(Context context, int layoutResId, List<MusicSheetInfo> data) {
+        public Adapter(Context context, int layoutResId, List<LocalSheetInfo> data) {
             super(layoutResId, data);
             this.mContext = context;
         }
 
         @Override
-        protected void convert(BaseViewHolder helper, MusicSheetInfo info) {
+        protected void convert(BaseViewHolder helper, LocalSheetInfo info) {
             helper.setText(R.id.sheet_name_tv, info.getName())
                     .setText(R.id.sheet_music_count_tv, mContext.getString(R.string.music_sheet_song_num, info.getCount()));
             ((SwipeMenuLayout) helper.getView(R.id.sheet_content_swipe_view)).setSwipeEnable(false);
             helper.getView(R.id.sheet_content_ll).setOnClickListener(v -> {
-                if (dbManager.isExistPlaylist(info.getId(), musicInfo.getId())) {
-                    Toasty.error(mContext, mContext.getString(R.string.music_sheet_contains_song));
+                if (dbManager.isExistInSheet(info.getId(), musicInfo.getId())) {
+                    Toasty.error(mContext, mContext.getString(R.string.music_sheet_contains_song)).show();
                 } else {
-                    dbManager.addToPlaylist(info.getId(), musicInfo.getId());
-                    Toasty.info(mContext, mContext.getString(R.string.music_add_sheet_song_success));
+                    dbManager.addToSheet(info.getId(), musicInfo.getId());
+                    Toasty.info(mContext, mContext.getString(R.string.music_add_sheet_song_success)).show();
                 }
                 dismiss();
             });

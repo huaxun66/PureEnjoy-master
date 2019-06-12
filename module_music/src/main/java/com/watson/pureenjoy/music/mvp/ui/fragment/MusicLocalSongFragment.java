@@ -19,18 +19,28 @@ import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
 import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.db.DBManager;
+import com.watson.pureenjoy.music.event.MusicRefreshEvent;
 import com.watson.pureenjoy.music.http.entity.local.LocalMusicInfo;
 import com.watson.pureenjoy.music.mvp.ui.adapter.MusicLocalSongAdapter;
 import com.watson.pureenjoy.music.mvp.ui.view.MusicPopMenuWindow;
 import com.watson.pureenjoy.music.mvp.ui.view.SlideBar;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
-import es.dmoral.toasty.Toasty;
+import me.jessyan.armscomponent.commonres.base.BaseEvent;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
+
+import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TITLE;
+import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TYPE;
+import static com.watson.pureenjoy.music.app.MusicConstants.LIST_ALBUM;
+import static com.watson.pureenjoy.music.app.MusicConstants.LIST_FOLDER;
+import static com.watson.pureenjoy.music.app.MusicConstants.LIST_SINGER;
 
 @Route(path = RouterHub.MUSIC_LOCAL_SONG_FRAGMENT)
 public class MusicLocalSongFragment extends MusicBaseFragment {
@@ -50,6 +60,9 @@ public class MusicLocalSongFragment extends MusicBaseFragment {
     private List<LocalMusicInfo> musicInfoList = new ArrayList<>();
     private View view;
 
+    private int type;
+    private String title;
+
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {
     }
@@ -62,14 +75,34 @@ public class MusicLocalSongFragment extends MusicBaseFragment {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        type = getArguments().getInt(KEY_TYPE, -1);
+        title = getArguments().getString(KEY_TITLE);
         dbManager = DBManager.getInstance(getContext());
-        musicInfoList = dbManager.getAllMusicFromMusicTable();
-        Collections.sort(musicInfoList);
+        musicInfoList = getData();
         mAdapter = new MusicLocalSongAdapter(getContext(), R.layout.music_local_song_item, musicInfoList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mNumTv.setText(getString(R.string.music_song_num, dbManager.getMusicCount(MusicConstants.LIST_ALLMUSIC)));
+        mNumTv.setText(getString(R.string.music_song_num, musicInfoList.size()));
         initListener();
+    }
+
+    public List<LocalMusicInfo> getData() {
+        List<LocalMusicInfo> musicInfoList;
+        switch (type) {
+            case LIST_SINGER:
+                musicInfoList = dbManager.getMusicListBySinger(title);
+                break;
+            case LIST_ALBUM:
+                musicInfoList = dbManager.getMusicListByAlbum(title);
+                break;
+            case LIST_FOLDER:
+                musicInfoList = dbManager.getMusicListByFolder(title);
+                break;
+            default:
+                musicInfoList = dbManager.getAllMusicList();
+        }
+        Collections.sort(musicInfoList);
+        return musicInfoList;
     }
 
     @Override
@@ -119,19 +152,18 @@ public class MusicLocalSongFragment extends MusicBaseFragment {
             params1.alpha = 1f;
             getActivity().getWindow().setAttributes(params1);
         });
-        menuPopupWindow.setOnDeleteUpdateListener(this::updateView);
     }
 
     public void updateView(){
-        musicInfoList = dbManager.getAllMusicFromMusicTable();
-        Collections.sort(musicInfoList);
+        musicInfoList = getData();
         mAdapter.updateMusicInfoList(musicInfoList);
-        if (musicInfoList.size() == 0){
-            mSlideBar.setVisibility(View.GONE);
-            mRecyclerView.setVisibility(View.GONE);
-        } else {
-            mSlideBar.setVisibility(View.VISIBLE);
-            mRecyclerView.setVisibility(View.VISIBLE);
+        mNumTv.setText(getString(R.string.music_song_num, musicInfoList.size()));
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(BaseEvent event) {
+        if (event instanceof MusicRefreshEvent) {
+            updateView();
         }
     }
 

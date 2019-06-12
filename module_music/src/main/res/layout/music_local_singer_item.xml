@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/local_singer_item_ll"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/public_height_50dp"
+    android:background="@drawable/public_selector_layout"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/singer_img"
+        android:layout_width="@dimen/public_width_30dp"
+        android:layout_height="@dimen/public_height_30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/public_mar_left_10dp"
+        android:src="@drawable/music_singer_header" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/singer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textSize="@dimen/public_font_15sp"
+                android:textColor="@color/public_custom_color_text_main"
+                tools:text="singer name " />
+
+            <TextView
+                android:id="@+id/singer_song_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/public_grey_700"
+                android:textSize="@dimen/public_font_12sp"
+                tools:text="@string/music_local_song_num" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/public_height_0_5dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/public_common_touch_bg" />
+    </RelativeLayout>
+</LinearLayout>

@@ -17,12 +17,13 @@ import android.widget.TextView;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.github.promeg.pinyinhelper.Pinyin;
 import com.jess.arms.di.component.AppComponent;
+import com.jess.arms.integration.EventBusManager;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
 import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.db.DBManager;
+import com.watson.pureenjoy.music.event.MusicRefreshEvent;
 import com.watson.pureenjoy.music.http.entity.local.LocalMusicInfo;
-import com.watson.pureenjoy.music.mvp.ui.view.MusicRefreshHeaderView;
 import com.watson.pureenjoy.music.mvp.ui.view.ScanView;
 
 import java.io.File;
@@ -264,6 +265,7 @@ public class MusicScanActivity extends MusicBaseActivity {
         scanning = false;
         scanBtn.setOnClickListener(v -> {
             if (!scanning){
+                EventBusManager.getInstance().post(new MusicRefreshEvent());
                 finish();
             }
         });

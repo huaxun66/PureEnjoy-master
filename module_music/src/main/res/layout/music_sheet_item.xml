@@ -20,10 +20,10 @@
 
         <ImageView
             android:id="@+id/sheet_cover_iv"
-            android:layout_width="@dimen/public_width_50dp"
-            android:layout_height="@dimen/public_height_50dp"
-            android:padding="@dimen/public_padding_5dp"
-            android:src="@drawable/music_tag_category_emotion" />
+            android:layout_width="@dimen/public_width_40dp"
+            android:layout_height="@dimen/public_height_40dp"
+            android:layout_marginStart="@dimen/public_mar_left_5dp"
+            android:src="@drawable/music_my_sheet" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,6 +52,11 @@
                 android:text="@string/music_sheet_song_num"
                 android:textColor="@color/public_grey_700"
                 android:textSize="@dimen/public_font_12sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/public_height_0_5dp"
+                android:background="@color/public_common_touch_bg" />
         </LinearLayout>
     </LinearLayout>
 

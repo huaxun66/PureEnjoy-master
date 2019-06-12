@@ -16,12 +16,13 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.jess.arms.integration.EventBusManager;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.db.DBManager;
+import com.watson.pureenjoy.music.event.MusicRefreshEvent;
 import com.watson.pureenjoy.music.http.entity.local.LocalMusicInfo;
-import com.watson.pureenjoy.music.http.entity.local.MusicSheetInfo;
-import com.watson.pureenjoy.music.utils.MusicUtil;
+import com.watson.pureenjoy.music.http.entity.local.LocalSheetInfo;
 
 import java.io.File;
 
@@ -37,10 +38,11 @@ public class MusicPopMenuWindow extends PopupWindow {
     private LinearLayout deleteLl;
     private LinearLayout cancelLl;
     private LocalMusicInfo musicInfo;
-    private MusicSheetInfo musicSheetInfo;
+    private LocalSheetInfo musicSheetInfo;
     private int from;
     private View parentView;
     private boolean isSongLoved;
+    private DBManager dbManager;
 
     public MusicPopMenuWindow(Activity activity, LocalMusicInfo musicInfo, View parentView, int from) {
         super(activity);
@@ -51,7 +53,7 @@ public class MusicPopMenuWindow extends PopupWindow {
         initView();
     }
 
-    public MusicPopMenuWindow(Activity activity, LocalMusicInfo musicInfo, View parentView, int from, MusicSheetInfo musicSheetInfo) {
+    public MusicPopMenuWindow(Activity activity, LocalMusicInfo musicInfo, View parentView, int from, LocalSheetInfo musicSheetInfo) {
         super(activity);
         this.activity = activity;
         this.musicInfo = musicInfo;
@@ -62,6 +64,7 @@ public class MusicPopMenuWindow extends PopupWindow {
     }
 
     private void initView() {
+        dbManager = DBManager.getInstance(activity);
         View view = LayoutInflater.from(activity).inflate(R.layout.music_pop_window_menu, null);
         nameTv = view.findViewById(R.id.pop_win_name_tv);
         addLl = view.findViewById(R.id.pop_win_add_rl);
@@ -70,7 +73,7 @@ public class MusicPopMenuWindow extends PopupWindow {
         cancelLl = view.findViewById(R.id.pop_win_cancel_ll);
         loveIv = view.findViewById(R.id.pop_win_love_iv);
         nameTv.setText(activity.getString(R.string.music_song) + ":" + musicInfo.getName());
-        isSongLoved = MusicUtil.isSongMyLove(activity, musicInfo.getId());
+        isSongLoved = dbManager.isSongMyLove(musicInfo.getId());
         loveIv.setSelected(isSongLoved);
         // 设置视图
         setContentView(view);
@@ -103,7 +106,7 @@ public class MusicPopMenuWindow extends PopupWindow {
         });
 
         loveLl.setOnClickListener(v -> {
-            MusicUtil.setSongLoveStatus(activity, musicInfo.getId(), !isSongLoved);
+            dbManager.setSongLoveStatus(musicInfo.getId(), !isSongLoved);
             dismiss();
             View customView = LayoutInflater.from(activity).inflate(R.layout.music_love_toast_layout, null);
             ImageView image = customView.findViewById(R.id.toast_icon);
@@ -128,7 +131,6 @@ public class MusicPopMenuWindow extends PopupWindow {
     public void deleteOperate(LocalMusicInfo musicInfo, final Context context) {
         int curId = musicInfo.getId();
         int musicId = (int) SharedPreferenceUtil.getData(MusicConstants.KEY_ID, -1);
-        DBManager dbManager = DBManager.getInstance(context);
         String path = dbManager.getMusicPath(curId);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.music_dialog_delete_file, null);
@@ -167,6 +169,7 @@ public class MusicPopMenuWindow extends PopupWindow {
 //                    context.sendBroadcast(intent);
                         }
                     }
+                    EventBusManager.getInstance().post(new MusicRefreshEvent());
                     if (onDeleteUpdateListener != null) {
                         onDeleteUpdateListener.onDeleteUpdate();
                     }

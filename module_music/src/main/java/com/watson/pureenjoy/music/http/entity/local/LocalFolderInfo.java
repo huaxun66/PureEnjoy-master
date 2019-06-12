@@ -1,40 +1,49 @@
 package com.watson.pureenjoy.music.http.entity.local;
 
-import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 public class LocalFolderInfo implements Parcelable {
 
-    public static String KEY_FOLDER_NAME = "folder_name";
-    public static String KEY_FOLDER_PATH = "folder_path";
-    public static final String KEY_FOLDER_SORT = "folder_sort";
-    public static final String KEY_FOLDER_FILE_COUNT = "file_count";
+    private String name;
+    private String path;
+    private int count;
 
-    public String folder_name;
-    public String folder_path;
-    public String folder_sort;
-    public int folder_count;
+    public String getName() {
+        return name;
+    }
 
-    // 用来创建自定义的Parcelable的对象
-    public static Creator<LocalFolderInfo> CREATOR = new Creator<LocalFolderInfo>() {
+    public void setName(String name) {
+        this.name = name;
+    }
 
-        @Override
-        public LocalFolderInfo createFromParcel(Parcel source) {
-            LocalFolderInfo info = new LocalFolderInfo();
-            Bundle bundle = source.readBundle();
-            info.folder_name = bundle.getString(KEY_FOLDER_NAME);
-            info.folder_path = bundle.getString(KEY_FOLDER_PATH);
-            info.folder_sort = bundle.getString(KEY_FOLDER_SORT);
-            info.folder_count = bundle.getInt(KEY_FOLDER_FILE_COUNT);
-            return info;
-        }
+    public int getCount() {
+        return count;
+    }
 
-        @Override
-        public LocalFolderInfo[] newArray(int size) {
-            return new LocalFolderInfo[size];
-        }
-    };
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    @Override
+    public int hashCode() {
+        String code = name + path + count ;
+        return code.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        LocalFolderInfo info = (LocalFolderInfo) (obj);
+        return info.getName().equals(name) && info.getPath().equals(path) && info.getCount() == count ;
+    }
 
     @Override
     public int describeContents() {
@@ -43,13 +52,29 @@ public class LocalFolderInfo implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        Bundle bundle = new Bundle();
-        bundle.putString(KEY_FOLDER_NAME, folder_name);
-        bundle.putString(KEY_FOLDER_PATH, folder_path);
-        bundle.putString(KEY_FOLDER_SORT, folder_sort);
-        bundle.putInt(KEY_FOLDER_FILE_COUNT, folder_count);
-        dest.writeBundle(bundle);
+        dest.writeString(this.name);
+        dest.writeString(this.path);
+        dest.writeInt(this.count);
     }
 
-}
+    public LocalFolderInfo() {
+    }
 
+    protected LocalFolderInfo(Parcel in) {
+        this.name = in.readString();
+        this.path = in.readString();
+        this.count = in.readInt();
+    }
+
+    public static final Parcelable.Creator<LocalFolderInfo> CREATOR = new Parcelable.Creator<LocalFolderInfo>() {
+        @Override
+        public LocalFolderInfo createFromParcel(Parcel source) {
+            return new LocalFolderInfo(source);
+        }
+
+        @Override
+        public LocalFolderInfo[] newArray(int size) {
+            return new LocalFolderInfo[size];
+        }
+    };
+}

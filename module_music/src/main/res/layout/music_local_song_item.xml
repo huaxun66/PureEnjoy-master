@@ -66,6 +66,7 @@
                             android:ellipsize="end"
                             android:maxLines="1"
                             tools:text="music name "
+                            android:textColor="@color/public_custom_color_text_main"
                             android:textSize="@dimen/public_font_15sp"/>
 
                         <TextView

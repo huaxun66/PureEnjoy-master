@@ -15,8 +15,14 @@ import com.jess.arms.di.component.AppComponent;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
 import com.watson.pureenjoy.music.app.MusicConstants;
+import com.watson.pureenjoy.music.db.DBManager;
+import com.watson.pureenjoy.music.event.MusicRefreshEvent;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
+import me.jessyan.armscomponent.commonres.base.BaseEvent;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
 @Route(path = RouterHub.MUSIC_MY_MUSIC_FRAGMENT)
@@ -38,6 +44,8 @@ public class MusicMyMusicFragment extends MusicBaseFragment {
     @BindView(R2.id.collect_num)
     TextView mCollectNum;
 
+    private DBManager dbManager;
+
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {
 
@@ -50,6 +58,8 @@ public class MusicMyMusicFragment extends MusicBaseFragment {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
+        dbManager = DBManager.getInstance(getContext());
+        setData(null);
         initListener();
     }
 
@@ -68,6 +78,15 @@ public class MusicMyMusicFragment extends MusicBaseFragment {
 
     @Override
     public void setData(@Nullable Object data) {
-//        mLocalNum.setText(MusicUtil.queryMusic(mContext, MusicConstants.START_FROM_LOCAL).size()+"");
+        mLocalNum.setText(String.valueOf(dbManager.getMusicCount(MusicConstants.LIST_ALLMUSIC)));
+        mRecentNum.setText(String.valueOf(dbManager.getMusicCount(MusicConstants.LIST_LASTPLAY)));
+        mCollectNum.setText(String.valueOf(dbManager.getMusicCount(MusicConstants.LIST_MYLOVE)));
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEvent(BaseEvent event) {
+        if (event instanceof MusicRefreshEvent) {
+            setData(null);
+        }
     }
 }

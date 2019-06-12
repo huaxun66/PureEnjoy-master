@@ -21,18 +21,19 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/public_height_50dp"
         android:background="@drawable/public_selector_layout"
+        android:gravity="center_vertical"
         android:clickable="true">
 
         <ImageView
-            android:layout_width="@dimen/public_width_50dp"
-            android:layout_height="match_parent"
-            android:padding="@dimen/public_padding_10dp"
-            android:layout_margin="@dimen/public_mar_left_10dp"
+            android:layout_width="@dimen/public_width_20dp"
+            android:layout_height="@dimen/public_height_20dp"
+            android:layout_marginStart="@dimen/public_mar_left_10dp"
             android:src="@drawable/public_nav_add"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/public_mar_left_10dp"
             android:gravity="center_vertical"
             android:text="@string/music_new_sheet" />
 

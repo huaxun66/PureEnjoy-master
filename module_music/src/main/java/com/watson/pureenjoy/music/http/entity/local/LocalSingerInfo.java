@@ -3,10 +3,9 @@ package com.watson.pureenjoy.music.http.entity.local;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+public class LocalSingerInfo implements Parcelable {
 
-public class LocalAlbumInfo implements Parcelable {
     private String name;
-    private String singer;
     private int count;
 
     public String getName() {
@@ -25,23 +24,16 @@ public class LocalAlbumInfo implements Parcelable {
         this.count = count;
     }
 
-    public String getSinger() {
-        return singer;
-    }
-
-    public void setSinger(String singer) {
-        this.singer = singer;
-    }
     @Override
     public int hashCode() {
-        String code = name + singer + count;
+        String code = name + count;
         return code.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        LocalAlbumInfo info = (LocalAlbumInfo) (obj);
-        return info.getName().equals(name) && info.getSinger().equals(singer) && info.getCount() == count;
+        LocalSingerInfo info = (LocalSingerInfo) (obj);
+        return info.getName().equals(name) && info.getCount() == count;
     }
 
     @Override
@@ -52,28 +44,28 @@ public class LocalAlbumInfo implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.name);
-        dest.writeString(this.singer);
         dest.writeInt(this.count);
     }
 
-    public LocalAlbumInfo() {
+    public LocalSingerInfo() {
     }
 
-    protected LocalAlbumInfo(Parcel in) {
+    protected LocalSingerInfo(Parcel in) {
         this.name = in.readString();
-        this.singer = in.readString();
         this.count = in.readInt();
     }
 
-    public static final Parcelable.Creator<LocalAlbumInfo> CREATOR = new Parcelable.Creator<LocalAlbumInfo>() {
+    public static final Parcelable.Creator<LocalSingerInfo> CREATOR = new Parcelable.Creator<LocalSingerInfo>() {
         @Override
-        public LocalAlbumInfo createFromParcel(Parcel source) {
-            return new LocalAlbumInfo(source);
+        public LocalSingerInfo createFromParcel(Parcel source) {
+            return new LocalSingerInfo(source);
         }
 
         @Override
-        public LocalAlbumInfo[] newArray(int size) {
-            return new LocalAlbumInfo[size];
+        public LocalSingerInfo[] newArray(int size) {
+            return new LocalSingerInfo[size];
         }
     };
 }
+
+
