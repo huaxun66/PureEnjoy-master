@@ -1,11 +1,15 @@
 package com.watson.pureenjoy.music.mvp.ui.fragment;
 
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,9 +21,16 @@ import com.watson.pureenjoy.music.R2;
 import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.db.DBManager;
 import com.watson.pureenjoy.music.event.MusicRefreshEvent;
+import com.watson.pureenjoy.music.event.SheetRefreshEvent;
+import com.watson.pureenjoy.music.http.entity.local.LocalSheetInfo;
+import com.watson.pureenjoy.music.http.entity.sheet.SheetInfo;
+import com.watson.pureenjoy.music.mvp.ui.adapter.MusicCollectedSheetAdapter;
+import com.watson.pureenjoy.music.mvp.ui.adapter.MusicCreatedSheetAdapter;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 import butterknife.BindView;
 import me.jessyan.armscomponent.commonres.base.BaseEvent;
@@ -43,12 +54,37 @@ public class MusicMyMusicFragment extends MusicBaseFragment {
     RelativeLayout mMyCollection;
     @BindView(R2.id.collect_num)
     TextView mCollectNum;
+    @BindView(R2.id.operator_img_create)
+    ImageView mCreateArrow;
+    @BindView(R2.id.operator_title_create)
+    TextView mCreateText;
+    @BindView(R2.id.operator_more_create)
+    ImageView mCreateMore;
+    @BindView(R2.id.operator_bar_create)
+    RelativeLayout mCreateLayout;
+    @BindView(R2.id.recycler_view_create)
+    RecyclerView mCreateRecyclerView;
+    @BindView(R2.id.operator_img_collect)
+    ImageView mCollectArrow;
+    @BindView(R2.id.operator_title_collect)
+    TextView mCollectText;
+    @BindView(R2.id.operator_more_collect)
+    ImageView mCollectMore;
+    @BindView(R2.id.operator_bar_collect)
+    RelativeLayout mCollectLayout;
+    @BindView(R2.id.recycler_view_collect)
+    RecyclerView mCollectRecyclerView;
+
+    private List<LocalSheetInfo> createSheetList;
+    private List<SheetInfo> collectSheetList;
+
+    private MusicCreatedSheetAdapter createAdapter;
+    private MusicCollectedSheetAdapter collectAdapter;
 
     private DBManager dbManager;
 
     @Override
     public void setupFragmentComponent(@NonNull AppComponent appComponent) {
-
     }
 
     @Override
@@ -59,6 +95,12 @@ public class MusicMyMusicFragment extends MusicBaseFragment {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         dbManager = DBManager.getInstance(getContext());
+        createAdapter = new MusicCreatedSheetAdapter(getContext(), R.layout.music_created_sheet_item, null);
+        mCreateRecyclerView.setAdapter(createAdapter);
+        mCreateRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        collectAdapter = new MusicCollectedSheetAdapter(getContext(), R.layout.music_collected_sheet_item, null);
+        mCollectRecyclerView.setAdapter(collectAdapter);
+        mCollectRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         setData(null);
         initListener();
     }
@@ -74,6 +116,30 @@ public class MusicMyMusicFragment extends MusicBaseFragment {
         mMyCollection.setOnClickListener(v -> {
 
         });
+        mCreateLayout.setOnClickListener(v -> {
+            if (mCreateRecyclerView.getVisibility() == View.VISIBLE) {
+                mCreateRecyclerView.setVisibility(View.GONE);
+                ObjectAnimator.ofFloat(mCreateArrow, "rotation", 0.0F, -90.0F).setDuration(300).start();
+            } else {
+                mCreateRecyclerView.setVisibility(View.VISIBLE);
+                ObjectAnimator.ofFloat(mCreateArrow, "rotation", -90.0F, 0F).setDuration(300).start();
+            }
+        });
+        mCreateMore.setOnClickListener(v -> {
+
+        });
+        mCollectLayout.setOnClickListener(v -> {
+            if (mCollectRecyclerView.getVisibility() == View.VISIBLE) {
+                mCollectRecyclerView.setVisibility(View.GONE);
+                ObjectAnimator.ofFloat(mCollectArrow, "rotation", 0.0F, -90.0F).setDuration(300).start();
+            } else {
+                mCollectRecyclerView.setVisibility(View.VISIBLE);
+                ObjectAnimator.ofFloat(mCollectArrow, "rotation", -90.0F, 0.0F).setDuration(300).start();
+            }
+        });
+        mCollectMore.setOnClickListener(v -> {
+
+        });
     }
 
     @Override
@@ -81,11 +147,19 @@ public class MusicMyMusicFragment extends MusicBaseFragment {
         mLocalNum.setText(String.valueOf(dbManager.getMusicCount(MusicConstants.LIST_ALLMUSIC)));
         mRecentNum.setText(String.valueOf(dbManager.getMusicCount(MusicConstants.LIST_LASTPLAY)));
         mCollectNum.setText(String.valueOf(dbManager.getMusicCount(MusicConstants.LIST_MYLOVE)));
+        createSheetList = dbManager.getMyCreateSheet();
+        collectSheetList = dbManager.getMyCollectSheet();
+        mCreateText.setText(getString(R.string.music_my_create_sheet, createSheetList.size()));
+        mCollectText.setText(getString(R.string.music_my_collect_sheet, collectSheetList.size()));
+        createAdapter.setNewData(createSheetList);
+        collectAdapter.setNewData(collectSheetList);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(BaseEvent event) {
         if (event instanceof MusicRefreshEvent) {
+            setData(null);
+        } else if (event instanceof SheetRefreshEvent) {
             setData(null);
         }
     }

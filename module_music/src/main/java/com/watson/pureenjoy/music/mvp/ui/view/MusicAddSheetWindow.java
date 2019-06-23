@@ -14,9 +14,11 @@ import android.widget.PopupWindow;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.jess.arms.integration.EventBusManager;
 import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.db.DBManager;
+import com.watson.pureenjoy.music.event.SheetRefreshEvent;
 import com.watson.pureenjoy.music.http.entity.local.LocalMusicInfo;
 import com.watson.pureenjoy.music.http.entity.local.LocalSheetInfo;
 
@@ -61,7 +63,7 @@ public class MusicAddSheetWindow extends PopupWindow {
         setAnimationStyle(R.style.pop_window_animation);
 
         recyclerView = view.findViewById(R.id.pop_add_sheet_rv);
-        adapter = new Adapter(activity, R.layout.music_sheet_item, dbManager.getMySheet());
+        adapter = new Adapter(activity, R.layout.music_created_sheet_item, dbManager.getMyCreateSheet());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 
@@ -76,7 +78,8 @@ public class MusicAddSheetWindow extends PopupWindow {
                         String name = playlistEt.getText().toString();
                         dbManager.createSheet(name);
                         dialog.dismiss();
-                        adapter.setNewData(dbManager.getMySheet());
+                        adapter.setNewData(dbManager.getMyCreateSheet());
+                        EventBusManager.getInstance().post(new SheetRefreshEvent());
                     })
                     .setNegativeButton(activity.getResources().getString(R.string.str_cancel), (dialog, which) -> dialog.dismiss());
             builder.show();
@@ -102,6 +105,7 @@ public class MusicAddSheetWindow extends PopupWindow {
                 } else {
                     dbManager.addToSheet(info.getId(), musicInfo.getId());
                     Toasty.info(mContext, mContext.getString(R.string.music_add_sheet_song_success)).show();
+                    EventBusManager.getInstance().post(new SheetRefreshEvent());
                 }
                 dismiss();
             });

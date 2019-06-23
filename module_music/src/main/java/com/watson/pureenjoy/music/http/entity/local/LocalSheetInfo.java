@@ -3,6 +3,8 @@ package com.watson.pureenjoy.music.http.entity.local;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Objects;
+
 public class LocalSheetInfo implements Parcelable {
     private int id;
     private String name;
@@ -34,6 +36,18 @@ public class LocalSheetInfo implements Parcelable {
         this.id = id;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LocalSheetInfo that = (LocalSheetInfo) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     public static final Creator<LocalSheetInfo> CREATOR = new Creator<LocalSheetInfo>() {
         @Override

@@ -73,6 +73,7 @@
     <string name="music_confirm_delete">确定将所选音乐从列表中移除吗？</string>
     <string name="music_delete_song_file">同时删除歌曲文件</string>
     <string name="music_local_song_num">%1$d首</string>
+    <string name="music_collect_sheet_success">收藏歌单成功</string>
 
     <string name="duration_format" translatable="false"><xliff:g id="hours">%1$s</xliff:g> <xliff:g id="minutes">%2$s</xliff:g></string>
     <string name="durationformatshort" translatable="false"><xliff:g id="format">%2$d:%3$02d</xliff:g></string>

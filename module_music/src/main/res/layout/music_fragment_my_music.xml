@@ -1,88 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/public_custom_color_app_bg"
-    android:orientation="vertical">
+    android:background="@color/public_custom_color_app_bg">
 
-    <include layout="@layout/music_my_music_header_layout"/>
-
-    <RelativeLayout
-        android:id="@+id/operator_bar_create"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/public_height_30dp"
-        android:background="@color/music_operator_bg">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/operator_img_create"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/music_spread"
-            android:layout_marginStart="@dimen/public_mar_left_7dp"/>
+        <include layout="@layout/music_my_music_header_layout" />
 
-        <TextView
-            android:id="@+id/operator_title_create"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/operator_img_create"
-            android:layout_marginStart="@dimen/public_mar_left_10dp"
-            android:textSize="@dimen/public_font_11sp"
-            android:text="@string/music_my_create_sheet"/>
+        <RelativeLayout
+            android:id="@+id/operator_bar_create"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/public_height_30dp"
+            android:background="@color/music_operator_bg">
 
-        <ImageView
-            android:id="@+id/operator_more_create"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/music_sheet_more"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/public_mar_left_7dp"/>
+            <ImageView
+                android:id="@+id/operator_img_create"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/public_mar_left_7dp"
+                android:src="@drawable/music_spread" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/operator_title_create"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/public_mar_left_10dp"
+                android:layout_toRightOf="@+id/operator_img_create"
+                android:text="@string/music_my_create_sheet"
+                android:textSize="@dimen/public_font_11sp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_create"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/operator_more_create"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/public_mar_left_7dp"
+                android:src="@drawable/music_sheet_more" />
 
-    <RelativeLayout
-        android:id="@+id/operator_bar_collect"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/public_height_30dp"
-        android:background="@color/music_operator_bg">
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/operator_img_collect"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/music_spread"
-            android:layout_marginStart="@dimen/public_mar_left_7dp"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_create"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/operator_title_collect"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/operator_img_collect"
-            android:layout_marginStart="@dimen/public_mar_left_10dp"
-            android:textSize="@dimen/public_font_11sp"
-            android:text="@string/music_my_collect_sheet"/>
+        <RelativeLayout
+            android:id="@+id/operator_bar_collect"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/public_height_30dp"
+            android:background="@color/music_operator_bg">
 
-        <ImageView
-            android:id="@+id/operator_more_collect"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/music_sheet_more"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/public_mar_left_7dp"/>
+            <ImageView
+                android:id="@+id/operator_img_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/public_mar_left_7dp"
+                android:src="@drawable/music_spread" />
 
-    </RelativeLayout>
+            <TextView
+                android:id="@+id/operator_title_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/public_mar_left_10dp"
+                android:layout_toRightOf="@+id/operator_img_collect"
+                android:text="@string/music_my_collect_sheet"
+                android:textSize="@dimen/public_font_11sp" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_collect"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/operator_more_collect"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/public_mar_left_7dp"
+                android:src="@drawable/music_sheet_more" />
 
-</LinearLayout>
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_collect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
+
 
 

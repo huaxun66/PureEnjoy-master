@@ -4,6 +4,8 @@ package com.watson.pureenjoy.music.http.entity.sheet;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Objects;
+
 public class SheetInfo implements Parcelable {
 
     private String listid;
@@ -18,6 +20,9 @@ public class SheetInfo implements Parcelable {
     private String height;
     private String[] songIds;
     private String pic; //热门歌单使用
+    //收藏使用
+    private String id;
+    private String songCount;
 
     public String getListid() {
         return listid;
@@ -111,6 +116,34 @@ public class SheetInfo implements Parcelable {
         return pic;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getSongCount() {
+        return songCount;
+    }
+
+    public void setSongCount(String songCount) {
+        this.songCount = songCount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SheetInfo sheetInfo = (SheetInfo) o;
+        return Objects.equals(id, sheetInfo.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
     @Override
     public int describeContents() {
@@ -131,6 +164,8 @@ public class SheetInfo implements Parcelable {
         dest.writeString(this.height);
         dest.writeStringArray(this.songIds);
         dest.writeString(this.pic);
+        dest.writeString(this.id);
+        dest.writeString(this.songCount);
     }
 
     public SheetInfo() {
@@ -149,6 +184,8 @@ public class SheetInfo implements Parcelable {
         this.height = in.readString();
         this.songIds = in.createStringArray();
         this.pic = in.readString();
+        this.id = in.readString();
+        this.songCount = in.readString();
     }
 
     public static final Creator<SheetInfo> CREATOR = new Creator<SheetInfo>() {

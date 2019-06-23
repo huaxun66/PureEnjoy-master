@@ -56,6 +56,9 @@ public class MusicConstants {
     public static final String KEY_TYPE = "type";
     public static final String KEY_TITLE = "title";
 
+    public static final String SHEET_TYPE_CREATE = "create";
+    public static final String SHEET_TYPE_COLLECT = "collect";
+
     //歌曲列表常量
     public static final int LIST_ALLMUSIC = -1;
     public static final int LIST_MYLOVE = 10000;

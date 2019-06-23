@@ -19,10 +19,13 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.http.imageloader.ImageLoader;
+import com.jess.arms.integration.EventBusManager;
 import com.jess.arms.utils.ArmsUtils;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
+import com.watson.pureenjoy.music.db.DBManager;
 import com.watson.pureenjoy.music.di.component.DaggerMusicSheetDetailComponent;
+import com.watson.pureenjoy.music.event.SheetRefreshEvent;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetDetailResponse;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetInfo;
 import com.watson.pureenjoy.music.mvp.contract.MusicSheetDetailContract;
@@ -32,6 +35,7 @@ import com.watson.pureenjoy.music.mvp.ui.adapter.MusicSheetDetailAdapter;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import es.dmoral.toasty.Toasty;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 import me.jessyan.armscomponent.commonsdk.imgaEngine.config.CommonImageConfigImpl;
 import me.jessyan.armscomponent.commonsdk.utils.FastBlurUtil;
@@ -151,6 +155,12 @@ public class MusicSheetDetailActivity extends MusicBaseActivity<MusicSheetDetail
                 }
                 scrollY += dy;
             }
+        });
+        mCollection.setOnClickListener(v -> {
+            mSheetInfo.setSongCount(String.valueOf(mSheetInfo.getSongIds().length));
+            DBManager.getInstance(this).collectSheet(mSheetInfo);
+            Toasty.info(this, R.string.music_collect_sheet_success).show();
+            EventBusManager.getInstance().post(new SheetRefreshEvent());
         });
     }
 

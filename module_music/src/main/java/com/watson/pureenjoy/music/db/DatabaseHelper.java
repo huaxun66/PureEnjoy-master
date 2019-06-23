@@ -15,6 +15,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public static final String MUSIC_TABLE = "music_table";
 
 	public static final String ID_COLUMN = "id";
+	public static final String TYPE_COLUMN = "type";
+	public static final String LIST_ID_COLUMN = "list_id";
+	public static final String PIC_COLUMN = "pic";
+	public static final String LIST_ENUM_COLUMN = "list_enum";
+	public static final String SONG_COUNT_COLUMN = "song_count";
 	public static final String MUSIC_ID_COLUMN = "music_id";
 	public static final String NAME_COLUMN = "name";
 	public static final String SINGER_COLUMN = "singer";
@@ -51,14 +56,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	//创建播放历史表
 	private String createLastPlayTable = "create table if not exists " + LAST_PLAY_TABLE +" ("
-			+ ID_COLUMN +" integer,"
+			+ ID_COLUMN + " integer,"
 			+ "FOREIGN KEY(id) REFERENCES "+ MUSIC_TABLE + " (id) ON DELETE CASCADE);";
 
 
 	//创建歌单表
 	private String createSheetTable = "create table if not exists " + SHEET_TABLE + " ("
-			+ ID_COLUMN +" integer PRIMARY KEY autoincrement,"
-			+ NAME_COLUMN + " text);";
+			+ ID_COLUMN + " integer PRIMARY KEY autoincrement,"
+			+ TYPE_COLUMN + " text,"
+			+ NAME_COLUMN + " text,"
+			+ LIST_ID_COLUMN + " text,"
+			+ PIC_COLUMN + " text,"
+			+ SONG_COUNT_COLUMN + " text,"
+			+ LIST_ENUM_COLUMN + " text);";
 
 	//创建歌单歌曲表
 	private String createSheetSongTable = "create table if not exists " + SHEET_SONG_TABLE +" ("
