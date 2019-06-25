@@ -66,6 +66,7 @@
     <string name="music_new_sheet">新建歌单</string>
     <string name="music_my_sheet">我的歌单</string>
     <string name="music_sheet_song_num">%1$d首</string>
+    <string name="music_sheet_exist">该歌单已经存在</string>
     <string name="music_sheet_contains_song">该歌单已存在该歌曲</string>
     <string name="music_add_sheet_song_success">添加到歌单成功</string>
     <string name="music_set_song_love_success">设置我喜欢的音乐成功</string>

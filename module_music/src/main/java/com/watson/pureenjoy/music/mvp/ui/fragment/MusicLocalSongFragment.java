@@ -39,6 +39,7 @@ import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TITLE;
 import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TYPE;
 import static com.watson.pureenjoy.music.app.MusicConstants.LIST_ALBUM;
+import static com.watson.pureenjoy.music.app.MusicConstants.LIST_CREATE_SHEET;
 import static com.watson.pureenjoy.music.app.MusicConstants.LIST_FOLDER;
 import static com.watson.pureenjoy.music.app.MusicConstants.LIST_SINGER;
 
@@ -97,6 +98,9 @@ public class MusicLocalSongFragment extends MusicBaseFragment {
                 break;
             case LIST_FOLDER:
                 musicInfoList = dbManager.getMusicListByFolder(title);
+                break;
+            case LIST_CREATE_SHEET:
+                musicInfoList = dbManager.getMusicListBySheet(title);
                 break;
             default:
                 musicInfoList = dbManager.getAllMusicList();

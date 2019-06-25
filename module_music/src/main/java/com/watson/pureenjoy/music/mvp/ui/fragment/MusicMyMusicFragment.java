@@ -36,6 +36,11 @@ import butterknife.BindView;
 import me.jessyan.armscomponent.commonres.base.BaseEvent;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
+import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TITLE;
+import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TYPE;
+import static com.watson.pureenjoy.music.app.MusicConstants.LIST_CREATE_SHEET;
+import static com.watson.pureenjoy.music.app.MusicConstants.SHEET_INFO;
+
 @Route(path = RouterHub.MUSIC_MY_MUSIC_FRAGMENT)
 public class MusicMyMusicFragment extends MusicBaseFragment {
     @BindView(R2.id.local_music)

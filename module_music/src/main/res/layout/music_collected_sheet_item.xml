@@ -4,8 +4,6 @@
     android:id="@+id/sheet_content_swipe_view"
     android:layout_width="match_parent"
     android:layout_height="@dimen/public_height_60dp"
-    android:background="@drawable/public_selector_layout"
-    android:clickable="true"
     android:orientation="vertical"
     app:swipeEnable="true">
 
@@ -13,9 +11,8 @@
         android:id="@+id/sheet_content_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/public_selector_layout"
-        android:clickable="true"
         android:gravity="center_vertical"
+        android:background="@drawable/public_selector_layout"
         android:orientation="horizontal">
 
         <ImageView
@@ -40,7 +37,7 @@
                 android:gravity="bottom"
                 android:maxLines="1"
                 android:text="@string/music_my_sheet"
-                android:textSize="@dimen/public_font_15sp" />
+                android:textSize="@dimen/public_font_14sp" />
 
             <TextView
                 android:id="@+id/sheet_music_count_tv"

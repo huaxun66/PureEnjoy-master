@@ -76,10 +76,14 @@ public class MusicAddSheetWindow extends PopupWindow {
                     .setView(view1)
                     .setPositiveButton(activity.getResources().getString(R.string.str_sure), (dialog, which) -> {
                         String name = playlistEt.getText().toString();
-                        dbManager.createSheet(name);
+                        if (dbManager.isSheetExist(name)) {
+                            Toasty.error(activity, activity.getString(R.string.music_sheet_exist)).show();
+                        } else {
+                            dbManager.createSheet(name);
+                            adapter.setNewData(dbManager.getMyCreateSheet());
+                            EventBusManager.getInstance().post(new SheetRefreshEvent());
+                        }
                         dialog.dismiss();
-                        adapter.setNewData(dbManager.getMyCreateSheet());
-                        EventBusManager.getInstance().post(new SheetRefreshEvent());
                     })
                     .setNegativeButton(activity.getResources().getString(R.string.str_cancel), (dialog, which) -> dialog.dismiss());
             builder.show();
@@ -100,7 +104,7 @@ public class MusicAddSheetWindow extends PopupWindow {
                     .setText(R.id.sheet_music_count_tv, mContext.getString(R.string.music_sheet_song_num, info.getCount()));
             ((SwipeMenuLayout) helper.getView(R.id.sheet_content_swipe_view)).setSwipeEnable(false);
             helper.getView(R.id.sheet_content_ll).setOnClickListener(v -> {
-                if (dbManager.isExistInSheet(info.getId(), musicInfo.getId())) {
+                if (dbManager.isMusicExistInSheet(info.getId(), musicInfo.getId())) {
                     Toasty.error(mContext, mContext.getString(R.string.music_sheet_contains_song)).show();
                 } else {
                     dbManager.addToSheet(info.getId(), musicInfo.getId());

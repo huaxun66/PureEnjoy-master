@@ -68,11 +68,9 @@ public class MusicHotSheetActivity extends MusicBaseActivity<MusicHotSheetPresen
 
     private void initListener() {
         mTopBar.setLeftImageClickListener(v -> finish());
-        mAdapter.setOnItemClickListener((adapter, view, position) -> {
-            ARouter.getInstance().build(RouterHub.MUSIC_SHEET_DETAIL_ACTIVITY)
-                    .withParcelable(SHEET_INFO, (SheetInfo)adapter.getData().get(position))
-                    .navigation();
-        });
+        mAdapter.setOnItemClickListener((adapter, view, position) -> ARouter.getInstance().build(RouterHub.MUSIC_SHEET_DETAIL_ACTIVITY)
+                .withParcelable(SHEET_INFO, (SheetInfo)adapter.getData().get(position))
+                .navigation());
     }
 
     @Override

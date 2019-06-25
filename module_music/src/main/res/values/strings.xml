@@ -67,6 +67,7 @@
     <string name="music_new_sheet">New Sheet</string>
     <string name="music_my_sheet">My Sheet</string>
     <string name="music_sheet_song_num">%1$dSongs</string>
+    <string name="music_sheet_exist">The sheet is already exist</string>
     <string name="music_sheet_contains_song">The song is exist in sheet</string>
     <string name="music_add_sheet_song_success">Add to sheet success</string>
     <string name="music_set_song_love_success">Set song love success</string>

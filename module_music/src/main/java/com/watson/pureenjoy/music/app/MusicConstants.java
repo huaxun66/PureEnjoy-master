@@ -65,7 +65,8 @@ public class MusicConstants {
     public static final int LIST_LASTPLAY = 10001;
     public static final int LIST_DOWNLOAD = 10002;
     public static final int LIST_MYPLAY = 10003;    //我的歌单列表
-    public static final int LIST_PLAYLIST = 10004;	//歌单音乐列表
+
+    public static final int LIST_CREATE_SHEET = 10004;	//创建歌单
     public static final int LIST_SINGER = 10005;	//歌手
     public static final int LIST_ALBUM = 10006;	    //专辑
     public static final int LIST_FOLDER = 10007;	//文件夹

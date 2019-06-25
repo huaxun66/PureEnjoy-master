@@ -78,6 +78,7 @@ public class MusicSheetDetailActivity extends MusicBaseActivity<MusicSheetDetail
     SheetInfo mSheetInfo;
 
     private ImageLoader mImageLoader;
+    private DBManager dbManager;
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
@@ -98,6 +99,7 @@ public class MusicSheetDetailActivity extends MusicBaseActivity<MusicSheetDetail
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         mImageLoader = ArmsUtils.obtainAppComponentFromContext(this).imageLoader();
+        dbManager = DBManager.getInstance(this);
         mTopTitle.setText(getString(R.string.music_song_sheet));
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -157,10 +159,14 @@ public class MusicSheetDetailActivity extends MusicBaseActivity<MusicSheetDetail
             }
         });
         mCollection.setOnClickListener(v -> {
-            mSheetInfo.setSongCount(String.valueOf(mSheetInfo.getSongIds().length));
-            DBManager.getInstance(this).collectSheet(mSheetInfo);
-            Toasty.info(this, R.string.music_collect_sheet_success).show();
-            EventBusManager.getInstance().post(new SheetRefreshEvent());
+            if (dbManager.isSheetExist(mSheetInfo.getTitle())) {
+                Toasty.error(this, getString(R.string.music_sheet_exist)).show();
+            } else {
+                mSheetInfo.setSongCount(String.valueOf(mAdapter.getItemCount()));
+                dbManager.collectSheet(mSheetInfo);
+                Toasty.info(this, R.string.music_collect_sheet_success).show();
+                EventBusManager.getInstance().post(new SheetRefreshEvent());
+            }
         });
     }
 
