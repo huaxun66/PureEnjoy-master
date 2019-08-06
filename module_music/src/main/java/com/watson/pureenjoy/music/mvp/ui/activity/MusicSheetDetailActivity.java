@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.jess.arms.di.component.AppComponent;
 import com.jess.arms.http.imageloader.ImageLoader;
 import com.jess.arms.integration.EventBusManager;
@@ -26,8 +28,10 @@ import com.watson.pureenjoy.music.R2;
 import com.watson.pureenjoy.music.db.DBManager;
 import com.watson.pureenjoy.music.di.component.DaggerMusicSheetDetailComponent;
 import com.watson.pureenjoy.music.event.SheetRefreshEvent;
+import com.watson.pureenjoy.music.http.entity.sheet.SheetDetailInfo;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetDetailResponse;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetInfo;
+import com.watson.pureenjoy.music.http.entity.song.SongResponse;
 import com.watson.pureenjoy.music.mvp.contract.MusicSheetDetailContract;
 import com.watson.pureenjoy.music.mvp.presenter.MusicSheetDetailPresenter;
 import com.watson.pureenjoy.music.mvp.ui.adapter.MusicSheetDetailAdapter;
@@ -168,6 +172,10 @@ public class MusicSheetDetailActivity extends MusicBaseActivity<MusicSheetDetail
                 EventBusManager.getInstance().post(new SheetRefreshEvent());
             }
         });
+        mAdapter.setOnItemClickListener((adapter, view, position) -> {
+            String songId = ((SheetDetailInfo)adapter.getItem(position)).getSong_id();
+            mPresenter.requestSongInfo(this, songId);
+        });
     }
 
     @Override
@@ -176,6 +184,11 @@ public class MusicSheetDetailActivity extends MusicBaseActivity<MusicSheetDetail
         mNum.setText(getString(R.string.music_song_num, response.getContent().size()));
         mCollection.setText(getString(R.string.music_collection_num, response.getCollectnum()));
         mAdapter.setNewData(response.getContent());
+    }
+
+    @Override
+    public void setSongInfo(SongResponse response) {
+
     }
 
     @Override

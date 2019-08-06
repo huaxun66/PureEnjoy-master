@@ -47,7 +47,9 @@ public class LocalSingerInfo implements Parcelable {
         dest.writeInt(this.count);
     }
 
-    public LocalSingerInfo() {
+    public LocalSingerInfo(String name, int count) {
+        this.name = name;
+        this.count = count;
     }
 
     protected LocalSingerInfo(Parcel in) {

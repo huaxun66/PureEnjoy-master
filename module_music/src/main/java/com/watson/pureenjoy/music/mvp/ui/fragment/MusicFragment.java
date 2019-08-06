@@ -90,5 +90,6 @@ public class MusicFragment extends MusicBaseFragment {
         mSearch.setOnClickListener(v -> {
              //TODO 搜索
         });
+        mIndicatorView.setOnClickListener(view -> ARouter.getInstance().build(RouterHub.MUSIC_PLAY_DETAIL_ACTIVITY).navigation());
     }
 }

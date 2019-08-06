@@ -14,6 +14,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.jess.arms.di.component.AppComponent;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
+import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.db.DBManager;
 import com.watson.pureenjoy.music.event.MusicRefreshEvent;
 import com.watson.pureenjoy.music.http.entity.local.LocalFolderInfo;
@@ -30,7 +31,7 @@ import butterknife.BindView;
 import me.jessyan.armscomponent.commonres.base.BaseEvent;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
-import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TITLE;
+import static com.watson.pureenjoy.music.app.MusicConstants.KEY_OTHER;
 import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TYPE;
 import static com.watson.pureenjoy.music.app.MusicConstants.LIST_FOLDER;
 
@@ -56,7 +57,7 @@ public class MusicLocalFolderFragment extends MusicBaseFragment {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         dbManager = DBManager.getInstance(getContext());
-        folderInfoList = MusicUtil.groupByFolder((ArrayList) dbManager.getAllMusicList());
+        folderInfoList = MusicUtil.groupByFolder((ArrayList) dbManager.getMusicList(MusicConstants.LIST_ALL_MUSIC));
         mAdapter = new MusicLocalFolderAdapter(getContext(), R.layout.music_local_folder_item, folderInfoList);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -72,14 +73,14 @@ public class MusicLocalFolderFragment extends MusicBaseFragment {
     private void initListener() {
         mAdapter.setOnItemClickListener((adapter, view, position) -> ARouter.getInstance().build(RouterHub.MUSIC_LOCAL_SONG_LIST_ACTIVITY)
                 .withInt(KEY_TYPE, LIST_FOLDER)
-                .withString(KEY_TITLE, folderInfoList.get(position).getPath())
+                .withString(KEY_OTHER, folderInfoList.get(position).getPath())
                 .navigation());
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(BaseEvent event) {
         if (event instanceof MusicRefreshEvent) {
-            folderInfoList = MusicUtil.groupByFolder((ArrayList) dbManager.getAllMusicList());
+            folderInfoList = MusicUtil.groupByFolder((ArrayList) dbManager.getMusicList(MusicConstants.LIST_ALL_MUSIC));
             mAdapter.setNewData(folderInfoList);
         }
     }

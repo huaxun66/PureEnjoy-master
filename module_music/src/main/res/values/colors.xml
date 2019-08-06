@@ -4,5 +4,8 @@
     <color name="music_theme">#D94038</color>
     <color name="music_search_bg">#DF645C</color>
     <color name="music_operator_bg">#EEEFF1</color>
+    <color name="music_play_detail_bg">#70000000</color>
+    <color name="music_play_lrc_bg">#70d7d7d7</color>
+    <color name="music_play_text_color">#FAFAFA</color>
 
 </resources>

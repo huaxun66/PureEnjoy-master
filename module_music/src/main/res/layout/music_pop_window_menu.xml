@@ -68,7 +68,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_margin="@dimen/public_mar_left_10dp"
-            android:src="@drawable/music_selector_love"/>
+            android:src="@drawable/music_menu_love"/>
 
         <LinearLayout
             android:layout_width="match_parent"

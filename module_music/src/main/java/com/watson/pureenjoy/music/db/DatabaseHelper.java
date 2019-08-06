@@ -25,6 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public static final String SINGER_COLUMN = "singer";
 	public static final String DURATION_COLUMN = "duration";
 	public static final String ALBUM_COLUMN = "album";
+	public static final String ALBUM_THUMBS_COLUMN = "album_thumbs";
 	public static final String PATH_COLUMN = "path";
 	public static final String PARENT_PATH_COLUMN = "parent_path";
 	public static final String FIRST_LETTER_COLUMN = "first_letter";
@@ -32,7 +33,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 	//最近播放表
-	public static final String LAST_PLAY_TABLE = "last_play_table";
+	public static final String RECENT_PLAY_TABLE = "recent_play_table";
 	//歌单表
 	public static final String SHEET_TABLE = "sheet_table";
 	//歌单歌曲表
@@ -48,6 +49,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ NAME_COLUMN +" text,"
 			+ SINGER_COLUMN +" text,"
 			+ ALBUM_COLUMN + " text,"
+			+ ALBUM_THUMBS_COLUMN + " text,"
 			+ DURATION_COLUMN + " long,"
 			+ PATH_COLUMN + " text,"
 			+ PARENT_PATH_COLUMN + " text,"
@@ -55,7 +57,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			+ FIRST_LETTER_COLUMN + " text );";
 
 	//创建播放历史表
-	private String createLastPlayTable = "create table if not exists " + LAST_PLAY_TABLE +" ("
+	private String createRecentPlayTable = "create table if not exists " + RECENT_PLAY_TABLE +" ("
 			+ ID_COLUMN + " integer,"
 			+ "FOREIGN KEY(id) REFERENCES "+ MUSIC_TABLE + " (id) ON DELETE CASCADE);";
 
@@ -87,7 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		Log.d(TAG, "onCreate");
 		db.execSQL(createMusicTable);			//创建音乐表
-		db.execSQL(createLastPlayTable);		//创建播放历史表
+		db.execSQL(createRecentPlayTable);		//创建播放历史表
 		db.execSQL(createSheetTable);		    //创建歌单表
 		db.execSQL(createSheetSongTable);		//创建歌单歌曲表
 
@@ -98,8 +100,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		Log.e(TAG, "onUpgrade: oldVersion ="+oldVersion );
 		Log.e(TAG, "onUpgrade: newVersion ="+newVersion );
 		if (oldVersion < VERSION){
-			db.execSQL("drop table if exists "+MUSIC_TABLE);
-			db.execSQL("drop table if exists "+LAST_PLAY_TABLE);
+			db.execSQL("drop table if exists "+ MUSIC_TABLE);
+			db.execSQL("drop table if exists "+ RECENT_PLAY_TABLE);
 			db.execSQL("drop table if exists "+ SHEET_TABLE);
 			db.execSQL("drop table if exists "+ SHEET_SONG_TABLE);
 			onCreate(db);

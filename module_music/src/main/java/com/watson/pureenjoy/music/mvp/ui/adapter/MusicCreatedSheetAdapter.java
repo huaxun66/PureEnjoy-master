@@ -15,7 +15,7 @@ import java.util.List;
 
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
-import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TITLE;
+import static com.watson.pureenjoy.music.app.MusicConstants.KEY_OTHER;
 import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TYPE;
 import static com.watson.pureenjoy.music.app.MusicConstants.LIST_CREATE_SHEET;
 
@@ -37,7 +37,7 @@ public class MusicCreatedSheetAdapter extends BaseQuickAdapter<LocalSheetInfo, B
         });
         helper.getView(R.id.sheet_content_ll).setOnClickListener(v -> ARouter.getInstance().build(RouterHub.MUSIC_LOCAL_SONG_LIST_ACTIVITY)
                 .withInt(KEY_TYPE, LIST_CREATE_SHEET)
-                .withString(KEY_TITLE, String.valueOf(info.getId()))
+                .withString(KEY_OTHER, String.valueOf(info.getId()))
                 .navigation());
     }
 }

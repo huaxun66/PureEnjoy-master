@@ -3,6 +3,8 @@ package com.watson.pureenjoy.music.http.entity.local;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Objects;
+
 /**
  MediaStore.Audio.Media._ID,                 //歌曲ID
  MediaStore.Audio.Media.TITLE,               //歌曲名称
@@ -19,10 +21,11 @@ public class LocalMusicInfo implements Comparable, Parcelable {
     private String name;
     private String singer;
     private String album;
+    private String albumThumbs;
     private String duration;
     private String path;
     private String parentPath; //父目录路径
-    private int love; //1设置我喜欢 0未设置
+    private int love;   //1设置我喜欢 0未设置
     private String firstLetter;
 
 
@@ -32,6 +35,14 @@ public class LocalMusicInfo implements Comparable, Parcelable {
 
     public void setAlbum(String album) {
         this.album = album;
+    }
+
+    public String getAlbumThumbs() {
+        return albumThumbs;
+    }
+
+    public void setAlbumThumbs(String albumThumbs) {
+        this.albumThumbs = albumThumbs;
     }
 
     public int getId() {
@@ -96,6 +107,19 @@ public class LocalMusicInfo implements Comparable, Parcelable {
 
     public void setParentPath(String parentPath) {
         this.parentPath = parentPath;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LocalMusicInfo that = (LocalMusicInfo) o;
+        return id == that.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override

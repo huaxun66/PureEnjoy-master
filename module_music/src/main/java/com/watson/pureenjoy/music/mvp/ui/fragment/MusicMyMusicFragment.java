@@ -36,10 +36,8 @@ import butterknife.BindView;
 import me.jessyan.armscomponent.commonres.base.BaseEvent;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
-import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TITLE;
 import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TYPE;
-import static com.watson.pureenjoy.music.app.MusicConstants.LIST_CREATE_SHEET;
-import static com.watson.pureenjoy.music.app.MusicConstants.SHEET_INFO;
+import static com.watson.pureenjoy.music.app.MusicConstants.LIST_MY_LOVE;
 
 @Route(path = RouterHub.MUSIC_MY_MUSIC_FRAGMENT)
 public class MusicMyMusicFragment extends MusicBaseFragment {
@@ -112,15 +110,13 @@ public class MusicMyMusicFragment extends MusicBaseFragment {
 
     private void initListener() {
         mLocalMusic.setOnClickListener(v -> ARouter.getInstance().build(RouterHub.MUSIC_LOCAL_MUSIC_ACTIVITY).navigation());
-        mRecentPlay.setOnClickListener(v -> {
-
-        });
+        mRecentPlay.setOnClickListener(v -> ARouter.getInstance().build(RouterHub.MUSIC_RECENT_PLAY_LIST_ACTIVITY).navigation());
         mMyRadio.setOnClickListener(v -> {
 
         });
-        mMyCollection.setOnClickListener(v -> {
-
-        });
+        mMyCollection.setOnClickListener(v -> ARouter.getInstance().build(RouterHub.MUSIC_LOCAL_SONG_LIST_ACTIVITY)
+                .withInt(KEY_TYPE, LIST_MY_LOVE)
+                .navigation());
         mCreateLayout.setOnClickListener(v -> {
             if (mCreateRecyclerView.getVisibility() == View.VISIBLE) {
                 mCreateRecyclerView.setVisibility(View.GONE);
@@ -149,11 +145,11 @@ public class MusicMyMusicFragment extends MusicBaseFragment {
 
     @Override
     public void setData(@Nullable Object data) {
-        mLocalNum.setText(String.valueOf(dbManager.getMusicCount(MusicConstants.LIST_ALLMUSIC)));
-        mRecentNum.setText(String.valueOf(dbManager.getMusicCount(MusicConstants.LIST_LASTPLAY)));
-        mCollectNum.setText(String.valueOf(dbManager.getMusicCount(MusicConstants.LIST_MYLOVE)));
-        createSheetList = dbManager.getMyCreateSheet();
-        collectSheetList = dbManager.getMyCollectSheet();
+        mLocalNum.setText(String.valueOf(dbManager.getMusicCount(MusicConstants.LIST_ALL_MUSIC)));
+        mRecentNum.setText(String.valueOf(dbManager.getMusicCount(MusicConstants.LIST_RECENT_PLAY)));
+        mCollectNum.setText(String.valueOf(dbManager.getMusicCount(MusicConstants.LIST_MY_LOVE)));
+        createSheetList = dbManager.getCreateSheetList();
+        collectSheetList = dbManager.getCollectSheetList();
         mCreateText.setText(getString(R.string.music_my_create_sheet, createSheetList.size()));
         mCollectText.setText(getString(R.string.music_my_collect_sheet, collectSheetList.size()));
         createAdapter.setNewData(createSheetList);

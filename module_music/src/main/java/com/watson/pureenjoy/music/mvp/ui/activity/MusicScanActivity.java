@@ -2,6 +2,7 @@ package com.watson.pureenjoy.music.mvp.ui.activity;
 
 import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -132,6 +133,7 @@ public class MusicScanActivity extends MusicBaseActivity {
                             MediaStore.Audio.Media.TITLE,               //歌曲名称
                             MediaStore.Audio.Media.ARTIST,              //歌曲歌手
                             MediaStore.Audio.Media.ALBUM,               //歌曲的专辑名
+                            MediaStore.Audio.Media.ALBUM_ID,            //歌曲的专辑图片
                             MediaStore.Audio.Media.DURATION,            //歌曲时长
                             MediaStore.Audio.Media.DATA};               //歌曲文件的全路径
                     Cursor cursor = getContentResolver().query(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
@@ -146,6 +148,7 @@ public class MusicScanActivity extends MusicBaseActivity {
                             String name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.TITLE));
                             String singer = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.ARTIST));
                             String album = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.ALBUM));
+                            String albumId = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.ALBUM_ID));
                             String path = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DATA));
                             String duration = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.AudioColumns.DURATION));
 
@@ -165,6 +168,7 @@ public class MusicScanActivity extends MusicBaseActivity {
                             musicInfo.setName(name);
                             musicInfo.setSinger(singer);
                             musicInfo.setAlbum(album);
+                            musicInfo.setAlbumThumbs(getAlbumArt(albumId));
                             musicInfo.setPath(path);
                             musicInfo.setParentPath(parentPath);
                             musicInfo.setFirstLetter(Pinyin.toPinyin(name.charAt(0)).toUpperCase().charAt(0)+"");
@@ -213,6 +217,19 @@ public class MusicScanActivity extends MusicBaseActivity {
                 }
             }
         }.start();
+    }
+
+    private String getAlbumArt(String album_id) {
+        String mUriAlbums = "content://media/external/audio/albums";
+        String[] projection = new String[] {"album_art"};
+        Cursor cur = this.getContentResolver().query(Uri.parse(mUriAlbums + "/" + album_id), projection, null, null, null);
+        String album_art = null;
+        if (cur.getCount() > 0 && cur.getColumnCount() > 0) {
+            cur.moveToNext();
+            album_art = cur.getString(0);
+        }
+        cur.close();
+        return album_art;
     }
 
     public static String replaceUnknown(String oldStr){

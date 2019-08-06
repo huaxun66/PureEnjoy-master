@@ -54,36 +54,55 @@ public class MusicConstants {
     public static final String KEY_DURATION = "duration";
 
     public static final String KEY_TYPE = "type";
-    public static final String KEY_TITLE = "title";
+    public static final String KEY_OTHER = "other";
 
     public static final String SHEET_TYPE_CREATE = "create";
     public static final String SHEET_TYPE_COLLECT = "collect";
 
     //歌曲列表常量
-    public static final int LIST_ALLMUSIC = -1;
-    public static final int LIST_MYLOVE = 10000;
-    public static final int LIST_LASTPLAY = 10001;
-    public static final int LIST_DOWNLOAD = 10002;
-    public static final int LIST_MYPLAY = 10003;    //我的歌单列表
+    public static final int LIST_ALL_MUSIC = -1;  //所有
+    public static final int LIST_MY_LOVE = 10000;  //喜爱
+    public static final int LIST_RECENT_PLAY = 10001;  //最近播放
+    public static final int LIST_CREATE_SHEET = 10002;  //创建的歌单
+    public static final int LIST_COLLECT_SHEET = 10003;  //收藏的歌单
+    public static final int LIST_SINGER = 10004;	//歌手
+    public static final int LIST_ALBUM = 10005;	    //专辑
+    public static final int LIST_FOLDER = 10006;	//文件夹
+//    public static final int LIST_DOWNLOAD = 10007;  //下载
 
-    public static final int LIST_CREATE_SHEET = 10004;	//创建歌单
-    public static final int LIST_SINGER = 10005;	//歌手
-    public static final int LIST_ALBUM = 10006;	    //专辑
-    public static final int LIST_FOLDER = 10007;	//文件夹
 
     public static final int ACTIVITY_LOCAL = 20; //本地音乐
     public static final int ACTIVITY_RECENTPLAY = 21;//最近播放
     public static final int ACTIVITY_MYLOVE = 22; //我喜爱
     public static final int ACTIVITY_MYLIST = 24;//我的歌单
 
-    //播放模式
-    public static final int PLAYMODE_SEQUENCE = -1;
-    public static final int PLAYMODE_SINGLE_REPEAT = 1;
-    public static final int PLAYMODE_RANDOM = 2;
+    //service名
+    public static final String SERVICE_NAME = "com.watson.pureenjoy.music.mvp.service.MediaPlayerService";//服务的名称为包名+类名
 
-    public static final String PLAYMODE_SEQUENCE_TEXT = "顺序播放";
-    public static final String PLAYMODE_RANDOM_TEXT = "随机播放";
-    public static final String PLAYMODE_SINGLE_REPEAT_TEXT = "单曲循环";
+    //播放控制
+    public static final String PLAY_STATUS = "play_status";
+    public static final String PLAY_MODE = "play_mode";
+    public static final String COMMAND = "cmd";
+
+    //播放状态
+    public static final int STATUS_STOP = 0; //停止状态
+    public static final int STATUS_PLAY = 1; //播放状态
+    public static final int STATUS_PAUSE = 2; //暂停状态
+    public static final int STATUS_RUN = 3;  //   状态
+
+    //命令
+    public static final int COMMAND_INIT = 0; //初始化命令
+    public static final int COMMAND_PLAY = 1; //播放命令
+    public static final int COMMAND_PAUSE = 2; //暂停命令
+    public static final int COMMAND_RESUME = 3; //重新开始命令
+    public static final int COMMAND_STOP = 4; //停止命令
+    public static final int COMMAND_PROGRESS = 5; //改变进度命令
+    public static final int COMMAND_RELEASE = 6; //退出程序时释放
+
+    //播放模式
+    public static final int PLAY_MODE_SEQUENCE = 0;
+    public static final int PLAY_MODE_SINGLE_REPEAT = 1;
+    public static final int PLAY_MODE_RANDOM = 2;
 
     public static final String METHOD_SHEET = "baidu.ting.diy.gedan";
     public static final String METHOD_SHEET_SEARCH = "baidu.ting.diy.search";
@@ -95,7 +114,7 @@ public class MusicConstants {
     public static final String METHOD_ALBUM = "baidu.ting.plaza.getRecommendAlbum";
     public static final String METHOD_ALBUM_DETAIL = "baidu.ting.album.getAlbumInfo";
     public static final String METHOD_RECOMMEND_SONG = "baidu.ting.song.getEditorRecommend";
-
+    public static final String METHOD_SONG = "baidu.ting.song.getInfos";
 
 
 }

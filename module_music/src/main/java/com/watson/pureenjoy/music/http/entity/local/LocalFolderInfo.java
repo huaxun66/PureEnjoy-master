@@ -57,7 +57,10 @@ public class LocalFolderInfo implements Parcelable {
         dest.writeInt(this.count);
     }
 
-    public LocalFolderInfo() {
+    public LocalFolderInfo(String name, String path, int count) {
+        this.name = name;
+        this.path = path;
+        this.count = count;
     }
 
     protected LocalFolderInfo(Parcel in) {

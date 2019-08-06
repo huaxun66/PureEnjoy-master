@@ -10,7 +10,7 @@
         android:layout_width="@dimen/public_width_25dp"
         android:layout_height="@dimen/public_height_25dp"
         android:layout_marginStart="@dimen/public_mar_left_15dp"
-        android:src="@drawable/music_play"
+        android:src="@drawable/music_selector_play"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -13,12 +13,13 @@ import com.jess.arms.base.BaseFragment;
 import com.jess.arms.di.component.AppComponent;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.R2;
+import com.watson.pureenjoy.music.app.MusicConstants;
 
 import butterknife.BindView;
 import me.jessyan.armscomponent.commonres.view.TopBar;
 import me.jessyan.armscomponent.commonsdk.core.RouterHub;
 
-import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TITLE;
+import static com.watson.pureenjoy.music.app.MusicConstants.KEY_OTHER;
 import static com.watson.pureenjoy.music.app.MusicConstants.KEY_TYPE;
 
 @Route(path = RouterHub.MUSIC_LOCAL_SONG_LIST_ACTIVITY)
@@ -27,7 +28,7 @@ public class MusicLocalSongListActivity extends MusicBaseActivity {
     TopBar mTopBar;
 
     private int type;
-    private String title;
+    private String other;
 
     @Override
     public void setupActivityComponent(@NonNull AppComponent appComponent) {
@@ -41,11 +42,16 @@ public class MusicLocalSongListActivity extends MusicBaseActivity {
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
         type = getIntent().getIntExtra(KEY_TYPE, -1);
-        title = getIntent().getStringExtra(KEY_TITLE);
+        other = getIntent().getStringExtra(KEY_OTHER);
+        if (type == MusicConstants.LIST_MY_LOVE) {
+            mTopBar.setTitleText(getString(R.string.music_my_collect));
+        } else if (type == MusicConstants.LIST_CREATE_SHEET) {
+            mTopBar.setTitleText(getString(R.string.music_song_sheet));
+        }
         mTopBar.setTitleColor(Color.WHITE);
         Fragment fragment = (BaseFragment)ARouter.getInstance().build(RouterHub.MUSIC_LOCAL_SONG_FRAGMENT)
                 .withInt(KEY_TYPE, type)
-                .withString(KEY_TITLE, title)
+                .withString(KEY_OTHER, other)
                 .navigation();
         loadFragment(fragment);
         initListener();

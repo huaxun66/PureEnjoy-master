@@ -29,6 +29,7 @@
     <string name="str_internet_unavailable">网络连接失败</string>
 
 
+    <string name="str_tips">提示</string>
     <string name="str_sure">确认</string>
     <string name="str_cancel">取消</string>
     <string name="str_wait">请稍等</string>

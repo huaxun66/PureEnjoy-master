@@ -2,14 +2,10 @@ package com.watson.pureenjoy.music.mvp.ui.view;
 
 import android.app.Activity;
 import android.content.Context;
-import android.provider.MediaStore;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -22,7 +18,7 @@ import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.db.DBManager;
 import com.watson.pureenjoy.music.event.MusicRefreshEvent;
 import com.watson.pureenjoy.music.http.entity.local.LocalMusicInfo;
-import com.watson.pureenjoy.music.http.entity.local.LocalSheetInfo;
+import com.watson.pureenjoy.music.utils.MusicUtil;
 
 import java.io.File;
 
@@ -38,28 +34,15 @@ public class MusicPopMenuWindow extends PopupWindow {
     private LinearLayout deleteLl;
     private LinearLayout cancelLl;
     private LocalMusicInfo musicInfo;
-    private LocalSheetInfo musicSheetInfo;
-    private int from;
     private View parentView;
     private boolean isSongLoved;
     private DBManager dbManager;
 
-    public MusicPopMenuWindow(Activity activity, LocalMusicInfo musicInfo, View parentView, int from) {
+    public MusicPopMenuWindow(Activity activity, LocalMusicInfo musicInfo, View parentView) {
         super(activity);
         this.activity = activity;
         this.musicInfo = musicInfo;
         this.parentView = parentView;
-        this.from = from;
-        initView();
-    }
-
-    public MusicPopMenuWindow(Activity activity, LocalMusicInfo musicInfo, View parentView, int from, LocalSheetInfo musicSheetInfo) {
-        super(activity);
-        this.activity = activity;
-        this.musicInfo = musicInfo;
-        this.parentView = parentView;
-        this.from = from;
-        this.musicSheetInfo = musicSheetInfo;
         initView();
     }
 
@@ -107,6 +90,7 @@ public class MusicPopMenuWindow extends PopupWindow {
 
         loveLl.setOnClickListener(v -> {
             dbManager.setSongLoveStatus(musicInfo.getId(), !isSongLoved);
+            EventBusManager.getInstance().post(new MusicRefreshEvent());
             dismiss();
             View customView = LayoutInflater.from(activity).inflate(R.layout.music_love_toast_layout, null);
             ImageView image = customView.findViewById(R.id.toast_icon);
@@ -132,70 +116,35 @@ public class MusicPopMenuWindow extends PopupWindow {
         int curId = musicInfo.getId();
         int musicId = (int) SharedPreferenceUtil.getData(MusicConstants.KEY_ID, -1);
         String path = dbManager.getMusicPath(curId);
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.music_dialog_delete_file, null);
-        CheckBox deleteFile = view.findViewById(R.id.dialog_delete_cb);
-        AlertDialog.Builder builder = new AlertDialog.Builder(context)
-                .setView(view)
-                .setPositiveButton(activity.getString(R.string.music_delete), (dialog1, which) -> {
-                    //同时删除文件
-                    if (deleteFile.isChecked()) {
-                        //删除的是当前播放的音乐
-                        File file = new File(path);
-                        if (file.exists()) {
-                            deleteMediaDB(file, context);
-                            boolean ret = file.delete();
-                            Log.e(TAG, "onClick: ret = " + ret);
-                            dbManager.deleteMusic(curId);
-                        }
-                        if (curId == musicId) {
-//                    Intent intent = new Intent(MusicPlayerService.PLAYER_MANAGER_ACTION);
-//                    intent.putExtra(Constant.COMMAND, Constant.COMMAND_STOP);
-//                    context.sendBroadcast(intent);
-                            SharedPreferenceUtil.putData(MusicConstants.KEY_ID, dbManager.getFirstId(MusicConstants.LIST_ALLMUSIC));
-                        }
-                    } else {
-                        //从列表移除
-                        if (from == MusicConstants.ACTIVITY_MYLIST) {
-                            dbManager.removeMusicFromPlaylist(curId, musicSheetInfo.getId());
-                        } else {
-                            dbManager.removeMusic(curId, from);
-                        }
 
-                        if (curId == musicId) {
-                            //移除的是当前播放的音乐
-//                    Intent intent = new Intent(MusicPlayerService.PLAYER_MANAGER_ACTION);
-//                    intent.putExtra(Constant.COMMAND, Constant.COMMAND_STOP);
-//                    context.sendBroadcast(intent);
-                        }
+        MusicDeleteDialog mDialog = new MusicDeleteDialog(context);
+        mDialog.setDialogButtonClickListener(new MusicDeleteDialog.DialogButtonClickListener() {
+            @Override
+            public void onDelete(boolean checked) {
+                dbManager.deleteMusic(curId);
+                //移除的是当前播放的音乐
+                if (curId == musicId) {
+                    MusicUtil.stopMusic(activity);
+                    SharedPreferenceUtil.putData(MusicConstants.KEY_ID, -1);
+                }
+                //同时删除文件
+                if (checked) {
+                    File file = new File(path);
+                    if (file.exists()) {
+                        file.delete();
+                        MusicUtil.deleteMediaDB(file, activity);
                     }
-                    EventBusManager.getInstance().post(new MusicRefreshEvent());
-                    if (onDeleteUpdateListener != null) {
-                        onDeleteUpdateListener.onDeleteUpdate();
-                    }
-                    dialog1.dismiss();
-                })
-                .setNegativeButton(activity.getString(R.string.str_cancel), (dialog12, which) -> dialog12.dismiss());
-        builder.show();
+                }
+                EventBusManager.getInstance().post(new MusicRefreshEvent());
+            }
+
+            @Override
+            public void onCancel() {
+            }
+
+        });
+        mDialog.show();
     }
 
-    public static void deleteMediaDB(File file, Context context) {
-        String filePath = file.getPath();
-//        if(filePath.endsWith(".mp3")){
-        int res = context.getContentResolver().delete(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-                MediaStore.Audio.Media.DATA + "= \"" + filePath + "\"",
-                null);
-        Log.i(TAG, "deleteMediaDB: res = " + res);
-//        }
-    }
 
-    private OnDeleteUpdateListener onDeleteUpdateListener;
-
-    public void setOnDeleteUpdateListener(OnDeleteUpdateListener onDeleteUpdateListener) {
-        this.onDeleteUpdateListener = onDeleteUpdateListener;
-    }
-
-    public interface OnDeleteUpdateListener {
-        void onDeleteUpdate();
-    }
 }

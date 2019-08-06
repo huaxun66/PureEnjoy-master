@@ -59,7 +59,9 @@
     <dimen name="public_height_180dp">180dp</dimen>
     <dimen name="public_height_200dp">200dp</dimen>
     <dimen name="public_height_250dp">250dp</dimen>
+    <dimen name="public_height_263dp">263dp</dimen>
     <dimen name="public_height_280dp">280dp</dimen>
+    <dimen name="public_height_390dp">390dp</dimen>
     <dimen name="public_height_500dp">500dp</dimen>
 
     //宽
@@ -87,6 +89,7 @@
     <dimen name="public_width_150dp">150dp</dimen>
     <dimen name="public_width_180dp">180dp</dimen>
     <dimen name="public_width_200dp">200dp</dimen>
+    <dimen name="public_width_263dp">263dp</dimen>
 
     //padding
     <dimen name="public_padding_2dp">2dp</dimen>
@@ -139,6 +142,8 @@
     <dimen name="public_pad_bottom_20dp">20dp</dimen>
 
     //marginTop
+    <dimen name="public_mar_top_minus_16dp">-16dp</dimen>
+    <dimen name="public_mar_top_minus_10dp">-10dp</dimen>
     <dimen name="public_mar_top_minus_5dp">-5dp</dimen>
     <dimen name="public_mar_top_2dp">2dp</dimen>
     <dimen name="public_mar_top_3dp">3dp</dimen>
@@ -149,10 +154,12 @@
     <dimen name="public_mar_top_16dp">16dp</dimen>
     <dimen name="public_mar_top_17_5dp">17.5dp</dimen>
     <dimen name="public_mar_top_20dp">20dp</dimen>
+    <dimen name="public_mar_top_22dp">22dp</dimen>
     <dimen name="public_mar_top_25dp">25dp</dimen>
     <dimen name="public_mar_top_26dp">26dp</dimen>
     <dimen name="public_mar_top_30dp">30dp</dimen>
     <dimen name="public_mar_top_32dp">32dp</dimen>
+    <dimen name="public_mar_top_60dp">60dp</dimen>
     <dimen name="public_mar_top_70dp">70dp</dimen>
     <dimen name="public_mar_top_100dp">100dp</dimen>
 
@@ -172,6 +179,7 @@
     <dimen name="public_mar_left_40dp">40dp</dimen>
     <dimen name="public_mar_left_50dp">50dp</dimen>
     <dimen name="public_mar_left_55dp">55dp</dimen>
+    <dimen name="public_mar_left_70dp">70dp</dimen>
     <dimen name="public_mar_left_135dp">135dp</dimen>
     <dimen name="public_mar_left_165dp">165dp</dimen>
 
@@ -185,7 +193,10 @@
     <dimen name="public_mar_right_15dp">15dp</dimen>
     <dimen name="public_mar_right_16dp">16dp</dimen>
     <dimen name="public_mar_right_20dp">20dp</dimen>
+    <dimen name="public_mar_right_40dp">40dp</dimen>
     <dimen name="public_mar_right_50dp">50dp</dimen>
+    <dimen name="public_mar_right_70dp">70dp</dimen>
+    <dimen name="public_mar_right_100dp">100dp</dimen>
 
     //marginBottom
     <dimen name="public_mar_bottom_2dp">2dp</dimen>

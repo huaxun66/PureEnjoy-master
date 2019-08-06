@@ -5,10 +5,14 @@ import android.widget.SectionIndexer;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.mcxtzhang.swipemenulib.SwipeMenuLayout;
 import com.watson.pureenjoy.music.R;
+import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.http.entity.local.LocalMusicInfo;
 
 import java.util.List;
+
+import me.jessyan.armscomponent.commonsdk.utils.SharedPreferenceUtil;
 
 public class MusicLocalSongAdapter extends BaseQuickAdapter<LocalMusicInfo, BaseViewHolder> implements SectionIndexer {
     private Context mContext;
@@ -30,12 +34,15 @@ public class MusicLocalSongAdapter extends BaseQuickAdapter<LocalMusicInfo, Base
 
         int section = getSectionForPosition(position);
         int firstPosition = getPositionForSection(section);
-        if (firstPosition == position){
+        if (firstPosition == position) {
             helper.setVisible(R.id.section_header, true);
             helper.setText(R.id.section_header, info.getFirstLetter());
         } else {
             helper.setGone(R.id.section_header, false);
         }
+
+        int currentMusicId = (int) SharedPreferenceUtil.getData(MusicConstants.KEY_ID, -1);
+        helper.setGone(R.id.play_icon, currentMusicId == info.getId());
 
         helper.getView(R.id.local_music_item_ll).setOnClickListener(v -> {
             if (onItemClickListener != null)
@@ -48,6 +55,7 @@ public class MusicLocalSongAdapter extends BaseQuickAdapter<LocalMusicInfo, Base
         });
 
         helper.getView(R.id.swipe_delete_menu_btn).setOnClickListener(v -> {
+            ((SwipeMenuLayout) (helper.getView(R.id.swipe_layout))).smoothClose();
             if (onItemClickListener != null)
                 onItemClickListener.onDeleteMenuClick(position);
         });
@@ -86,14 +94,17 @@ public class MusicLocalSongAdapter extends BaseQuickAdapter<LocalMusicInfo, Base
     }
 
     private OnItemClickListener onItemClickListener;
-    public interface OnItemClickListener{
+
+    public interface OnItemClickListener {
         void onMoreMenuClick(int position);
+
         void onDeleteMenuClick(int position);
+
         void onContentClick(int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
-        this.onItemClickListener = onItemClickListener ;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
 }

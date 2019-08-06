@@ -22,7 +22,9 @@ import com.watson.pureenjoy.music.app.MusicConstants;
 import com.watson.pureenjoy.music.http.api.cache.MusicCache;
 import com.watson.pureenjoy.music.http.api.service.MusicService;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetDetailResponse;
+import com.watson.pureenjoy.music.http.entity.song.SongResponse;
 import com.watson.pureenjoy.music.mvp.contract.MusicSheetDetailContract;
+import com.watson.pureenjoy.music.utils.AESTools;
 
 import javax.inject.Inject;
 
@@ -54,5 +56,21 @@ public class MusicSheetDetailModel extends BaseModel implements MusicSheetDetail
                         MusicConstants.JSON,
                         MusicConstants.METHOD_SHEET_DETAIL,
                         listid);
+    }
+
+    @Override
+    public Observable<SongResponse> getSongInfo(String songId) {
+        String ts = System.currentTimeMillis() + "";
+        String str = new StringBuilder().append("songid=").append(songId).append("&ts=").append(ts).toString();
+        String e = AESTools.encrpty(str);
+        return mRepositoryManager
+                .obtainRetrofitService(MusicService.class)
+                .getSongResponse(MusicConstants.ANDROID,
+                        MusicConstants.VERSION,
+                        MusicConstants.JSON,
+                        MusicConstants.METHOD_SONG,
+                        songId,
+                        ts,
+                        e);
     }
 }

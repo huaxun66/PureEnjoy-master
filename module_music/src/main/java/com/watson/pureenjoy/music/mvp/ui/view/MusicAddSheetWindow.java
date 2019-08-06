@@ -63,7 +63,7 @@ public class MusicAddSheetWindow extends PopupWindow {
         setAnimationStyle(R.style.pop_window_animation);
 
         recyclerView = view.findViewById(R.id.pop_add_sheet_rv);
-        adapter = new Adapter(activity, R.layout.music_created_sheet_item, dbManager.getMyCreateSheet());
+        adapter = new Adapter(activity, R.layout.music_created_sheet_item, dbManager.getCreateSheetList());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
 
@@ -80,7 +80,7 @@ public class MusicAddSheetWindow extends PopupWindow {
                             Toasty.error(activity, activity.getString(R.string.music_sheet_exist)).show();
                         } else {
                             dbManager.createSheet(name);
-                            adapter.setNewData(dbManager.getMyCreateSheet());
+                            adapter.setNewData(dbManager.getCreateSheetList());
                             EventBusManager.getInstance().post(new SheetRefreshEvent());
                         }
                         dialog.dismiss();
@@ -107,7 +107,7 @@ public class MusicAddSheetWindow extends PopupWindow {
                 if (dbManager.isMusicExistInSheet(info.getId(), musicInfo.getId())) {
                     Toasty.error(mContext, mContext.getString(R.string.music_sheet_contains_song)).show();
                 } else {
-                    dbManager.addToSheet(info.getId(), musicInfo.getId());
+                    dbManager.addMusicToSheet(info.getId(), musicInfo.getId());
                     Toasty.info(mContext, mContext.getString(R.string.music_add_sheet_song_success)).show();
                     EventBusManager.getInstance().post(new SheetRefreshEvent());
                 }

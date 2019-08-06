@@ -23,6 +23,7 @@ import com.jess.arms.utils.ArmsUtils;
 import com.jess.arms.utils.RxLifecycleUtils;
 import com.watson.pureenjoy.music.R;
 import com.watson.pureenjoy.music.http.entity.sheet.SheetDetailResponse;
+import com.watson.pureenjoy.music.http.entity.song.SongResponse;
 import com.watson.pureenjoy.music.mvp.contract.MusicSheetDetailContract;
 
 import javax.inject.Inject;
@@ -59,6 +60,27 @@ public class MusicSheetDetailPresenter extends BasePresenter<MusicSheetDetailCon
                     public void onNext(@NonNull SheetDetailResponse response) {
                         if (response.isSuccess()) {
                             mRootView.setSheetDetailInfo(response);
+                        } else {
+                            mRootView.showMessage(ArmsUtils.getString(context, R.string.public_server_error));
+                        }
+                    }
+                });
+    }
+
+    public void requestSongInfo(Context context, String songId) {
+        mModel.getSongInfo(songId)
+                .subscribeOn(Schedulers.io())
+                .retryWhen(new RetryWithDelay(3, 2))
+                .doOnSubscribe(disposable -> mRootView.showLoading())
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally(() -> mRootView.hideLoading())
+                .compose(RxLifecycleUtils.bindToLifecycle(mRootView))
+                .subscribe(new ErrorHandleSubscriber<SongResponse>(mErrorHandler) {
+                    @Override
+                    public void onNext(@NonNull SongResponse response) {
+                        if (response.isSuccess()) {
+                            mRootView.setSongInfo(response);
                         } else {
                             mRootView.showMessage(ArmsUtils.getString(context, R.string.public_server_error));
                         }
